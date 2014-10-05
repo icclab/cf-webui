@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="phonecatApp">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,12 +17,21 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
-    <h1>Hello, world!</h1>
+  <body ng-controller="PhoneListCtrl">
+    <input type="text" ng-model="query">
+    <ul>
+      <li ng-repeat="phone in phones | filter:query">
+        {{phone.name}}
+        <p>{{phone.snippet}}</p>
+      </li>
+    </ul>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <!-- AngularJS -->
+    <script src="js/angular.min.js"></script>
+    <script src="app/controllers.js"></script>
   </body>
 </html>
