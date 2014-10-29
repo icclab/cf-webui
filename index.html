@@ -30,11 +30,6 @@
       <div id="page-sidebar">
         <ul id="sidebar-navigation">
           <li id="logo"><a href="#">CF WebUI</a></li>
-          <li id="profile">
-            <div id="profile-content">
-              [TODO: Profile]
-            </div>
-          </li>
           <li class="title">Organizations</li>
           <li><a href="#">Cars</a></li>
           <li><a href="#">Trucks</a></li>
@@ -48,7 +43,11 @@
             <a href="#"><span class="fa fa-dedent"></span></a>
           </li>
           <li class="pull-right">
-            <a href="#"><span class="fa fa-sign-out"></span></a>
+            <a href="#" data-toggle="dropdown"><span class="fa fa-user"></span></a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+              <li><a href="#">My account</a></li>
+              <li><a href="#">Sign out</a></li>
+            </ul>
           </li>
         </ul><!-- /#top-navigation -->
         
