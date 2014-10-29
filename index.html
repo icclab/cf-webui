@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="phonecatApp">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
+    <title>Cloud Foundry Web User Interface</title>
+
+  	<!-- Google Fonts -->
+  	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic" rel="stylesheet">
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- Theme -->
+    <link href="css/style.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -17,19 +25,108 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body ng-controller="PhoneListCtrl">
-    <input type="text" ng-model="query">
-    <ul>
-      <li ng-repeat="phone in phones | filter:query">
-        {{phone.name}}
-        <p>{{phone.snippet}}</p>
-      </li>
-    </ul>
+  <body>
+    <div id="page">
+      <div id="page-sidebar">
+        <ul id="sidebar-navigation">
+          <li id="logo"><a href="#">CF WebUI</a></li>
+          <li id="profile">
+            <div id="profile-content">
+              [TODO: Profile]
+            </div>
+          </li>
+          <li class="title">Organizations</li>
+          <li><a href="#">Cars</a></li>
+          <li><a href="#">Trucks</a></li>
+          <li><a href="#">E-Cars</a></li>
+        </ul><!-- /#sidebar-navigation -->
+      </div><!-- /#page-sidebar -->
+      
+      <div id="page-content">
+        <ul id="top-navigation">
+          <li>
+            <a href="#"><span class="fa fa-dedent"></span></a>
+          </li>
+          <li class="pull-right">
+            <a href="#"><span class="fa fa-sign-out"></span></a>
+          </li>
+        </ul><!-- /#top-navigation -->
+        
+        <ul id="breadcrumb">
+          <li><a href="#">Organizations</a></li>
+          <li><a href="#">ZHAW</a></li>
+          <li><a href="#">Spaces</a></li>
+          <li><a href="#">Technikum</a></li>
+          <li>Building</li>
+        </ul><!-- /#breadcrumb -->
+        
+        <div id="page-title">
+          <h1>Page title</h1>
+        </div><!-- /#page-title -->
+        
+        <div id="page-content-wrap">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="panel panel-default">
+                <div class="panel-heading ui-draggable-handle">
+                  <h3 class="panel-title">Lorem ipsum..</h3>
+                </div>
+                <div class="panel-body">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et sodales dui. Pellentesque venenatis dui mauris, eu molestie tellus molestie eu. Nam tempus arcu magna, condimentum convallis tellus luctus sit amet. Nullam auctor tortor lectus, eget imperdiet arcu gravida eu. Nulla gravida tincidunt lorem, sit amet ullamcorper orci sagittis in.</p>
+                </div>
+              </div><!-- /.panel -->
+            </div><!-- /.col-md-6 -->
+            
+            <div class="col-md-6">
+              <div class="panel panel-default">
+                <div class="panel-heading ui-draggable-handle">
+                  <h3 class="panel-title">Beispiel Tabelle</h3>
+                </div>
+                <div class="panel-body">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>Fatmir</td>
+                        <td>Popaj</td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>Michael John</td>
+                        <td>Rieser</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div><!-- /.panel -->
+            </div><!-- /.col-md-6 -->
+          </div><!-- /.row -->
+          
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          
+        </div><!-- /#page-content-wrap -->
+      </div><!-- /#page-content -->
+    </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    
     <!-- AngularJS -->
     <script src="js/angular.min.js"></script>
     <script src="app/controllers.js"></script>
