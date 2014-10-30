@@ -38,12 +38,15 @@ a, a:hover {
   color: @sidebar-text-color;
 }
 
-#sidebar-navigation {
+#sidebar-navigation,
+#sidebar-navigation ul {
   display: block;
   list-style: outside none none;
   margin: 0;
   padding: 0;
-  
+}
+
+#sidebar-navigation {  
   li {
     display: block;
     float: left;
@@ -60,21 +63,34 @@ a, a:hover {
       padding: 20px 10px 10px;
     }
     
-    a {
-      border-bottom: 1px solid #2f3c48;
-      color: @sidebar-text-color;
+    a { /* general styles for each link in the side bar navigation */
       display: block;
       float: left;
       font-size: 13px;
       line-height: 19px;
-      padding: 15px 10px 15px 15px;
       text-decoration: none;
-      vertical-align: text-bottom;
       width: 100%;
+    }
+    
+    > a { /* links of 1st level */
+      border-bottom: 1px solid #2f3c48;
+      color: @sidebar-text-color;
+      padding: 15px 10px 15px 15px;
       
       &:hover {
         background-color: #3d4e5d;
         transition: all 200ms ease 0s;
+      }
+    }
+      
+    ul li > a { /* links of 2nd level */
+      border-bottom: 1px solid #23303b;
+      background-color: #273541;
+      color: #ccc;
+      padding: 15px 10px 15px 30px;
+      
+      &:hover {
+        background-color: #23303b;
       }
     }
   }
