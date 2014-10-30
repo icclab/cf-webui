@@ -1,0 +1,27 @@
+#breadcrumb {
+  background-color: #e8e8e8;
+  margin-bottom: 10px;
+  padding: 6px 15px 7px;
+  width: 100%;
+  list-style: outside none none;
+  
+  li, li a {
+    color: #99a0aa;
+    line-height: 12px;
+    font-size: 11px;
+  }
+  
+  li {
+    display: inline-block;
+  
+    &:last-child {
+      color: #656d78;
+    }
+  }
+  
+  li + li:before {
+    color: #99a0aa;
+    content: "> ";
+    padding: 0 5px;
+  }
+}
