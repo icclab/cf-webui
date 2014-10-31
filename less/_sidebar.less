@@ -1,8 +1,10 @@
 #page-sidebar {
   width: 220px;
-  float: left;
-  position: relative;
+  position: absolute;
+  left: 0;
+  top: 0;
   color: @sidebar-text-color;
+  height: 100%;
 }
 
 #sidebar-navigation,
@@ -16,7 +18,6 @@
 #sidebar-navigation {  
   li {
     display: block;
-    float: left;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -32,7 +33,6 @@
     
     a { /* general styles for each link in the side bar navigation */
       display: block;
-      float: left;
       font-size: 13px;
       line-height: 19px;
       text-decoration: none;
