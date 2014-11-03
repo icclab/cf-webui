@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Log In - Cloud Foundry Web User Interface</title>
+
+  	<!-- Google Fonts -->
+  	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- Theme -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div id="page">
+      <div id="login">
+        <div id="login-logo">CF WebUI</div>
+        <div id="login-content">
+          <h1>Log In</h1>
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <div class="col-md-12">
+                <input type="email" class="form-control" placeholder="E-mail">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-12">
+                <input type="password" class="form-control" placeholder="Password">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-6">
+                <a class="btn btn-link btn-block" href="#">Forgot your password?</a>
+              </div>
+              <div class="col-md-6">
+                <input type="submit" class="btn btn-info btn-block" value="Log In">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div><!-- /#page -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    
+    <!-- AngularJS -->
+    <script src="js/angular.min.js"></script>
+    <script src="app/controllers.js"></script>
+    
+    <!-- Custom -->
+    <script src="js/custom.js"></script>
+  </body>
+</html>
