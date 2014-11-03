@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cloud Foundry Web User Interface</title>
+    <title>Create Environment Variable - Cloud Foundry Web User Interface</title>
 
   	<!-- Google Fonts -->
   	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic" rel="stylesheet">
@@ -67,54 +67,40 @@
         </ul><!-- /#breadcrumb -->
         
         <div id="page-title">
-          <h1>Page title</h1>
+          <h1>Create evironment variable</h1>
         </div><!-- /#page-title -->
         
         <div id="page-content-wrap">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <h3 class="panel-title">Lorem ipsum..</h3>
+                  <h3 class="panel-title">Create evironment variable</h3>
                 </div>
                 <div class="panel-body">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et sodales dui. Pellentesque venenatis dui mauris, eu molestie tellus molestie eu. Nam tempus arcu magna, condimentum convallis tellus luctus sit amet. Nullam auctor tortor lectus, eget imperdiet arcu gravida eu. Nulla gravida tincidunt lorem, sit amet ullamcorper orci sagittis in.</p>
+                  <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                      <label for="inputName" class="col-sm-3 control-label">Name</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputName" value="MyKey" required>
+                      </div>
+                    </div>
+                    <div class="form-group has-error">
+                      <label for="inputValue" class="col-sm-3 control-label">Value</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputValue" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-offset-3 col-sm-9">
+                        <input type="submit" class="btn btn-primary" value="Create">
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div><!-- /.panel -->
-            </div><!-- /.col-md-6 -->
-            
-            <div class="col-md-6">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Beispiel Tabelle</h3>
-                </div>
-                <div class="panel-body">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Fatmir</td>
-                        <td>Popaj</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Michael John</td>
-                        <td>Rieser</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div><!-- /.panel -->
-            </div><!-- /.col-md-6 -->
-          </div><!-- /.row -->
-          
+            </div><!-- /.col-md-12 -->
+          </div><!-- /.row -->          
         </div><!-- /#page-content-wrap -->
       </div><!-- /#page-content -->
     </div><!-- /#page -->
