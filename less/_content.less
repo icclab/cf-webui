@@ -2,7 +2,7 @@
   background-color: @page-content-background-color;
   position: relative;
   margin-left: 220px;
-  height: 100%;
+  min-height: 100%;
 }
 
 #page-content-wrap {
@@ -58,5 +58,30 @@
   .btn-link {
     color: #fff;
     
+  }
+}
+
+.table {
+  .action {
+    color: @text-color;
+    text-decoration: none;
+  }
+  
+  .action-edit:hover {
+    color: #f0ad4e;
+  }
+  
+  .action-delete:hover {
+    color: #d9534f;
+  }
+  
+  .fa-lg {
+    vertical-align: 0;
+    padding: 0 0 0 5px;
+  }
+  
+  tr td:last-child,
+  tr th:last-child {
+    text-align: right;
   }
 }
