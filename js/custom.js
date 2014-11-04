@@ -13,7 +13,7 @@ function minimizeSideBar() {
     $('#page-sidebar').animate({'width': 0}, 400, function() {
       $('#page-sidebar').hide();
     });
-    $('#page-content').animate({'left': 0}, 400);
+    $('#page-content').animate({'marginLeft': 0}, 400);
     
   // show sidebar
   } else {
@@ -21,6 +21,6 @@ function minimizeSideBar() {
     
     $('#page-sidebar').show();
     $('#page-sidebar').animate({'width': '220px'}, 400);
-    $('#page-content').animate({'left': '220px'}, 400);
+    $('#page-content').animate({'marginLeft': '220px'}, 400);
   }
 }
