@@ -77,8 +77,12 @@
           <li>Building</li>
         </ul><!-- /#breadcrumb -->
         
-        <div id="page-title">
-          <h1>Organization: ZHAW School of Engineering</h1>
+        <div id="page-title" class="clearfix">
+          <h1 class="pull-left">Organization: ZHAW School of Engineering</h1>
+          <div class="pull-right">
+            <a class="action action-edit" href="#"><i class="fa fa-lg fa-pencil"></i></a>
+            <a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a>
+          </div>
         </div><!-- /#page-title -->
         
         <div id="page-content-wrap" class="clearfix">
@@ -107,60 +111,58 @@
                   <h3 class="panel-title pull-left">Spaces <span class="label label-default">3</span></h3>
                   <a href="#" class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp; Add a space</a>
                 </div>
-                <div class="panel-body">
-                  <table class="table table-striped table-hover">
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Apps</th>
-                        <th>Services</th>
-                        <th>Quota</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><a href="#">Development</a></td>
-                        <td>
-                          <span class="label label-success">3 running</span>
-                          <span class="label label-default">2 stopped</span>
-                        </td>
-                        <td>5</td>
-                        <td>512 MB</td>
-                        <td>
-                          <a class="action action-edit" href="#"><i class="fa fa-lg fa-pencil"></i></a>
-                          <a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">Stage</a></td>
-                        <td>
-                          <span class="label label-success">1 running</span>
-                          <span class="label label-default">1 stopped</span>
-                        </td>
-                        <td>2</td>
-                        <td>128 MB</td>
-                        <td>
-                          <a class="action action-edit" href="#"><i class="fa fa-lg fa-pencil"></i></a>
-                          <a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><a href="#">Production</a></td>
-                        <td>
-                          <span class="label label-success">4 running</span>
-                          <span class="label label-default">0 stopped</span>
-                        </td>
-                        <td>4</td>
-                        <td>1024 MB</td>
-                        <td>
-                          <a class="action action-edit" href="#"><i class="fa fa-lg fa-pencil"></i></a>
-                          <a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                <table class="table table-striped table-hover has-actions">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Apps</th>
+                      <th>Services</th>
+                      <th>Quota</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><a href="#">Development</a></td>
+                      <td>
+                        <span class="label label-success">3 running</span>
+                        <span class="label label-default">2 stopped</span>
+                      </td>
+                      <td>5</td>
+                      <td>512 MB</td>
+                      <td>
+                        <a class="action action-edit" href="#"><i class="fa fa-lg fa-pencil"></i></a>
+                        <a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="#">Stage</a></td>
+                      <td>
+                        <span class="label label-success">1 running</span>
+                        <span class="label label-default">1 stopped</span>
+                      </td>
+                      <td>2</td>
+                      <td>128 MB</td>
+                      <td>
+                        <a class="action action-edit" href="#"><i class="fa fa-lg fa-pencil"></i></a>
+                        <a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="#">Production</a></td>
+                      <td>
+                        <span class="label label-success">4 running</span>
+                        <span class="label label-default">0 stopped</span>
+                      </td>
+                      <td>4</td>
+                      <td>1024 MB</td>
+                      <td>
+                        <a class="action action-edit" href="#"><i class="fa fa-lg fa-pencil"></i></a>
+                        <a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div><!-- /.panel -->
             </div><!-- /.col-md-6 -->
             
@@ -170,38 +172,36 @@
                   <h3 class="panel-title pull-left">Domains <span class="label label-default">5</span></h3>
                   <a href="#" class="btn btn-success pull-right" data-toggle="modal" data-target="#modalAddDomain"><i class="fa fa-plus"></i>&nbsp; Add a domain</a>
                 </div>
-                <div class="panel-body">
-                  <table class="table table-striped table-hover">
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>cfapps.io <span class="label label-default">shared</span></td>
-                        <td><a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td>development.zhaw.ch</td>
-                        <td><a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td>engineering.zhaw.ch</td>
-                        <td><a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td>init.zhaw.ch</td>
-                        <td><a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td>stage.zhaw.ch</td>
-                        <td><a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                <table class="table table-striped table-hover has-actions">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>cfapps.io <span class="label label-default">shared</span></td>
+                      <td><a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a></td>
+                    </tr>
+                    <tr>
+                      <td>development.zhaw.ch</td>
+                      <td><a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a></td>
+                    </tr>
+                    <tr>
+                      <td>engineering.zhaw.ch</td>
+                      <td><a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a></td>
+                    </tr>
+                    <tr>
+                      <td>init.zhaw.ch</td>
+                      <td><a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a></td>
+                    </tr>
+                    <tr>
+                      <td>stage.zhaw.ch</td>
+                      <td><a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div><!-- /.panel -->
             </div><!-- /.col-md-6 -->
           </div><!-- /.row -->
@@ -213,35 +213,33 @@
                   <h3 class="panel-title pull-left">Members <span class="label label-default">2</span></h3>
                   <a href="#" class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp; Invite a member</a>
                 </div>
-                <div class="panel-body">
-                  <table class="table table-striped table-hover">
-                    <thead>
-                      <tr>
-                        <th>Member</th>
-                        <th>Org Manager</th>
-                        <th>Org Billing Manager</th>
-                        <th>Org Auditor</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>michi.rieser@gmail.com</td>
-                        <td><input type="checkbox" checked></td>
-                        <td><input type="checkbox" checked></td>
-                        <td><input type="checkbox" checked></td>
-                        <td><a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a></td>
-                      </tr>
-                      <tr>
-                        <td>fatmir.popaj@gmail.com</td>
-                        <td><input type="checkbox"></td>
-                        <td><input type="checkbox" checked></td>
-                        <td><input type="checkbox"></td>
-                        <td><a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                <table class="table table-striped table-hover has-actions">
+                  <thead>
+                    <tr>
+                      <th>Member</th>
+                      <th>Org Manager</th>
+                      <th>Org Billing Manager</th>
+                      <th>Org Auditor</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>michi.rieser@gmail.com</td>
+                      <td><input type="checkbox" checked></td>
+                      <td><input type="checkbox" checked></td>
+                      <td><input type="checkbox" checked></td>
+                      <td><a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a></td>
+                    </tr>
+                    <tr>
+                      <td>fatmir.popaj@gmail.com</td>
+                      <td><input type="checkbox"></td>
+                      <td><input type="checkbox" checked></td>
+                      <td><input type="checkbox"></td>
+                      <td><a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div><!-- /.panel -->
             </div><!-- /.col-md-6 -->
           </div><!-- /.row -->

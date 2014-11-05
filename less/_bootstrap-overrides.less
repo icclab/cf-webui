@@ -2,10 +2,6 @@
   margin: 0 -10px;
 }
 
-.row:before, .row:after {
-  content: none;
-}
-
 .row [class^="col-xs-"],
 .row [class^="col-sm-"],
 .row [class^="col-md-"],
@@ -20,6 +16,16 @@
   -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
   border: 0;
+  
+  > .table tr td:first-child,
+  > .table tr th:first-child {
+    padding-left: 15px;
+  }
+  
+  > .table tr td:last-child,
+  > .table tr th:last-child {
+    padding-right: 15px;
+  }
 }
 
 .form-horizontal .form-group {

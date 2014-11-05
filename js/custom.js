@@ -7,6 +7,8 @@ $(document).ready(function() {
   // navigation
   $('#sidebar-navigation li > a').on('click', function() {
     subNavi($(this));
+  
+    return false;
   });
 });
 
@@ -38,6 +40,4 @@ function subNavi($this) {
   } else {
     $subNavi.slideDown();
   }
-  
-  return false;
 }

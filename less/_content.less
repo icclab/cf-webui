@@ -61,27 +61,46 @@
   }
 }
 
-.table {
-  .action {
-    color: @text-color;
-    text-decoration: none;
-  }
+.action {
+  color: @text-color;
+  text-decoration: none;
   
-  .action-edit:hover {
-    color: #f0ad4e;
-  }
-  
-  .action-delete:hover {
-    color: #d9534f;
-  }
-  
-  .fa-lg {
-    vertical-align: 0;
+  .fa {
     padding: 0 0 0 5px;
   }
+}
+
+.action-edit:hover {
+  color: #f0ad4e;
+}
+
+.action-delete:hover {
+  color: #d9534f;
+}
+
+.table {  
+  .fa-lg {
+    vertical-align: 0;
+  }
   
-  tr td:last-child,
-  tr th:last-child {
+  &.has-actions tr td:last-child,
+  &.has-actions tr th:last-child {
     text-align: right;
   }
+  
+  pre {
+    white-space: pre-wrap;
+  }
+}
+
+
+
+/* Services */
+.service-title,
+.service-type {
+  display: block;
+}
+
+.service-title {
+  font-weight: bold;
 }
