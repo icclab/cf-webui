@@ -22,6 +22,10 @@ app.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
+app.controller('MainCtrl', ['$scope', function($scope) {
+  
+}]);
+
 // toggle side bar
 app.directive( 'toggleSidebar', function () {
   return {
