@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,109 +25,11 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body ng-controller="MainCtrl">
     <div id="page">
-      <div id="page-sidebar">
-        <ul id="sidebar-navigation">
-          <li id="logo"><a href="#">CF WebUI</a></li>
-          <li class="title">Organizations</li>
-          <li>
-            <a href="#">ZHAW Gesundheit</a>
-            <ul>
-              <li><a href="#">Overview</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">ZHAW School of Engineering</a>
-            <ul>
-              <li><a href="#">Overview</a></li>
-              <li><a href="#">Development</a></li>
-              <li><a href="#">Stage</a></li>
-              <li><a href="#">Production</a></li>
-            </ul>
-          </li>
-          <li>
-            <a href="#">ZHAW Architektur, Gestaltung und Bauingenieurwesen</a>
-            <ul>
-              <li><a href="#">Overview</a></li>
-            </ul>
-          </li>
-        </ul><!-- /#sidebar-navigation -->
-      </div><!-- /#page-sidebar -->
       
-      <div id="page-content">
-        <ul id="top-navigation">
-          <li>
-            <a href="#" id="sidebar-minimize"><span class="fa fa-dedent"></span></a>
-          </li>
-          <li class="pull-right">
-            <a href="#" data-toggle="dropdown"><span class="fa fa-user"></span></a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-              <li><a href="#">My account</a></li>
-              <li><a href="#">Sign out</a></li>
-            </ul>
-          </li>
-        </ul><!-- /#top-navigation -->
-        
-        <ul id="breadcrumb">
-          <li><a href="#">Organizations</a></li>
-          <li><a href="#">ZHAW</a></li>
-          <li><a href="#">Spaces</a></li>
-          <li><a href="#">Technikum</a></li>
-          <li>Building</li>
-        </ul><!-- /#breadcrumb -->
-        
-        <div id="page-title">
-          <h1>Page title</h1>
-        </div><!-- /#page-title -->
-        
-        <div id="page-content-wrap">          
-          <div class="row">
-            <div class="col-md-6">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Lorem ipsum..</h3>
-                </div>
-                <div class="panel-body">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et sodales dui. Pellentesque venenatis dui mauris, eu molestie tellus molestie eu. Nam tempus arcu magna, condimentum convallis tellus luctus sit amet. Nullam auctor tortor lectus, eget imperdiet arcu gravida eu. Nulla gravida tincidunt lorem, sit amet ullamcorper orci sagittis in.</p>
-                </div>
-              </div><!-- /.panel -->
-            </div><!-- /.col-md-6 -->
-            
-            <div class="col-md-6">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Beispiel Tabelle</h3>
-                </div>
-                <div class="panel-body">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Fatmir</td>
-                        <td>Popaj</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Michael John</td>
-                        <td>Rieser</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div><!-- /.panel -->
-            </div><!-- /.col-md-6 -->
-          </div><!-- /.row -->
-          
-        </div><!-- /#page-content-wrap -->
-      </div><!-- /#page-content -->
+      <ng-view></ng-view>
+      
     </div><!-- /#page -->
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -138,9 +40,10 @@
     
     <!-- AngularJS -->
     <script src="js/angular.min.js"></script>
-    <script src="app/controllers.js"></script>
+    <script src="js/angular-route.min.js"></script>
     
-    <!-- Custom -->
-    <script src="js/custom.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/login/login.js"></script>
+    <script src="app/dashboard/dashboard.js"></script>
   </body>
 </html>
