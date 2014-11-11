@@ -1,1 +1,3 @@
-/cf-webui.sublime-project
+*.sublime-project
+*.sublime-workspace
+.project
