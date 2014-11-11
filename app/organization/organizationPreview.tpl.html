@@ -1,0 +1,93 @@
+<div id="page-sidebar">
+  <ul id="sidebar-navigation">
+    <li id="logo"><a href="#">CF WebUI</a></li>
+    <li class="title">Organizations</li>
+    <li>
+      <a href="#" toggle-subnavi>ZHAW Gesundheit</a>
+      <ul>
+        <li><a href="#">Overview</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" toggle-subnavi>ZHAW School of Engineering</a>
+      <ul>
+        <li><a href="#">Overview</a></li>
+        <li><a href="#">Development</a></li>
+        <li><a href="#">Stage</a></li>
+        <li><a href="#">Production</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" toggle-subnavi>ZHAW Architektur, Gestaltung und Bauingenieurwesen</a>
+      <ul>
+        <li><a href="#">Overview</a></li>
+      </ul>
+    </li>
+  </ul><!-- /#sidebar-navigation -->
+</div><!-- /#page-sidebar -->
+
+<div id="page-content">
+  <ul id="top-navigation">
+    <li>
+      <a href="#" id="sidebar-minimize" toggle-sidebar><span class="fa fa-dedent"></span></a>
+    </li>
+    <li class="pull-right">
+      <a href="#" data-toggle="dropdown" toggle-usernavi><span class="fa fa-user"></span></a>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+        <li><a href="#">My account</a></li>
+        <li><a ng-controller="LogInCtrl" ng-click="logOut()">Sign out</a></li>
+      </ul>
+    </li>
+  </ul><!-- /#top-navigation -->
+  
+  <ul id="breadcrumb">
+    <li><a href="#">Organizations</a></li>
+    <li><a href="#">ZHAW</a></li>
+    <li><a href="#">Spaces</a></li>
+    <li><a href="#">Technikum</a></li>
+    <li>Building</li>
+  </ul><!-- /#breadcrumb -->
+  
+  <div id="page-title" class="clearfix">
+    <h1 class="pull-left">Organizations</h1>
+    <div class="pull-right">
+      <a class="action action-edit" href="#"><i class="fa fa-lg fa-pencil"></i></a>
+      <a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a>
+    </div>
+  </div><!-- /#page-title -->
+  
+  <div id="page-content-wrap" class="clearfix">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading clearfix">
+            <h3 class="panel-title pull-left">Organizations <span class="label label-default">{{nrOfOrganizations}}</span></h3>
+                  <a href="#" class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp; Add a organization</a>
+          </div>
+          <table class="table table-striped table-hover has-actions">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="organization in organizations">
+                <td><a href="#/organizations/{{organization.metadata.guid}}">{{organization.entity.name}}</a></td>
+                <td>
+                  <span class="label" ng-class="organization.entity.status == 'active' ? 'label-success' : 'label-danger'">{{organization.entity.status}}</span>
+                </td>
+                <td>
+                  <a class="action action-edit" href="#"><i class="fa fa-lg fa-pencil"></i></a>
+                  <a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div><!-- /.panel -->
+      </div>
+    </div><!-- /.row -->
+    
+  </div><!-- /#page-content-wrap -->
+</div><!-- /#page-content -->

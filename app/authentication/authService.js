@@ -1,4 +1,4 @@
-app.factory('authService', ['$http', '$q', function($http, $q) {
+app.factory('authService', ['$http', '$q', 'UAA_ENDPOINT', function($http, $q, UAA_ENDPOINT) {
   var authServiceFactory = {};
 
   var _authentication = {
@@ -9,7 +9,7 @@ app.factory('authService', ['$http', '$q', function($http, $q) {
   var _logIn = function(logInData) {
     // data to post
     var data = {
-      'url': 'https://uaa.run.pivotal.io/oauth/token',
+      'url': UAA_ENDPOINT + '/oauth/token',
       'grant_type': 'password',
       'password': logInData.password,
       'username': logInData.userName,

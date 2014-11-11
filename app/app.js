@@ -3,8 +3,11 @@ var app = angular.module('app', [
   'ngResource',
 
   'logIn',
-  'dashboard'
+  'organization'
 ]);
+
+app.constant('UAA_ENDPOINT', 'https://uaa.run.pivotal.io');
+app.constant('API_ENDPOINT', 'https://api.run.pivotal.io');
 
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider
@@ -13,13 +16,18 @@ app.config(['$routeProvider', function($routeProvider) {
       controller: 'LogInCtrl'
     })
     
-    .when('/dashboard', {
-      templateUrl: 'app/dashboard/dashboard.tpl.html',
-      controller: 'DashboardCtrl'
+    .when('/organizations', {
+      templateUrl: 'app/organization/organizationPreview.tpl.html',
+      controller: 'OrganizationPreviewCtrl'
+    })
+
+    .when('/organizations/:organizationId', {
+      templateUrl: 'app/organization/organizationDetails.tpl.html',
+      controller: 'OrganizationDetailsCtrl'
     })
     
     .otherwise({
-      redirectTo: '/dashboard'
+      redirectTo: '/organizations'
     });
 }]);
 

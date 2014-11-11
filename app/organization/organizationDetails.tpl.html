@@ -49,10 +49,8 @@
   </ul><!-- /#breadcrumb -->
   
   <div id="page-title" class="clearfix">
-    <h1 class="pull-left">Application: My bike store</h1>
+    <h1 class="pull-left">Organization: {{name}}</h1>
     <div class="pull-right">
-      <a href="#" class="action"><i class="fa fa-refresh fa-lg"></i></a>
-      <a href="#" class="action"><i class="fa fa-stop fa-lg"></i></a>
       <a class="action action-edit" href="#"><i class="fa fa-lg fa-pencil"></i></a>
       <a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a>
     </div>
@@ -62,12 +60,36 @@
     <div class="row">
       <div class="col-md-6">
         <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">About</h3>
+          <div class="panel-heading clearfix">
+            <h3 class="panel-title pull-left">Spaces <span class="label label-default">{{nrOfSpaces}}</span></h3>
+                  <a href="#" class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp; Add a space</a>
           </div>
-          <div class="panel-body">
-            <h1>Welcome to the dashboard</h1>
-          </div>
+          <table class="table table-striped table-hover has-actions">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Apps</th>
+                <th>Services</th>
+                <th>Memory</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="space in spaces | orderBy:name:false">
+                <td><a href="#/spaces/{{space.id}}">{{space.name}}</a></td>
+                <td>
+                  <span class="label label-success">{{space.nrOfStartedApps}} running</span>
+                  <span class="label label-default">{{space.nrOfStoppedApps}} stopped</span>
+                </td>
+                <td>{{space.nrOfServices}}</td>
+                <td>{{space.memory}} MB</td>
+                <td>
+                  <a class="action action-edit" href="#"><i class="fa fa-lg fa-pencil"></i></a>
+                  <a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div><!-- /.panel -->
       </div>
     </div><!-- /.row -->
