@@ -1,16 +1,16 @@
 var app = angular.module('app', [
   'ngRoute',
   'ngResource',
-  
-  'login',
+
+  'logIn',
   'dashboard'
 ]);
 
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider
     .when('/login', {
-      templateUrl: 'app/login/login.tpl.html',
-      controller: 'LoginCtrl'
+      templateUrl: 'app/logIn/logIn.tpl.html',
+      controller: 'LogInCtrl'
     })
     
     .when('/dashboard', {
@@ -23,12 +23,28 @@ app.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
+app.config(['$httpProvider', function($httpProvider) {
+  $httpProvider.interceptors.push('authInterceptorService');
+}]);
+
+app.run(['$rootScope', '$location', 'authService', function($rootScope, $location, authService) {
+  authService.fillAuthData();
+
+  // redirect the user to the login page if he is not logged in
+  $rootScope.$on('$routeChangeStart', function(event) {
+    var authentication = authService.authentication;
+    if (!authentication.isAuth && $location.path() != '/login') {
+      $location.path('/login');
+    }
+  })
+}]);
+
 app.controller('MainCtrl', ['$scope', function($scope) {
   
 }]);
 
 // toggle side bar
-app.directive( 'toggleSidebar', function () {
+app.directive('toggleSidebar', function () {
   return {
       restrict: 'A',
       link: function (scope, element, attrs) {
@@ -58,7 +74,7 @@ app.directive( 'toggleSidebar', function () {
 });
 
 // toggle subnavi
-app.directive( 'toggleSubnavi', function () {
+app.directive('toggleSubnavi', function () {
   return {
       restrict: 'A',
       link: function (scope, element, attrs) {
@@ -77,7 +93,7 @@ app.directive( 'toggleSubnavi', function () {
 });
 
 // toggle usernavi
-app.directive( 'toggleUsernavi', function () {
+app.directive('toggleUsernavi', function () {
   return {
       restrict: 'A',
       link: function (scope, element, attrs) {

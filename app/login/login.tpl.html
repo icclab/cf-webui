@@ -2,15 +2,18 @@
   <div id="login-logo">CF WebUI</div>
   <div id="login-content">
     <h1>Log In</h1>
-    <form class="form-horizontal" role="form" name="formLogin">
+    <div class="alert alert-danger" ng-hide="message == ''">
+      {{message}}
+    </div>
+    <form class="form-horizontal" role="form" name="formLogIn">
       <div class="form-group">
         <div class="col-md-12">
-          <input type="email" class="form-control" placeholder="E-mail" required ng-model="user.email">
+          <input type="text" class="form-control" placeholder="Username" required ng-model="logInData.userName">
         </div>
       </div>
       <div class="form-group">
         <div class="col-md-12">
-          <input type="password" class="form-control" placeholder="Password" required ng-model="user.password">
+          <input type="password" class="form-control" placeholder="Password" required ng-model="logInData.password">
         </div>
       </div>
       <div class="form-group">
@@ -18,7 +21,7 @@
           <a class="btn btn-link btn-block" href="#">Forgot your password?</a>
         </div>
         <div class="col-md-6">
-          <input type="submit" class="btn btn-info btn-block" value="Log In" ng-click="login(user)" ng-disabled="formLogin.$invalid">
+          <input type="submit" class="btn btn-info btn-block" value="Log In" ng-click="logIn()" ng-disabled="formLogIn.$invalid">
         </div>
       </div>
     </form>

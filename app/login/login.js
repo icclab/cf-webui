@@ -1,11 +1,24 @@
-var login = angular.module('login', []);
+var logIn = angular.module('logIn', []);
 
-login.controller('LoginCtrl', ['$scope', 'loginService', function($scope, loginService) {
-  $scope.login = function(user) {
-    loginService.login(user);
+logIn.controller('LogInCtrl', ['$scope', '$location', 'authService', function($scope, $location, authService) {
+  $scope.logInData = {
+    userName: '',
+    password: ''
   };
 
-  $scope.logout = function() {
-    loginService.logout();
+  $scope.message = '';
+
+  $scope.logIn = function() {
+    authService.logIn($scope.logInData).then(function(response) {
+      $location.path('/dashboard');
+    },
+    function (err) {
+      $scope.message = err.error_description;
+    });
+  };
+
+  $scope.logOut = function() {
+    authService.logOut();
+    $location.path('/login');
   }
 }]);
