@@ -2,12 +2,15 @@ var app = angular.module('app', [
   'ngRoute',
   'ngResource',
 
+  'ui.bootstrap',
+
   'logIn',
-  'organization'
+  'organization',
+  'space'
 ]);
 
 app.constant('UAA_ENDPOINT', 'https://uaa.run.pivotal.io');
-app.constant('API_ENDPOINT', 'https://api.run.pivotal.io');
+app.constant('API_ENDPOINT', 'http://api.run.pivotal.io');
 
 app.config(['$routeProvider', function($routeProvider) {
   $routeProvider
@@ -101,7 +104,7 @@ app.directive('toggleSubnavi', function () {
 });
 
 // toggle usernavi
-app.directive('toggleUsernavi', function () {
+/*app.directive('toggleUsernavi', function () {
   return {
       restrict: 'A',
       link: function (scope, element, attrs) {
@@ -111,4 +114,4 @@ app.directive('toggleUsernavi', function () {
         });
       }
   };
-});
+});*/

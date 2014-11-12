@@ -31,9 +31,9 @@
     <li>
       <a href="#" id="sidebar-minimize" toggle-sidebar><span class="fa fa-dedent"></span></a>
     </li>
-    <li class="pull-right">
-      <a href="#" data-toggle="dropdown" toggle-usernavi><span class="fa fa-user"></span></a>
-      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+    <li class="pull-right" dropdown>
+      <a class="dropdown-toggle"><span class="fa fa-user"></span></a>
+      <ul class="dropdown-menu" role="menu">
         <li><a href="#">My account</a></li>
         <li><a ng-controller="LogInCtrl" ng-click="logOut()">Sign out</a></li>
       </ul>
@@ -74,9 +74,9 @@
             </thead>
             <tbody>
               <tr ng-repeat="organization in organizations">
-                <td><a href="#/organizations/{{organization.metadata.guid}}">{{organization.entity.name}}</a></td>
+                <td><a href="#/organizations/{{organization.id}}">{{organization.name}}</a></td>
                 <td>
-                  <span class="label" ng-class="organization.entity.status == 'active' ? 'label-success' : 'label-danger'">{{organization.entity.status}}</span>
+                  <span class="label" ng-class="organization.status == 'active' ? 'label-success' : 'label-danger'">{{organization.status}}</span>
                 </td>
                 <td>
                   <a class="action action-edit" href="#"><i class="fa fa-lg fa-pencil"></i></a>

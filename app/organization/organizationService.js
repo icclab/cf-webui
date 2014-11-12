@@ -136,7 +136,7 @@ app.factory('organizationService', ['$http', 'API_ENDPOINT', function($http, API
   var _getMembersForTheOrganization = function(id) {
     // params
     var params = {
-      'url': API_ENDPOINT + '/v2/organizations/' + id +  '/spaces'
+      'url': API_ENDPOINT + '/v2/organizations/' + id +  '/users'
     };
 
     // http headers
@@ -162,6 +162,12 @@ app.factory('organizationService', ['$http', 'API_ENDPOINT', function($http, API
   organizationServiceFactory.getSharedDomainsForTheOrganization = _getSharedDomainsForTheOrganization;
   organizationServiceFactory.getPrivateDomainsForTheOrganization = _getPrivateDomainsForTheOrganization;
   organizationServiceFactory.getMembersForTheOrganization = _getMembersForTheOrganization;
+  
+  /*
+  organizationServiceFactory.getAuditorsForTheOrganization = _getAuditorsForTheOrganization;
+  organizationServiceFactory.getBillingManagersForTheOrganization = _getBillingManagersForTheOrganization;
+  organizationServiceFactory.getManagersForTheOrganization = _getManagersForTheOrganization;
+  */
 
   return organizationServiceFactory;
 }]);
