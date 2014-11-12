@@ -5,6 +5,7 @@
   $method = $_SERVER['REQUEST_METHOD'];
   $url = null;
   $data = null;
+  $urlEncoded = false;
 
   // get data from the request
   if ($method == 'GET') {
@@ -27,6 +28,17 @@
       if ($key == 'Accept' || $key == 'Authorization' || $key == 'Content-Type') {
         $headersForCurl[] = $key . ': ' . $value;
       }
+
+      if ($key == 'Content-Type' && $value == 'application/x-www-form-urlencoded') {
+        $urlEncoded = true;
+      }
+    }
+
+    // prepare data for request
+    if ($urlEncoded) {
+      $data = http_build_query($data);
+    } else {
+      $data = json_encode($data);
     }
 
     $ch = curl_init();
@@ -41,7 +53,12 @@
 
       case 'POST':
         curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        break;
+
+      case 'PUT':
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         break;
     }
 

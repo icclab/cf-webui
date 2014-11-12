@@ -31,9 +31,9 @@
     <li>
       <a href="#" id="sidebar-minimize" toggle-sidebar><span class="fa fa-dedent"></span></a>
     </li>
-    <li class="pull-right">
-      <a href="#" data-toggle="dropdown" toggle-usernavi><span class="fa fa-user"></span></a>
-      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+    <li class="pull-right" dropdown>
+      <a class="dropdown-toggle"><span class="fa fa-user"></span></a>
+      <ul class="dropdown-menu" role="menu">
         <li><a href="#">My account</a></li>
         <li><a ng-controller="LogInCtrl" ng-click="logOut()">Sign out</a></li>
       </ul>
@@ -75,7 +75,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr ng-repeat="space in spaces | orderBy:name:false">
+              <tr ng-repeat="space in spaces | orderBy:space.name:false">
                 <td><a href="#/spaces/{{space.id}}">{{space.name}}</a></td>
                 <td>
                   <span class="label label-success">{{space.nrOfStartedApps}} running</span>
@@ -84,7 +84,7 @@
                 <td>{{space.nrOfServices}}</td>
                 <td>{{space.memory}} MB</td>
                 <td>
-                  <a class="action action-edit" href="#"><i class="fa fa-lg fa-pencil"></i></a>
+                  <a class="action action-edit" ng-click="open(space)"><i class="fa fa-lg fa-pencil"></i></a>
                   <a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a>
                 </td>
               </tr>

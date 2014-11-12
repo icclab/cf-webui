@@ -7,14 +7,24 @@ organization.controller('OrganizationPreviewCtrl', ['$scope', 'organizationServi
 
   organizationService.getOrganizations().then(function(response) {
     var data = response.data;
-    $scope.organizations = data.resources;
     $scope.nrOfOrganizations = data.total_results;
+
+    // create organization objects
+    angular.forEach(data.resources, function(organization, i) {
+      var objectOrganization = {
+        id: organization.metadata.guid,
+        name: organization.entity.name,
+        status: organization.entity.status
+      };
+
+      $scope.organizations.push(objectOrganization);
+    });
   }, function (err) {
     console.log('Error: ' + err);
   });
 }]);
 
-organization.controller('OrganizationDetailsCtrl', ['$scope', '$routeParams', 'organizationService', 'spaceService', function($scope, $routeParams, organizationService, spaceService) {
+organization.controller('OrganizationDetailsCtrl', ['$scope', '$routeParams', '$modal', 'organizationService', 'spaceService', function($scope, $routeParams, $modal, organizationService, spaceService) {
   $scope.name = '';
   $scope.id = $routeParams.organizationId;
 
@@ -74,5 +84,22 @@ organization.controller('OrganizationDetailsCtrl', ['$scope', '$routeParams', 'o
     });
   }, function(err) {
     console.log('Error: ' + err);
-  });  
+  });
+
+  $scope.open = function (space) {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'app/space/spaceEdit.tpl.html',
+      controller: 'SpaceEditCtrl',
+      resolve: {
+        space: function () {
+          return space;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (editedSpace) {
+      $scope.editedSpace = editedSpace;
+    });
+  };
 }]);

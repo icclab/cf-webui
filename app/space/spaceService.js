@@ -23,7 +23,33 @@ app.factory('spaceService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOI
     });
   };
 
+  var _editSpace = function(space) {
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/spaces/' + space.id,
+      'name': space.name
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers
+    };
+
+    return $http.put('/request.php', data, config).success(function(response) {
+      console.log(space);
+      console.log('space changed');
+    }).error(function(err, status) {
+      console.log('error: ' + err);
+    });
+  };
+
   spaceServiceFactory.getSpaceSummary = _getSpaceSummary;
+  spaceServiceFactory.editSpace = _editSpace;
 
   return spaceServiceFactory;
 }]);
