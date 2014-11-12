@@ -1,7 +1,7 @@
 var space = angular.module('space', []);
 
 space.controller('SpaceEditCtrl', ['$scope', '$modalInstance', 'space', 'spaceService', function($scope, $modalInstance, space, spaceService) {
-  
+
   $scope.space = space;
 
   $scope.ok = function () {
@@ -13,7 +13,7 @@ space.controller('SpaceEditCtrl', ['$scope', '$modalInstance', 'space', 'spaceSe
 
     $modalInstance.close($scope.space);
   };
-
+  
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };

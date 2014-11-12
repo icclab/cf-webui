@@ -128,7 +128,7 @@ organization.controller('OrganizationDetailsCtrl', ['$scope', '$routeParams', '$
   $scope.open = function (space) {
 
     var modalInstance = $modal.open({
-      templateUrl: 'app/space/spaceEdit.tpl.html',
+      templateUrl: 'app/components/space/spaceEdit.tpl.html',
       controller: 'SpaceEditCtrl',
       resolve: {
         space: function () {
