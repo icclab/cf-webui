@@ -66,10 +66,102 @@ app.factory('organizationService', ['$http', 'API_ENDPOINT', function($http, API
       return response;
     });
   };
+  
+  var _getQuotaForTheOrganization = function(id) {
+    // params
+    var params = {
+      'url': API_ENDPOINT + '/v2/quota_definitions/' + id
+    };
+
+    // http headers
+    headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      params: params,
+      headers: headers
+    };
+
+    return $http.get('/request.php', config).then(function(response) {
+      return response;
+    });
+  };
+  
+  var _getSharedDomainsForTheOrganization = function() {
+    // params
+    var params = {
+      'url': API_ENDPOINT + '/v2/shared_domains'
+    };
+
+    // http headers
+    headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      params: params,
+      headers: headers
+    };
+
+    return $http.get('/request.php', config).then(function(response) {
+      return response;
+    });
+  };
+  
+  var _getPrivateDomainsForTheOrganization = function(id) {
+    // params
+    var params = {
+      'url': API_ENDPOINT + '/v2/organizations/' + id +  '/private_domains'
+    };
+
+    // http headers
+    headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      params: params,
+      headers: headers
+    };
+
+    return $http.get('/request.php', config).then(function(response) {
+      return response;
+    });
+  };
+  
+  var _getMembersForTheOrganization = function(id) {
+    // params
+    var params = {
+      'url': API_ENDPOINT + '/v2/organizations/' + id +  '/spaces'
+    };
+
+    // http headers
+    headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      params: params,
+      headers: headers
+    };
+
+    return $http.get('/request.php', config).then(function(response) {
+      return response;
+    });
+  };
 
   organizationServiceFactory.getOrganizations = _getOrganizations;
   organizationServiceFactory.getOrganization = _getOrganization;
+  organizationServiceFactory.getQuotaForTheOrganization = _getQuotaForTheOrganization;
   organizationServiceFactory.getSpacesForTheOrganization = _getSpacesForTheOrganization;
+  organizationServiceFactory.getSharedDomainsForTheOrganization = _getSharedDomainsForTheOrganization;
+  organizationServiceFactory.getPrivateDomainsForTheOrganization = _getPrivateDomainsForTheOrganization;
+  organizationServiceFactory.getMembersForTheOrganization = _getMembersForTheOrganization;
 
   return organizationServiceFactory;
 }]);

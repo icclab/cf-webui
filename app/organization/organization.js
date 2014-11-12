@@ -21,6 +21,11 @@ organization.controller('OrganizationDetailsCtrl', ['$scope', '$routeParams', 'o
   // space info
   $scope.spaces = [];
   $scope.nrOfSpaces = 0;
+  
+  // domain info
+  $scope.sharedDomains = [];
+  $scope.privateDomains = [];
+  $scope.nrOfDomains = 0;
 
   // get particular organization
   organizationService.getOrganization($scope.id).then(function(response) {
@@ -74,5 +79,40 @@ organization.controller('OrganizationDetailsCtrl', ['$scope', '$routeParams', 'o
     });
   }, function(err) {
     console.log('Error: ' + err);
-  });  
+  });
+  
+  // get organization quota
+  organizationService.getQuotaForTheOrganization($scope.id).then(function(response) {
+    var data = response.data;
+    
+    
+  }, function(err) {
+    console.log('Error: ' + err);
+  });
+  
+  // get organization sharedDomains
+  organizationService.getSharedDomainsForTheOrganization($scope.id).then(function(response) {
+    var data = response.data;
+    $scope.nrOfDomains += 1;
+    $scope.sharedDomains = (data.resources);
+  }, function(err) {
+    console.log('Error: ' + err);
+  });
+  
+  // get organization privateDomains
+  organizationService.getPrivateDomainsForTheOrganization($scope.id).then(function(response) {
+    var data = response.data;
+    $scope.nrOfDomains += data.total_results;
+    $scope.privateDomains = data.resources;
+  }, function(err) {
+    console.log('Error: ' + err);
+  });
+  
+  // get organization members
+  organizationService.getMembersForTheOrganization($scope.id).then(function(response) {
+    
+  }, function(err) {
+    console.log('Error: ' + err);
+  });
+  
 }]);

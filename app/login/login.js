@@ -10,7 +10,7 @@ logIn.controller('LogInCtrl', ['$scope', '$location', 'authService', function($s
 
   $scope.logIn = function() {
     authService.logIn($scope.logInData).then(function(response) {
-      $location.path('/dashboard');
+      $location.path('/');
     },
     function (err) {
       $scope.message = err.error_description;

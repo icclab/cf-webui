@@ -78,7 +78,9 @@
         </ul><!-- /#breadcrumb -->
         
         <div id="page-title" class="clearfix">
-          <h1 class="pull-left">Organization: ZHAW School of Engineering</h1>
+<!-- XXX>fat: -->
+          <h1 class="pull-left">Organization: {{name}}</h1>
+<!-- <XXX -->
           <div class="pull-right">
             <a class="action action-edit" href="#"><i class="fa fa-lg fa-pencil"></i></a>
             <a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a>
@@ -122,6 +124,21 @@
                     </tr>
                   </thead>
                   <tbody>
+<!-- XXX>fat: -->
+                    <tr>
+                      <td><a href="#">{{space.name}}</a></td>
+                      <td>
+                        <span class="label label-success">3 running</span>
+                        <span class="label label-default">2 stopped</span>
+                      </td>
+                      <td>5</td>
+                      <td>512 MB</td>
+                      <td>
+                        <a class="action action-edit" href="#"><i class="fa fa-lg fa-pencil"></i></a>
+                        <a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a>
+                      </td>
+                    </tr>
+<!-- <XXX -->
                     <tr>
                       <td><a href="#">Development</a></td>
                       <td>
@@ -224,6 +241,16 @@
                     </tr>
                   </thead>
                   <tbody>
+<!-- XXX>fat: -->
+                    <tr ng-repeat="member in members | orderBy:email:false">
+                      <td>{{member.email}}</td>
+                      <td><input type="checkbox" checked></td>
+                      <td><input type="checkbox" checked></td>
+                      <td><input type="checkbox" checked></td>
+                      <td><a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a></td>
+                    </tr>
+<!-- <XXX -->
+                    
                     <tr>
                       <td>michi.rieser@gmail.com</td>
                       <td><input type="checkbox" checked></td>
