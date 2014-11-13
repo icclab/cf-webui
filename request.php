@@ -1,6 +1,6 @@
 <?php
   header('Access-Control-Allow-Origin: *');
-  header('Content-Type: application/json;charset=UTF-8');
+  header('Content-Type: application/json');
 
   $method = $_SERVER['REQUEST_METHOD'];
   $url = null;
@@ -29,7 +29,7 @@
         $headersForCurl[] = $key . ': ' . $value;
       }
 
-      if ($key == 'Content-Type' && $value == 'application/x-www-form-urlencoded') {
+      if ($key == 'Content-Type' && strrpos($value, 'application/x-www-form-urlencoded') !== false) {
         $urlEncoded = true;
       }
     }
