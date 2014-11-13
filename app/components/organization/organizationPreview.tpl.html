@@ -1,52 +1,9 @@
-<div id="page-sidebar">
-  <ul id="sidebar-navigation">
-    <li id="logo"><a href="#">CF WebUI</a></li>
-    <li class="title">Organizations</li>
-    <li>
-      <a href="#" toggle-subnavi>ZHAW Gesundheit</a>
-      <ul>
-        <li><a href="#">Overview</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#" toggle-subnavi>ZHAW School of Engineering</a>
-      <ul>
-        <li><a href="#">Overview</a></li>
-        <li><a href="#">Development</a></li>
-        <li><a href="#">Stage</a></li>
-        <li><a href="#">Production</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#" toggle-subnavi>ZHAW Architektur, Gestaltung und Bauingenieurwesen</a>
-      <ul>
-        <li><a href="#">Overview</a></li>
-      </ul>
-    </li>
-  </ul><!-- /#sidebar-navigation -->
-</div><!-- /#page-sidebar -->
+<sidebar></sidebar>
 
 <div id="page-content">
-  <ul id="top-navigation">
-    <li>
-      <a href="#" id="sidebar-minimize" toggle-sidebar><span class="fa fa-dedent"></span></a>
-    </li>
-    <li class="pull-right" dropdown>
-      <a class="dropdown-toggle"><span class="fa fa-user"></span></a>
-      <ul class="dropdown-menu" role="menu">
-        <li><a href="#">My account</a></li>
-        <li><a ng-controller="LogInCtrl" ng-click="logOut()">Sign out</a></li>
-      </ul>
-    </li>
-  </ul><!-- /#top-navigation -->
+  <topbar></topbar>
   
-  <ul id="breadcrumb">
-    <li><a href="#">Organizations</a></li>
-    <li><a href="#">ZHAW</a></li>
-    <li><a href="#">Spaces</a></li>
-    <li><a href="#">Technikum</a></li>
-    <li>Building</li>
-  </ul><!-- /#breadcrumb -->
+  <breadcrumb></breadcrumb>
   
   <div id="page-title" class="clearfix">
     <h1 class="pull-left">Organizations</h1>
