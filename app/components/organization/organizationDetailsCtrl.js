@@ -10,6 +10,11 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
   $scope.sharedDomains = [];
   $scope.privateDomains = [];
   $scope.nrOfDomains = 0;
+  
+  // users
+  $scope.users = [];
+  $scope.nrOfOrganizationUsers = 0;
+  $scope.allUsersForOrganization = [];
 
   // get particular organization
   organizationService.getOrganization($scope.id).then(function(response) {
@@ -92,8 +97,24 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
     console.log('Error: ' + err);
   });
   
-  // get organization members
-  organizationService.getMembersForTheOrganization($scope.id).then(function(response) {
+  // get all users for the organization
+  organizationService.getAllUsersForTheOrganization($scope.id).then(function(response) {
+     
+    var data = response.data;
+    $scope.nrOfOrganizationUsers = data.total_results;
+    $scope.allUsersForOrganization = data.resources;
+    
+    
+    // get summary for each user
+    angular.forEach(data.resources, function(user, key) {
+      
+      userService.getUserSummary(user.metadata.guid).then(function(responseUser) {
+        // ... not authorized
+        console.log(responseUser.data);
+      }, function(err) {
+        console.log('Error: ' + err);
+      });
+    });
     
   }, function(err) {
     console.log('Error: ' + err);

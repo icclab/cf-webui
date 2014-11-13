@@ -133,7 +133,8 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
     });
   };
   
-  var _getMembersForTheOrganization = function(id) {
+  var _getAllUsersForTheOrganization = function(id) {
+    
     // params
     var params = {
       'url': API_ENDPOINT + '/v2/organizations/' + id +  '/users'
@@ -161,13 +162,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
   organizationServiceFactory.getSpacesForTheOrganization = _getSpacesForTheOrganization;
   organizationServiceFactory.getSharedDomainsForTheOrganization = _getSharedDomainsForTheOrganization;
   organizationServiceFactory.getPrivateDomainsForTheOrganization = _getPrivateDomainsForTheOrganization;
-  organizationServiceFactory.getMembersForTheOrganization = _getMembersForTheOrganization;
-  
-  /*
-  organizationServiceFactory.getAuditorsForTheOrganization = _getAuditorsForTheOrganization;
-  organizationServiceFactory.getBillingManagersForTheOrganization = _getBillingManagersForTheOrganization;
-  organizationServiceFactory.getManagersForTheOrganization = _getManagersForTheOrganization;
-  */
+  organizationServiceFactory.getAllUsersForTheOrganization = _getAllUsersForTheOrganization;
 
   return organizationServiceFactory;
 }]);

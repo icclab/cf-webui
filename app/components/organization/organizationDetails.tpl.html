@@ -121,20 +121,11 @@
               </tr>
             </thead>
             <tbody>
-<!-- XXX>fat: -->
-              <tr ng-repeat="member in members | orderBy:email:false">
-                <td>{{member.email}}</td>
+              <tr ng-repeat="user in allUsersForOrganization | orderBy:email:false">
+                <td>{{user.metadata.guid}}</td>
                 <td><input type="checkbox" checked></td>
                 <td><input type="checkbox" checked></td>
                 <td><input type="checkbox" checked></td>
-                <td><a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a></td>
-              </tr>
-<!-- <XXX -->
-              <tr>
-                <td>fatmir.popaj@gmail.com</td>
-                <td><input type="checkbox"></td>
-                <td><input type="checkbox" checked></td>
-                <td><input type="checkbox"></td>
                 <td><a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a></td>
               </tr>
             </tbody>
