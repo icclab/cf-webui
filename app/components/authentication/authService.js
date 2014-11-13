@@ -1,4 +1,4 @@
-app.factory('authService', ['$http', '$q', 'UAA_ENDPOINT', function($http, $q, UAA_ENDPOINT) {
+angular.module('app.auth').factory('authService', ['$http', '$q', 'UAA_ENDPOINT', function($http, $q, UAA_ENDPOINT) {
   var authServiceFactory = {};
 
   var _authentication = {

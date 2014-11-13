@@ -1,4 +1,4 @@
-app.factory('authInterceptorService', ['$q', '$location', function($q, $location) {
+angular.module('app.auth').factory('authInterceptorService', ['$q', '$location', function($q, $location) {
   var authInterceptorServiceFactory = {};
 
   var _request = function(config) {

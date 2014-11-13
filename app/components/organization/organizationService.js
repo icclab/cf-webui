@@ -1,4 +1,4 @@
-app.factory('organizationService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
+angular.module('app.organization').factory('organizationService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
   var organizationServiceFactory = {};
 
   var _getOrganizations = function() {

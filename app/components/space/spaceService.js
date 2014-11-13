@@ -1,4 +1,4 @@
-app.factory('spaceService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
+angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
   var spaceServiceFactory = {};
 
   var _getSpaceSummary = function(id) {
@@ -41,10 +41,9 @@ app.factory('spaceService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOI
     };
 
     return $http.put('/request.php', data, config).success(function(response) {
-      console.log(space);
-      console.log('space changed');
+      // TODO: error handling
     }).error(function(err, status) {
-      console.log('error: ' + err);
+      // TODO: error handling
     });
   };
 
