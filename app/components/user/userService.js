@@ -1,10 +1,10 @@
-app.factory('userService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
+angular.module('app.user').factory('userService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
   var userServiceFactory = {};
 
   var _getUserSummary = function(id) {
     // params
     var params = {
-      'url': API_ENDPOINT + '/v2/users/' + id + '/audited_organizations'
+      'url': API_ENDPOINT + '/v2/users/' + id
     };
 
     // http headers

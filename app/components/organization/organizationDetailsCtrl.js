@@ -1,4 +1,4 @@
-angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scope', '$routeParams', '$modal', 'organizationService', 'spaceService', function($scope, $routeParams, $modal, organizationService, spaceService) {
+angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scope', '$routeParams', '$modal', 'organizationService', 'spaceService', 'userService', function($scope, $routeParams, $modal, organizationService, spaceService, userService) {
   $scope.name = '';
   $scope.id = $routeParams.organizationId;
 
@@ -110,7 +110,6 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
       
       userService.getUserSummary(user.metadata.guid).then(function(responseUser) {
         // ... not authorized
-        console.log(responseUser.data);
       }, function(err) {
         console.log('Error: ' + err);
       });
