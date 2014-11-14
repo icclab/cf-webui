@@ -70,7 +70,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
   var _getQuotaForTheOrganization = function(id) {
     // params
     var params = {
-      'url': API_ENDPOINT + '/v2/quota_definitions/' + id
+      'url': API_ENDPOINT + '/v2/quota_definitions'
     };
 
     // http headers

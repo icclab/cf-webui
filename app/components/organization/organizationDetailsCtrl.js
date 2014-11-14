@@ -1,10 +1,16 @@
 angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scope', '$routeParams', '$modal', 'organizationService', 'spaceService', 'userService', function($scope, $routeParams, $modal, organizationService, spaceService, userService) {
   $scope.name = '';
   $scope.id = $routeParams.organizationId;
+  
+  // organizations
+  $scope.quotaDefID = 0;
+  $scope.organizationTotalQuota = 0;
+  $scope.usedQuotaPercent = 0.0;
 
   // space info
   $scope.spaces = [];
   $scope.nrOfSpaces = 0;
+  $scope.spacesTotalQuota = 0;
   
   // domain info
   $scope.sharedDomains = [];
@@ -20,6 +26,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
   organizationService.getOrganization($scope.id).then(function(response) {
     var data = response.data;
     $scope.name = data.entity.name;
+    $scope.quotaDefID = data.entity.quota_definition_guid;
   }, function (err) {
     console.log('Error: ' + err);
   });
@@ -40,6 +47,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
         var nrOfStoppedApps = 0;
         angular.forEach(dataSpace.apps, function(application, i) {
           memory += application.memory;
+          $scope.spacesTotalQuota += memory;
 
           // started apps
           if (application.state === 'STARTED') {
@@ -71,9 +79,14 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
   });
   
   // get organization quota
-  organizationService.getQuotaForTheOrganization($scope.id).then(function(response) {
+  organizationService.getQuotaForTheOrganization($scope.quotaDefID).then(function(response) {
     var data = response.data;
     
+    angular.forEach(data.resources, function(organization, i) {
+      if($scope.quotaDefID === organization.metadata.guid){
+        $scope.organizationTotalQuota += organization.entity.memory_limit;
+      }
+    });
     
   }, function(err) {
     console.log('Error: ' + err);
