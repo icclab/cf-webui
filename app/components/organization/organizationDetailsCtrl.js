@@ -1,20 +1,32 @@
-angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scope', '$routeParams', '$modal', 'organizationService', 'spaceService', function($scope, $routeParams, $modal, organizationService, spaceService) {
+angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scope', '$routeParams', '$modal', 'organizationService', 'spaceService', 'userService', 'domainService', function($scope, $routeParams, $modal, organizationService, spaceService, userService, domainService) {
   $scope.name = '';
   $scope.id = $routeParams.organizationId;
+  
+  // organizations
+  $scope.quotaDefID = 0;
+  $scope.organizationTotalQuota = 0;
+  $scope.usedQuotaPercent = 0.0;
 
   // space info
   $scope.spaces = [];
   $scope.nrOfSpaces = 0;
+  $scope.spacesTotalQuota = 0;
   
   // domain info
   $scope.sharedDomains = [];
   $scope.privateDomains = [];
   $scope.nrOfDomains = 0;
+  
+  // users
+  $scope.users = [];
+  $scope.nrOfOrganizationUsers = 0;
+  $scope.allUsersForOrganization = [];
 
   // get particular organization
   organizationService.getOrganization($scope.id).then(function(response) {
     var data = response.data;
     $scope.name = data.entity.name;
+    $scope.quotaDefID = data.entity.quota_definition_guid;
   }, function (err) {
     console.log('Error: ' + err);
   });
@@ -35,6 +47,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
         var nrOfStoppedApps = 0;
         angular.forEach(dataSpace.apps, function(application, i) {
           memory += application.memory;
+          $scope.spacesTotalQuota += memory;
 
           // started apps
           if (application.state === 'STARTED') {
@@ -66,9 +79,14 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
   });
   
   // get organization quota
-  organizationService.getQuotaForTheOrganization($scope.id).then(function(response) {
+  organizationService.getQuotaForTheOrganization($scope.quotaDefID).then(function(response) {
     var data = response.data;
     
+    angular.forEach(data.resources, function(organization, i) {
+      if($scope.quotaDefID === organization.metadata.guid){
+        $scope.organizationTotalQuota += organization.entity.memory_limit;
+      }
+    });
     
   }, function(err) {
     console.log('Error: ' + err);
@@ -92,8 +110,23 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
     console.log('Error: ' + err);
   });
   
-  // get organization members
-  organizationService.getMembersForTheOrganization($scope.id).then(function(response) {
+  // get all users for the organization
+  organizationService.getAllUsersForTheOrganization($scope.id).then(function(response) {
+     
+    var data = response.data;
+    $scope.nrOfOrganizationUsers = data.total_results;
+    $scope.allUsersForOrganization = data.resources;
+    
+    
+    // get summary for each user
+    angular.forEach(data.resources, function(user, key) {
+      
+      userService.getUserSummary(user.metadata.guid).then(function(responseUser) {
+        // ... not authorized
+      }, function(err) {
+        console.log('Error: ' + err);
+      });
+    });
     
   }, function(err) {
     console.log('Error: ' + err);
@@ -115,4 +148,23 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
       $scope.editedSpace = editedSpace;
     });
   };
+  
+  // new domain
+  $scope.newDomain = function () {
+    var domain = {
+      'organizationID' : $scope.id
+    }
+    
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/domain/domainAdd.tpl.html',
+      controller: 'DomainAddCtrl',
+      resolve: {
+        domain: function () {
+          return domain;
+        }
+      }
+    });
+
+  };
+  
 }]);
