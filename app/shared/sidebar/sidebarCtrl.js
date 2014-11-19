@@ -33,7 +33,6 @@ angular.module('app.sidebar').controller('SidebarCtrl', ['$scope', 'organization
 
         for (var j = 0; j < $scope.organizations.length; j++) {
           if ($scope.organizations[j].id === objectSpace.organizationId) {
-            console.log(objectSpace);
             $scope.organizations[j].spaces.push(objectSpace);
             break;
           }
