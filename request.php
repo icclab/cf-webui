@@ -60,6 +60,10 @@
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         break;
+        
+      case 'DELETE':
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+        break;
     }
 
     curl_setopt($ch, CURLOPT_URL, $url);

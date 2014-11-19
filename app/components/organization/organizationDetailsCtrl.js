@@ -1,4 +1,4 @@
-angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scope', '$routeParams', '$modal', 'organizationService', 'spaceService', 'userService', function($scope, $routeParams, $modal, organizationService, spaceService, userService) {
+angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scope', '$routeParams', '$modal', 'organizationService', 'spaceService', 'userService', 'domainService', function($scope, $routeParams, $modal, organizationService, spaceService, userService, domainService) {
   $scope.name = '';
   $scope.id = $routeParams.organizationId;
   
@@ -148,4 +148,23 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
       $scope.editedSpace = editedSpace;
     });
   };
+  
+  // new domain
+  $scope.newDomain = function () {
+    var domain = {
+      'organizationID' : $scope.id
+    }
+    
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/domain/domainAdd.tpl.html',
+      controller: 'DomainAddCtrl',
+      resolve: {
+        domain: function () {
+          return domain;
+        }
+      }
+    });
+
+  };
+  
 }]);
