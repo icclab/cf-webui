@@ -155,6 +155,31 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       return response;
     });
   };
+  
+  var _editOrganization = function(organization) {
+    
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/organizations/' + organization.id,
+      'name': organization.name
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers
+    };
+
+    return $http.put('/request.php', data, config).success(function(response) {
+      // TODO: error handling
+    }).error(function(err, status) {
+      // TODO: error handling
+    });
+  };
 
   organizationServiceFactory.getOrganizations = _getOrganizations;
   organizationServiceFactory.getOrganization = _getOrganization;
@@ -163,6 +188,8 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
   organizationServiceFactory.getSharedDomainsForTheOrganization = _getSharedDomainsForTheOrganization;
   organizationServiceFactory.getPrivateDomainsForTheOrganization = _getPrivateDomainsForTheOrganization;
   organizationServiceFactory.getAllUsersForTheOrganization = _getAllUsersForTheOrganization;
+  organizationServiceFactory.editOrganization = _editOrganization;
+  
 
   return organizationServiceFactory;
 }]);

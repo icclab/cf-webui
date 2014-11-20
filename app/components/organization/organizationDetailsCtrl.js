@@ -155,6 +155,30 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
       $scope.editedSpace = editedSpace;
     });
   };
+  
+  $scope.editOrganization = function() {
+    
+    var organization = {
+      'id' : $scope.id,
+      'name' : name,
+      'quota_definition_guid' : $scope.quotaDefID
+    };
+    
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/organization/organizationEdit.tpl.html',
+      controller: 'OrganizationEditCtrl',
+      resolve: {
+        organization: function() {
+          return organization;
+        }
+      }
+    });
+
+    modalInstance.result.then(function(editedOrganization) {
+      $scope.name = editedOrganization.name;
+    });
+
+  };
 
   // add space
   $scope.addSpace = function() {
