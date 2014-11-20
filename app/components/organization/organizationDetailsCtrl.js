@@ -32,51 +32,59 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
   });
 
   // get spaces for the organization
-  organizationService.getSpacesForTheOrganization($scope.id).then(function(response) {
-    var data = response.data;
-    $scope.nrOfSpaces = data.total_results;
+  $scope.getSpacesForTheOrganization = function() {
+    // clear spaces array on reload
+    if ($scope.spaces.length > 0) {
+      $scope.spaces.length = 0;
+    }
 
-    // get summary for each space
-    angular.forEach(data.resources, function(space, key) {
-      spaceService.getSpaceSummary(space.metadata.guid).then(function(responseSpace) {
-        var dataSpace = responseSpace.data;
+    organizationService.getSpacesForTheOrganization($scope.id).then(function(response) {
+      var data = response.data;
+      $scope.nrOfSpaces = data.total_results;
 
-        // calculate space memory and stopped or started apps
-        var memory = 0;
-        var nrOfStartedApps = 0;
-        var nrOfStoppedApps = 0;
-        angular.forEach(dataSpace.apps, function(application, i) {
-          memory += application.memory;
-          $scope.spacesTotalQuota += memory;
+      // get summary for each space
+      angular.forEach(data.resources, function(space, key) {
+        spaceService.getSpaceSummary(space.metadata.guid).then(function(responseSpace) {
+          var dataSpace = responseSpace.data;
 
-          // started apps
-          if (application.state === 'STARTED') {
-            nrOfStartedApps++;
-          }
+          // calculate space memory and stopped or started apps
+          var memory = 0;
+          var nrOfStartedApps = 0;
+          var nrOfStoppedApps = 0;
+          angular.forEach(dataSpace.apps, function(application, i) {
+            memory += application.memory;
+            $scope.spacesTotalQuota += memory;
 
-          // stopped apps
-          if (application.state === 'STOPPED') {
-            nrOfStoppedApps++;
-          }
+            // started apps
+            if (application.state === 'STARTED') {
+              nrOfStartedApps++;
+            }
+
+            // stopped apps
+            if (application.state === 'STOPPED') {
+              nrOfStoppedApps++;
+            }
+          });
+
+          var objectSpace = {
+            id: dataSpace.guid,
+            name: dataSpace.name,
+            memory: memory,
+            nrOfStartedApps: nrOfStartedApps,
+            nrOfStoppedApps: nrOfStoppedApps,
+            nrOfServices: dataSpace.services.length
+          };
+
+          $scope.spaces.push(objectSpace);
+        }, function(err) {
+          console.log('Error: ' + err);
         });
-
-        var objectSpace = {
-          id: dataSpace.guid,
-          name: dataSpace.name,
-          memory: memory,
-          nrOfStartedApps: nrOfStartedApps,
-          nrOfStoppedApps: nrOfStoppedApps,
-          nrOfServices: dataSpace.services.length
-        };
-
-        $scope.spaces.push(objectSpace);
-      }, function(err) {
-        console.log('Error: ' + err);
       });
+    }, function(err) {
+      console.log('Error: ' + err);
     });
-  }, function(err) {
-    console.log('Error: ' + err);
-  });
+  };
+  $scope.getSpacesForTheOrganization();
   
   // get organization quota
   organizationService.getQuotaForTheOrganization($scope.quotaDefID).then(function(response) {
@@ -132,13 +140,12 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
     console.log('Error: ' + err);
   });
 
-  $scope.open = function (space) {
-
+  $scope.open = function(space) {
     var modalInstance = $modal.open({
       templateUrl: 'app/components/space/spaceEdit.tpl.html',
       controller: 'SpaceEditCtrl',
       resolve: {
-        space: function () {
+        space: function() {
           return space;
         }
       }
@@ -148,18 +155,40 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
       $scope.editedSpace = editedSpace;
     });
   };
+
+  // add space
+  $scope.addSpace = function() {
+    var space = {
+      'organizationId': $scope.id
+    };
+
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/space/spaceAdd.tpl.html',
+      controller: 'SpaceAddCtrl',
+      resolve: {
+        space: function() {
+          return space;
+        }
+      }
+    });
+
+    modalInstance.result.then(function() {
+      // reload the spaces table
+      $scope.getSpacesForTheOrganization();
+    });
+  };
   
   // new domain
-  $scope.newDomain = function () {
+  $scope.newDomain = function() {
     var domain = {
       'organizationID' : $scope.id
-    }
+    };
     
     var modalInstance = $modal.open({
       templateUrl: 'app/components/domain/domainAdd.tpl.html',
       controller: 'DomainAddCtrl',
       resolve: {
-        domain: function () {
+        domain: function() {
           return domain;
         }
       }
