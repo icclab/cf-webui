@@ -54,7 +54,7 @@
             </thead>
             <tbody>
               <tr ng-repeat="space in spaces | orderBy:space.name:false">
-                <td><a href="#/spaces/{{space.id}}">{{space.name}}</a></td>
+                <td><a href="#/organizations/{{id}}/spaces/{{space.id}}">{{space.name}}</a></td>
                 <td>
                   <span class="label label-success">{{space.nrOfStartedApps}} running</span>
                   <span class="label label-default">{{space.nrOfStoppedApps}} stopped</span>

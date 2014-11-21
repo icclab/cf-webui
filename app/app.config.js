@@ -15,6 +15,11 @@ angular.module('app').config(['$routeProvider', function($routeProvider) {
       controller: 'OrganizationDetailsCtrl'
     })
 
+    .when('/organizations/:organizationId/spaces/:spaceId', {
+      templateUrl: 'app/components/space/spaceDetails.tpl.html',
+      controller: 'SpaceDetailsCtrl'
+    })
+
     .otherwise({
       redirectTo: '/organizations'
     });

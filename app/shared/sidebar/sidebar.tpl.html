@@ -7,7 +7,7 @@
       <ul>
         <li><a href="#/organizations/{{organization.id}}">Overview</a></li>
         <li ng-repeat="space in organization.spaces">
-          <a href="#/spaces/{{space.id}}">{{space.name}}</a>
+          <a href="#/organizations/{{organization.id}}/spaces/{{space.id}}">{{space.name}}</a>
         </li>
       </ul>
     </li>

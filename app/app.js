@@ -15,6 +15,6 @@ angular.module('app', [
   'app.logIn',
   'app.organization',
   'app.space',
-  'app.user', 
+  'app.user',
   'app.domain'
 ]);
