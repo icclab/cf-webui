@@ -93,11 +93,38 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
       // TODO: error handling
     });
   };
+  
+  var _deleteSpace = function(space) {
+    
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/spaces/' + space.id,
+      'guid' : space.id
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers,
+      data: data
+    };
+    
+    return $http.delete('/request.php', config).success(function(response) {
+      // TODO: error handling
+    }).error(function(err, status) {
+      // TODO: error handling
+    });
+  };
 
   spaceServiceFactory.getSpaces = _getSpaces;
   spaceServiceFactory.getSpaceSummary = _getSpaceSummary;
   spaceServiceFactory.editSpace = _editSpace;
   spaceServiceFactory.addSpace = _addSpace;
+  spaceServiceFactory.deleteSpace = _deleteSpace;
 
   return spaceServiceFactory;
 }]);

@@ -52,7 +52,7 @@ angular.module('app.domain').factory('domainService', ['$http', 'API_ENDPOINT', 
     }).error(function(err, status) {
       // TODO: error handling
     });
-  }
+  };
   
   domainServiceFactory.addDomain = _addDomain;
   domainServiceFactory.deleteDomain = _deleteDomain;

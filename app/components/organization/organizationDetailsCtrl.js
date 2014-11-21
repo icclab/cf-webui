@@ -220,12 +220,25 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
 
   };
   
-  // delete Organization
+  // delete organization
   $scope.deleteDomain = function (domain) {
     
     domainService.deleteDomain(domain).then(function(response) {
       var indexOfDomainToRemove = $scope.privateDomains.indexOf(domain);
       $scope.privateDomains.splice(indexOfDomainToRemove, 1);
+    }, function(err) {
+      console.log('Error: ' + err);
+    });
+    
+  };
+  
+  // delete space
+  $scope.deleteSpace = function (space) {
+    
+    spaceService.deleteSpace(space).then(function(response) {
+      $scope.spaces
+      var indexOfSpaceToRemove = $scope.spaces.indexOf(space);
+      $scope.spaces.splice(indexOfSpaceToRemove, 1);
     }, function(err) {
       console.log('Error: ' + err);
     });
