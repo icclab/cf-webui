@@ -222,15 +222,12 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
   
   // delete Organization
   $scope.deleteDomain = function (domain) {
-    console.log(domain);
-    domainService.deleteDomain(domain);
     
-    angular.forEach($scope.privateDomains, function(privateDomain, i) {
-      if(angular.equals(privateDomain.entity.name, domain.entity.name)){
-        $scope.privateDomains.shift(domain);
-        $scope.nrOfDomains -=1;
-      }
-
+    domainService.deleteDomain(domain).then(function(response) {
+      var indexOfDomainToRemove = $scope.privateDomains.indexOf(domain);
+      $scope.privateDomains.splice(indexOfDomainToRemove, 1);
+    }, function(err) {
+      console.log('Error: ' + err);
     });
     
   };
