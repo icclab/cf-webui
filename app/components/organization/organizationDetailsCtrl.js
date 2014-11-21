@@ -223,11 +223,21 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
   // delete organization
   $scope.deleteDomain = function (domain) {
     
-    domainService.deleteDomain(domain).then(function(response) {
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/domain/domainDelete.tpl.html',
+      controller: 'DomainDeleteCtrl',
+      resolve: {
+        domain: function() {
+          return domain;
+        }
+      }
+    });
+    
+    modalInstance.result.then(function() {
+      // adjust domain table information
       var indexOfDomainToRemove = $scope.privateDomains.indexOf(domain);
       $scope.privateDomains.splice(indexOfDomainToRemove, 1);
-    }, function(err) {
-      console.log('Error: ' + err);
+      $scope.nrOfDomains -=1;
     });
     
   };
