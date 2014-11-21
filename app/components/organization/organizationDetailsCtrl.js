@@ -245,12 +245,21 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
   // delete space
   $scope.deleteSpace = function (space) {
     
-    spaceService.deleteSpace(space).then(function(response) {
-      $scope.spaces
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/space/spaceDelete.tpl.html',
+      controller: 'SpaceDeleteCtrl',
+      resolve: {
+        space: function() {
+          return space;
+        }
+      }
+    });
+    
+    modalInstance.result.then(function() {
+      // adjust space table information
       var indexOfSpaceToRemove = $scope.spaces.indexOf(space);
       $scope.spaces.splice(indexOfSpaceToRemove, 1);
-    }, function(err) {
-      console.log('Error: ' + err);
+      $scope.nrOfSpaces -=1;
     });
     
   };
