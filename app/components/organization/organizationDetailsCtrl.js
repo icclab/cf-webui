@@ -223,11 +223,21 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
   // delete organization
   $scope.deleteDomain = function (domain) {
     
-    domainService.deleteDomain(domain).then(function(response) {
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/domain/domainDelete.tpl.html',
+      controller: 'DomainDeleteCtrl',
+      resolve: {
+        domain: function() {
+          return domain;
+        }
+      }
+    });
+    
+    modalInstance.result.then(function() {
+      // adjust domain table information
       var indexOfDomainToRemove = $scope.privateDomains.indexOf(domain);
       $scope.privateDomains.splice(indexOfDomainToRemove, 1);
-    }, function(err) {
-      console.log('Error: ' + err);
+      $scope.nrOfDomains -=1;
     });
     
   };
@@ -235,12 +245,21 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
   // delete space
   $scope.deleteSpace = function (space) {
     
-    spaceService.deleteSpace(space).then(function(response) {
-      $scope.spaces
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/space/spaceDelete.tpl.html',
+      controller: 'SpaceDeleteCtrl',
+      resolve: {
+        space: function() {
+          return space;
+        }
+      }
+    });
+    
+    modalInstance.result.then(function() {
+      // adjust space table information
       var indexOfSpaceToRemove = $scope.spaces.indexOf(space);
       $scope.spaces.splice(indexOfSpaceToRemove, 1);
-    }, function(err) {
-      console.log('Error: ' + err);
+      $scope.nrOfSpaces -=1;
     });
     
   };
