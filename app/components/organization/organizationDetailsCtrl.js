@@ -245,7 +245,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
 
   };
   
-  // delete organization
+  // delete domain
   $scope.deleteDomain = function (domain) {
     
     var modalInstance = $modal.open({
@@ -285,6 +285,28 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
       var indexOfSpaceToRemove = $scope.spaces.indexOf(space);
       $scope.spaces.splice(indexOfSpaceToRemove, 1);
       $scope.nrOfSpaces -=1;
+    });
+    
+  };
+  
+  // delete user
+  $scope.deleteUser = function (user) {
+    
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/user/userDelete.tpl.html',
+      controller: 'UserDeleteCtrl',
+      resolve: {
+        user: function() {
+          return user;
+        }
+      }
+    });
+    
+    modalInstance.result.then(function() {
+      // adjust user table information
+      var indexOfUserToRemove = $scope.users.indexOf(user);
+      $scope.users.splice(indexOfUserToRemove, 1);
+      $scope.nrOfOrganizationUsers -=1;
     });
     
   };
