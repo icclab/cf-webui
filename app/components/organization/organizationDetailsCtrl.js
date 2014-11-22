@@ -242,6 +242,12 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
         }
       }
     });
+    
+    modalInstance.result.then(function(newDomainResponseObject) {
+      // adjust domain table information
+      $scope.nrOfDomains += 1;
+      $scope.privateDomains.push(newDomainResponseObject);
+    });
 
   };
   
