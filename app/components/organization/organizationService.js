@@ -180,6 +180,34 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       // TODO: error handling
     });
   };
+  
+  var _deleteOrganization = function(organization) {
+    
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/organizations/' + organization.id,
+      'guid' : organization.id,
+      'async' : false,
+      'recursive' : true
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers,
+      data: data
+    };
+    
+    return $http.delete('/request.php', config).success(function(response) {
+      // TODO: error handling
+    }).error(function(err, status) {
+      // TODO: error handling
+    });
+  };
 
   organizationServiceFactory.getOrganizations = _getOrganizations;
   organizationServiceFactory.getOrganization = _getOrganization;
@@ -189,7 +217,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
   organizationServiceFactory.getPrivateDomainsForTheOrganization = _getPrivateDomainsForTheOrganization;
   organizationServiceFactory.getAllUsersForTheOrganization = _getAllUsersForTheOrganization;
   organizationServiceFactory.editOrganization = _editOrganization;
-  
+  organizationServiceFactory.deleteOrganization = _deleteOrganization;
 
   return organizationServiceFactory;
 }]);

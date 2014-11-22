@@ -179,6 +179,31 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
     });
 
   };
+  
+  $scope.deleteOrganization = function() {
+    
+    var organization = {
+      'id' : $scope.id,
+      'name' : $scope.name,
+      'quota_definition_guid' : $scope.quotaDefID
+    };
+    
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/organization/organizationDelete.tpl.html',
+      controller: 'OrganizationDeleteCtrl',
+      resolve: {
+        organization: function() {
+          return organization;
+        }
+      }
+    });
+    
+    modalInstance.result.then(function(response) {
+      // redirect to organizations overview
+      window.location = "../#/organizations";
+    });
+
+  };
 
   // add space
   $scope.addSpace = function() {
