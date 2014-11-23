@@ -118,11 +118,38 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
     });
   };
   
+  var _deleteApplication = function(application) {
+    console.log("hier2dfasdf");
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/apps/' + application.id,
+      'guid' : application.id
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers,
+      data: data
+    };
+    
+    return $http.delete('/request.php', config).success(function(response) {
+      // TODO: error handling
+    }).error(function(err, status) {
+      // TODO: error handling
+    });
+  };
+  
   applicationServiceFactory.getApplicationSummary = _getApplicationSummary;
   applicationServiceFactory.getStack = _getStack;
   applicationServiceFactory.getEnvironmentVariables = _getEnvironmentVariables;
   applicationServiceFactory.getServiceBindings = _getServiceBindings;
   applicationServiceFactory.editApplication = _editApplication;
+  applicationServiceFactory.deleteApplication = _deleteApplication;
   
   return applicationServiceFactory;
 }]);

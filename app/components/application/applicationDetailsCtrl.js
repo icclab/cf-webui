@@ -127,4 +127,27 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
     });
   };
   
+  $scope.deleteApplication = function() {
+    
+    var application = {
+      'id' : $scope.applicationId,
+      'name' : $scope.name
+    };
+    
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/application/applicationDelete.tpl.html',
+      controller: 'ApplicationDeleteCtrl',
+      resolve: {
+        application: function() {
+          return application;
+        }
+      }
+    });
+
+    modalInstance.result.then(function() {
+      // go to spaces overview
+      window.location = '#/organizations/' + $scope.organizationId + '/spaces/' + $scope.spaceId;
+    });
+  };
+  
 }]);
