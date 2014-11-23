@@ -69,4 +69,26 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
     messageService.addMessage('danger', 'The application summary has not been loaded: ' + err);
   });
   
+  $scope.editApplication = function() {
+    
+    var application = {
+      'id' : $scope.applicationId,
+      'name' : $scope.name
+    };
+    
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/application/applicationEdit.tpl.html',
+      controller: 'ApplicationEditCtrl',
+      resolve: {
+        application: function() {
+          return application;
+        }
+      }
+    });
+
+    modalInstance.result.then(function(editedApplication) {
+      $scope.name = editedApplication.name;
+    });
+  };
+  
 }]);

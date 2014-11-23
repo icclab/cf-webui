@@ -70,9 +70,34 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
     });
   };
   
+  var _editApplication = function(application) {
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/apps/' + application.id,
+      'name': application.name
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers
+    };
+
+    return $http.put('/request.php', data, config).success(function(response) {
+      // TODO: error handling
+    }).error(function(err, status) {
+      // TODO: error handling
+    });
+  };
+  
   applicationServiceFactory.getApplicationSummary = _getApplicationSummary;
   applicationServiceFactory.getStack = _getStack;
   applicationServiceFactory.getEnvironmentVariables = _getEnvironmentVariables;
+  applicationServiceFactory.editApplication = _editApplication;
   
   return applicationServiceFactory;
 }]);
