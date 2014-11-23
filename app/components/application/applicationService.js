@@ -70,6 +70,30 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
     });
   };
   
+  var _getServiceBindings = function(id) {
+    
+    // params
+    var params = {
+      'url': API_ENDPOINT + '/v2/apps/' + id + '/service_bindings',
+      'inline-relations-depth': 1
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers,
+      params: params
+    };
+
+    return $http.get('/request.php', config).then(function(response) {
+      return response;
+    });
+  };
+  
   var _editApplication = function(application) {
     // data
     var data = {
@@ -97,6 +121,7 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
   applicationServiceFactory.getApplicationSummary = _getApplicationSummary;
   applicationServiceFactory.getStack = _getStack;
   applicationServiceFactory.getEnvironmentVariables = _getEnvironmentVariables;
+  applicationServiceFactory.getServiceBindings = _getServiceBindings;
   applicationServiceFactory.editApplication = _editApplication;
   
   return applicationServiceFactory;

@@ -82,15 +82,17 @@
           <table class="table table-striped table-hover has-actions">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Description</th>
+                <th>Service</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="service in services">
-                <td>{{service.name}}</td>
-                <td>{{service.service_plan.name}} {{service.service_plan.service.label}}</td>
+                <td>
+                  <span class="service-title">{{service.name}}</span>
+                  <a ng-click="service.isCollapsed = !service.isCollapsed"><i class="fa fa-caret-right"></i> Show credentials</a>
+                  <pre collapse="service.isCollapsed" class="service-credentials word-break">{{service.credentials}}</pre>
+                </td>
                 <td>
                   <a class="action action-delete" ng-click=""><i class="fa fa-lg fa-lock"></i></a>
                   <a class="action action-delete" ng-click=""><i class="fa fa-lg fa-eye"></i></a>

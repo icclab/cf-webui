@@ -25,6 +25,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
   $scope.packageState = '';
   
   $scope.services = [];
+  $scope.serviceBindings = [];
   $scope.routes = [];
   $scope.domains = [];
   
@@ -45,12 +46,16 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
     $scope.packageState = response.data.package_state;
     
     $scope.services = response.data.services;
+    angular.forEach($scope.services, function(service, i) {
+      service.isCollapsed = true;
+    });
     $scope.nrOfServices = $scope.services.length;
     
     $scope.routes = response.data.routes;
     $scope.nrOfRoutes = $scope.routes.length;
     
     $scope.domains = response.data.available_domains;
+
     // get stack
     applicationService.getStack($scope.stackId).then(function(stackResponse) {
       $scope.stack = stackResponse.data;
@@ -69,9 +74,36 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
       messageService.addMessage('danger', 'Could not load environment variables: ' + err);
     });
 
+    // get service bindings and add to the service the credentials
+    var getServiceBindingsPromise = applicationService.getServiceBindings($scope.applicationId);
+    getServiceBindingsPromise.then(function(response) {
+      angular.forEach(response.data.resources, function(serviceBinding, i) {
+
+        var keepGoing = true;
+        angular.forEach($scope.services, function(service, k) {
+          if (keepGoing) {
+            if (service.guid === serviceBinding.entity.service_instance_guid) {
+              // pretty-printed json
+              var credentials = serviceBinding.entity.credentials;
+              credentials = JSON.stringify(credentials, null, '  ');
+
+              service.credentials = credentials;
+              keepGoing = false;
+            }
+          }
+        });
+
+      });
+      console.log($scope.services);
+    }, function(err) {
+      messageService.addMessage('danger', 'The service bindings have not been loaded: ' + err);
+    });
+
   }, function(err) {
     messageService.addMessage('danger', 'The application summary has not been loaded: ' + err);
   });
+
+
   
   $scope.editApplication = function() {
     
