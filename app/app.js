@@ -11,6 +11,7 @@ angular.module('app', [
   'app.message',
 
   // components
+  'app.application',
   'app.auth',
   'app.logIn',
   'app.organization',

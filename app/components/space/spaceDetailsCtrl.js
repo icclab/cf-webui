@@ -2,6 +2,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$scope', '$routePar
   $scope.name = '';
   $scope.organizationId = $routeParams.organizationId;
   $scope.id = $routeParams.spaceId;
+  $scope.spaceId = $routeParams.spaceId;
 
   $scope.applications = [];
   $scope.nrOfApplications = 0;

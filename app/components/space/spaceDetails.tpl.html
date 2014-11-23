@@ -45,6 +45,7 @@
                 <td>{{application.instances}}</td>
                 <td>{{application.memory}} MB</td>
                 <td>
+                  <a href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/applications/{{application.id}}"><i class="fa fa-lg fa-eye"></i></a>
                   <a class="action action-edit" ng-click="editApplication(application)"><i class="fa fa-lg fa-pencil"></i></a>
                   <a class="action action-delete" ng-click="deleteApplication(application)"><i class="fa fa-lg fa-trash"></i></a>
                 </td>
