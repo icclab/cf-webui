@@ -41,7 +41,8 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$scope', '$routePar
           id: service.guid,
           name: service.name,
           servicePlan: service.service_plan.service.label + ', ' + service.service_plan.name,
-          nrOfBoundApps: service.bound_app_count
+          nrOfBoundApps: service.bound_app_count,
+          dashboardUrl: service.dashboard_url
         };
 
         $scope.services.push(objectService);

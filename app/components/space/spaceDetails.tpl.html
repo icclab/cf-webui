@@ -45,7 +45,7 @@
                 <td>{{application.instances}}</td>
                 <td>{{application.memory}} MB</td>
                 <td>
-                  <a href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/applications/{{application.id}}"><i class="fa fa-lg fa-eye"></i></a>
+                  <a class="action" href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/applications/{{application.id}}"><i class="fa fa-lg fa-eye"></i></a>
                   <a class="action action-edit" ng-click="editApplication(application)"><i class="fa fa-lg fa-pencil"></i></a>
                   <a class="action action-delete" ng-click="deleteApplication(application)"><i class="fa fa-lg fa-trash"></i></a>
                 </td>
@@ -76,9 +76,7 @@
                 <td>{{service.servicePlan}}</td>
                 <td>{{service.nrOfBoundApps}}</td>
                 <td>
-                  <a class="action" href="#"><i class="fa fa-lg fa fa-home"></i></a>
-                  <a class="action" href="#"><i class="fa fa-lg fa fa-book"></i></a>
-                  <a class="action" href="#"><i class="fa fa-lg fa fa-cog"></i></a>
+                  <a class="action" href="{{service.dashboardUrl}}" target="_blank"><i class="fa fa-lg fa fa-cog"></i></a>
                   <a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a>
                 </td>
               </tr>
