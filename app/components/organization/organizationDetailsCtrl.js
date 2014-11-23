@@ -21,6 +21,8 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
   $scope.users = [];
   $scope.nrOfOrganizationUsers = 0;
   $scope.allUsersForOrganization = [];
+  
+  $scope.$watch('[spacesTotalQuota, organizationTotalQuota]', function () { $scope.setOrganizationQuota(); });
 
   // get particular organization
   organizationService.getOrganization($scope.id).then(function(response) {
@@ -139,6 +141,12 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scop
   }, function(err) {
     console.log('Error: ' + err);
   });
+  
+ $scope.setOrganizationQuota = function() {
+   if($scope.organizationTotalQuota > 0){
+     $scope.usedQuotaPercent = (($scope.spacesTotalQuota / $scope.organizationTotalQuota)*100);
+   }
+ };
 
   $scope.open = function(space) {
     var modalInstance = $modal.open({

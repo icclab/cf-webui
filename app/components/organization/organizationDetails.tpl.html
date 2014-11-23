@@ -25,8 +25,8 @@
           </div>
           <div class="panel-body">
             <div class="progress">
-              <div class="progress-bar" role="progressbar" aria-valuenow="{{(spacesTotalQuota/organizationTotalQuota)*100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{(spacesTotalQuota/organizationTotalQuota)*100}}%;">
-                {{(spacesTotalQuota/organizationTotalQuota)*100}}%
+              <div class="progress-bar" role="progressbar" aria-valuenow="{{usedQuotaPercent}}" aria-valuemin="0" aria-valuemax="100" style="width: {{usedQuotaPercent}}%;">
+                {{usedQuotaPercent}}%
               </div>
             </div>
             <p ng-show="spacesTotalQuota !== 0 && organizationTotalQuota !== 0">{{spacesTotalQuota}} MB of {{organizationTotalQuota}} MB limit</p>
