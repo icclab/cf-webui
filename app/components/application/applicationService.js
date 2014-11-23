@@ -119,7 +119,7 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
   };
   
   var _deleteApplication = function(application) {
-    console.log("hier2dfasdf");
+    
     // data
     var data = {
       'url': API_ENDPOINT + '/v2/apps/' + application.id,

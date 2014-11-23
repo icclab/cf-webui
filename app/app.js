@@ -17,5 +17,6 @@ angular.module('app', [
   'app.organization',
   'app.space',
   'app.user',
-  'app.domain'
+  'app.domain',
+  'app.route'
 ]);

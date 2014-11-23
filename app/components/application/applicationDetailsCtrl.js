@@ -1,4 +1,4 @@
-angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope', '$routeParams', '$modal', 'applicationService', function($scope, $routeParams, $modal, applicationService) {
+angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope', '$routeParams', '$modal', 'applicationService', 'routeService', function($scope, $routeParams, $modal, applicationService, routeService) {
   
   $scope.summary = {};
   $scope.stack = {};
@@ -102,7 +102,6 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
     messageService.addMessage('danger', 'The application summary has not been loaded: ' + err);
   });
 
-
   
   $scope.editApplication = function() {
     
@@ -146,6 +145,29 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
     modalInstance.result.then(function() {
       // go to spaces overview
       window.location = '#/organizations/' + $scope.organizationId + '/spaces/' + $scope.spaceId;
+    });
+  };
+  
+  $scope.unmapRoute = function(route) {  
+    
+    // applicationID injection
+    route.applicationID = $scope.applicationId;
+    
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/route/routeUnmap.tpl.html',
+      controller: 'RouteUnmapCtrl',
+      resolve: {
+        route: function() {
+          return route;
+        }
+      }
+    });
+
+    modalInstance.result.then(function(unmappedRoute) {
+      // adjust route table information
+      var indexOfRouteToRemove = $scope.routes.indexOf(unmappedRoute);
+      $scope.routes.splice(indexOfRouteToRemove, 1);
+      $scope.nrOfRoutes -=1;
     });
   };
   
