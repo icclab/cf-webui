@@ -15,6 +15,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
   $scope.nrOfInstances = 0;
   $scope.nrOfServices = 0;
   $scope.nrOfRoutes = 0;
+  $scope.nrOfUserEnvVars = 0;
   $scope.diskQuota = 0;
   $scope.memory = 0;
   $scope.lastPush = 0;
@@ -61,6 +62,9 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
     applicationService.getEnvironmentVariables($scope.applicationId).then(function(envVarResponse) {
       $scope.environmentVariables = envVarResponse.data;
       $scope.systemEnvironmentVariables = $scope.environmentVariables.system_env_json;
+      angular.forEach(envVarResponse.data.environment_json, function(key, value) {
+        $scope.nrOfUserEnvVars += 1;
+      });
     }, function(err) {
       messageService.addMessage('danger', 'Could not load environment variables: ' + err);
     });
