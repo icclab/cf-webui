@@ -94,7 +94,6 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
         });
 
       });
-      console.log($scope.services);
     }, function(err) {
       messageService.addMessage('danger', 'The service bindings have not been loaded: ' + err);
     });
