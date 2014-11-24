@@ -101,8 +101,6 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
   }, function(err) {
     messageService.addMessage('danger', 'The application summary has not been loaded: ' + err);
   });
-
-
   
   $scope.editApplication = function() {
     
