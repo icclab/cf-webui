@@ -42,7 +42,6 @@ angular.module('app.serviceBinding').controller('ServiceBindingAddCtrl', ['$scop
 
     serviceBindingService.addServiceBinding(serviceBinding).then(function(response) {
       $modalInstance.close(serviceBinding);
-      console.log(response);
       messageService.addMessage('success', 'The service has been successfully bound.');
     }, function(err) {
       messageService.addMessage('danger', 'The service has not been bound: ' + err);

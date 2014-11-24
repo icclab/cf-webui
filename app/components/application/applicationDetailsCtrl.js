@@ -88,6 +88,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
                 var credentials = serviceBinding.entity.credentials;
                 credentials = JSON.stringify(credentials, null, '  ');
 
+                service.serviceBindingId = serviceBinding.metadata.guid;
                 service.credentials = credentials;
                 keepGoing = false;
               }
@@ -191,6 +192,25 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
     });
 
     modalInstance.result.then(function(addedServiceBinding) {
+      // reload page
+      $scope.getApplicationSummary();
+    });
+  };
+
+  $scope.deleteServiceBinding = function(service) {
+    console.log(service);
+
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/serviceBinding/serviceBindingDelete.tpl.html',
+      controller: 'ServiceBindingDeleteCtrl',
+      resolve: {
+        service: function() {
+          return service;
+        }
+      }
+    });
+
+    modalInstance.result.then(function(deletedServiceBinding) {
       // reload page
       $scope.getApplicationSummary();
     });
