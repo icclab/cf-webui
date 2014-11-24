@@ -1,0 +1,18 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <h3 class="modal-title">Add service binding</h3>
+</div>
+<form class="form-horizontal" role="form" name="formAddServiceBinding">
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="inputService" class="col-sm-3 control-label">Service</label>
+      <div class="col-sm-9">
+        <select type="text" class="form-control" id="inputService" required ng-options="service.id as service.name for service in services" ng-model="selectedServiceId"></select>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()" ng-disabled="formAddServiceBinding.$invalid">Save</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  </div>
+</form>

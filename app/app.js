@@ -18,5 +18,6 @@ angular.module('app', [
   'app.space',
   'app.user',
   'app.domain',
-  'app.route'
+  'app.route',
+  'app.serviceBinding'
 ]);
