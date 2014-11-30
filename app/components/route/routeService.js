@@ -54,12 +54,6 @@ angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', fu
     });
   };
   
-  var _domainRouteLink = function(route) {
-    
-
-    
-  };
-  
   var _mapRoute = function(config) {
     
     globalRouteConfig = config;
@@ -68,7 +62,7 @@ angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', fu
     return this.createRoute(config).then(function(response) {
       globalRouteConfig.routeID = response.data.metadata.guid;
       
-      // Second
+      // Second: map route
       // data
       var data = {
         'url': API_ENDPOINT + '/v2/routes/' + globalRouteConfig.routeID + '/apps/' + globalRouteConfig.applicationID,
