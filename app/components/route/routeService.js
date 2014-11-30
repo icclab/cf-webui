@@ -1,12 +1,40 @@
 angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
   var routeServiceFactory = {};
   
-  var _mapRoute = function(application) {
+  var globalRouteConfig;
+  
+  var _getRoutesForApp = function(id) {
+    
+    // params
+    var params = {
+      'url': API_ENDPOINT + '/v2/apps/' + id + '/routes',
+      'guid' : id
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers,
+      params: params
+    };
+
+    return $http.get('/request.php', config).then(function(response) {
+      return response;
+    });
+  };
+  
+  var _createRoute = function(config) {
     
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/routes/' + application.id + '/apps/' + application.routeID,
-      'guid': orapplication.routeID
+      'url': API_ENDPOINT + '/v2/routes',
+      'domain_guid': config.domainID,
+      'space_guid': config.spaceID,
+      'host' : config.host
     };
 
     // http headers
@@ -18,12 +46,55 @@ angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', fu
     var config = {
       headers: headers
     };
-
-    return $http.put('/request.php', data, config).success(function(response) {
+    
+    return $http.post('/request.php', data, config).success(function(response) {
       // TODO: error handling
     }).error(function(err, status) {
       // TODO: error handling
     });
+  };
+  
+  var _domainRouteLink = function(route) {
+    
+
+    
+  };
+  
+  var _mapRoute = function(config) {
+    
+    globalRouteConfig = config;
+    
+    // First: create route
+    return this.createRoute(config).then(function(response) {
+      globalRouteConfig.routeID = response.data.metadata.guid;
+      
+      // Second
+      // data
+      var data = {
+        'url': API_ENDPOINT + '/v2/routes/' + globalRouteConfig.routeID + '/apps/' + globalRouteConfig.applicationID,
+        'guid': globalRouteConfig.routeID
+      };
+
+      // http headers
+      var headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      };
+
+      var config = {
+        headers: headers
+      };
+    
+      return $http.put('/request.php', data, config).success(function(response) {
+        // TODO: error handling
+      }).error(function(err, status) {
+        // TODO: error handling
+      });
+      
+    }, function(err) {
+      messageService.addMessage('danger', 'Route creation failed: ' + err);
+    });
+    
   };
   
   var _unmapRoute = function(route) {
@@ -53,6 +124,8 @@ angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', fu
     });
   };
   
+  routeServiceFactory.getRoutesForApp = _getRoutesForApp;
+  routeServiceFactory.createRoute = _createRoute;
   routeServiceFactory.mapRoute = _mapRoute;
   routeServiceFactory.unmapRoute = _unmapRoute;
   

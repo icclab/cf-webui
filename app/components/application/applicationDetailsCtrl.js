@@ -105,7 +105,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
     });
   };
   $scope.getApplicationSummary();
-  
+
   $scope.editApplication = function() {
     
     var application = {
@@ -148,6 +148,40 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
     modalInstance.result.then(function() {
       // go to spaces overview
       window.location = '#/organizations/' + $scope.organizationId + '/spaces/' + $scope.spaceId;
+    });
+  };
+  
+  $scope.mapRoute = function() {
+    
+    // applicationID injection
+    var route = {
+      'organizationID': $scope.organizationId,
+      'applicationID': $scope.applicationId,
+      'spaceID': $scope.spaceId
+    }
+    
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/route/routeMap.tpl.html',
+      controller: 'RouteMapCtrl',
+      resolve: {
+        route: function() {
+          return route;
+        }
+      }
+    });
+
+    modalInstance.result.then(function(mappedRoute) {
+      
+      // adjust route table information
+      var newDomain = {
+        domain : mappedRoute.domain,
+        host : mappedRoute.host,
+        guid : mappedRoute.guid
+      };
+
+      $scope.routes.push(newDomain);
+      $scope.nrOfRoutes +=1;
+      
     });
   };
   
@@ -198,8 +232,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
   };
 
   $scope.deleteServiceBinding = function(service) {
-    console.log(service);
-
+    
     var modalInstance = $modal.open({
       templateUrl: 'app/components/serviceBinding/serviceBindingDelete.tpl.html',
       controller: 'ServiceBindingDeleteCtrl',
