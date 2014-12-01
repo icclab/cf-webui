@@ -1,7 +1,4 @@
 <?php
-  header('Access-Control-Allow-Origin: *');
-  header('Content-Type: application/json');
-
   $method = $_SERVER['REQUEST_METHOD'];
   $url = null;
   $data = null;
@@ -68,15 +65,26 @@
 
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headersForCurl);
+    curl_setopt($ch, CURLOPT_HEADER, true);
 
     // Send the request & save response to $resp
-    $resp = curl_exec($ch);
+    $response = curl_exec($ch);
 
     if (curl_errno($ch)) {
         print "Error: " . curl_error($ch);
     } else {
-        // Show me the result
-        echo $resp;
+        // get the response
+        $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+        $header = substr($response, 0, $header_size);
+        $body = substr($response, $header_size);
+
+        // create http header
+        $lines = explode(PHP_EOL, $header);
+        foreach($lines as $line) {
+          header($line);
+        }
+
+        echo $body;
         curl_close($ch);
     }
   }
