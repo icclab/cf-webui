@@ -1,6 +1,50 @@
 angular.module('app.domain').factory('domainService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
   var domainServiceFactory = {};
   
+  var _getSharedDomainsForTheOrganization = function() {
+    // params
+    var params = {
+      'url': API_ENDPOINT + '/v2/shared_domains'
+    };
+
+    // http headers
+    headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      params: params,
+      headers: headers
+    };
+
+    return $http.get('/request.php', config).success(function(response) {
+    }).error(function(err, status) {
+    });
+  };
+  
+  var _getPrivateDomainsForTheOrganization = function(id) {
+    // params
+    var params = {
+      'url': API_ENDPOINT + '/v2/organizations/' + id +  '/private_domains'
+    };
+
+    // http headers
+    headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      params: params,
+      headers: headers
+    };
+
+    return $http.get('/request.php', config).success(function(response) {
+    }).error(function(err, status) {
+    });
+  };
+  
   var _addDomain = function(domain) {
     
     // data
@@ -54,6 +98,8 @@ angular.module('app.domain').factory('domainService', ['$http', 'API_ENDPOINT', 
     });
   };
   
+  domainServiceFactory.getPrivateDomainsForTheOrganization =_getPrivateDomainsForTheOrganization;
+  domainServiceFactory.getSharedDomainsForTheOrganization =_getSharedDomainsForTheOrganization;
   domainServiceFactory.addDomain = _addDomain;
   domainServiceFactory.deleteDomain = _deleteDomain;
   
