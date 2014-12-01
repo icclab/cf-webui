@@ -51,4 +51,24 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$scope', '$routePar
   }, function(err) {
     messageService.addMessage('danger', 'The space summary has not been loaded: ' + err);
   });
+
+
+  
+  
+  // add service
+  $scope.addService = function (spaceId) {
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/space/spaceAddService.tpl.html',
+      controller: 'SpaceAddServiceCtrl',
+      resolve: {
+        spaceId: function() {
+          return spaceId;
+        }
+      }
+    });
+    
+    modalInstance.result.then(function() {
+      console.log('reload page');
+    });
+  };
 }]);

@@ -19,6 +19,11 @@ angular.module('app').config(['$routeProvider', function($routeProvider) {
       templateUrl: 'app/components/space/spaceDetails.tpl.html',
       controller: 'SpaceDetailsCtrl'
     })
+
+    .when('/organizations/:organizationId/spaces/:spaceId/marketplace', {
+      templateUrl: 'app/components/space/spaceAddService.tpl.html',
+      controller: 'SpaceAddServiceCtrl'
+    })
   
     .when('/organizations/:organizationId/spaces/:spaceId/applications/:applicationId', {
       templateUrl: 'app/components/application/applicationDetails.tpl.html',

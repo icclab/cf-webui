@@ -16,6 +16,8 @@ angular.module('app', [
   'app.logIn',
   'app.organization',
   'app.space',
+  'app.service',
+  'app.serviceInstance',
   'app.user',
   'app.domain',
   'app.route',

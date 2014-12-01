@@ -1,0 +1,137 @@
+<sidebar></sidebar>
+
+<div id="page-content">
+  <topbar></topbar>
+  
+  <breadcrumb></breadcrumb>
+
+  <messages></messages>
+  
+  <div id="page-title">
+    <h1>Add a service to the space</h1>
+  </div><!-- /#page-title -->
+  
+  <div id="page-content-wrap" class="clearfix">
+    
+    <div class="row" ng-hide="hideSelectService">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Select a service</h3>
+          </div>
+          <div class="panel-body">
+            <div class="select-service clearfix">
+              <a class="media" ng-repeat="service in services" ng-click="selectService(service)">
+                <div class="media-left" href="#">
+                  <img src="{{service.imageUrl}}" alt="{{service.name}}" width="60">
+                </div>
+                <div class="media-body">
+                  <h4 class="media-heading">{{service.name}}</h4>
+                  <p>{{service.description}}</p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div><!-- /.panel -->
+      </div>
+    </div><!-- /.row -->
+    
+    <div class="row" ng-hide="hideSelectServicePlan">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Select a service plan</h3>
+          </div>
+          <div class="panel-body">
+            <div class="selected-service row">
+              <div class="col-md-4">
+                <img src="{{selectedService.imageUrl}}" alt="{{selectedService.name}}" width="60">
+                <h4>{{selectedService.name}}</h4>
+                <p>{{selectedService.description}}</p>
+              </div>
+
+              <div class="col-md-4">
+                <h4>About this service</h4>
+                <p>{{selectedService.longDescription}}</p>
+                <p><a href="{{selectedService.documentationUrl}}" target="_blank">Documentation</a> | <a href="{{selectedService.supportUrl}}" target="_blank">Support</a></p>
+              </div>
+
+              <div class="col-md-4">
+                <h4>Provider</h4>
+                <p>{{selectedService.provider}}</p>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="select-serviceplan row">
+              <div class="col-md-12">
+                <tabset vertical="false" type="tabs">
+                  <tab ng-repeat="servicePlan in servicePlans" heading="{{servicePlan.name}} ({{servicePlan.costs}})">
+                    <p>{{servicePlan.description}}</p>
+                    <ul>
+                      <li ng-repeat="bullet in servicePlan.bullets">{{bullet}}</li>
+                    </ul>
+                    <button class="btn btn-primary" ng-click="selectServicePlan(servicePlan)">Select {{servicePlan.name}}</button>
+                  </tab>
+                </tabset>
+              </div>
+            </div>
+          </div>
+        </div><!-- /.panel -->
+      </div>
+    </div><!-- /.row -->
+
+    <div class="row" ng-hide="hideAddServiceInstance">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Add a service instance</h3>
+          </div>
+          <div class="panel-body">
+            <div class="add-service-instance row">
+              <div class="col-md-12">
+                <form class="form-horizontal" role="form" name="formAddInstanceService">
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">Space</label>
+                    <div class="col-sm-9">
+                      <p class="form-control-static">{{spaceName}}</p>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">Service</label>
+                    <div class="col-sm-9">
+                      <p class="form-control-static">{{selectedService.name}}</p>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">Service plan</label>
+                    <div class="col-sm-9">
+                      <p class="form-control-static">{{selectedServicePlan.name}} ({{selectedServicePlan.costs}})</p>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="inputInstanceName" class="col-sm-3 control-label">Instance name</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="inputInstanceName" ng-model="instanceName" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                      <button class="btn btn-primary" ng-click="addServiceInstance()" ng-disabled="formAddInstanceService.$invalid">Add</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div><!-- /.panel -->
+      </div>
+    </div><!-- /.row -->
+    
+  </div><!-- /#page-content-wrap -->
+</div><!-- /#page-content -->

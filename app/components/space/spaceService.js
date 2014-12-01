@@ -45,6 +45,29 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
     });
   };
 
+  var _getServicesForTheSpace = function(id) {
+    // params
+    var params = {
+      'url': API_ENDPOINT + '/v2/spaces/' + id + '/services',
+      'inline-relations-depth': 1
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      params: params,
+      headers: headers
+    };
+
+    return $http.get('/request.php', config).then(function(response) {
+      return response;
+    });
+  };
+
   var _editSpace = function(space) {
     // data
     var data = {
@@ -122,6 +145,7 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
 
   spaceServiceFactory.getSpaces = _getSpaces;
   spaceServiceFactory.getSpaceSummary = _getSpaceSummary;
+  spaceServiceFactory.getServicesForTheSpace = _getServicesForTheSpace;
   spaceServiceFactory.editSpace = _editSpace;
   spaceServiceFactory.addSpace = _addSpace;
   spaceServiceFactory.deleteSpace = _deleteSpace;
