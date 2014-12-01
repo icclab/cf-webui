@@ -6,7 +6,7 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
 
     var accessToken = sessionStorage.getItem('accessToken');
     var userName = sessionStorage.getItem('userName');
-    if (accessToken != null && userName != null) {
+    if (accessToken !== null && userName !== null) {
       config.headers.Authorization = 'Bearer ' + accessToken;
     }
 

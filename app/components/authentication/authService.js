@@ -26,9 +26,10 @@ angular.module('app.auth').factory('authService', ['$http', '$q', 'UAA_ENDPOINT'
     var deferred = $q.defer();
 
     $http.post('/request.php', data, { headers: headers }).success(function(response) {
-      if (response.access_token != null) {
+      if (response.access_token !== null) {
         // save access token and username in session storage
         sessionStorage.setItem('accessToken', response.access_token);
+        sessionStorage.setItem('refreshToken', response.refresh_token);
         sessionStorage.setItem('userName', logInData.userName);
 
         // set data of authentication object
@@ -51,6 +52,7 @@ angular.module('app.auth').factory('authService', ['$http', '$q', 'UAA_ENDPOINT'
   var _logOut = function() {
     // remove access token and username in session storage
     sessionStorage.removeItem('accessToken');
+    sessionStorage.removeItem('refreshToken');
     sessionStorage.removeItem('userName');
 
     // reset authentication object
@@ -60,9 +62,10 @@ angular.module('app.auth').factory('authService', ['$http', '$q', 'UAA_ENDPOINT'
 
   var _fillAuthData = function() {
     var accessToken = sessionStorage.getItem('accessToken');
+    var refreshToken = sessionStorage.getItem('refreshToken');
     var userName = sessionStorage.getItem('userName');
 
-    if (accessToken != null && userName != null) {
+    if (accessToken !== null && userName !== null) {
       _authentication.isAuth = true;
       _authentication.userName = userName;
     }
@@ -70,6 +73,7 @@ angular.module('app.auth').factory('authService', ['$http', '$q', 'UAA_ENDPOINT'
 
   authServiceFactory.logIn = _logIn;
   authServiceFactory.logOut = _logOut;
+  //authServiceFactory.refresh = _refresh;
   authServiceFactory.fillAuthData = _fillAuthData;
   authServiceFactory.authentication = _authentication;
 

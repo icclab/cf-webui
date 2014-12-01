@@ -1,4 +1,4 @@
-angular.module('app.space').controller('SpaceDetailsCtrl', ['$scope', '$routeParams', '$modal', 'spaceService', function($scope, $routeParams, $modal, spaceService) {
+angular.module('app.space').controller('SpaceDetailsCtrl', ['$scope', '$routeParams', '$modal', 'spaceService', 'messageService', function($scope, $routeParams, $modal, spaceService, messageService) {
   $scope.name = '';
   $scope.organizationId = $routeParams.organizationId;
   $scope.id = $routeParams.spaceId;
