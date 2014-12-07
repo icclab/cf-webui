@@ -14,6 +14,8 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
   };
 
   var _responseError = function(rejection) {
+    console.log('rejection: ' + rejection.status);
+
     if (rejection.status === 401) {
       $location.path('/login');
     }
@@ -21,7 +23,15 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
     return $q.reject(rejection);
   };
 
+  var _response = function(response){
+    if (response.status === 401) {
+      console.log("Response 401");
+    }
+    return response || $q.when(response);
+  };
+
   authInterceptorServiceFactory.request = _request;
+  authInterceptorServiceFactory.response = _response;
   authInterceptorServiceFactory.responseError = _responseError;
 
   return authInterceptorServiceFactory;

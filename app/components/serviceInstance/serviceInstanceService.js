@@ -27,7 +27,34 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
     });
   };
 
+  var _deleteServiceInstance = function(serviceInstanceId) {
+    
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/service_instances/' + serviceInstanceId
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers,
+      data: data
+    };
+    
+    return $http.delete('/request.php', config).success(function(response) {
+      // TODO: error handling
+      return serviceInstanceId;
+    }).error(function(err, status) {
+      // TODO: error handling
+    });
+  };
+
   serviceInstanceServiceFactory.addServiceInstance = _addServiceInstance;
+  serviceInstanceServiceFactory.deleteServiceInstance = _deleteServiceInstance;
 
   return serviceInstanceServiceFactory;
 }]);

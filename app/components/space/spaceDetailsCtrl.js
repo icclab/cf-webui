@@ -53,22 +53,25 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$scope', '$routePar
   });
 
 
-  
-  
-  // add service
-  $scope.addService = function (spaceId) {
+
+
+  // delete service instance
+  $scope.deleteServiceInstance = function(serviceInstance) {
     var modalInstance = $modal.open({
-      templateUrl: 'app/components/space/spaceAddService.tpl.html',
-      controller: 'SpaceAddServiceCtrl',
+      templateUrl: 'app/components/serviceInstance/serviceInstanceDelete.tpl.html',
+      controller: 'ServiceInstanceDeleteCtrl',
       resolve: {
-        spaceId: function() {
-          return spaceId;
+        serviceInstance: function() {
+          return serviceInstance;
         }
       }
     });
     
     modalInstance.result.then(function() {
-      console.log('reload page');
+      // adjust service instance table information
+      var indexOfServiceInstanceToRemove = $scope.services.indexOf(serviceInstance);
+      $scope.services.splice(indexOfServiceInstanceToRemove, 1);
+      $scope.nrOfServices -= 1;
     });
   };
 }]);

@@ -77,7 +77,7 @@
                 <td>{{service.nrOfBoundApps}}</td>
                 <td>
                   <a class="action" href="{{service.dashboardUrl}}" target="_blank"><i class="fa fa-lg fa fa-cog"></i></a>
-                  <a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a>
+                  <a class="action action-delete" ng-click="deleteServiceInstance(service)"><i class="fa fa-lg fa-trash"></i></a>
                 </td>
               </tr>
             </tbody>

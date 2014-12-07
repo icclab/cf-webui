@@ -111,7 +111,7 @@ angular.module('app.space').controller('SpaceAddServiceCtrl', ['$scope', '$route
       
       $location.path('/organizations/' + $scope.organizationId + '/spaces/' + $scope.spaceId);
     }, function(err) {
-      messageService.addMessage('danger', 'The service instance has not been added: ' + err);
+      messageService.addMessage('danger', 'The service instance has not been added: ' + err.data.description);
       $location.path('/organizations/' + $scope.organizationId + '/spaces/' + $scope.spaceId);
     });
   };
