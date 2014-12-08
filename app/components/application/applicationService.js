@@ -144,11 +144,37 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
     });
   };
   
+  // environment variables
+  var _editApplicationEnv = function(applicationId, userEnvs) {
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/apps/' + applicationId,
+      'environment_json': userEnvs
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers
+    };
+
+    return $http.put('/request.php', data, config).success(function(response) {
+      // TODO: error handling
+    }).error(function(err, status) {
+      // TODO: error handling
+    });
+  };
+  
   applicationServiceFactory.getApplicationSummary = _getApplicationSummary;
   applicationServiceFactory.getStack = _getStack;
   applicationServiceFactory.getEnvironmentVariables = _getEnvironmentVariables;
   applicationServiceFactory.getServiceBindings = _getServiceBindings;
   applicationServiceFactory.editApplication = _editApplication;
+  applicationServiceFactory.editApplicationEnv = _editApplicationEnv;
   applicationServiceFactory.deleteApplication = _deleteApplication;
   
   return applicationServiceFactory;

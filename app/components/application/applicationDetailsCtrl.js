@@ -71,6 +71,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
         angular.forEach(envVarResponse.data.environment_json, function(key, value) {
           $scope.nrOfUserEnvVars += 1;
         });
+        $scope.userEnvironmentVariables = $scope.environmentVariables.environment_json;
       }, function(err) {
         //messageService.addMessage('danger', 'Could not load environment variables: ' + err);
       });
@@ -158,7 +159,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
       'organizationID': $scope.organizationId,
       'applicationID': $scope.applicationId,
       'spaceID': $scope.spaceId
-    }
+    };
     
     var modalInstance = $modal.open({
       templateUrl: 'app/components/route/routeMap.tpl.html',
@@ -246,6 +247,68 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
     modalInstance.result.then(function(deletedServiceBinding) {
       // reload page
       $scope.getApplicationSummary();
+    });
+  };
+  
+  $scope.addUserEnv = function() {
+    var config = {
+      applicationId: $scope.applicationId,
+      existingUserEnvs: $scope.userEnvironmentVariables
+    };
+
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/application/applicationUserEnvAdd.tpl.html',
+      controller: 'UserEnvAddCtrl',
+      resolve: {
+        config: function() {
+          return config;
+        }
+      }
+    });
+  };
+  
+  $scope.editUserEnv = function(userEnvKey, userEnvValue) {
+    var userEnvToEdit = {
+      key: userEnvKey,
+      value: userEnvValue
+    };
+    
+    var config = {
+      applicationId: $scope.applicationId,
+      existingUserEnvs: $scope.userEnvironmentVariables,
+      userEnvToEdit: userEnvToEdit
+    };
+
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/application/applicationUserEnvEdit.tpl.html',
+      controller: 'UserEnvEditCtrl',
+      resolve: {
+        config: function() {
+          return config;
+        }
+      }
+    });
+  };
+  
+  $scope.deleteUserEnv = function(userEnvKey) {
+    var config = {
+      applicationId: $scope.applicationId,
+      existingUserEnvs: $scope.userEnvironmentVariables,
+      userEnvToDelete: userEnvKey
+    };
+
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/application/applicationUserEnvDelete.tpl.html',
+      controller: 'UserEnvDeleteCtrl',
+      resolve: {
+        config: function() {
+          return config;
+        }
+      }
+    });
+
+    modalInstance.result.then(function() {
+      $scope.nrOfUserEnvVars--;
     });
   };
   
