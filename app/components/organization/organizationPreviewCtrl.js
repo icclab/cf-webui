@@ -1,5 +1,6 @@
 angular.module('app.organization').controller('OrganizationPreviewCtrl', ['$scope', 'organizationService', function($scope, organizationService) {
   // organization info
+  $scope.showContent = false;
   $scope.organizations = [];
   $scope.nrOfOrganizations = 0;
 
@@ -17,6 +18,8 @@ angular.module('app.organization').controller('OrganizationPreviewCtrl', ['$scop
 
       $scope.organizations.push(objectOrganization);
     });
+
+    $scope.showContent = true;
   }, function (err) {
     // TODO: error handling
   });
