@@ -169,6 +169,46 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
     });
   };
   
+  var _stopApplication = function(applicationId) {
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/apps/' + applicationId,
+      'state': 'STOPPED'
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers
+    };
+
+    return $http.put('/request.php', data, config);
+  };
+  
+  var _startApplication = function(applicationId) {
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/apps/' + applicationId,
+      'state': 'STARTED'
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers
+    };
+
+    return $http.put('/request.php', data, config);
+  };
+  
   applicationServiceFactory.getApplicationSummary = _getApplicationSummary;
   applicationServiceFactory.getStack = _getStack;
   applicationServiceFactory.getEnvironmentVariables = _getEnvironmentVariables;
@@ -176,6 +216,8 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
   applicationServiceFactory.editApplication = _editApplication;
   applicationServiceFactory.editApplicationEnv = _editApplicationEnv;
   applicationServiceFactory.deleteApplication = _deleteApplication;
+  applicationServiceFactory.stopApplication = _stopApplication;
+  applicationServiceFactory.startApplication = _startApplication;
   
   return applicationServiceFactory;
 }]);

@@ -1,4 +1,4 @@
-angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope', '$routeParams', '$modal', 'applicationService', 'routeService', function($scope, $routeParams, $modal, applicationService, routeService) {
+angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope', '$routeParams', '$modal', 'applicationService', 'routeService', 'messageService', function($scope, $routeParams, $modal, applicationService, routeService, messageService) {
   
   $scope.summary = {};
   $scope.stack = {};
@@ -19,6 +19,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
   $scope.diskQuota = 0;
   $scope.memory = 0;
   $scope.lastPush = 0;
+  $scope.state = '';
   
   $scope.buildPack = '';
   $scope.startCommand = '';
@@ -41,6 +42,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
       $scope.diskQuota = response.data.disk_quota;
       $scope.memory = response.data.memory;
       $scope.lastPush = response.data.package_updated_at;
+      $scope.state = response.data.state;
       
       $scope.buildPack = response.data.buildPack;
       $scope.startCommand = response.data.detected_start_command;
@@ -309,6 +311,37 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
 
     modalInstance.result.then(function() {
       $scope.nrOfUserEnvVars--;
+    });
+  };
+
+  $scope.stopApplication = function() {
+    applicationService.stopApplication($scope.applicationId).then(function(response) {
+      $scope.state = 'STOPPED';
+      messageService.addMessage('success', 'The application has been successfully stopped.');
+    }, function(err) {
+      console.log('The application has not been stopped: ' + err.data.description + ' (' + err.data.error_code + ')');
+    });
+  };
+
+  $scope.startApplication = function() {
+    applicationService.startApplication($scope.applicationId).then(function(response) {
+      $scope.state = 'STARTED';
+      messageService.addMessage('success', 'The application has been successfully started.');
+    }, function(err) {
+      console.log('The application has not been started: ' + err.data.description + ' (' + err.data.error_code + ')');
+    });
+  };
+
+  $scope.restartApplication = function() {
+    applicationService.stopApplication($scope.applicationId).then(function(responseStop) {
+      applicationService.startApplication($scope.applicationId).then(function(responseStart) {
+        $scope.state = 'STARTED';
+        messageService.addMessage('success', 'The application has been successfully restarted.');
+      }, function(err) {
+        console.log('The application has not been started: ' + err.data.description + ' (' + err.data.error_code + ')');
+      });
+    }, function(err) {
+      console.log('The application has not been stopped: ' + err.data.description + ' (' + err.data.error_code + ')');
     });
   };
   

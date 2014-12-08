@@ -10,8 +10,9 @@
   <div id="page-title" class="clearfix">
     <h1 class="pull-left">Application: {{name}}</h1>
     <div class="pull-right">
-      <a class="action action-stop" ng-click=""><i class="fa fa-lg fa-stop"></i></a>
-      <a class="action action-refresh" ng-click=""><i class="fa fa-lg fa-refresh"></i></a>
+      <a class="action action-stop" ng-click="stopApplication()" ng-show="state == 'STARTED'"><i class="fa fa-lg fa-stop"></i></a>
+      <a class="action action-play" ng-click="startApplication()" ng-show="state == 'STOPPED'"><i class="fa fa-lg fa-play"></i></a>
+      <a class="action action-refresh" ng-click="restartApplication()" ng-show="state == 'STARTED'"><i class="fa fa-lg fa-refresh"></i></a>
       <a class="action action-edit" ng-click="editApplication()"><i class="fa fa-lg fa-pencil"></i></a>
       <a class="action action-delete" ng-click="deleteApplication()"><i class="fa fa-lg fa-trash"></i></a>
     </div>
