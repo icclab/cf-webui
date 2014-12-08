@@ -86,7 +86,7 @@ angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', fu
       });
       
     }, function(err) {
-      messageService.addMessage('danger', 'Route creation failed: ' + err);
+      // TODO: error handling
     });
     
   };

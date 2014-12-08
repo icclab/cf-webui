@@ -11,7 +11,7 @@ angular.module('app.route', ['app.domain']).controller('RouteMapCtrl', ['$scope'
       $scope.domains.push(sharedDomain);
     });
   }, function(err) {
-    messageService.addMessage('danger', 'Could not load shared domains: ' + err);
+    //messageService.addMessage('danger', 'Could not load shared domains: ' + err);
   });
   
   // domain module dependency
@@ -20,7 +20,7 @@ angular.module('app.route', ['app.domain']).controller('RouteMapCtrl', ['$scope'
       $scope.domains.push(privateDomain);
     });
   }, function(err) {
-    messageService.addMessage('danger', 'Could not load private domains: ' + err);
+    //messageService.addMessage('danger', 'Could not load private domains: ' + err);
   });
 
   routeService.getRoutesForApp($scope.route.applicationID).then(function(hosts) {
@@ -28,7 +28,7 @@ angular.module('app.route', ['app.domain']).controller('RouteMapCtrl', ['$scope'
       $scope.existingHosts.push(existingHost.entity.host);
     });
   }, function(err) {
-    messageService.addMessage('danger', 'Could not load application routes: ' + err);
+    //messageService.addMessage('danger', 'Could not load application routes: ' + err);
   });
   
 
@@ -49,16 +49,16 @@ angular.module('app.route', ['app.domain']).controller('RouteMapCtrl', ['$scope'
           var domainInjection = {
             guid : domain.metadata.guid,
             name : domain.entity.name
-          }
+          };
           mapRouteResponse.domain = domainInjection;
           mapRouteResponse.host = config.host;
           mapRouteResponse.guid = mapRouteResponse.data.metadata.guid;
         }
       });
       $modalInstance.close(mapRouteResponse);
-      messageService.addMessage('success', 'The route has been successfully mapped.');
+      //messageService.addMessage('success', 'The route has been successfully mapped.');
     }, function(err) {
-      messageService.addMessage('danger', 'The route has not been mapped: ' + err);
+      //messageService.addMessage('danger', 'The route has not been mapped: ' + err);
     });
 
   };

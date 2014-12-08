@@ -74,9 +74,11 @@ angular.module('app.auth').factory('authService', ['$http', '$q', 'UAA_ENDPOINT'
         // save access token and username in session storage
         sessionStorage.setItem('accessToken', response.access_token);
         sessionStorage.setItem('refreshToken', response.refresh_token);
+        sessionStorage.setItem('userName', logInData.userName);
 
         // set data of authentication object
         _authentication.isAuth = true;
+        _authentication.userName = logInData.userName;
 
         deferred.resolve(response);
       } else {
@@ -114,8 +116,8 @@ angular.module('app.auth').factory('authService', ['$http', '$q', 'UAA_ENDPOINT'
   };
 
   authServiceFactory.logIn = _logIn;
-  authServiceFactory.refresh = _refresh;
   authServiceFactory.logOut = _logOut;
+  authServiceFactory.refresh = _refresh;
   authServiceFactory.fillAuthData = _fillAuthData;
   authServiceFactory.authentication = _authentication;
 

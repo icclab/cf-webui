@@ -61,7 +61,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
       applicationService.getStack($scope.stackId).then(function(stackResponse) {
         $scope.stack = stackResponse.data;
       }, function(err) {
-        messageService.addMessage('danger', 'Stack load failed: ' + err);
+        //messageService.addMessage('danger', 'Stack load failed: ' + err);
       });
       
       // get environment variables
@@ -72,7 +72,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
           $scope.nrOfUserEnvVars += 1;
         });
       }, function(err) {
-        messageService.addMessage('danger', 'Could not load environment variables: ' + err);
+        //messageService.addMessage('danger', 'Could not load environment variables: ' + err);
       });
 
       // get service bindings and add to the service the credentials
@@ -97,11 +97,11 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
 
         });
       }, function(err) {
-        messageService.addMessage('danger', 'The service bindings have not been loaded: ' + err);
+        //messageService.addMessage('danger', 'The service bindings have not been loaded: ' + err);
       });
 
     }, function(err) {
-      messageService.addMessage('danger', 'The application summary has not been loaded: ' + err);
+      //messageService.addMessage('danger', 'The application summary has not been loaded: ' + err);
     });
   };
   $scope.getApplicationSummary();
