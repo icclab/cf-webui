@@ -1,6 +1,5 @@
-angular.module('app.auth').factory('authInterceptorService', ['$q', '$location', '$injector', function($q, $location, $injector) {
+angular.module('app.auth').factory('authInterceptorService', ['$q', '$location', '$injector', '$rootScope', function($q, $location, $injector, $rootScope) {
   var authInterceptorServiceFactory = {};
-  var i = 0;
 
   var _request = function(config) {
     config.headers = config.headers || {};
@@ -15,9 +14,7 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
   };
 
   var _responseError = function(rejection) {
-    console.log(i);
-    console.log(rejection.status);
-    if (i === 0 && rejection.status === 401) {
+    if ($rootScope.nrOfUnauthorizedRequests === 0 && rejection.status === 401) {
       var authService = $injector.get('authService');
       var $route = $injector.get('$route');
       authService.refresh().then(function(response) {
@@ -28,7 +25,7 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
       });
     }
 
-    i++;
+    $rootScope.nrOfUnauthorizedRequests++;
     return $q.reject(rejection);
   };
 
