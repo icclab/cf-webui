@@ -44,7 +44,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope'
       $scope.lastPush = response.data.package_updated_at;
       $scope.state = response.data.state;
       
-      $scope.buildPack = response.data.buildPack;
+      $scope.buildPack = response.data.detected_buildpack;
       $scope.startCommand = response.data.detected_start_command;
       $scope.packageState = response.data.package_state;
       
