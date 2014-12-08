@@ -84,7 +84,8 @@ angular.module('app.auth').factory('authService', ['$http', '$q', 'UAA_ENDPOINT'
         deferred.reject(response);
       }
     }).error(function(err, status) {
-      _logOut();
+      console.log(err);
+      //_logOut();
       deferred.reject(err);
     });
 

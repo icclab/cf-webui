@@ -1,4 +1,4 @@
-angular.module('app').run(['$rootScope', '$location', 'authService', function($rootScope, $location, authService) {
+angular.module('app').run(['$rootScope', '$location', '$route', 'authService', function($rootScope, $location, $route, authService) {
   authService.fillAuthData();
 
   // redirect the user to the login page if he is not logged in
@@ -7,6 +7,7 @@ angular.module('app').run(['$rootScope', '$location', 'authService', function($r
     
     if (!authentication.isAuth && $location.path() != '/login') {
       $location.path('/login');
+      $route.reload();
     }
   });
 }]);

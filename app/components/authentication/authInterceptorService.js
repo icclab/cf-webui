@@ -15,6 +15,8 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
   };
 
   var _responseError = function(rejection) {
+    console.log(i);
+    console.log(rejection.status);
     if (i === 0 && rejection.status === 401) {
       var authService = $injector.get('authService');
       var $route = $injector.get('$route');
