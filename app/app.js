@@ -1,8 +1,10 @@
 angular.module('app', [
   'ngRoute',
   'ngResource',
+  'ngAnimate',
 
   'ui.bootstrap',
+  'angular-loading-bar',
 
   // shared
   'app.sidebar',
