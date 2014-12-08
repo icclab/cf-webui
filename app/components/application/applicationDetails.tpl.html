@@ -118,7 +118,7 @@
             </thead>
             <tbody>
               <tr ng-repeat="route in routes">
-                <td><a href="http://{{route.host}}.{{route.domain.name}}" >{{route.host}}.{{route.domain.name}}</a></td>
+                <td><a href="http://{{route.host}}.{{route.domain.name}}" target="_blank">{{route.host}}.{{route.domain.name}}</a></td>
                 <td><a class="action action-delete" ng-click="unmapRoute(route)"><i class="fa fa-lg fa-trash"></i></a></td>
               </tr>
             </tbody>
