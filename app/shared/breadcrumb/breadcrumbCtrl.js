@@ -1,12 +1,7 @@
 angular.module('app.breadcrumb').controller('BreadcrumbCtrl', ['$rootScope', '$scope', '$location', 'organizationService', 'spaceService', 'applicationService', function ($rootScope, $scope, $location, organizationService, spaceService, applicationService) {
   $rootScope.rootFields.showContent = false;
   
-  $scope.elements = [
-    {
-      link: '#/',
-      name: 'Home'
-    }
-  ];
+  $scope.elements = [];
   
   var organizationPath = '';
   var spacePath = '';
@@ -19,6 +14,13 @@ angular.module('app.breadcrumb').controller('BreadcrumbCtrl', ['$rootScope', '$s
 
   // get all organizations
   organizationService.getOrganizations().then(function(response) {
+    $scope.elements.push(
+      {
+        link: '#/',
+        name: 'Home'
+      }
+    );
+    
     var data = response.data;
 
     // create organization objects
