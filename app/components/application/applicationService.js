@@ -231,6 +231,27 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
     return $http.put('/request.php', data, config);
   };
   
+  var _scaleApplication = function(applicationId, scale) {
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/apps/' + applicationId,
+      'instances': scale.instances,
+      'memory': scale.memory
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers
+    };
+
+    return $http.put('/request.php', data, config);
+  };
+  
   applicationServiceFactory.getApplications = _getApplications;
   applicationServiceFactory.getApplicationSummary = _getApplicationSummary;
   applicationServiceFactory.getStack = _getStack;
@@ -241,6 +262,7 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
   applicationServiceFactory.deleteApplication = _deleteApplication;
   applicationServiceFactory.stopApplication = _stopApplication;
   applicationServiceFactory.startApplication = _startApplication;
+  applicationServiceFactory.scaleApplication = _scaleApplication;
   
   return applicationServiceFactory;
 }]);

@@ -70,24 +70,24 @@
               <h3 class="panel-title">Configuration</h3>
             </div>
             <div class="panel-body">
-              <form class="form-horizontal" role="form">
+              <form class="form-horizontal" role="form" name="formScaleApplication">
                 <div class="form-group">
                   <label for="inputInstances" class="col-sm-3 control-label">Instances</label>
                   <div class="col-sm-9">
-                    <input type="number" class="form-control" id="inputInstances" value="{{nrOfInstances}}" required>
+                    <input type="number" class="form-control" id="inputInstances" ng-model="scale.instances" required>
                   </div>
                 </div>
   
                 <div class="form-group">
-                  <label for="inputMemory" class="col-sm-3 control-label">Memory</label>
+                  <label for="inputMemory" class="col-sm-3 control-label">Memory (in MB)</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="inputInstances" value="{{memory}}" required>
+                    <input type="number" class="form-control" id="inputMemory" ng-model="scale.memory" required>
                   </div>
                 </div>
   
                 <div class="form-group">
                   <div class="col-sm-offset-3 col-sm-9">
-                    <input type="submit" class="btn btn-primary" value="Save">
+                    <button class="btn btn-primary" ng-disabled="formScaleApplication.$invalid" ng-click="scaleApplication()">Scale</button>
                   </div>
                 </div>
               </form>

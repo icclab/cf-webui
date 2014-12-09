@@ -30,6 +30,8 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
   $scope.serviceBindings = [];
   $scope.routes = [];
   $scope.domains = [];
+
+  $scope.scale = {};
   
   // app summary
   $scope.getApplicationSummary = function() {
@@ -40,8 +42,10 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
       $scope.stackId = response.data.stack_guid;
       $scope.name = response.data.name;
       $scope.nrOfInstances = response.data.instances;
+      $scope.scale.instances = response.data.instances;
       $scope.diskQuota = response.data.disk_quota;
       $scope.memory = response.data.memory;
+      $scope.scale.memory = response.data.memory;
       $scope.lastPush = response.data.package_updated_at;
       $scope.state = response.data.state;
       
@@ -343,6 +347,23 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
       });
     }, function(err) {
       console.log('The application has not been stopped: ' + err.data.description + ' (' + err.data.error_code + ')');
+    });
+  };
+
+  $scope.scaleApplication = function() {
+    applicationService.scaleApplication($scope.applicationId, $scope.scale).then(function(response) {
+      applicationService.stopApplication($scope.applicationId).then(function(responseStop) {
+        applicationService.startApplication($scope.applicationId).then(function(responseStart) {
+          $scope.state = 'STARTED';
+          messageService.addMessage('success', 'The application has been successfully scaled.');
+        }, function(err) {
+          console.log('The application has not been started: ' + err.data.description + ' (' + err.data.error_code + ')');
+        });
+      }, function(err) {
+        console.log('The application has not been stopped: ' + err.data.description + ' (' + err.data.error_code + ')');
+      });
+    }, function(err) {
+      console.log('The application has not been scaled: ' + err.data.description + ' (' + err.data.error_code + ')');
     });
   };
   
