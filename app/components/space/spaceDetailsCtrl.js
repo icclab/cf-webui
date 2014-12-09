@@ -1,4 +1,6 @@
-angular.module('app.space').controller('SpaceDetailsCtrl', ['$scope', '$routeParams', '$modal', 'spaceService', 'messageService', function($scope, $routeParams, $modal, spaceService, messageService) {
+angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scope', '$routeParams', '$modal', 'spaceService', 'messageService', function($rootScope, $scope, $routeParams, $modal, spaceService, messageService) {
+  $rootScope.rootFields.showContent = false;
+  
   $scope.name = '';
   $scope.organizationId = $routeParams.organizationId;
   $scope.id = $routeParams.spaceId;

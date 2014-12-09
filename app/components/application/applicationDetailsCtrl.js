@@ -1,4 +1,5 @@
-angular.module('app.application').controller('ApplicationDetailsCtrl', ['$scope', '$routeParams', '$modal', 'applicationService', 'routeService', 'messageService', function($scope, $routeParams, $modal, applicationService, routeService, messageService) {
+angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootScope', '$scope', '$routeParams', '$modal', 'applicationService', 'routeService', 'messageService', function($rootScope, $scope, $routeParams, $modal, applicationService, routeService, messageService) {
+  $rootScope.rootFields.showContent = false;
   
   $scope.summary = {};
   $scope.stack = {};

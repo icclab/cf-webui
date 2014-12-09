@@ -1,5 +1,6 @@
 angular.module('app').run(['$rootScope', '$location', '$route', 'authService', function($rootScope, $location, $route, authService) {
   $rootScope.nrOfUnauthorizedRequests = 0;
+  $rootScope.rootFields = {};
 
   authService.fillAuthData();
 
@@ -12,5 +13,13 @@ angular.module('app').run(['$rootScope', '$location', '$route', 'authService', f
       $location.path('/login');
       $route.reload();
     }
+  });
+  
+  $rootScope.$on('cfpLoadingBar:started', function (event, data) {
+    $rootScope.rootFields.showContent = false;
+  });
+  
+  $rootScope.$on('cfpLoadingBar:completed', function (event, data) {
+    $rootScope.rootFields.showContent = true;
   });
 }]);

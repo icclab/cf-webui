@@ -1,4 +1,5 @@
-angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$scope', '$routeParams', '$modal', 'organizationService', 'spaceService', 'userService', 'domainService', function($scope, $routeParams, $modal, organizationService, spaceService, userService, domainService) {
+angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rootScope', '$scope', '$routeParams', '$modal', 'organizationService', 'spaceService', 'userService', 'domainService', function($rootScope, $scope, $routeParams, $modal, organizationService, spaceService, userService, domainService) {
+  $rootScope.rootFields.showContent = false;
   $scope.name = '';
   $scope.id = $routeParams.organizationId;
   

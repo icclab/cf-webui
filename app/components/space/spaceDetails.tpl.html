@@ -7,85 +7,87 @@
 
   <messages></messages>
   
-  <div id="page-title" class="clearfix">
-    <h1 class="pull-left">Space: {{name}}</h1>
-    <div class="pull-right">
-      <a class="action action-edit" ng-click="editSpace()"><i class="fa fa-lg fa-pencil"></i></a>
-      <a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a>
-    </div>
-  </div><!-- /#page-title -->
+  <div class="fadein" ng-show="rootFields.showContent">
+    <div id="page-title" class="clearfix">
+      <h1 class="pull-left">Space: {{name}}</h1>
+      <div class="pull-right">
+        <a class="action action-edit" ng-click="editSpace()"><i class="fa fa-lg fa-pencil"></i></a>
+        <a class="action action-delete" href="#"><i class="fa fa-lg fa-trash"></i></a>
+      </div>
+    </div><!-- /#page-title -->
+    
+    <div id="page-content-wrap" class="clearfix">
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Applications <span class="label label-default">{{nrOfApplications}}</span></h3>
+            </div>
+            <table class="table table-striped table-hover has-actions">
+              <thead>
+                <tr>
+                  <th>Status</th>
+                  <th>Application</th>
+                  <th>Instances</th>
+                  <th>Memory</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="application in applications">
+                  <td>
+                    <span class="label" ng-class="application.status == 'running' ? 'label-success' : 'label-danger'">{{application.status}}</span>
+                  </td>
+                  <td>
+                    {{application.name}}<br>
+                    <a href="http://{{application.url}}" target="_blank">{{application.url}}</a>
+                  </td>
+                  <td>{{application.instances}}</td>
+                  <td>{{application.memory}} MB</td>
+                  <td>
+                    <a class="action" href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/applications/{{application.id}}"><i class="fa fa-lg fa-eye"></i></a>
+                    <a class="action action-edit" ng-click="editApplication(application)"><i class="fa fa-lg fa-pencil"></i></a>
+                    <a class="action action-delete" ng-click="deleteApplication(application)"><i class="fa fa-lg fa-trash"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div><!-- /.panel -->
+        </div>
   
-  <div id="page-content-wrap" class="clearfix">
-    
-    <div class="row">
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Applications <span class="label label-default">{{nrOfApplications}}</span></h3>
-          </div>
-          <table class="table table-striped table-hover has-actions">
-            <thead>
-              <tr>
-                <th>Status</th>
-                <th>Application</th>
-                <th>Instances</th>
-                <th>Memory</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="application in applications">
-                <td>
-                  <span class="label" ng-class="application.status == 'running' ? 'label-success' : 'label-danger'">{{application.status}}</span>
-                </td>
-                <td>
-                  {{application.name}}<br>
-                  <a href="http://{{application.url}}" target="_blank">{{application.url}}</a>
-                </td>
-                <td>{{application.instances}}</td>
-                <td>{{application.memory}} MB</td>
-                <td>
-                  <a class="action" href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/applications/{{application.id}}"><i class="fa fa-lg fa-eye"></i></a>
-                  <a class="action action-edit" ng-click="editApplication(application)"><i class="fa fa-lg fa-pencil"></i></a>
-                  <a class="action action-delete" ng-click="deleteApplication(application)"><i class="fa fa-lg fa-trash"></i></a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div><!-- /.panel -->
-      </div>
-
-      <div class="col-md-6">
-        <div class="panel panel-default">
-          <div class="panel-heading clearfix">
-            <h3 class="panel-title pull-left">Services <span class="label label-default">{{nrOfServices}}</span></h3>
-            <a href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/marketplace" class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp; Add a service</a>
-          </div>
-          <table class="table table-striped table-hover has-actions">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Service plan</th>
-                <th>Bound services</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="service in services">
-                <td>{{service.name}}</td>
-                <td>{{service.servicePlan}}</td>
-                <td>{{service.nrOfBoundApps}}</td>
-                <td>
-                  <a class="action" href="{{service.dashboardUrl}}" target="_blank"><i class="fa fa-lg fa fa-cog"></i></a>
-                  <a class="action action-delete" ng-click="deleteServiceInstance(service)"><i class="fa fa-lg fa-trash"></i></a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div><!-- /.panel -->
-      </div>
-
-    </div><!-- /.row -->
-    
-  </div><!-- /#page-content-wrap -->
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title pull-left">Services <span class="label label-default">{{nrOfServices}}</span></h3>
+              <a href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/marketplace" class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp; Add a service</a>
+            </div>
+            <table class="table table-striped table-hover has-actions">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Service plan</th>
+                  <th>Bound services</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="service in services">
+                  <td>{{service.name}}</td>
+                  <td>{{service.servicePlan}}</td>
+                  <td>{{service.nrOfBoundApps}}</td>
+                  <td>
+                    <a class="action" href="{{service.dashboardUrl}}" target="_blank"><i class="fa fa-lg fa fa-cog"></i></a>
+                    <a class="action action-delete" ng-click="deleteServiceInstance(service)"><i class="fa fa-lg fa-trash"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div><!-- /.panel -->
+        </div>
+  
+      </div><!-- /.row -->
+      
+    </div><!-- /#page-content-wrap -->
+  </div>
 </div><!-- /#page-content -->
