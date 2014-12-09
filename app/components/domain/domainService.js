@@ -1,7 +1,9 @@
 angular.module('app.domain').factory('domainService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
   var domainServiceFactory = {};
   
-  var _getSharedDomainsForTheOrganization = function() {
+  var _getSharedDomainsForTheOrganization = function(ignoreLoadingBar) {
+    if (typeof(ignoreLoadingBar) === 'undefined') ignoreLoadingBar = false;
+    
     // params
     var params = {
       'url': API_ENDPOINT + '/v2/shared_domains'
@@ -15,7 +17,8 @@ angular.module('app.domain').factory('domainService', ['$http', 'API_ENDPOINT', 
 
     var config = {
       params: params,
-      headers: headers
+      headers: headers,
+      ignoreLoadingBar: ignoreLoadingBar
     };
 
     return $http.get('/request.php', config).success(function(response) {
@@ -23,7 +26,9 @@ angular.module('app.domain').factory('domainService', ['$http', 'API_ENDPOINT', 
     });
   };
   
-  var _getPrivateDomainsForTheOrganization = function(id) {
+  var _getPrivateDomainsForTheOrganization = function(id, ignoreLoadingBar) {
+    if (typeof(ignoreLoadingBar) === 'undefined') ignoreLoadingBar = false;
+    
     // params
     var params = {
       'url': API_ENDPOINT + '/v2/organizations/' + id +  '/private_domains'
@@ -37,7 +42,8 @@ angular.module('app.domain').factory('domainService', ['$http', 'API_ENDPOINT', 
 
     var config = {
       params: params,
-      headers: headers
+      headers: headers,
+      ignoreLoadingBar: ignoreLoadingBar
     };
 
     return $http.get('/request.php', config).success(function(response) {

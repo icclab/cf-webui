@@ -6,7 +6,7 @@ angular.module('app.serviceBinding').controller('ServiceBindingAddCtrl', ['$scop
   $scope.services = [];
 
   // service summary from api
-  var getSpaceSummaryPromise = spaceService.getSpaceSummary($scope.config.spaceId);
+  var getSpaceSummaryPromise = spaceService.getSpaceSummary($scope.config.spaceId, true);
   getSpaceSummaryPromise.then(function(response) {
 
     // populate services

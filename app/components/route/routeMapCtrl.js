@@ -6,7 +6,7 @@ angular.module('app.route', ['app.domain']).controller('RouteMapCtrl', ['$scope'
   $scope.domains = [];
   
   // domain module dependency
-  domainService.getSharedDomainsForTheOrganization($scope.route.organizationID).then(function(sharedDomainResponse) {
+  domainService.getSharedDomainsForTheOrganization($scope.route.organizationID, true).then(function(sharedDomainResponse) {
     angular.forEach(sharedDomainResponse.data.resources, function(sharedDomain, i) {
       $scope.domains.push(sharedDomain);
     });
@@ -15,7 +15,7 @@ angular.module('app.route', ['app.domain']).controller('RouteMapCtrl', ['$scope'
   });
   
   // domain module dependency
-  domainService.getPrivateDomainsForTheOrganization($scope.route.organizationID).then(function(privateDomainResponse) {
+  domainService.getPrivateDomainsForTheOrganization($scope.route.organizationID, true).then(function(privateDomainResponse) {
     angular.forEach(privateDomainResponse.data.resources, function(privateDomain, i) {
       $scope.domains.push(privateDomain);
     });
@@ -23,7 +23,7 @@ angular.module('app.route', ['app.domain']).controller('RouteMapCtrl', ['$scope'
     //messageService.addMessage('danger', 'Could not load private domains: ' + err);
   });
 
-  routeService.getRoutesForApp($scope.route.applicationID).then(function(hosts) {
+  routeService.getRoutesForApp($scope.route.applicationID, true).then(function(hosts) {
     angular.forEach(hosts.data.resources, function(existingHost, i) {
       $scope.existingHosts.push(existingHost.entity.host);
     });

@@ -23,7 +23,9 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
     });
   };
 
-  var _getSpaceSummary = function(id) {
+  var _getSpaceSummary = function(id, ignoreLoadingBar) {
+    if (typeof(ignoreLoadingBar) === 'undefined') ignoreLoadingBar = false;
+    
     // params
     var params = {
       'url': API_ENDPOINT + '/v2/spaces/' + id + '/summary'
@@ -37,7 +39,8 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
 
     var config = {
       params: params,
-      headers: headers
+      headers: headers,
+      ignoreLoadingBar: ignoreLoadingBar
     };
 
     return $http.get('/request.php', config).then(function(response) {

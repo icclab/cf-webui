@@ -15,11 +15,11 @@ angular.module('app').run(['$rootScope', '$location', '$route', 'authService', f
     }
   });
   
-  $rootScope.$on('cfpLoadingBar:started', function (event, data) {
+  $rootScope.$on('cfpLoadingBar:started', function (event) {
     $rootScope.rootFields.showContent = false;
   });
   
-  $rootScope.$on('cfpLoadingBar:completed', function (event, data) {
+  $rootScope.$on('cfpLoadingBar:completed', function (event) {
     $rootScope.rootFields.showContent = true;
   });
 }]);

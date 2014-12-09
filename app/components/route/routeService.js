@@ -3,7 +3,8 @@ angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', fu
   
   var globalRouteConfig;
   
-  var _getRoutesForApp = function(id) {
+  var _getRoutesForApp = function(id, ignoreLoadingBar) {
+    if (typeof(ignoreLoadingBar) === 'undefined') ignoreLoadingBar = false;
     
     // params
     var params = {
@@ -19,7 +20,8 @@ angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', fu
 
     var config = {
       headers: headers,
-      params: params
+      params: params,
+      ignoreLoadingBar: ignoreLoadingBar
     };
 
     return $http.get('/request.php', config).then(function(response) {
