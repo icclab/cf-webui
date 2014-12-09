@@ -69,6 +69,53 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
     });
   };
   
+  var _getInstances = function(id) {
+    
+    // params
+    var params = {
+      'url': API_ENDPOINT + '/v2/apps/' + id + '/stats',
+      'guid' : id
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers,
+      params: params
+    };
+
+    return $http.get('/request.php', config).then(function(response) {
+      return response;
+    });
+  };
+  
+  var _getAppEvents = function(id) {
+    
+    // params
+    var params = {
+      'url': API_ENDPOINT + '/v2/events?order-direction=desc&q=actee:' + id + '&results-per-page=5'
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers,
+      params: params
+    };
+
+    return $http.get('/request.php', config).then(function(response) {
+      return response;
+    });
+  };
+  
   var _getEnvironmentVariables = function(id) {
     
     // params
@@ -255,6 +302,8 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
   applicationServiceFactory.getApplications = _getApplications;
   applicationServiceFactory.getApplicationSummary = _getApplicationSummary;
   applicationServiceFactory.getStack = _getStack;
+  applicationServiceFactory.getInstances = _getInstances;
+  applicationServiceFactory.getAppEvents = _getAppEvents;
   applicationServiceFactory.getEnvironmentVariables = _getEnvironmentVariables;
   applicationServiceFactory.getServiceBindings = _getServiceBindings;
   applicationServiceFactory.editApplication = _editApplication;

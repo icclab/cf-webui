@@ -113,6 +113,34 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
     });
   };
   $scope.getApplicationSummary();
+  
+  // get instances
+  applicationService.getInstances($scope.applicationId).then(function(instancesResponse) {
+    angular.forEach(instancesResponse.data, function(instance, i) {
+      
+      var hours = Math.floor(instance.stats.uptime / 3600);
+      var hoursRest = instance.stats.uptime % 3600;
+      var minutes = Math.floor(hoursRest / 60);
+      
+      instance.stats.hours = hours;
+      instance.stats.minutes = minutes;
+      
+    });
+    $scope.instances = instancesResponse.data;
+
+  }, function(err) {
+    messageService.addMessage('danger', 'Could not load app instances: ' + err);
+  });
+  
+  // get application events
+  applicationService.getAppEvents($scope.applicationId).then(function(appEventsResponse) {
+    $scope.appEvents = appEventsResponse.data.resources;
+    $scope.eventTotalpages = appEventsResponse.data.total_pages;
+    $scope.eventTotalResults = appEventsResponse.data.total_results;
+  }, function(err) {
+    console.log(err);
+    messageService.addMessage('danger', 'Could not load app events: ' + err);
+  });
 
   $scope.editApplication = function() {
     
