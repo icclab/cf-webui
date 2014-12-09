@@ -22,8 +22,6 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$root
   $scope.users = [];
   $scope.nrOfOrganizationUsers = 0;
   $scope.allUsersForOrganization = [];
-  
-  $scope.$watch('[spacesTotalQuota, organizationTotalQuota]', function () { $scope.setOrganizationQuota(); });
 
   // get particular organization
   organizationService.getOrganization($scope.id).then(function(response) {
@@ -55,8 +53,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$root
           var nrOfStartedApps = 0;
           var nrOfStoppedApps = 0;
           angular.forEach(dataSpace.apps, function(application, i) {
-            memory += application.memory;
-            $scope.spacesTotalQuota += memory;
+            memory += application.memory * application.instances;
 
             // started apps
             if (application.state === 'STARTED') {
@@ -79,6 +76,9 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$root
           };
 
           $scope.spaces.push(objectSpace);
+          
+          $scope.spacesTotalQuota += memory;
+          $scope.setOrganizationQuota();
         }, function(err) {
           console.log('Error: ' + err);
         });
@@ -143,11 +143,12 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$root
     console.log('Error: ' + err);
   });
   
- $scope.setOrganizationQuota = function() {
-   if($scope.organizationTotalQuota > 0){
-     $scope.usedQuotaPercent = (($scope.spacesTotalQuota / $scope.organizationTotalQuota)*100);
-   }
- };
+  $scope.setOrganizationQuota = function() {
+    if ($scope.organizationTotalQuota > 0) {
+      console.log('spacesTotalQuota: ' + $scope.spacesTotalQuota);
+      $scope.usedQuotaPercent = (($scope.spacesTotalQuota / $scope.organizationTotalQuota)*100);
+    }
+  };
 
   $scope.open = function(space) {
     var modalInstance = $modal.open({
