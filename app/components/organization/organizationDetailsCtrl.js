@@ -145,7 +145,6 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$root
   
   $scope.setOrganizationQuota = function() {
     if ($scope.organizationTotalQuota > 0) {
-      console.log('spacesTotalQuota: ' + $scope.spacesTotalQuota);
       $scope.usedQuotaPercent = (($scope.spacesTotalQuota / $scope.organizationTotalQuota)*100);
     }
   };

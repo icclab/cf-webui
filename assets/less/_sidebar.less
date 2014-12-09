@@ -43,7 +43,8 @@
       color: @sidebar-text-color;
       padding: 15px 10px 15px 15px;
       
-      &:hover {
+      &:hover,
+      &.active {
         background-color: #3d4e5d;
         transition: all 200ms ease 0s;
       }
@@ -52,6 +53,10 @@
     ul {
       display: none;
     }
+    
+    > a.active + ul {
+      display: block;
+    }
       
     ul li > a { /* links of 2nd level */
       border-bottom: 1px solid #23303b;
@@ -59,7 +64,8 @@
       color: #ccc;
       padding: 15px 10px 15px 30px;
       
-      &:hover {
+      &:hover,
+      &.active {
         background-color: #23303b;
       }
     }

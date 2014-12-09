@@ -1,4 +1,6 @@
-angular.module('app.sidebar').controller('SidebarCtrl', ['$scope', 'organizationService', 'spaceService', function ($scope, organizationService, spaceService) {
+angular.module('app.sidebar').controller('SidebarCtrl', ['$rootScope', '$scope', '$location', 'organizationService', 'spaceService', function ($rootScope, $scope, $location, organizationService, spaceService) {
+  $rootScope.rootFields.showContent = false;
+  
   $scope.organizations = [];
 
   // get all spaces
@@ -44,5 +46,9 @@ angular.module('app.sidebar').controller('SidebarCtrl', ['$scope', 'organization
   }, function (err) {
     // TODO: error handling
   });
+  
+  $scope.isActive = function(path) {
+    return ($location.path().indexOf(path) > -1);
+  };
   
 }]);

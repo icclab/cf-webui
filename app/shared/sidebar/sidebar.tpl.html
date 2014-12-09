@@ -1,13 +1,12 @@
 <div id="page-sidebar" ng-controller="SidebarCtrl">
   <ul id="sidebar-navigation">
     <li id="logo"><a href="#">CF WebUI</a></li>
-    <li class="title">Organizations</li>
-    <li ng-repeat="organization in organizations">
-      <a href="#" toggle-subnavi>{{organization.name}}</a>
+    <li ng-repeat="organization in organizations" class="fadein" ng-show="rootFields.showContent">
+      <a href="#" ng-class="{active: isActive('/organizations/' + organization.id)}" toggle-subnavi>{{organization.name}}</a>
       <ul>
         <li><a href="#/organizations/{{organization.id}}">Overview</a></li>
         <li ng-repeat="space in organization.spaces">
-          <a href="#/organizations/{{organization.id}}/spaces/{{space.id}}">{{space.name}}</a>
+          <a href="#/organizations/{{organization.id}}/spaces/{{space.id}}" ng-class="{active: isActive('/organizations/' + organization.id + '/spaces/' + space.id)}">{{space.name}}</a>
         </li>
       </ul>
     </li>
