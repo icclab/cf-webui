@@ -28,6 +28,20 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$root
     var data = response.data;
     $scope.name = data.entity.name;
     $scope.quotaDefID = data.entity.quota_definition_guid;
+    
+    // get organization quota
+    organizationService.getQuotaForTheOrganization($scope.quotaDefID).then(function(response) {
+      var data = response.data;
+      
+      angular.forEach(data.resources, function(organization, i) {
+        if($scope.quotaDefID === organization.metadata.guid){
+          $scope.organizationTotalQuota += organization.entity.memory_limit;
+        }
+      });
+      
+    }, function(err) {
+      console.log('Error: ' + err);
+    });
   }, function (err) {
     console.log('Error: ' + err);
   });
@@ -88,20 +102,6 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$root
     });
   };
   $scope.getSpacesForTheOrganization();
-  
-  // get organization quota
-  organizationService.getQuotaForTheOrganization($scope.quotaDefID).then(function(response) {
-    var data = response.data;
-    
-    angular.forEach(data.resources, function(organization, i) {
-      if($scope.quotaDefID === organization.metadata.guid){
-        $scope.organizationTotalQuota += organization.entity.memory_limit;
-      }
-    });
-    
-  }, function(err) {
-    console.log('Error: ' + err);
-  });
   
   // get organization sharedDomains
   organizationService.getSharedDomainsForTheOrganization($scope.id).then(function(response) {
