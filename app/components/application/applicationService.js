@@ -1,6 +1,28 @@
 angular.module('app.application').factory('applicationService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
   var applicationServiceFactory = {};
   
+  var _getApplications = function() {
+    // params
+    var params = {
+      'url': API_ENDPOINT + '/v2/apps'
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      params: params,
+      headers: headers
+    };
+
+    return $http.get('/request.php', config).then(function(response) {
+      return response;
+    });
+  };
+  
   var _getApplicationSummary = function(id) {
     // params
     var params = {
@@ -209,6 +231,7 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
     return $http.put('/request.php', data, config);
   };
   
+  applicationServiceFactory.getApplications = _getApplications;
   applicationServiceFactory.getApplicationSummary = _getApplicationSummary;
   applicationServiceFactory.getStack = _getStack;
   applicationServiceFactory.getEnvironmentVariables = _getEnvironmentVariables;

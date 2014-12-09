@@ -1,7 +1,3 @@
-<ul id="breadcrumb">
-  <li><a href="#">Organizations</a></li>
-  <li><a href="#">ZHAW</a></li>
-  <li><a href="#">Spaces</a></li>
-  <li><a href="#">Technikum</a></li>
-  <li>Building</li>
+<ul id="breadcrumb" ng-controller="BreadcrumbCtrl" class="fadein" ng-show="rootFields.showContent">
+  <li ng-repeat="element in elements"><a href="{{element.link}}">{{element.name}}</a></li>
 </ul><!-- /#breadcrumb -->
