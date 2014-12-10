@@ -32,6 +32,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
   $scope.domains = [];
 
   $scope.scale = {};
+  $scope.instances = [];
   
   // app summary
   $scope.getApplicationSummary = function() {
@@ -115,22 +116,25 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
   $scope.getApplicationSummary();
   
   // get instances
-  applicationService.getInstances($scope.applicationId).then(function(instancesResponse) {
-    angular.forEach(instancesResponse.data, function(instance, i) {
-      
-      var hours = Math.floor(instance.stats.uptime / 3600);
-      var hoursRest = instance.stats.uptime % 3600;
-      var minutes = Math.floor(hoursRest / 60);
-      
-      instance.stats.hours = hours;
-      instance.stats.minutes = minutes;
-      
-    });
-    $scope.instances = instancesResponse.data;
+  $scope.getInstances = function() {
+    applicationService.getInstances($scope.applicationId).then(function(instancesResponse) {
+      angular.forEach(instancesResponse.data, function(instance, i) {
+        
+        var hours = Math.floor(instance.stats.uptime / 3600);
+        var hoursRest = instance.stats.uptime % 3600;
+        var minutes = Math.floor(hoursRest / 60);
+        
+        instance.stats.hours = hours;
+        instance.stats.minutes = minutes;
+        
+      });
+      $scope.instances = instancesResponse.data;
 
-  }, function(err) {
-    messageService.addMessage('danger', 'Could not load app instances: ' + err);
-  });
+    }, function(err) {
+      messageService.addMessage('danger', 'Could not load app instances: ' + err);
+    });
+  };
+  $scope.getInstances();
   
   // get application events
   applicationService.getAppEvents($scope.applicationId).then(function(appEventsResponse) {
@@ -377,21 +381,25 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
       console.log('The application has not been stopped: ' + err.data.description + ' (' + err.data.error_code + ')');
     });
   };
-
+  
   $scope.scaleApplication = function() {
-    applicationService.scaleApplication($scope.applicationId, $scope.scale).then(function(response) {
-      applicationService.stopApplication($scope.applicationId).then(function(responseStop) {
-        applicationService.startApplication($scope.applicationId).then(function(responseStart) {
-          $scope.state = 'STARTED';
-          messageService.addMessage('success', 'The application has been successfully scaled.');
-        }, function(err) {
-          console.log('The application has not been started: ' + err.data.description + ' (' + err.data.error_code + ')');
-        });
-      }, function(err) {
-        console.log('The application has not been stopped: ' + err.data.description + ' (' + err.data.error_code + ')');
-      });
-    }, function(err) {
-      console.log('The application has not been scaled: ' + err.data.description + ' (' + err.data.error_code + ')');
+    var config = {
+      applicationId: $scope.applicationId,
+      scale: $scope.scale
+    };
+
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/application/applicationScale.tpl.html',
+      controller: 'ApplicationScaleCtrl',
+      resolve: {
+        config: function() {
+          return config;
+        }
+      }
+    });
+
+    modalInstance.result.then(function() {
+      messageService.addMessage('success', 'The application has been successfully scaled.');
     });
   };
   
