@@ -6,6 +6,14 @@
         if (substr($name, 0, 5) == 'HTTP_') {
           $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
         }
+
+        if ($name == 'CONTENT_TYPE') {
+          $headers['Content-Type'] = $value;
+        }
+
+        if ($name == 'CONTENT_LENGTH') {
+          $headers['Content-Length'] = $value;
+        }
       }
       return $headers;
     }
