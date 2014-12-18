@@ -1,4 +1,4 @@
-angular.module('app.application').controller('UserEnvEditCtrl', ['$scope', '$modalInstance', 'config', 'applicationService', 'messageService', function($scope, $modalInstance, config, applicationService, messageService) {
+angular.module('app.application').controller('UserEnvEditCtrl', ['$scope', '$modalInstance', '$log', 'config', 'applicationService', 'messageService', function($scope, $modalInstance, $log, config, applicationService, messageService) {
 
   $scope.applicationId = config.applicationId;
   $scope.userEnvs = config.existingUserEnvs;
@@ -12,7 +12,8 @@ angular.module('app.application').controller('UserEnvEditCtrl', ['$scope', '$mod
       $modalInstance.close();
       messageService.addMessage('success', 'The environment variable has been successfully edited.');
     }, function(err) {
-      messageService.addMessage('danger', 'The environment variable has not been edited: ' + err);
+      messageService.addMessage('danger', 'The environment variable has not been edited.');
+      $log.error(err);
     });
   };
   

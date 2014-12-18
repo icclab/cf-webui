@@ -18,9 +18,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       headers: headers
     };
 
-    return $http.get('/request.php', config).then(function(response) {
-      return response;
-    });
+    return $http.get('/request.php', config);
   };
 
   var _getOrganization = function(id) {
@@ -40,9 +38,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       headers: headers
     };
 
-    return $http.get('/request.php', config).then(function(response) {
-      return response;
-    });
+    return $http.get('/request.php', config);
   };
 
   var _getSpacesForTheOrganization = function(id) {
@@ -62,9 +58,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       headers: headers
     };
 
-    return $http.get('/request.php', config).then(function(response) {
-      return response;
-    });
+    return $http.get('/request.php', config);
   };
   
   var _getQuotaForTheOrganization = function(id) {
@@ -84,9 +78,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       headers: headers
     };
 
-    return $http.get('/request.php', config).then(function(response) {
-      return response;
-    });
+    return $http.get('/request.php', config);
   };
   
   var _getSharedDomainsForTheOrganization = function() {
@@ -106,9 +98,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       headers: headers
     };
 
-    return $http.get('/request.php', config).then(function(response) {
-      return response;
-    });
+    return $http.get('/request.php', config);
   };
   
   var _getPrivateDomainsForTheOrganization = function(id) {
@@ -128,9 +118,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       headers: headers
     };
 
-    return $http.get('/request.php', config).then(function(response) {
-      return response;
-    });
+    return $http.get('/request.php', config);
   };
   
   var _getAllUsersForTheOrganization = function(id) {
@@ -151,9 +139,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       headers: headers
     };
 
-    return $http.get('/request.php', config).then(function(response) {
-      return response;
-    });
+    return $http.get('/request.php', config);
   };
   
   var _editOrganization = function(organization) {
@@ -174,11 +160,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       headers: headers
     };
 
-    return $http.put('/request.php', data, config).success(function(response) {
-      // TODO: error handling
-    }).error(function(err, status) {
-      // TODO: error handling
-    });
+    return $http.put('/request.php', data, config);
   };
   
   var _deleteOrganization = function(organization) {
@@ -202,11 +184,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       data: data
     };
     
-    return $http.delete('/request.php', config).success(function(response) {
-      // TODO: error handling
-    }).error(function(err, status) {
-      // TODO: error handling
-    });
+    return $http.delete('/request.php', config);
   };
 
   organizationServiceFactory.getOrganizations = _getOrganizations;

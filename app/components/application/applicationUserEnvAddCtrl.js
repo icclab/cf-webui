@@ -1,4 +1,4 @@
-angular.module('app.application').controller('UserEnvAddCtrl', ['$scope', '$modalInstance', 'config', 'applicationService', 'messageService', function($scope, $modalInstance, config, applicationService, messageService) {
+angular.module('app.application').controller('UserEnvAddCtrl', ['$scope', '$modalInstance', '$log', 'config', 'applicationService', 'messageService', function($scope, $modalInstance, $log, config, applicationService, messageService) {
 
   $scope.applicationId = config.applicationId;
   $scope.userEnvs = config.existingUserEnvs;
@@ -11,7 +11,8 @@ angular.module('app.application').controller('UserEnvAddCtrl', ['$scope', '$moda
       $modalInstance.close();
       messageService.addMessage('success', 'The environment variable has been successfully added.');
     }, function(err) {
-      messageService.addMessage('danger', 'The environment variable has not been added: ' + err);
+      messageService.addMessage('danger', 'The environment variable has not been added.');
+      $log.error(err);
     });
   };
   

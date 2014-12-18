@@ -18,9 +18,7 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
       headers: headers
     };
 
-    return $http.get('/request.php', config).then(function(response) {
-      return response;
-    });
+    return $http.get('/request.php', config);
   };
   
   var _getApplicationSummary = function(id) {
@@ -40,9 +38,7 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
       headers: headers
     };
 
-    return $http.get('/request.php', config).then(function(response) {
-      return response;
-    });
+    return $http.get('/request.php', config);
   };
   
   var _getStack = function(id) {
@@ -64,9 +60,7 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
       params: params
     };
 
-    return $http.get('/request.php', config).then(function(response) {
-      return response;
-    });
+    return $http.get('/request.php', config);
   };
   
   var _getInstances = function(id) {
@@ -88,9 +82,7 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
       params: params
     };
 
-    return $http.get('/request.php', config).then(function(response) {
-      return response;
-    });
+    return $http.get('/request.php', config);
   };
   
   var _getAppEvents = function(id) {
@@ -111,9 +103,7 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
       params: params
     };
 
-    return $http.get('/request.php', config).then(function(response) {
-      return response;
-    });
+    return $http.get('/request.php', config);
   };
   
   var _getEnvironmentVariables = function(id) {
@@ -134,9 +124,7 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
       params: params
     };
 
-    return $http.get('/request.php', config).then(function(response) {
-      return response;
-    });
+    return $http.get('/request.php', config);
   };
   
   var _getServiceBindings = function(id) {
@@ -158,9 +146,7 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
       params: params
     };
 
-    return $http.get('/request.php', config).then(function(response) {
-      return response;
-    });
+    return $http.get('/request.php', config);
   };
   
   var _editApplication = function(application) {
@@ -180,11 +166,7 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
       headers: headers
     };
 
-    return $http.put('/request.php', data, config).success(function(response) {
-      // TODO: error handling
-    }).error(function(err, status) {
-      // TODO: error handling
-    });
+    return $http.put('/request.php', data, config);
   };
   
   var _deleteApplication = function(application) {
@@ -206,11 +188,7 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
       data: data
     };
     
-    return $http.delete('/request.php', config).success(function(response) {
-      // TODO: error handling
-    }).error(function(err, status) {
-      // TODO: error handling
-    });
+    return $http.delete('/request.php', config);
   };
   
   // environment variables
@@ -231,11 +209,7 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
       headers: headers
     };
 
-    return $http.put('/request.php', data, config).success(function(response) {
-      // TODO: error handling
-    }).error(function(err, status) {
-      // TODO: error handling
-    });
+    return $http.put('/request.php', data, config);
   };
   
   var _stopApplication = function(applicationId) {

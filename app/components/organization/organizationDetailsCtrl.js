@@ -1,4 +1,4 @@
-angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rootScope', '$scope', '$routeParams', '$modal', 'organizationService', 'spaceService', 'userService', 'domainService', function($rootScope, $scope, $routeParams, $modal, organizationService, spaceService, userService, domainService) {
+angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rootScope', '$scope', '$routeParams', '$modal', '$log', 'organizationService', 'spaceService', 'userService', 'domainService', function($rootScope, $scope, $routeParams, $modal, $log, organizationService, spaceService, userService, domainService) {
   $rootScope.rootFields.showContent = false;
   $scope.name = '';
   $scope.id = $routeParams.organizationId;
@@ -40,10 +40,10 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$root
       });
       
     }, function(err) {
-      console.log('Error: ' + err);
+      $log.error(err);
     });
   }, function (err) {
-    console.log('Error: ' + err);
+    $log.error(err);
   });
 
   // get spaces for the organization
@@ -94,11 +94,11 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$root
           $scope.spacesTotalQuota += memory;
           $scope.setOrganizationQuota();
         }, function(err) {
-          console.log('Error: ' + err);
+          $log.error(err);
         });
       });
     }, function(err) {
-      console.log('Error: ' + err);
+      $log.error(err);
     });
   };
   $scope.getSpacesForTheOrganization();
@@ -109,7 +109,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$root
     $scope.nrOfDomains += 1;
     $scope.sharedDomains = (data.resources);
   }, function(err) {
-    console.log('Error: ' + err);
+    $log.error(err);
   });
   
   // get organization privateDomains
@@ -118,7 +118,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$root
     $scope.nrOfDomains += data.total_results;
     $scope.privateDomains = data.resources;
   }, function(err) {
-    console.log('Error: ' + err);
+    $log.error(err);
   });
   
   // get all users for the organization
@@ -135,12 +135,12 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$root
       userService.getUserSummary(user.metadata.guid).then(function(responseUser) {
         // ... not authorized
       }, function(err) {
-        console.log('Error: ' + err);
+        $log.error(err);
       });
     });
     
   }, function(err) {
-    console.log('Error: ' + err);
+    $log.error(err);
   });
   
   $scope.setOrganizationQuota = function() {

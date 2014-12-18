@@ -1,4 +1,4 @@
-angular.module('app.user').controller('UserDeleteCtrl', ['$scope', '$modalInstance', 'user', 'userService', 'messageService', function($scope, $modalInstance, user, userService, messageService) {
+angular.module('app.user').controller('UserDeleteCtrl', ['$scope', '$modalInstance', '$log', 'user', 'userService', 'messageService', function($scope, $modalInstance, $log, user, userService, messageService) {
 
   $scope.user = user;
 
@@ -6,7 +6,8 @@ angular.module('app.user').controller('UserDeleteCtrl', ['$scope', '$modalInstan
     userService.deleteUser($scope.user).then(function(response) {
       messageService.addMessage('success', 'The user has been successfully deleted.');
     }, function(err) {
-      messageService.addMessage('danger', 'The user has not been deleted: ' + err);
+      messageService.addMessage('danger', 'The user has not been deleted.');
+      $log.error(err);
     });
 
     $modalInstance.close($scope.user);

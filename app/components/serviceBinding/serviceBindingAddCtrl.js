@@ -1,4 +1,4 @@
-angular.module('app.serviceBinding').controller('ServiceBindingAddCtrl', ['$scope', '$modalInstance', 'config', 'serviceBindingService', 'spaceService', 'messageService', function($scope, $modalInstance, config, serviceBindingService, spaceService, messageService) {
+angular.module('app.serviceBinding').controller('ServiceBindingAddCtrl', ['$scope', '$modalInstance', '$log', 'config', 'serviceBindingService', 'spaceService', 'messageService', function($scope, $modalInstance, $log, config, serviceBindingService, spaceService, messageService) {
 
   $scope.config = config;
   $scope.alreadyBoundServices = $scope.config.alreadyBoundServices;
@@ -31,7 +31,8 @@ angular.module('app.serviceBinding').controller('ServiceBindingAddCtrl', ['$scop
       });
     }
   }, function(err) {
-    messageService.addMessage('danger', 'The space summary has not been loaded: ' + err);
+    messageService.addMessage('danger', 'The space summary has not been loaded.');
+    $log.error(err);
   });
 
   $scope.ok = function () {
@@ -44,7 +45,8 @@ angular.module('app.serviceBinding').controller('ServiceBindingAddCtrl', ['$scop
       $modalInstance.close(serviceBinding);
       messageService.addMessage('success', 'The service has been successfully bound.');
     }, function(err) {
-      messageService.addMessage('danger', 'The service has not been bound: ' + err);
+      messageService.addMessage('danger', 'The service has not been bound.');
+      $log.error(err);
     });
   };
   

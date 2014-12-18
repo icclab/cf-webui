@@ -1,4 +1,4 @@
-angular.module('app.application').controller('ApplicationDeleteCtrl', ['$scope', '$modalInstance', 'application', 'applicationService', 'messageService', function($scope, $modalInstance, application, applicationService, messageService) {
+angular.module('app.application').controller('ApplicationDeleteCtrl', ['$scope', '$modalInstance', '$log', 'application', 'applicationService', 'messageService', function($scope, $modalInstance, $log, application, applicationService, messageService) {
 
   $scope.application = application;
 
@@ -6,7 +6,8 @@ angular.module('app.application').controller('ApplicationDeleteCtrl', ['$scope',
     applicationService.deleteApplication($scope.application).then(function(response) {
       messageService.addMessage('success', 'The application has been successfully deleted.');
     }, function(err) {
-      messageService.addMessage('danger', 'The application has not been deleted: ' + err);
+      messageService.addMessage('danger', 'The application has not been deleted.');
+      $log.error(err);
     });
 
     $modalInstance.close($scope.application);

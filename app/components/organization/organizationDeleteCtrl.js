@@ -1,4 +1,4 @@
-angular.module('app.organization').controller('OrganizationDeleteCtrl', ['$scope', '$modalInstance', 'organization', 'organizationService', 'messageService', function($scope, $modalInstance, organization, organizationService, messageService) {
+angular.module('app.organization').controller('OrganizationDeleteCtrl', ['$scope', '$modalInstance', '$log', 'organization', 'organizationService', 'messageService', function($scope, $modalInstance, $log, organization, organizationService, messageService) {
 
   $scope.organization = organization;
 
@@ -7,7 +7,8 @@ angular.module('app.organization').controller('OrganizationDeleteCtrl', ['$scope
     organizationService.deleteOrganization($scope.organization).then(function(response) {
       messageService.addMessage('success', 'The organization has been successfully deleted.');
     }, function(err) {
-      messageService.addMessage('danger', 'The organization has not been deleted: ' + err);
+      messageService.addMessage('danger', 'The organization has not been deleted.');
+      $log.error(err);
     });
 
     $modalInstance.close($scope.organization);

@@ -1,4 +1,4 @@
-angular.module('app.serviceBinding').controller('ServiceBindingDeleteCtrl', ['$scope', '$modalInstance', 'service', 'serviceBindingService', 'messageService', function($scope, $modalInstance, service, serviceBindingService, messageService) {
+angular.module('app.serviceBinding').controller('ServiceBindingDeleteCtrl', ['$scope', '$modalInstance', '$log', 'service', 'serviceBindingService', 'messageService', function($scope, $modalInstance, $log, service, serviceBindingService, messageService) {
 
   $scope.service = service;
 
@@ -8,7 +8,8 @@ angular.module('app.serviceBinding').controller('ServiceBindingDeleteCtrl', ['$s
       console.log(response);
       messageService.addMessage('success', 'The service has been successfully unbound.');
     }, function(err) {
-      messageService.addMessage('danger', 'The service has not been unbound: ' + err);
+      messageService.addMessage('danger', 'The service has not been unbound.');
+      $log.error(err);
     });
   };
   

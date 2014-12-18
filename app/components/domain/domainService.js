@@ -21,9 +21,7 @@ angular.module('app.domain').factory('domainService', ['$http', 'API_ENDPOINT', 
       ignoreLoadingBar: ignoreLoadingBar
     };
 
-    return $http.get('/request.php', config).success(function(response) {
-    }).error(function(err, status) {
-    });
+    return $http.get('/request.php', config);
   };
   
   var _getPrivateDomainsForTheOrganization = function(id, ignoreLoadingBar) {
@@ -46,9 +44,7 @@ angular.module('app.domain').factory('domainService', ['$http', 'API_ENDPOINT', 
       ignoreLoadingBar: ignoreLoadingBar
     };
 
-    return $http.get('/request.php', config).success(function(response) {
-    }).error(function(err, status) {
-    });
+    return $http.get('/request.php', config);
   };
   
   var _addDomain = function(domain) {
@@ -70,11 +66,7 @@ angular.module('app.domain').factory('domainService', ['$http', 'API_ENDPOINT', 
       headers: headers
     };
 
-    return $http.post('/request.php', data, config).success(function(response) {
-      // TODO: error handling
-    }).error(function(err, status) {
-      // TODO: error handling
-    });
+    return $http.post('/request.php', data, config);
   };
   
   var _deleteDomain = function(domain) {
@@ -97,11 +89,7 @@ angular.module('app.domain').factory('domainService', ['$http', 'API_ENDPOINT', 
       data: data
     };
     
-    return $http.delete('/request.php', config).success(function(response) {
-      // TODO: error handling
-    }).error(function(err, status) {
-      // TODO: error handling
-    });
+    return $http.delete('/request.php', config);
   };
   
   domainServiceFactory.getPrivateDomainsForTheOrganization =_getPrivateDomainsForTheOrganization;

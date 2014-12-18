@@ -1,4 +1,4 @@
-angular.module('app.serviceInstance').controller('ServiceInstanceDeleteCtrl', ['$scope', '$modalInstance', 'serviceInstance', 'serviceInstanceService', 'messageService', function($scope, $modalInstance, serviceInstance, serviceInstanceService, messageService) {
+angular.module('app.serviceInstance').controller('ServiceInstanceDeleteCtrl', ['$scope', '$modalInstance', '$log', 'serviceInstance', 'serviceInstanceService', 'messageService', function($scope, $modalInstance, $log, serviceInstance, serviceInstanceService, messageService) {
 
   $scope.serviceInstance = serviceInstance;
 
@@ -8,7 +8,8 @@ angular.module('app.serviceInstance').controller('ServiceInstanceDeleteCtrl', ['
 
       $modalInstance.close($scope.serviceInstance);
     }, function(err) {
-      messageService.addMessage('danger', 'The service instance has not been deleted: ' + err.data.description);
+      messageService.addMessage('danger', 'The service instance has not been deleted.');
+      $log.error(err);
 
       $modalInstance.dismiss('cancel');
     });

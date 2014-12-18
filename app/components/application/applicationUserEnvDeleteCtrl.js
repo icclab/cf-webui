@@ -1,5 +1,4 @@
-angular.module('app.application').controller('UserEnvDeleteCtrl', ['$scope', '$modalInstance', 'config', 'applicationService', 'messageService', function($scope, $modalInstance, config, applicationService, messageService) {
-  console.log(config);
+angular.module('app.application').controller('UserEnvDeleteCtrl', ['$scope', '$modalInstance', '$log', 'config', 'applicationService', 'messageService', function($scope, $modalInstance, $log, config, applicationService, messageService) {
   $scope.applicationId = config.applicationId;
   $scope.userEnvs = config.existingUserEnvs;
   $scope.userEnvToDelete = config.userEnvToDelete;
@@ -12,7 +11,8 @@ angular.module('app.application').controller('UserEnvDeleteCtrl', ['$scope', '$m
       $modalInstance.close();
       messageService.addMessage('success', 'The environment variable has been successfully deleted.');
     }, function(err) {
-      messageService.addMessage('danger', 'The environment variable has not been deleted: ' + err);
+      messageService.addMessage('danger', 'The environment variable has not been deleted.');
+      $log.error(err);
     });
   };
   

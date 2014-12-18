@@ -1,4 +1,4 @@
-angular.module('app.logIn').controller('LogInCtrl', ['$scope', '$location', 'authService', 'messageService', function($scope, $location, authService, messageService) {
+angular.module('app.logIn').controller('LogInCtrl', ['$scope', '$location', '$log', 'authService', 'messageService', function($scope, $location, $log, authService, messageService) {
   $scope.logInData = {
     userName: '',
     password: ''
@@ -10,6 +10,7 @@ angular.module('app.logIn').controller('LogInCtrl', ['$scope', '$location', 'aut
     },
     function (err) {
       messageService.addMessage('danger', err.error_description);
+      $log.error(err);
     });
   };
 

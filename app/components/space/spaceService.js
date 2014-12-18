@@ -18,9 +18,7 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
       headers: headers
     };
 
-    return $http.get('/request.php', config).then(function(response) {
-      return response;
-    });
+    return $http.get('/request.php', config);
   };
 
   var _getSpaceSummary = function(id, ignoreLoadingBar) {
@@ -43,9 +41,7 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
       ignoreLoadingBar: ignoreLoadingBar
     };
 
-    return $http.get('/request.php', config).then(function(response) {
-      return response;
-    });
+    return $http.get('/request.php', config);
   };
 
   var _getServicesForTheSpace = function(id) {
@@ -66,9 +62,7 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
       headers: headers
     };
 
-    return $http.get('/request.php', config).then(function(response) {
-      return response;
-    });
+    return $http.get('/request.php', config);
   };
 
   var _editSpace = function(space) {
@@ -88,11 +82,7 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
       headers: headers
     };
 
-    return $http.put('/request.php', data, config).success(function(response) {
-      // TODO: error handling
-    }).error(function(err, status) {
-      // TODO: error handling
-    });
+    return $http.put('/request.php', data, config);
   };
 
   var _addSpace = function(space) {
@@ -113,11 +103,7 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
       headers: headers
     };
 
-    return $http.post('/request.php', data, config).success(function(response) {
-      // TODO: error handling
-    }).error(function(err, status) {
-      // TODO: error handling
-    });
+    return $http.post('/request.php', data, config);
   };
   
   var _deleteSpace = function(space) {
@@ -139,11 +125,7 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
       data: data
     };
     
-    return $http.delete('/request.php', config).success(function(response) {
-      // TODO: error handling
-    }).error(function(err, status) {
-      // TODO: error handling
-    });
+    return $http.delete('/request.php', config);
   };
 
   spaceServiceFactory.getSpaces = _getSpaces;

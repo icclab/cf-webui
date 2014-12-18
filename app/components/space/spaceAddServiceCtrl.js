@@ -1,4 +1,4 @@
-angular.module('app.space').controller('SpaceAddServiceCtrl', ['$rootScope', '$scope', '$routeParams', '$location', 'spaceService', 'serviceService', 'serviceInstanceService', 'messageService', function($rootScope, $scope, $routeParams, $location, spaceService, serviceService, serviceInstanceService, messageService) {
+angular.module('app.space').controller('SpaceAddServiceCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$log', 'spaceService', 'serviceService', 'serviceInstanceService', 'messageService', function($rootScope, $scope, $routeParams, $location, $log, spaceService, serviceService, serviceInstanceService, messageService) {
   $rootScope.rootFields.showContent = false;
 
   $scope.organizationId = $routeParams.organizationId;
@@ -37,7 +37,8 @@ angular.module('app.space').controller('SpaceAddServiceCtrl', ['$rootScope', '$s
     });
 
   }, function(err) {
-    messageService.addMessage('danger', 'The space services have not been loaded: ' + err);
+    messageService.addMessage('danger', 'The space services have not been loaded.');
+    $log.error(err);
   });
 
   $scope.selectService = function(selectedService) {
@@ -84,7 +85,8 @@ angular.module('app.space').controller('SpaceAddServiceCtrl', ['$rootScope', '$s
       $scope.hideAddServiceInstance = true;
 
     }, function(err) {
-      messageService.addMessage('danger', 'The service plans have not been loaded: ' + err);
+      messageService.addMessage('danger', 'The service plans have not been loaded.');
+      $log.error(err);
     });
   };
 
@@ -106,6 +108,7 @@ angular.module('app.space').controller('SpaceAddServiceCtrl', ['$rootScope', '$s
     serviceInstanceService.addServiceInstance(serviceInstance).then(function(response) {
       if (response.data.error_code) {
         messageService.addMessage('danger', response.data.description);
+        $log.error(response);
       } else {
         messageService.addMessage('success', 'The service instance has been successfully added.');
       }
@@ -113,6 +116,7 @@ angular.module('app.space').controller('SpaceAddServiceCtrl', ['$rootScope', '$s
       $location.path('/organizations/' + $scope.organizationId + '/spaces/' + $scope.spaceId);
     }, function(err) {
       messageService.addMessage('danger', 'The service instance has not been added: ' + err.data.description);
+      $log.error(err);
       $location.path('/organizations/' + $scope.organizationId + '/spaces/' + $scope.spaceId);
     });
   };

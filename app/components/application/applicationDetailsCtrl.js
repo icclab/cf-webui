@@ -1,4 +1,4 @@
-angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootScope', '$scope', '$routeParams', '$modal', 'applicationService', 'routeService', 'messageService', function($rootScope, $scope, $routeParams, $modal, applicationService, routeService, messageService) {
+angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootScope', '$scope', '$routeParams', '$modal', '$log', 'applicationService', 'routeService', 'messageService', function($rootScope, $scope, $routeParams, $modal, $log, applicationService, routeService, messageService) {
   $rootScope.rootFields.showContent = false;
   
   $scope.summary = {};
@@ -69,7 +69,8 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
       applicationService.getStack($scope.stackId).then(function(stackResponse) {
         $scope.stack = stackResponse.data;
       }, function(err) {
-        //messageService.addMessage('danger', 'Stack load failed: ' + err);
+        messageService.addMessage('danger', 'Stack load failed.');
+        $log.error(err);
       });
       
       // get environment variables
@@ -81,7 +82,8 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
         });
         $scope.userEnvironmentVariables = $scope.environmentVariables.environment_json;
       }, function(err) {
-        //messageService.addMessage('danger', 'Could not load environment variables: ' + err);
+        messageService.addMessage('danger', 'Could not load environment variables.');
+        $log.error(err);
       });
 
       // get service bindings and add to the service the credentials
@@ -106,11 +108,13 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
 
         });
       }, function(err) {
-        //messageService.addMessage('danger', 'The service bindings have not been loaded: ' + err);
+        messageService.addMessage('danger', 'The service bindings have not been loaded.');
+        $log.error(err);
       });
 
     }, function(err) {
-      //messageService.addMessage('danger', 'The application summary has not been loaded: ' + err);
+      messageService.addMessage('danger', 'The application summary has not been loaded.');
+      $log.error(err);
     });
   };
   $scope.getApplicationSummary();
@@ -131,7 +135,8 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
       $scope.instances = instancesResponse.data;
 
     }, function(err) {
-      messageService.addMessage('danger', 'Could not load app instances: ' + err);
+      messageService.addMessage('danger', 'Could not load app instances.');
+      $log.error(err);
     });
   };
   $scope.getInstances();
@@ -142,7 +147,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
     $scope.eventTotalpages = appEventsResponse.data.total_pages;
     $scope.eventTotalResults = appEventsResponse.data.total_results;
   }, function(err) {
-    console.log(err);
+    $log.error(err);
     messageService.addMessage('danger', 'Could not load app events: ' + err);
   });
 
@@ -356,7 +361,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
       $scope.state = 'STOPPED';
       messageService.addMessage('success', 'The application has been successfully stopped.');
     }, function(err) {
-      console.log('The application has not been stopped: ' + err.data.description + ' (' + err.data.error_code + ')');
+      $log.error('The application has not been stopped: ' + err.data.description + ' (' + err.data.error_code + ')');
     });
   };
 
@@ -365,7 +370,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
       $scope.state = 'STARTED';
       messageService.addMessage('success', 'The application has been successfully started.');
     }, function(err) {
-      console.log('The application has not been started: ' + err.data.description + ' (' + err.data.error_code + ')');
+      $log.error('The application has not been started: ' + err.data.description + ' (' + err.data.error_code + ')');
     });
   };
 
@@ -375,10 +380,10 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
         $scope.state = 'STARTED';
         messageService.addMessage('success', 'The application has been successfully restarted.');
       }, function(err) {
-        console.log('The application has not been started: ' + err.data.description + ' (' + err.data.error_code + ')');
+        $log.error('The application has not been started: ' + err.data.description + ' (' + err.data.error_code + ')');
       });
     }, function(err) {
-      console.log('The application has not been stopped: ' + err.data.description + ' (' + err.data.error_code + ')');
+      $log.error('The application has not been stopped: ' + err.data.description + ' (' + err.data.error_code + ')');
     });
   };
   

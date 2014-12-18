@@ -19,11 +19,7 @@ angular.module('app.serviceBinding').factory('serviceBindingService', ['$http', 
       headers: headers
     };
 
-    return $http.post('/request.php', data, config).success(function(response) {
-      // TODO: error handling
-    }).error(function(err, status) {
-      // TODO: error handling
-    });
+    return $http.post('/request.php', data, config);
   };
 
   var _deleteServiceBinding = function(serviceBindingId) {
@@ -43,11 +39,7 @@ angular.module('app.serviceBinding').factory('serviceBindingService', ['$http', 
       data: data
     };
 
-    return $http.delete('/request.php', config).success(function(response) {
-      // TODO: error handling
-    }).error(function(err, status) {
-      // TODO: error handling
-    });
+    return $http.delete('/request.php', config);
   };
   
   serviceBindingServiceFactory.addServiceBinding = _addServiceBinding;

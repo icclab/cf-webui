@@ -1,4 +1,4 @@
-angular.module('app.auth').factory('authInterceptorService', ['$q', '$location', '$injector', '$rootScope', function($q, $location, $injector, $rootScope) {
+angular.module('app.auth').factory('authInterceptorService', ['$q', '$location', '$injector', '$rootScope', '$log', function($q, $location, $injector, $rootScope, $log) {
   var authInterceptorServiceFactory = {};
 
   var _request = function(config) {
@@ -22,6 +22,7 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
       },
       function (err) {
         messageService.addMessage('danger', err.error_description);
+        $log.error(err);
       });
     }
 

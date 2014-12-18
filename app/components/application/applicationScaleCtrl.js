@@ -1,4 +1,4 @@
-angular.module('app.application').controller('ApplicationScaleCtrl', ['$scope', '$modalInstance', 'config', 'applicationService', 'messageService', function($scope, $modalInstance, config, applicationService, messageService) {
+angular.module('app.application').controller('ApplicationScaleCtrl', ['$scope', '$modalInstance', '$log', 'config', 'applicationService', 'messageService', function($scope, $modalInstance, $log, config, applicationService, messageService) {
 
   $scope.applicationId = config.applicationId;
   $scope.scale = config.scale;
@@ -9,13 +9,13 @@ angular.module('app.application').controller('ApplicationScaleCtrl', ['$scope', 
         applicationService.startApplication($scope.applicationId).then(function(responseStart) {
           $modalInstance.close();
         }, function(err) {
-          console.log('The application has not been started: ' + err.data.description + ' (' + err.data.error_code + ')');
+          $log.error('The application has not been started: ' + err.data.description + ' (' + err.data.error_code + ')');
         });
       }, function(err) {
-        console.log('The application has not been stopped: ' + err.data.description + ' (' + err.data.error_code + ')');
+        $log.error('The application has not been stopped: ' + err.data.description + ' (' + err.data.error_code + ')');
       });
     }, function(err) {
-      console.log('The application has not been scaled: ' + err.data.description + ' (' + err.data.error_code + ')');
+      $log.error('The application has not been scaled: ' + err.data.description + ' (' + err.data.error_code + ')');
     });
   };
   

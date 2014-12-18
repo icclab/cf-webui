@@ -1,4 +1,4 @@
-angular.module('app.domain').controller('DomainDeleteCtrl', ['$scope', '$modalInstance', 'domain', 'domainService', 'messageService', function($scope, $modalInstance, domain, domainService, messageService) {
+angular.module('app.domain').controller('DomainDeleteCtrl', ['$scope', '$modalInstance', '$log', 'domain', 'domainService', 'messageService', function($scope, $modalInstance, $log, domain, domainService, messageService) {
 
   $scope.domain = domain;
 
@@ -6,7 +6,8 @@ angular.module('app.domain').controller('DomainDeleteCtrl', ['$scope', '$modalIn
     domainService.deleteDomain($scope.domain).then(function(response) {
       messageService.addMessage('success', 'The domain has been successfully deleted.');
     }, function(err) {
-      messageService.addMessage('danger', 'The domain has not been deleted: ' + err);
+      messageService.addMessage('danger', 'The domain has not been deleted.');
+      $log.error(err);
     });
 
     $modalInstance.close($scope.domain);

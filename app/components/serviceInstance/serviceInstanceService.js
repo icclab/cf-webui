@@ -20,11 +20,7 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
       headers: headers
     };
 
-    return $http.post('/request.php', data, config).success(function(response) {
-      // TODO: error handling
-    }).error(function(err, status) {
-      // TODO: error handling
-    });
+    return $http.post('/request.php', data, config);
   };
 
   var _deleteServiceInstance = function(serviceInstanceId) {
@@ -45,12 +41,7 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
       data: data
     };
     
-    return $http.delete('/request.php', config).success(function(response) {
-      // TODO: error handling
-      return serviceInstanceId;
-    }).error(function(err, status) {
-      // TODO: error handling
-    });
+    return $http.delete('/request.php', config);
   };
 
   serviceInstanceServiceFactory.addServiceInstance = _addServiceInstance;

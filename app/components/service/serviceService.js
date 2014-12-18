@@ -19,9 +19,7 @@ angular.module('app.service').factory('serviceService', ['$http', 'API_ENDPOINT'
       headers: headers
     };
 
-    return $http.get('/request.php', config).then(function(response) {
-      return response;
-    });
+    return $http.get('/request.php', config);
   };
 
   serviceServiceFactory.getServicePlansForTheService = _getServicePlansForTheService;

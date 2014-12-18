@@ -1,4 +1,4 @@
-angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scope', '$routeParams', '$modal', 'spaceService', 'messageService', function($rootScope, $scope, $routeParams, $modal, spaceService, messageService) {
+angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scope', '$routeParams', '$modal', '$log', 'spaceService', 'messageService', function($rootScope, $scope, $routeParams, $modal, $log, spaceService, messageService) {
   $rootScope.rootFields.showContent = false;
   
   $scope.name = '';
@@ -51,7 +51,8 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
       });
     }
   }, function(err) {
-    messageService.addMessage('danger', 'The space summary has not been loaded: ' + err);
+    messageService.addMessage('danger', 'The space summary has not been loaded.');
+    $log.error(err);
   });
 
 

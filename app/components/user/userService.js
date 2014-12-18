@@ -18,9 +18,7 @@ angular.module('app.user').factory('userService', ['$http', 'API_ENDPOINT', func
       headers: headers
     };
 
-    return $http.get('/request.php', config).then(function(response) {
-      return response;
-    });
+    return $http.get('/request.php', config);
   };
   
   var _deleteUser = function(user) {
@@ -42,11 +40,7 @@ angular.module('app.user').factory('userService', ['$http', 'API_ENDPOINT', func
       data: data
     };
     
-    return $http.delete('/request.php', config).success(function(response) {
-      // TODO: error handling
-    }).error(function(err, status) {
-      // TODO: error handling
-    });
+    return $http.delete('/request.php', config);
   };
 
   userServiceFactory.getUserSummary = _getUserSummary;

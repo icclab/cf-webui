@@ -1,4 +1,4 @@
-angular.module('app.sidebar').controller('SidebarCtrl', ['$rootScope', '$scope', '$location', 'organizationService', 'spaceService', function ($rootScope, $scope, $location, organizationService, spaceService) {
+angular.module('app.sidebar').controller('SidebarCtrl', ['$rootScope', '$scope', '$location', '$log', 'organizationService', 'spaceService', function ($rootScope, $scope, $location, $log, organizationService, spaceService) {
   $rootScope.rootFields.showContent = false;
   
   $scope.organizations = [];
@@ -41,10 +41,10 @@ angular.module('app.sidebar').controller('SidebarCtrl', ['$rootScope', '$scope',
         }
       });
     }, function (err) {
-      // TODO: error handling
+      $log.error(err);
     });
   }, function (err) {
-    // TODO: error handling
+    $log.error(err);
   });
   
   $scope.isActive = function(path) {

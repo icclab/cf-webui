@@ -1,4 +1,4 @@
-angular.module('app.breadcrumb').controller('BreadcrumbCtrl', ['$rootScope', '$scope', '$location', 'organizationService', 'spaceService', 'applicationService', function ($rootScope, $scope, $location, organizationService, spaceService, applicationService) {
+angular.module('app.breadcrumb').controller('BreadcrumbCtrl', ['$rootScope', '$scope', '$location', '$log', 'organizationService', 'spaceService', 'applicationService', function ($rootScope, $scope, $location, $log, organizationService, spaceService, applicationService) {
   $rootScope.rootFields.showContent = false;
   
   $scope.elements = [];
@@ -56,7 +56,7 @@ angular.module('app.breadcrumb').controller('BreadcrumbCtrl', ['$rootScope', '$s
       getApplicationsPromise.then(function(response) {
         data = response.data;
 
-        angular.forEach(data.resources, function(application, i) {          
+        angular.forEach(data.resources, function(application, i) {
           if ($location.path().indexOf(spacePath + '/applications/' + application.metadata.guid) > -1) {
             var objectApplication = {
               link: '#' + spacePath + '/applications/' + application.metadata.guid,
@@ -68,10 +68,10 @@ angular.module('app.breadcrumb').controller('BreadcrumbCtrl', ['$rootScope', '$s
         });
       });
     }, function (err) {
-      // TODO: error handling
+      $log.error(err);
     });
   }, function (err) {
-    // TODO: error handling
-  }); 
+    $log.error(err);
+  });
   
 }]);

@@ -24,9 +24,7 @@ angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', fu
       ignoreLoadingBar: ignoreLoadingBar
     };
 
-    return $http.get('/request.php', config).then(function(response) {
-      return response;
-    });
+    return $http.get('/request.php', config);
   };
   
   var _createRoute = function(config) {
@@ -45,15 +43,11 @@ angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', fu
       'Content-Type': 'application/json'
     };
 
-    var config = {
+    config = {
       headers: headers
     };
     
-    return $http.post('/request.php', data, config).success(function(response) {
-      // TODO: error handling
-    }).error(function(err, status) {
-      // TODO: error handling
-    });
+    return $http.post('/request.php', data, config);
   };
   
   var _mapRoute = function(config) {
@@ -81,14 +75,7 @@ angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', fu
         headers: headers
       };
     
-      return $http.put('/request.php', data, config).success(function(response) {
-        // TODO: error handling
-      }).error(function(err, status) {
-        // TODO: error handling
-      });
-      
-    }, function(err) {
-      // TODO: error handling
+      return $http.put('/request.php', data, config);
     });
     
   };
@@ -112,12 +99,7 @@ angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', fu
       data: data
     };
     
-    return $http.delete('/request.php', config).success(function(response) {
-      // TODO: error handling
-      return route;
-    }).error(function(err, status) {
-      // TODO: error handling
-    });
+    return $http.delete('/request.php', config);
   };
   
   routeServiceFactory.getRoutesForApp = _getRoutesForApp;

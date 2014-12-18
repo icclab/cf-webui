@@ -1,4 +1,4 @@
-angular.module('app.organization').controller('OrganizationPreviewCtrl', ['$rootScope', '$scope', 'organizationService', function($rootScope, $scope, organizationService) {
+angular.module('app.organization').controller('OrganizationPreviewCtrl', ['$rootScope', '$scope', '$log', 'organizationService', function($rootScope, $scope, $log, organizationService) {
   $rootScope.rootFields.showContent = false;
   
   // organization info
@@ -21,6 +21,6 @@ angular.module('app.organization').controller('OrganizationPreviewCtrl', ['$root
       $scope.organizations.push(objectOrganization);
     });
   }, function (err) {
-    // TODO: error handling
+    $log.error(err);
   });
 }]);

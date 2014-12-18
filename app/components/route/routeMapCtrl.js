@@ -1,5 +1,5 @@
 // route module depends on domain module
-angular.module('app.route', ['app.domain']).controller('RouteMapCtrl', ['$scope', '$modalInstance', 'route', 'routeService', 'domainService', 'messageService', function($scope, $modalInstance, route, routeService, domainService, messageService) {
+angular.module('app.route', ['app.domain']).controller('RouteMapCtrl', ['$scope', '$modalInstance', '$log', 'route', 'routeService', 'domainService', 'messageService', function($scope, $modalInstance, $log, route, routeService, domainService, messageService) {
   
   $scope.route = route;
   $scope.existingHosts = [];
@@ -11,7 +11,7 @@ angular.module('app.route', ['app.domain']).controller('RouteMapCtrl', ['$scope'
       $scope.domains.push(sharedDomain);
     });
   }, function(err) {
-    //messageService.addMessage('danger', 'Could not load shared domains: ' + err);
+    $log.error(err);
   });
   
   // domain module dependency
@@ -20,7 +20,7 @@ angular.module('app.route', ['app.domain']).controller('RouteMapCtrl', ['$scope'
       $scope.domains.push(privateDomain);
     });
   }, function(err) {
-    //messageService.addMessage('danger', 'Could not load private domains: ' + err);
+    $log.error(err);
   });
 
   routeService.getRoutesForApp($scope.route.applicationID, true).then(function(hosts) {
@@ -28,7 +28,7 @@ angular.module('app.route', ['app.domain']).controller('RouteMapCtrl', ['$scope'
       $scope.existingHosts.push(existingHost.entity.host);
     });
   }, function(err) {
-    //messageService.addMessage('danger', 'Could not load application routes: ' + err);
+    $log.error(err);
   });
   
 
@@ -56,9 +56,8 @@ angular.module('app.route', ['app.domain']).controller('RouteMapCtrl', ['$scope'
         }
       });
       $modalInstance.close(mapRouteResponse);
-      //messageService.addMessage('success', 'The route has been successfully mapped.');
     }, function(err) {
-      //messageService.addMessage('danger', 'The route has not been mapped: ' + err);
+      $log.error(err);
     });
 
   };

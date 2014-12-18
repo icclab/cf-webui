@@ -1,4 +1,4 @@
-angular.module('app.space').controller('SpaceAddCtrl', ['$scope', '$modalInstance', 'space', 'spaceService', 'messageService', function($scope, $modalInstance, space, spaceService, messageService) {
+angular.module('app.space').controller('SpaceAddCtrl', ['$scope', '$modalInstance', '$log', 'space', 'spaceService', 'messageService', function($scope, $modalInstance, $log, space, spaceService, messageService) {
 
   $scope.space = {
     organizationId: space.organizationId
@@ -13,7 +13,8 @@ angular.module('app.space').controller('SpaceAddCtrl', ['$scope', '$modalInstanc
       $modalInstance.close();
     }, function(err) {
       // set message
-      messageService.addMessage('danger', 'The space has not been addedd: ' + err);
+      messageService.addMessage('danger', 'The space has not been added.');
+      $log.error(err);
 
       // close the modal
       $modalInstance.close();

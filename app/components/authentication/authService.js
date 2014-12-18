@@ -1,4 +1,4 @@
-angular.module('app.auth').factory('authService', ['$http', '$q', 'UAA_ENDPOINT', function($http, $q, UAA_ENDPOINT) {
+angular.module('app.auth').factory('authService', ['$http', '$log', '$q', 'UAA_ENDPOINT', function($http, $log, $q, UAA_ENDPOINT) {
   var authServiceFactory = {};
 
   var _authentication = {
@@ -42,6 +42,7 @@ angular.module('app.auth').factory('authService', ['$http', '$q', 'UAA_ENDPOINT'
         deferred.reject(response);
       }
     }).error(function(err, status) {
+      $log.error(err);
       _logOut();
       deferred.reject(err);
     });
@@ -84,7 +85,7 @@ angular.module('app.auth').factory('authService', ['$http', '$q', 'UAA_ENDPOINT'
         deferred.reject(response);
       }
     }).error(function(err, status) {
-      console.log(err);
+      $log.error(err);
       //_logOut();
       deferred.reject(err);
     });
