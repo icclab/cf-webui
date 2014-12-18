@@ -100,38 +100,6 @@
         </div>
   
       </div><!-- /.row -->
-  
-      
-      
-      <div class="row">
-        <div class="col-md-6">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Members <span class="label label-default">2</span></h3>
-            </div>
-            <table class="table table-striped table-hover has-actions">
-              <thead>
-                <tr>
-                  <th>Member</th>
-                  <th>Org Manager</th>
-                  <th>Org Billing Manager</th>
-                  <th>Org Auditor</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="user in allUsersForOrganization | orderBy:email:false">
-                  <td>{{user.metadata.guid}}</td>
-                  <td><input type="checkbox" checked></td>
-                  <td><input type="checkbox" checked></td>
-                  <td><input type="checkbox" checked></td>
-                  <td><a class="action action-delete" ng-click="deleteUser(user)"><i class="fa fa-lg fa-trash"></i></a></td>
-                </tr>
-              </tbody>
-            </table>
-          </div><!-- /.panel -->
-        </div><!-- /.col-md-6 -->
-      </div><!-- /.row -->
       
     </div><!-- /#page-content-wrap -->
   </div>
