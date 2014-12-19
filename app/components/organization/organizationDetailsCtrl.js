@@ -169,7 +169,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$root
     
     var organization = {
       'id' : $scope.id,
-      'name' : name,
+      'name' : $scope.name,
       'quota_definition_guid' : $scope.quotaDefID
     };
     
