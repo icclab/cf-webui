@@ -54,9 +54,100 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     messageService.addMessage('danger', 'The space summary has not been loaded.');
     $log.error(err);
   });
+  
+  $scope.editSpace = function(id) {
+    var space = {
+      id: $scope.id,
+      name: $scope.name
+    };
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/space/spaceEdit.tpl.html',
+      controller: 'SpaceEditCtrl',
+      resolve: {
+        space: function() {
+          return space;
+        }
+      }
+    });
 
+    modalInstance.result.then(function(editedSpace) {
+      console.log(editedSpace.name);
+      $scope.name = editedSpace.name;
+    });
+  };
+  
+  // delete space
+  $scope.deleteSpace = function (id) {
+    var space = {
+      id: $scope.id,
+      name: $scope.name
+    };
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/space/spaceDelete.tpl.html',
+      controller: 'SpaceDeleteCtrl',
+      resolve: {
+        space: function() {
+          return space;
+        }
+      }
+    });
+    
+    modalInstance.result.then(function() {
+      // adjust space table information
+      window.location = '#/organizations/' + $scope.organizationId;
+    });
+    
+  };
+  
+  $scope.editApplication = function(application) {
 
+    var application = {
+      'id' : application.id,
+      'name' : application.name
+    };
+    
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/application/applicationEdit.tpl.html',
+      controller: 'ApplicationEditCtrl',
+      resolve: {
+        application: function() {
+          return application;
+        }
+      }
+    });
 
+    modalInstance.result.then(function(editedApplication) {
+      angular.forEach($scope.applications, function(app, i) {
+        if(app.id === application.id){
+          app.name = editedApplication.name
+        }
+      });
+      $scope.name = editedApplication.name;
+    });
+  };
+  
+  $scope.deleteApplication = function(application) {
+    
+    var application = {
+      'id' : application.id,
+      'name' : application.name
+    };
+    
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/application/applicationDelete.tpl.html',
+      controller: 'ApplicationDeleteCtrl',
+      resolve: {
+        application: function() {
+          return application;
+        }
+      }
+    });
+
+    modalInstance.result.then(function() {
+      // go to spaces overview
+      window.location = '#/organizations/' + $scope.organizationId + '/spaces/' + $scope.id;
+    });
+  };
 
   // delete service instance
   $scope.deleteServiceInstance = function(serviceInstance) {
