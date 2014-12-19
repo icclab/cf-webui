@@ -108,6 +108,7 @@
     <script src="app/components/organization/organization.js"></script>
     <script src="app/components/organization/organizationPreviewCtrl.js"></script>
     <script src="app/components/organization/organizationDetailsCtrl.js"></script>
+    <script src="app/components/organization/organizationAddCtrl.js"></script>
     <script src="app/components/organization/organizationEditCtrl.js"></script>
     <script src="app/components/organization/organizationDeleteCtrl.js"></script>
     <script src="app/components/organization/organizationService.js"></script>

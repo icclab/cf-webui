@@ -142,6 +142,27 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
     return $http.get('/request.php', config);
   };
   
+  var _addOrganization = function(name) {
+    
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/organizations',
+      'name': name
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers
+    };
+
+    return $http.post('/request.php', data, config);
+  };
+  
   var _editOrganization = function(organization) {
     
     // data
@@ -194,6 +215,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
   organizationServiceFactory.getSharedDomainsForTheOrganization = _getSharedDomainsForTheOrganization;
   organizationServiceFactory.getPrivateDomainsForTheOrganization = _getPrivateDomainsForTheOrganization;
   organizationServiceFactory.getAllUsersForTheOrganization = _getAllUsersForTheOrganization;
+  organizationServiceFactory.addOrganization = _addOrganization;
   organizationServiceFactory.editOrganization = _editOrganization;
   organizationServiceFactory.deleteOrganization = _deleteOrganization;
 
