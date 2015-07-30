@@ -14,13 +14,19 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', 'UAA_E
       'password': logInData.password,
       'username': logInData.userName,
       'scope': ''
+
     };
+    //     'response_type': 'token'
+ 
+    // 'client_id': 'cf'
+    //'redirect_uri': 'https://cf-webui.cfapps.io/#organizations'
 
     // http headers
     var headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic Y2Y6'
+      'Authorization': 'Basic Y2Y6',
+      'X-Webui-Authorization': 'Basic Y2Y6',
     };
 
     var deferred = $q.defer();
@@ -52,6 +58,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', 'UAA_E
 
   var _refresh = function() {
     var refreshToken = sessionStorage.getItem('refreshToken');
+    var access_token = sessionStorage.getItem('accessToken');
 
     // data to post
     var data = {
@@ -65,7 +72,10 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', 'UAA_E
     var headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic Y2Y6'
+      'Authorization': 'Bearer ' + accessToken,
+      'X-Webui-Authorization': 'Bearer ' + accessToken,
+      'WWW-Authorization': 'Bearer ' + accessToken,
+
     };
 
     var deferred = $q.defer();

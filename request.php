@@ -1,8 +1,11 @@
 <?php
+  //openlog("cfwebui.log", LOG_PID | LOG_PERROR, LOG_LOCAL0);
   if (!function_exists('getallheaders')) {
     function getallheaders() {
+      error_log ( "IN: \n",3,"/app/php/var/log/webui.log");
       $headers = '';
       foreach ($_SERVER as $name => $value) {
+        error_log ( "$name : $value \n",3,"/app/php/var/log/webui.log");
         if (substr($name, 0, 5) == 'HTTP_') {
           $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
         }
@@ -42,8 +45,11 @@
     $headersFromRequest = getallheaders();
     $headersForCurl = array();
     foreach ($headersFromRequest as $key => $value) {
+      if ($key == 'X-Webui-Authorization') {
+          $headersForCurl[] = 'Authorization' . ': ' . $value;
+      }
       if ($key == 'Accept' || $key == 'Authorization' || $key == 'Content-Type') {
-        $headersForCurl[] = $key . ': ' . $value;
+          $headersForCurl[] = $key . ': ' . $value;
       }
 
       if ($key == 'Content-Type' && strrpos($value, 'application/x-www-form-urlencoded') !== false) {
@@ -57,8 +63,13 @@
     } else {
       $data = json_encode($data);
     }
+    error_log ( "url: $url \n",3,"/app/php/var/log/webui.log");
+    error_log ( "Data: $data \n",3,"/app/php/var/log/webui.log");
+    error_log ( "Header_IN:  " . $output = implode(', ', array_map(function ($v, $k) { return $k . '=' . $v; }, $headersFromRequest, array_keys($headersFromRequest))) . "\n",3,"/app/php/var/log/webui.log");
+    error_log ( "Header_OUT: " . implode(', ', array_map(function ($v, $k) { return $k . '=' . $v; }, $headersForCurl, array_keys($headersForCurl))) . "\n",3,"/app/php/var/log/webui.log");
 
     $ch = curl_init();
+    curl_setopt($ch, CURLOPT_VERBOSE, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_USERAGENT, 'Curl');
@@ -97,7 +108,9 @@
         $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
         $header = substr($response, 0, $header_size);
         $body = substr($response, $header_size);
-
+error_log ( "Header-size: $header_size \n",3,"/app/php/var/log/webui.log");
+error_log ( "Header: $header \n",3,"/app/php/var/log/webui.log");
+error_log ( "Body: $body \n",3,"/app/php/var/log/webui.log");
         // create http header
         $lines = explode(PHP_EOL, $header);
         foreach($lines as $line) {
@@ -108,4 +121,5 @@
         curl_close($ch);
     }
   }
+  //closelog("cfwebui.log");
 ?>

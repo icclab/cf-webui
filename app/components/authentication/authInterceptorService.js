@@ -8,6 +8,7 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
     var userName = sessionStorage.getItem('userName');
     if (config.headers.Authorization === undefined && accessToken !== null && userName !== null) {
       config.headers.Authorization = 'Bearer ' + accessToken;
+      config.headers['X-Webui-Authorization'] = 'Bearer ' + accessToken;
     }
 
     return config;
