@@ -589,7 +589,7 @@ hr {
 
 table {
   width: 100%;
-  border: 1px solid #ebebeb;
+  
 }
 
 th {
@@ -598,8 +598,9 @@ th {
 
 td {
   font-weight: 300;
-  text-align: center;
-  border: 1px solid #ebebeb;
+  vertical-align: top;
+  
+  
 }
 
 form {
@@ -878,4 +879,3 @@ footer a:hover {
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (max-width: 479px) { }
-
