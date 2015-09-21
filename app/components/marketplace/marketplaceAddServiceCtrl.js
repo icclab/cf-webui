@@ -248,7 +248,7 @@ angular.module('app.marketplace').controller('marketplaceAddServiceCtrl', ['$q',
           $scope.addServiceBinding(response.data.metadata.guid);
         }  
         
-        messageService.addMessage('success', 'The service instance has been successfully added.');
+        messageService.addMessage('success', 'The service instance has been successfully added.', true);
 
       }
       

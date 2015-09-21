@@ -110,7 +110,8 @@ angular.module('app.space').controller('SpaceAddServiceCtrl', ['$rootScope', '$s
         messageService.addMessage('danger', response.data.description);
         $log.error(response);
       } else {
-        messageService.addMessage('success', 'The service instance has been successfully added.');
+        messageService.addMessage('success', 'The service instance has been successfully added.', true);
+        $log.error('Lo guarda o qué');
       }
       
       $location.path('/organizations/' + $scope.organizationId + '/spaces/' + $scope.spaceId);
