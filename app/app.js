@@ -23,5 +23,6 @@ angular.module('app', [
   'app.user',
   'app.domain',
   'app.route',
-  'app.serviceBinding'
+  'app.serviceBinding',
+  'app.marketplace'
 ]);

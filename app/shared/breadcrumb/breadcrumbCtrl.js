@@ -23,6 +23,16 @@ angular.module('app.breadcrumb').controller('BreadcrumbCtrl', ['$rootScope', '$s
     
     var data = response.data;
 
+    // push the marketplace to the breadcrumb
+    if ($location.path().indexOf('/marketplace') > -1) {
+      var objectOrganization = {
+        link: '#/marketplace',
+        name: 'Marketplace'
+      };
+
+      $scope.elements.push(objectOrganization);
+    }
+
     // create organization objects
     angular.forEach(data.resources, function(organization, i) {
       if ($location.path().indexOf('/organizations/' + organization.metadata.guid) > -1) {
@@ -73,5 +83,7 @@ angular.module('app.breadcrumb').controller('BreadcrumbCtrl', ['$rootScope', '$s
   }, function (err) {
     $log.error(err);
   });
+
+  $log.error('breadcrumb');
   
 }]);
