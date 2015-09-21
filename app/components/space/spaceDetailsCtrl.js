@@ -122,7 +122,6 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
           app.name = editedApplication.name
         }
       });
-      $scope.name = editedApplication.name;
     });
   };
   
