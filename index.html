@@ -18,7 +18,7 @@
          <div class="inner">
             <h1>CF-WebUI</h1>
             <h2>Single page Cloud Foundry Web User Interface using AngularJS and Bootstrap</h2>
-            <a href="https://github.com/lidiafgarces/cf-webui" class="button"><small>View project on</small> GitHub</a>
+            <a href="https://github.com/icclab/cf-webui" class="button"><small>View project on</small> GitHub</a>
          </div>
       </header>
       <div id="content-wrapper">
@@ -26,22 +26,20 @@
          <div class="inner clearfix">
             <section id="main-content">
                <h2><a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
-               <p>Cloud Foundry is the OpenSource Platform as a Service (PaaS) Framework in which the most recent public PaaS offerings are based (eg. HP Helion, IBM BlueMix, Swisscom Application Cloud, etc.). It allows the developers to provide, manage and scale their application in the cloud very easily and quickly.</p>
-               <p>For end users Cloud Foundry provides a REST based API and a command line tool. So far no up to date modern and free Open Source Web-Frontend is available. The commercial providers have developed their own UI. The aim of this work is to design, develop and provide a modern interactive Web Frontend for Cloud Foundry, an open source tool available to the community.</p>
+               <p><a href="https://www.cloudfoundry.org/" target="_blank">Cloud Foundry</a> is the OpenSource Platform as a Service (PaaS) Framework on which many PaaS offerings are based (e.g. Pivotal Web Services, HP Helion, IBM BlueMix, Swisscom Application Cloud, etc.). It allows the developers to provide, manage and scale their application in the cloud very easily and quickly.</p>
+               <p>For end-users Cloud Foundry provides a REST based API and a command line tool (CLI). So far no up-to-date modern and free open source web front-end is available. Commercial providers have developed their own proprietary user interface.</p>
+               <p> The aim of this project is to design and develop an open source modern interactive web user interface for Cloud Foundry.</p>
                
                <h2><a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting started</h2>
                <ol>
-                  <li>Clone the project: <code>git clone https://github.com/chessjs/chess</code> </li>
-                  <li>Change directory to cf-webUI: <code>cd cf-webUI</code></li>
-                  <li>Change the endpoints to your desired Cloud Foundry instance in <code>/app/app.constant.js</code>.</li>
-                  <li>Change the <code>manifest.yml</code> to your desired options. E.g.:<br>
-                    <code>---applications:<br>
-                      &nbsp;&nbsp;&nbsp;- name: cf-webui<br>
-                      &nbsp;&nbsp;&nbsp;  memory: 128M<br>
-                      &nbsp;&nbsp;&nbsp;  host: console<br>
-                      &nbsp;&nbsp;&nbsp;  domain: pws.icclab.io</code></li>
+                  <li>Clone the project: <code>
+                        git clone https://github.com/icclab/cf-webui.git
+                     </code> </li>
+                  <li>Change to the cf-webui directory: <code>cd cf-webui</code></li>
+                  <li>Change the endpoints to your desired Cloud Foundry instance in <code>app/app.constant.js</code>.</li>
+                  <li>Update the <code>manifest.yml</code> with your desired deployment options. e.g. (change host and domain-name)</li>
                   <li>Push this application to Cloud Foundry with cf Command Line Interface (CLI): <code>cf push</code>.</li>
-                  <li>Enjoy the CF WebUI!</li>
+                  <li>Enjoy CF WebUI!</li>
                </ol>
 
                <table>
@@ -118,10 +116,13 @@
                   </tr>
                </table>
                
+               <h2><a id="disclaimer" class="anchor" href="#disclaimer" aria-hidden="true"><span class="octicon octicon-link"></span></a>Disclaimer</h2>
+               <p>This version is an early release (alpha). It is not yet production-ready. Use it at your own risk. Some features are still to come and it may contain major bugs.</p>
+               
                <h2><a id="community-and-support" class="anchor" href="#community-and-support" aria-hidden="true"><span class="octicon octicon-link"></span></a>Community & Support</h2>
-               <p>This version is an early release. Some features are still to come and you can find some bugs. Report bugs and request features using GitHub Issues. For additional resources, you can contact the maintainer directly.</p>
-               <p>Community discussion about CF-WebUI happens in CF-WebUI-discuss mailing list: icclab-cf-webui@dornbirn.zhaw.ch. Once you subscribe to the list, you can send mail to the list address. The mailing list archives are also available on the web.</p>
-               <p>You can follow ICCLab blog for updates.</p>
+               <p>Please report bugs and request features using <a href="https://github.com/icclab/cf-webui/issues">GitHub Issues</a>. For additional information, you can contact the maintainer directly.</p>
+               <p>Community discussions about CF-WebUI happen in the CF-WebUI-discuss mailing list. Once you <a href="https://mailman.engineering.zhaw.ch/mailman/listinfo/icclab-cf-webui">subscribe to the list</a>, you can send mail to the list address: <a href="mailto:icclab-cf-webui@dornbirn.zhaw.ch">icclab-cf-webui@dornbirn.zhaw.ch</a>. The mailing list archives are also <a href="https://mailman.engineering.zhaw.ch/pipermail/icclab-cf-webui/">available on the web</a>.</p>
+               <p>Please follow the <a href="http://blog.zhaw.ch/icclab/tag/cf-webui/">ICCLab blog</a> for updates.</p>
                
                <h2><a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h2>
                <p>This project is developed by 
