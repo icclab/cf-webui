@@ -3,4 +3,5 @@ applications:
 - name: cf-webui
   memory: 128M
   host: console
-  domain: pws.icclab.io
+  domain: cfapps.io
+  random-route: true
