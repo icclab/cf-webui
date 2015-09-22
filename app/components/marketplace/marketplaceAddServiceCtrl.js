@@ -120,6 +120,9 @@ angular.module('app.marketplace').controller('marketplaceAddServiceCtrl', ['$q',
       $scope.applications.length = 0;
     }
 
+    console.log('ID del espacio');
+    console.log($scope.spaceId);
+
     spaceService.getSpaceSummary($scope.spaceId, true).then(function(response) {
       //$log.error(config.ignoreLoadingBar);
  
