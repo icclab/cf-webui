@@ -10,10 +10,10 @@ Single-page-application for Cloud Foundry created with AngularJS and Bootstrap.
 4. Change the `manifest.yml` to your desired options. E.g.:  
 ~~~
 ---applications:  
-	&nbsp&nbsp- 	name: cf-webui  
-	&nbsp&nbsp	memory: 128M  
-	&nbsp&nbsp	host: console  
-	&nbsp&nbsp	domain: pws.icclab.io  
+	- 	name: cf-webui  
+	memory: 128M  
+	host: console  
+	domain: pws.icclab.io  
 ~~~
 5. Push this application to Cloud Foundry with cf Command Line Interface (CLI): `cf push`.
 6. Enjoy the CF WebUI!
