@@ -1,163 +1,153 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+   <head>
+      <meta charset='utf-8'>
+      <meta http-equiv="X-UA-Compatible" content="chrome=1">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+      <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+      <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+      <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+      <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+      <title>CF-WebUI by lidiafgarces</title>
+   </head>
+   <body>
+      <header>
+         <div class="inner">
+            <h1>CF-WebUI</h1>
+            <h2>Single page Cloud Foundry Web User Interface using AngularJS and Bootstrap</h2>
+            <a href="https://github.com/lidiafgarces/cf-webui" class="button"><small>View project on</small> GitHub</a>
+         </div>
+      </header>
+      <div id="content-wrapper">
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+         <div class="inner clearfix">
+            <section id="main-content">
+               <h2><a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h2>
+               <p>Cloud Foundry is the OpenSource Platform as a Service (PaaS) Framework in which the most recent public PaaS offerings are based (eg. HP Helion, IBM BlueMix, Swisscom Application Cloud, etc.). It allows the developers to provide, manage and scale their application in the cloud very easily and quickly.</p>
+               <p>For end users Cloud Foundry provides a REST based API and a command line tool. So far no up to date modern and free Open Source Web-Frontend is available. The commercial providers have developed their own UI. The aim of this work is to design, develop and provide a modern interactive Web Frontend for Cloud Foundry, an open source tool available to the community.</p>
+               
+               <h2><a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting started</h2>
+               <ol>
+                  <li>Clone the project: <code>git clone https://github.com/chessjs/chess</code> </li>
+                  <li>Change directory to cf-webUI: <code>cd cf-webUI</code></li>
+                  <li>Change the endpoints to your desired Cloud Foundry instance in <code>/app/app.constant.js</code>.</li>
+                  <li>Change the <code>manifest.yml</code> to your desired options. E.g.:<br>
+                    <code>---applications:<br>
+                      &nbsp;&nbsp;&nbsp;- name: cf-webui<br>
+                      &nbsp;&nbsp;&nbsp;  memory: 128M<br>
+                      &nbsp;&nbsp;&nbsp;  host: console<br>
+                      &nbsp;&nbsp;&nbsp;  domain: pws.icclab.io</code></li>
+                  <li>Push this application to Cloud Foundry with cf Command Line Interface (CLI): <code>cf push</code>.</li>
+                  <li>Enjoy the CF WebUI!</li>
+               </ol>
 
-    <title>CF-WebUI by lidiafgarces</title>
-  </head>
+               <table>
+                  <tr>
+                     <td>
+                        <h2><a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
+                     </td>
+                     <td>
+                        &nbsp
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        Application
+                        <ul>
+                           <li>Start application</li>
+                           <li>Restart application</li>
+                           <li>Stop application</li>
+                           <li>Edit application</li>
+                           <li>Delete application</li>
+                           <li>Scale application</li>
+                           <li>Bind a service</li>
+                           <li>Map a route</li>
+                           <li>Monitoring health status</li>
+                           <li>Monitoring indicators</li>
+                        </ul>
+                     </td>
+                     <td>
+                        Space
+                        <ul>
+                           <li>Add space</li>
+                           <li>Edit space</li>
+                           <li>Delete space</li>
+                           <li>Add a service</li>
+                        </ul>
+                     </td>
+                     <td>
+                        Organization
+                        <ul>
+                           <li>Add organization</li>
+                           <li>Edit organization</li>
+                           <li>Delete organization</li>
+                           <li>Add a domain</li>
+                        </ul>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        <h2>
+                        <a id="upcoming-features" class="anchor" href="#upcoming-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Upcoming Features</h2>
+                     </td>
 
-  <body>
-    <header>
-      <div class="inner">
-        <h1>CF-WebUI</h1>
-        <h2>Single page Cloud Foundry Web User Interface using AngularJS and Bootstrap</h2>
-        <a href="https://github.com/lidiafgarces/cf-webui" class="button"><small>View project on</small> GitHub</a>
+                  </tr>
+                  <tr>
+                     <td>
+                        Application
+                        <ul>
+                           <li>Deploy application</li>
+                           <li>Show application logs</li>
+                        </ul>
+                     </td>
+                     <td>
+                        Space
+                        <ul>
+                           <li>Manage space users</li>
+                        </ul>
+                     </td>
+                     <td>
+                        Organization
+                        <ul>
+                           <li>Manage organization users</li>
+                        </ul>
+                     </td>
+                  </tr>
+               </table>
+               
+               <h2><a id="community-and-support" class="anchor" href="#community-and-support" aria-hidden="true"><span class="octicon octicon-link"></span></a>Community & Support</h2>
+               <p>This version is an early release. Some features are still to come and you can find some bugs. Report bugs and request features using GitHub Issues. For additional resources, you can contact the maintainer directly.</p>
+               <p>Community discussion about CF-WebUI happens in CF-WebUI-discuss mailing list. Once you subscribe to the list, you can send mail to the list address: icclab-cf-webui@dornbirn.zhaw.ch The mailing list archives are also available on the web.</p>
+               <p>You can follow ICCLab blog for updates.</p>
+               <p>This project is maintained by <a href="https://github.com/icclab" class="user-mention">@icclab</a>.</p>
+               
+               <h2><a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h2>
+               <p>This project is developed by 
+                  <a href="https://github.com/mijo1886" class="user-mention">@mijo1886</a>, <a href="https://github.com/popaj" class="user-mention">@popaj</a>, 
+                  <a href="https://github.com/christofmarti" class="user-mention">@christofmarti</a> and 
+                  <a href="https://github.com/lidiafgarces" class="user-mention">@lidiafgarces</a>.
+                </p>
+
+               <h2><a id="License" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+               <p>CF-WebUI is licensed under the Apache License version 2.0. See the file <a href="https://github.com/icclab/cf-webui/blob/master/LICENSE">LICENSE</a>.</p>
+            </section>
+
+            <aside id="sidebar">
+               <a href="https://github.com/lidiafgarces/cf-webui/zipball/master" class="button">
+               <small>Download</small>
+               .zip file
+               </a>
+               <a href="https://github.com/lidiafgarces/cf-webui/tarball/master" class="button">
+               <small>Download</small>
+               .tar.gz file
+               </a>
+               <p class="repo-owner"><a href="https://github.com/lidiafgarces/cf-webui"></a> is maintained by <a href="https://github.com/icclab">icclab</a>.</p>
+               <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+            </aside>
+         </div>
       </div>
-    </header>
-
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h2>
-<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h3>
-
-<p>Cloud Foundry is the OpenSource Platform as a Service (PaaS) Framework in which the most recent public PaaS offerings are based (eg. HP Helion, IBM BlueMix, Swisscom Application Cloud, etc.). It allows the developers to provide, manage and scale their application in the cloud very easily and quickly.</p>
-<p>The interface provides a Cloud Foundry REST API and a command line tool. Unfortunately, so far there is no good open source Web Front End. The commercial providers have developed their own UI. The aim of this work is to design, develop and provide a modern interactive Web Frontend for Cloud Foundry, an open source tool available to the community.</p>
-
-<h2>
-<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting started</h3>
-
-<ol>
-<li>Change the endpoints to your desired Cloud Foundry instance in <code>/app/app.constant.js</code>.</li>
-<li>Push this application to Cloud Foundry with cf Command Line Interface (CLI) (e.g. <code>cf push cf-webui</code>).</li>
-<li>Enjoy the CF WebUI!</li>
-</ol>
-
-<table>
-<tr>
-   <td>
-    <h2>
-    <a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h3>
-   </td>
-   <td>
-      &nbsp
-    </td>
- </tr>
-
- <tr>
-   <td>
-    Application
-          <ul>
-            <li>Start application</li>
-            <li>Restart application</li>
-            <li>Stop application</li>
-            <li>Edit application</li>
-            <li>Delete application</li>
-            <li>Scale application</li>
-            <li>Bind a service</li>
-            <li>Map a route</li>
-            <li>Monitoring health status</li>
-            <li>Monitoring indicators</li>
-          </ul>
-   </td>
-   <td>
-      Space
-            <ul>
-              <li>Add space</li>
-              <li>Edit space</li>
-              <li>Delete space</li>
-              <li>Add a service</li>
-            </ul>
-   </td>
-   <td>
-            Organization
-            <ul>
-              <li>Add organization</li>
-              <li>Edit organization</li>
-              <li>Delete organization</li>
-              <li>Add a domain</li>
-            </ul>
-    </td>
- </tr>
-
-
-<tr>
-   <td>
-    <h2>
-    <a id="upcoming-features" class="anchor" href="#upcoming-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Upcoming Features</h3>
-   </td>
-   <td>
-      &nbsp
-    </td>
- </tr>
-
- <tr>
-   <td>
-    Application
-      <ul>
-        <li>Deploy application</li>
-        <li>Show application logs</li>
-      </ul>
-      &nbsp
-   </td>
-   <td>
-     Space
-      <ul>
-        <li>Manage space users</li>
-      </ul>
-   </td>
-   <td>
-      Organization
-      <ul>
-        <li>Manage organization users</li>
-      </ul>
-  </td>
- </tr>
-</table>
-
-<h2>
-<a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>This project is developed by <a href="https://github.com/mijo1886" 
-class="user-mention">@mijo1886</a>, <a href="https://github.com/popaj" 
-class="user-mention">@popaj</a>, <a href="https://github.com/christofmarti" 
-class="user-mention">@christofmarti</a> and <a href="https://github.com/lidiafgarces" 
-class="user-mention">@lidiafgarces</a>.</p>
-
-<h2>
-<a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>For support, please contact <a href="https://github.com/christofmarti" 
-class="user-mention">@christofmarti</a>.</p>
-        </section>
-
-        <aside id="sidebar">
-          <a href="https://github.com/lidiafgarces/cf-webui/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/lidiafgarces/cf-webui/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/lidiafgarces/cf-webui"></a> is maintained by <a href="https://github.com/icclab">icclab</a>.</p>
-
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
-    </div>
-
-  
-  </body>
+   </body>
 </html>
