@@ -90,7 +90,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
         sessionStorage.setItem('refreshToken', response.refresh_token);
 
         // set data of authentication object
-        _authentication.isAuth = true
+        _authentication.isAuth = true;
 
         deferred.resolve(response);
       } else {

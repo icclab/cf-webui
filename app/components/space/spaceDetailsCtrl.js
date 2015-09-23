@@ -103,7 +103,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
   
   $scope.editApplication = function(application) {
 
-    var application = {
+    application = {
       'id' : application.id,
       'name' : application.name
     };
@@ -121,7 +121,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     modalInstance.result.then(function(editedApplication) {
       angular.forEach($scope.applications, function(app, i) {
         if(app.id === application.id){
-          app.name = editedApplication.name
+          app.name = editedApplication.name;
         }
       });
       $scope.name = editedApplication.name;
@@ -130,7 +130,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
   
   $scope.deleteApplication = function(application) {
     
-    var application = {
+    application = {
       'id' : application.id,
       'name' : application.name
     };

@@ -44,7 +44,7 @@ angular.module('app.marketplace').controller('marketplaceAddServiceCtrl', ['$q',
   };
 
 
-  if ($scope.organizationId!=undefined){
+  if ($scope.organizationId!==undefined){
     getServicesPromise = spaceService.getServicesForTheSpace($scope.spaceId);
     //$scope.hideSelectOrganization = true;
   } else{
@@ -228,7 +228,7 @@ angular.module('app.marketplace').controller('marketplaceAddServiceCtrl', ['$q',
 
   $scope.addServiceInstance = function() {
 
-    var defer = $q.defer()
+    var defer = $q.defer();
 
     var serviceInstance = {
       name: $scope.instanceName,
