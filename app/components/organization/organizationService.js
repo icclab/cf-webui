@@ -41,7 +41,8 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
     return $http.get('/request.php', config);
   };
 
-  var _getSpacesForTheOrganization = function(id) {
+  var _getSpacesForTheOrganization = function(id, ignoreLoadingBar) {
+    if (typeof(ignoreLoadingBar) === 'undefined') ignoreLoadingBar = false;
     // params
     var params = {
       'url': API_ENDPOINT + '/v2/organizations/' + id +  '/spaces'
@@ -55,13 +56,15 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
 
     var config = {
       params: params,
-      headers: headers
+      headers: headers,
+      ignoreLoadingBar: ignoreLoadingBar
     };
 
     return $http.get('/request.php', config);
   };
   
   var _getQuotaForTheOrganization = function(id) {
+    console.log('aquiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii')
     // params
     var params = {
       'url': API_ENDPOINT + '/v2/quota_definitions'
@@ -190,7 +193,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
     var data = {
       'url': API_ENDPOINT + '/v2/organizations/' + organization.id,
       'guid' : organization.id,
-      'async' : false,
+      'async' : true,
       'recursive' : true
     };
 
