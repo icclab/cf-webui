@@ -13,7 +13,8 @@ Single-page-application for Cloud Foundry created with AngularJS and Bootstrap.
 	- name: cf-webui  
 	memory: 128M  
 	host: console  
-	domain: pws.icclab.io  
+	domain: cfapps.io
+	random-route: true  
 ~~~
 5. Push this application to Cloud Foundry with cf Command Line Interface (CLI): `cf push`.
 6. Enjoy the CF WebUI!
