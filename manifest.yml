@@ -1,0 +1,7 @@
+---
+applications:
+- name: cf-webui
+  memory: 128M
+  host: console
+  domain: cfapps.io
+  random-route: true
