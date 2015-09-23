@@ -12,7 +12,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
   $scope.nrOfServices = 0;
 
   // service summary from api
-  var getSpaceSummaryPromise = spaceService.getSpaceSummary($scope.id);
+  var getSpaceSummaryPromise = spaceService.getSpaceSummary($scope.spaceId);
   getSpaceSummaryPromise.then(function(response) {
     $scope.name = response.data.name;
 
@@ -46,6 +46,8 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
           nrOfBoundApps: service.bound_app_count,
           dashboardUrl: service.dashboard_url
         };
+
+        $log.error(objectService.name);
 
         $scope.services.push(objectService);
       });

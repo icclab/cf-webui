@@ -1,4 +1,4 @@
-angular.module('app.auth').factory('authService', ['$http', '$log', '$q', 'UAA_ENDPOINT', function($http, $log, $q, UAA_ENDPOINT) {
+angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$injector', '$rootScope', 'UAA_ENDPOINT', function($http, $log, $q, $injector, $rootScope, UAA_ENDPOINT) {
   var authServiceFactory = {};
 
   var _authentication = {
@@ -16,9 +16,9 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', 'UAA_E
       'scope': ''
 
     };
-    //     'response_type': 'token'
+    //'response_type': 'token'
  
-    // 'client_id': 'cf'
+    //'client_id': 'cf'
     //'redirect_uri': 'https://cf-webui.cfapps.io/#organizations'
 
     // http headers
@@ -36,7 +36,9 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', 'UAA_E
         // save access token and username in session storage
         sessionStorage.setItem('accessToken', response.access_token);
         sessionStorage.setItem('refreshToken', response.refresh_token);
+        sessionStorage.setItem('expiresIn', response.expires_in);
         sessionStorage.setItem('userName', logInData.userName);
+        sessionStorage.setItem('lastTime', Date.now());
 
         // set data of authentication object
         _authentication.isAuth = true;
@@ -49,7 +51,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', 'UAA_E
       }
     }).error(function(err, status) {
       $log.error(err);
-      _logOut();
+      //_logOut();
       deferred.reject(err);
     });
 
@@ -58,11 +60,12 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', 'UAA_E
 
   var _refresh = function() {
     var refreshToken = sessionStorage.getItem('refreshToken');
-    var access_token = sessionStorage.getItem('accessToken');
+    var accessToken = sessionStorage.getItem('accessToken');
 
     // data to post
     var data = {
       'url': UAA_ENDPOINT + '/oauth/token',
+      //'client_id': 'cf',
       'grant_type': 'refresh_token',
       'refresh_token': refreshToken,
       'scope': ''
@@ -72,9 +75,9 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', 'UAA_E
     var headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Bearer ' + accessToken,
-      'X-Webui-Authorization': 'Bearer ' + accessToken,
-      'WWW-Authorization': 'Bearer ' + accessToken,
+      'Authorization': 'Basic Y2Y6',
+      'X-Webui-Authorization': 'Basic Y2Y6',
+      //'WWW-Authorization': 'Basic Y2Y6',
 
     };
 
@@ -87,7 +90,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', 'UAA_E
         sessionStorage.setItem('refreshToken', response.refresh_token);
 
         // set data of authentication object
-        _authentication.isAuth = true;
+        _authentication.isAuth = true
 
         deferred.resolve(response);
       } else {
@@ -95,8 +98,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', 'UAA_E
         deferred.reject(response);
       }
     }).error(function(err, status) {
-      $log.error(err);
-      //_logOut();
+      _logOut();
       deferred.reject(err);
     });
 

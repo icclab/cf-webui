@@ -9,7 +9,7 @@
   
   <div class="fadein" ng-show="rootFields.showContent">
     <div id="page-title">
-      <h1>Add a service to the space</h1>
+      <h1>Services Marketplace</h1>
     </div><!-- /#page-title -->
     
     <div id="page-content-wrap" class="clearfix">
@@ -22,7 +22,7 @@
             </div>
             <div class="panel-body">
               <div class="select-service clearfix">
-                <a class="media" ng-repeat="service in services" ng-click="selectService(service)">
+                <a class="media" ng-repeat="service in services track by service.id" ng-click="selectService(service)">
                   <div class="media-left" href="#">
                     <img src="{{service.imageUrl}}" alt="{{service.name}}" width="60">
                   </div>
@@ -34,7 +34,7 @@
               </div>
             </div>
           </div><!-- /.panel -->
-        </div>
+        </div> 
       </div><!-- /.row -->
       
       <div class="row" ng-hide="hideSelectServicePlan">
@@ -68,7 +68,7 @@
               <div class="select-serviceplan row">
                 <div class="col-md-12">
                   <tabset vertical="false" type="tabs">
-                    <tab ng-repeat="servicePlan in servicePlans" heading="{{servicePlan.name}} ({{servicePlan.costs}})">
+                    <tab ng-repeat="servicePlan in servicePlans track by servicePlan.id" heading="{{servicePlan.name}} ({{servicePlan.costs}})">
                       <p>{{servicePlan.description}}</p>
                       <ul>
                         <li ng-repeat="bullet in servicePlan.bullets">{{bullet}}</li>
@@ -93,10 +93,28 @@
               <div class="add-service-instance row">
                 <div class="col-md-12">
                   <form class="form-horizontal" role="form" name="formAddInstanceService">
-                    <div class="form-group">
-                      <label class="col-sm-3 control-label">Space</label>
+
+                    <div class="form-group" ng-show="showSelectOrganization">
+                      <label for="inputOrganization" class="col-sm-3 control-label">Organization</label>
                       <div class="col-sm-9">
-                        <p class="form-control-static">{{spaceName}}</p>
+                        <select type="text" class="form-control" id="inputOrganization" required ng-options="organization.id as organization.name for organization in organizations" ng-model="organizationId" ng-change="selectSpace()"></select>
+                      </div>
+
+                    </div>
+
+                    <div class="form-group" ng-show="showSelectSpace">
+                      <label for="inputSpace" class="col-sm-3 control-label">Space</label>
+                      <div class="col-sm-9">
+                        <select type="text" class="form-control" id="inputSpace" required ng-options="space.id as space.name for space in spaces" ng-model="spaceId" ng-change="selectApplication()"></select>
+                      </div>
+                    </div>
+
+                    <div class="form-group" ng-show="showSelectApplication">
+                      <label for="inputSpace" class="col-sm-3 control-label">Bind to an application (optional)</label>
+                      <div class="col-sm-9">
+                        <select type="text" class="form-control" id="inputSpace" ng-options="application.id as application.name for application in applications" ng-model="applicationId">
+                          <option value="">--</option>
+                        </select>
                       </div>
                     </div>
   

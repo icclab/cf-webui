@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cloud Foundry Web User Interface</title>
 
-  	<!-- Google Fonts -->
-  	<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic" rel="stylesheet">
 
     <!-- Bootstrap -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -153,5 +153,10 @@
     <script src="app/components/serviceBinding/serviceBindingAddCtrl.js"></script>
     <script src="app/components/serviceBinding/serviceBindingDeleteCtrl.js"></script>
     <script src="app/components/serviceBinding/serviceBindingService.js"></script>
+
+    <!-- marketplace component -->
+    <script src="app/components/marketplace/marketplace.js"></script>
+    <script src="app/components/marketplace/marketplaceAddServiceCtrl.js"></script>
+
   </body>
 </html>
