@@ -64,7 +64,6 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
   };
   
   var _getQuotaForTheOrganization = function(id) {
-    console.log('aquiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii')
     // params
     var params = {
       'url': API_ENDPOINT + '/v2/quota_definitions'

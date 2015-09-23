@@ -44,7 +44,7 @@ angular.module('app.marketplace').controller('marketplaceAddServiceCtrl', ['$q',
   };
 
 
-  if ($scope.organizationId!=undefined){
+  if ($scope.organizationId!==undefined){
     getServicesPromise = spaceService.getServicesForTheSpace($scope.spaceId);
     //$scope.hideSelectOrganization = true;
   } else{
@@ -119,9 +119,6 @@ angular.module('app.marketplace').controller('marketplaceAddServiceCtrl', ['$q',
     if ($scope.applications.length > 0) {
       $scope.applications.length = 0;
     }
-
-    console.log('ID del espacio');
-    console.log($scope.spaceId);
 
     spaceService.getSpaceSummary($scope.spaceId, true).then(function(response) {
       //$log.error(config.ignoreLoadingBar);
@@ -228,7 +225,7 @@ angular.module('app.marketplace').controller('marketplaceAddServiceCtrl', ['$q',
 
   $scope.addServiceInstance = function() {
 
-    var defer = $q.defer()
+    var defer = $q.defer();
 
     var serviceInstance = {
       name: $scope.instanceName,

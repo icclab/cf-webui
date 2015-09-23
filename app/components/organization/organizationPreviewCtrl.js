@@ -49,7 +49,7 @@ angular.module('app.organization').controller('OrganizationPreviewCtrl', ['$root
           quota_definition_guid: addedOrganization.data.resources.entity.quota_definition_guid,
           name: addedOrganization.data.resources.entity.name,
           status: addedOrganization.data.resources.entity.status
-        }
+        };
         
         $scope.organizations.push(createdOrganization);
       }
