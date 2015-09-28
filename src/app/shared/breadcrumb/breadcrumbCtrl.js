@@ -83,7 +83,5 @@ angular.module('app.breadcrumb').controller('BreadcrumbCtrl', ['$rootScope', '$s
   }, function (err) {
     $log.error(err);
   });
-
-  $log.error('breadcrumb');
   
 }]);
