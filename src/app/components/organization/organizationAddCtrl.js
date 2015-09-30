@@ -1,8 +1,8 @@
-angular.module('app.organization').controller('OrganizationAddCtrl', ['$scope', '$modalInstance', '$log', 'organization', 'organizationService', 'messageService', function($scope, $modalInstance, $log, organization, organizationService, messageService) {
+angular.module('app.organization').controller('OrganizationAddCtrl', ['$route', '$scope', '$modalInstance', '$log', 'organization', 'organizationService', 'messageService', function($route, $scope, $modalInstance, $log, organization, organizationService, messageService) {
 
   $scope.ok = function () {
     
-    organizationService.addOrganization($scope.organization.name).then(function(response) {
+    organizationService.addOrganization($scope.organization, $route.reload()).then(function(response) {
       
       // set message
       messageService.addMessage('success', 'The organization has been successfully added.');

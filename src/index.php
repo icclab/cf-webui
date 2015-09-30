@@ -28,8 +28,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
     <!-- Libraries -->
-    <script src="assets/libs/test.min.js"></script>
-
+    <script src="assets/libs/libs.min.js"></script>
 
     <!-- AngularJS app -->
     <script src="app.min.js" defer></script>

@@ -12,50 +12,57 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
   $scope.nrOfServices = 0;
 
   // service summary from api
-  var getSpaceSummaryPromise = spaceService.getSpaceSummary($scope.spaceId);
-  getSpaceSummaryPromise.then(function(response) {
-    $scope.name = response.data.name;
 
-    // populate applications
-    if (response.data.apps && response.data.apps.length > 0) {
-      $scope.nrOfApplications = response.data.apps.length;
-
-      angular.forEach(response.data.apps, function(app, i) {
-        var objectApp = {
-          id: app.guid,
-          status: (app.state === 'STARTED') ? 'running' : 'stopped',
-          name: app.name,
-          instances: app.instances,
-          memory: app.memory,
-          url: app.urls[0] // only the first url
-        };
-
-        $scope.applications.push(objectApp);
-      });
+  $scope.getApplicationsForTheSpace = function() {
+    if ($scope.applications.length > 0) {
+      $scope.applications.length = 0;
     }
 
-    // populate services
-    if (response.data.services && response.data.services.length > 0) {
-      $scope.nrOfServices = response.data.services.length;
 
-      angular.forEach(response.data.services, function(service, i) {
-        var objectService = {
-          id: service.guid,
-          name: service.name,
-          servicePlan: service.service_plan.service.label + ', ' + service.service_plan.name,
-          nrOfBoundApps: service.bound_app_count,
-          dashboardUrl: service.dashboard_url
-        };
+    var getSpaceSummaryPromise = spaceService.getSpaceSummary($scope.spaceId);
+    getSpaceSummaryPromise.then(function(response) {
+      $scope.name = response.data.name;
 
-        $log.error(objectService.name);
+      // populate applications
+      if (response.data.apps && response.data.apps.length > 0) {
+        $scope.nrOfApplications = response.data.apps.length;
 
-        $scope.services.push(objectService);
-      });
-    }
-  }, function(err) {
-    messageService.addMessage('danger', 'The space summary has not been loaded.');
-    $log.error(err);
-  });
+        angular.forEach(response.data.apps, function(app, i) {
+          var objectApp = {
+            id: app.guid,
+            status: (app.state === 'STARTED') ? 'running' : 'stopped',
+            name: app.name,
+            instances: app.instances,
+            memory: app.memory,
+            url: app.urls[0] // only the first url
+          };
+
+          $scope.applications.push(objectApp);
+        });
+      }
+
+      // populate services
+      if (response.data.services && response.data.services.length > 0) {
+        $scope.nrOfServices = response.data.services.length;
+
+        angular.forEach(response.data.services, function(service, i) {
+          var objectService = {
+            id: service.guid,
+            name: service.name,
+            servicePlan: service.service_plan.service.label + ', ' + service.service_plan.name,
+            nrOfBoundApps: service.bound_app_count,
+            dashboardUrl: service.dashboard_url
+          };
+
+          $scope.services.push(objectService);
+        });
+      }
+    }, function(err) {
+      messageService.addMessage('danger', 'The space summary has not been loaded.');
+      $log.error(err);
+    });
+  };
+  $scope.getApplicationsForTheSpace();
   
   $scope.editSpace = function(id) {
     var space = {
@@ -146,7 +153,8 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
     modalInstance.result.then(function() {
       // go to spaces overview
-      window.location = '#/organizations/' + $scope.organizationId + '/spaces/' + $scope.id;
+      //window.location = '#/organizations/' + $scope.organizationId + '/spaces/' + $scope.id;
+      $scope.getApplicationsForTheSpace();
     });
   };
 

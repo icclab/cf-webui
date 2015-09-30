@@ -2,13 +2,6 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
-  	watch: {
-	    maintain: {
-		    files: [ 'src/**' ],
-		    tasks: [ 'build','newer:jshint' ]
-		}
-	},
-
     copy: {
       build: {
         cwd: 'src',
@@ -45,12 +38,12 @@ module.exports = function(grunt) {
     },
 
     ngAnnotate: {
-        demo: {
+        application: {
             files: {
                 'build/application.js': ['src/app/**/*.js', '!**/app.*.js', '!**/app.js']
             },
         },
-        test: {
+        app: {
             files: {
                 'build/app.js': ['src/app/app.js', 'src/app/app.constant.js', 'src/app/app.config.js', 'src/app/app.run.js']
             },
@@ -63,7 +56,7 @@ module.exports = function(grunt) {
       },
       dist: {
         src: ['src/assets/libs/angular.min.js', 'src/assets/libs/angular-route.min.js', 'src/assets/libs/angular-resource.min.js', 'src/assets/libs/angular-animate.min.js', 'src/assets/libs/ui-bootstrap-tpls-0.11.2.min.js', 'src/assets/libs/loading-bar.min.js'  ],
-        dest: 'build/assets/libs/test.min.js',
+        dest: 'build/assets/libs/libs.min.js',
       },
     },
 
@@ -119,7 +112,7 @@ module.exports = function(grunt) {
   grunt.registerTask(
     'build', 
     'Compiles all of the assets, validate js files, annotate angular and minify files to the build directory.', 
-    ['clean:prev', 'copy', 'jshint', 'htmlmin', 'ngAnnotate', 'uglify', 'cssmin', 'clean:post', 'concat']
+    ['clean:prev', 'copy', 'jshint', 'htmlmin', 'ngAnnotate', 'uglify', 'cssmin', 'concat', 'clean:post']
   );
 
 

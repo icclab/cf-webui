@@ -1,4 +1,4 @@
-angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rootScope', '$scope', '$routeParams', '$modal', '$log', 'organizationService', 'spaceService', 'userService', 'domainService', function($rootScope, $scope, $routeParams, $modal, $log, organizationService, spaceService, userService, domainService) {
+angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$route', '$rootScope', '$scope', '$routeParams', '$modal', '$log', 'organizationService', 'spaceService', 'userService', 'domainService', function($route, $rootScope, $scope, $routeParams, $modal, $log, organizationService, spaceService, userService, domainService) {
   $rootScope.rootFields.showContent = false;
   $scope.name = '';
   $scope.id = $routeParams.organizationId;
@@ -132,11 +132,13 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$root
     // get summary for each user
     angular.forEach(data.resources, function(user, key) {
       
-      userService.getUserSummary(user.metadata.guid).then(function(responseUser) {
-        // ... not authorized
-      }, function(err) {
-        $log.error(err);
-      });
+        var objectUser = {
+          id: user.metadata.guid,
+          name: user.entity.username,
+        };
+
+        $scope.users.push(objectUser);
+
     });
     
   }, function(err) {
@@ -216,6 +218,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$root
 
   // add space
   $scope.addSpace = function() {
+
     var space = {
       'organizationId': $scope.id
     };
@@ -230,10 +233,16 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$root
       }
     });
 
+
     modalInstance.result.then(function() {
       // reload the spaces table
+      //$route.reload();
+
       $scope.getSpacesForTheOrganization();
+      //$scope.organizations.spaces=$scope.spaces;
+      
     });
+
   };
   
   // new domain

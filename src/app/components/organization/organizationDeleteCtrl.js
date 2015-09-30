@@ -1,10 +1,10 @@
-angular.module('app.organization').controller('OrganizationDeleteCtrl', ['$scope', '$modalInstance', '$log', 'organization', 'organizationService', 'messageService', function($scope, $modalInstance, $log, organization, organizationService, messageService) {
+angular.module('app.organization').controller('OrganizationDeleteCtrl', ['$route', '$scope', '$modalInstance', '$log', 'organization', 'organizationService', 'messageService', function($route, $scope, $modalInstance, $log, organization, organizationService, messageService) {
 
   $scope.organization = organization;
 
   $scope.ok = function () {
 
-    organizationService.deleteOrganization($scope.organization).then(function(response) {
+    organizationService.deleteOrganization($scope.organization, $route.reload()).then(function(response) {
       messageService.addMessage('success', 'The organization has been successfully deleted.');
     }, function(err) {
       messageService.addMessage('danger', 'The organization has not been deleted.');

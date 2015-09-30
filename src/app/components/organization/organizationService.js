@@ -127,8 +127,11 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
     
     // params
     var params = {
-      'url': API_ENDPOINT + '/v2/organizations/' + id +  '/users'
+      'url': API_ENDPOINT + '/v2/organizations/' + id +  '/users',
+      'q': 'q=managed_organization_guid:0',
     };
+
+    console.log('aqui');
 
     // http headers
     headers = {
@@ -144,12 +147,12 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
     return $http.get('/request.php', config);
   };
   
-  var _addOrganization = function(name) {
+  var _addOrganization = function(organization) {
     
     // data
     var data = {
       'url': API_ENDPOINT + '/v2/organizations',
-      'name': name
+      'name': organization.name
     };
 
     // http headers
