@@ -1,8 +1,9 @@
-angular.module('app.organization').controller('OrganizationPreviewCtrl', ['$rootScope', '$scope', '$modal', '$log', 'organizationService', function($rootScope, $scope, $modal, $log, organizationService) {
+angular.module('app.organization').controller('OrganizationPreviewCtrl', ['$rootScope', '$scope', '$modal', '$log', 'organizationService', 'featureFlagService', function($rootScope, $scope, $modal, $log, organizationService, featureFlagService) {
   $rootScope.rootFields.showContent = false;
   
   // organization info
   $scope.showContent = false;
+  $scope.showOrgCreation = false;
   $scope.organizations = [];
   $scope.nrOfOrganizations = 0;
 
@@ -23,6 +24,12 @@ angular.module('app.organization').controller('OrganizationPreviewCtrl', ['$root
       $scope.organizations.push(objectOrganization);
     });
   }, function (err) {
+    $log.error(err);
+  });
+
+  featureFlagService.getUserOrgCreationFeatureFlag().then(function(response) {
+    $scope.showOrgCreation = response.data.enabled;
+  }, function(err) {
     $log.error(err);
   });
   

@@ -24,5 +24,6 @@ angular.module('app', [
   'app.domain',
   'app.route',
   'app.serviceBinding',
-  'app.marketplace'
+  'app.marketplace',
+  'app.featureFlag'
 ]);
