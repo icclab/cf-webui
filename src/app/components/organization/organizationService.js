@@ -128,7 +128,6 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
     // params
     var params = {
       'url': API_ENDPOINT + '/v2/organizations/' + id +  '/users',
-      'q': 'q=managed_organization_guid:0',
     };
 
     console.log('aqui');

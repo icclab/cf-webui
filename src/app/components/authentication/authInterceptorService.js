@@ -20,7 +20,6 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
     if (timeOut < 600000){
       sessionStorage.setItem('lastTime', Date.now());
     }
-
     return config;
   };
 
@@ -32,8 +31,8 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
       var $route = $injector.get('$route');
       var $location = $injector.get('$location');
       var messageService = $injector.get('messageService');
+      $log.error(timeOut);
       if(timeOut > 600000){
-        //$location.path('/login');
         authService.logOut();
         sessionStorage.setItem('lastTime', 0);
       }
@@ -41,13 +40,16 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
       authService.refresh().then(function(response) {
         $route.reload(); 
       },
-      function (err) {
-        messageService.addMessage('danger', err.error_description);
-        $log.error(err);
-        $location.path('/login');
+      function (err) {  
         authService.logOut();
-        //$location.path('/login');
-        //$route.reload();
+        $location.path('/login');
+        messageService.removeAllMessages();
+        if (err.error==='invalid_token'){
+          messageService.addMessage('danger', 'Your session has expired. Please, log in again.', true);
+        }else{
+          messageService.addMessage('danger', err.error_description, true);
+        }
+        $log.error(err);
       });
     }
 

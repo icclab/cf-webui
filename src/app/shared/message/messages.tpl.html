@@ -1,3 +1,3 @@
-<div ng-controller="MessagesCtrl">
+<div ng-controller="MessagesCtrl" ng-show="rootFields.showContent">
   <alert ng-repeat="message in messages" type="{{message.type}}" close="closeMessage($index)">{{message.msg}}</alert>
 </div>

@@ -10,8 +10,14 @@ angular.module('app.message').factory('messageService', ['$rootScope', function(
       msg: msg
     };
 
-
     _messages.push(message);
+  };
+
+  var _removeAllMessages = function(messageObject) {
+    if ($rootScope.rootFields.waitDelete===false && _messages.length > 0){
+      _messages.length = 0;
+    }
+    $rootScope.rootFields.waitDelete=false;
   };
 
   var _removeMessage = function(messageObject) {
@@ -22,6 +28,7 @@ angular.module('app.message').factory('messageService', ['$rootScope', function(
   messageServiceFactory.messages = _messages;
   messageServiceFactory.addMessage = _addMessage;
   messageServiceFactory.removeMessage = _removeMessage;
+  messageServiceFactory.removeAllMessages = _removeAllMessages;
 
   return messageServiceFactory;
 }]);
