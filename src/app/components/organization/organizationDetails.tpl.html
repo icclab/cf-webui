@@ -109,12 +109,27 @@
               <thead>
                 <tr>
                   <th>Name</th>
+                  <th>Org Manager</th>
+                  <th>Org Auditor</th>
+                  <th>Billing Manager</th>
                   <th>&nbsp;</th>
                 </tr>
               </thead>
               <tbody>
                 <tr ng-repeat="user in users | orderBy:name:false">
                   <td>{{user.name}}</td>
+                  <td>
+                    <i class="fa fa-lg fa-check" ng-show="user.orgManager"></i>
+                    <i class="fa fa-lg fa-close" ng-hide="user.orgManager"></i>
+                  </td>
+                  <td>
+                    <i class="fa fa-lg fa-check" ng-show="user.orgAuditor"></i>
+                    <i class="fa fa-lg fa-close" ng-hide="user.orgAuditor"></i>
+                  </td>
+                  <td>
+                    <i class="fa fa-lg fa-check" ng-show="user.billingManager"></i>
+                    <i class="fa fa-lg fa-close" ng-hide="user.billingManager"></i>
+                  </td>
                   <td>&nbsp;</td>
                 </tr>
               </tbody>

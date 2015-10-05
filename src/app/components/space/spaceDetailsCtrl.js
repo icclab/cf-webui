@@ -11,6 +11,9 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
   $scope.services = [];
   $scope.nrOfServices = 0;
 
+  $scope.users = [];
+  $scope.nrOfSpaceUsers = 0;
+
   // service summary from api
 
   $scope.getApplicationsForTheSpace = function() {
@@ -63,6 +66,53 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     });
   };
   $scope.getApplicationsForTheSpace();
+
+  spaceService.retrieveRolesOfAllUsersForTheSpace($scope.id).then(function(response){
+
+    var data = response.data;
+    $scope.nrOfSpaceUsers = data.total_results;
+    var userRoles = [];
+
+    angular.forEach(data.resources, function(user, key) {
+
+        var spaceDeveloper = false;
+        var spaceManager = false;
+        var spaceAuditor = false;
+
+        angular.forEach(user.entity.space_roles, function(userRole, key) {       
+
+          if (userRole === 'space_developer'){
+            spaceDeveloper = true;
+          }
+          if (userRole === 'space_manager'){
+            spaceManager = true;
+          }
+          if (userRole === 'space_auditor'){
+            spaceAuditor = true;
+          }
+
+          var objectRole = {
+            role: userRole
+          };
+
+          userRoles.push(objectRole);
+
+        });
+
+        var objectUser = {
+          //id: user.metadata.guid,
+          name: user.entity.username,
+          userRoles: userRoles,
+          spaceDeveloper: spaceDeveloper,
+          spaceManager: spaceManager,
+          spaceAuditor: spaceAuditor
+        };
+        $scope.users.push(objectUser);
+
+    });
+    }, function(err) {
+    $log.error(err);
+  });
   
   $scope.editSpace = function(id) {
     var space = {

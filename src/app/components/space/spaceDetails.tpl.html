@@ -85,6 +85,44 @@
             </table>
           </div><!-- /.panel -->
         </div>
+
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title pull-left">Users <span class="label label-default">{{nrOfSpaceUsers}}</span></h3>
+                    
+            </div>
+            <table class="table table-striped table-hover has-actions">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Space Developer</th>
+                  <th>Space Manager</th>
+                  <th>Space Auditor</th>
+                  <th>&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="user in users | orderBy:name:false">
+                  <td>{{user.name}}</td>
+                  <td>
+                    <i class="fa fa-lg fa-check" ng-show="user.spaceDeveloper"></i>
+                    <i class="fa fa-lg fa-close" ng-hide="user.spaceDeveloper"></i>
+                  </td>
+                  <td>
+                    <i class="fa fa-lg fa-check" ng-show="user.spaceManager"></i>
+                    <i class="fa fa-lg fa-close" ng-hide="user.spaceManager"></i>
+                  </td>
+                  <td>
+                    <i class="fa fa-lg fa-check" ng-show="user.spaceAuditor"></i>
+                    <i class="fa fa-lg fa-close" ng-hide="user.spaceAuditor"></i>
+                  </td>
+                  <td>&nbsp;</td>
+                </tr>
+              </tbody>
+            </table>
+          </div><!-- /.panel -->
+        </div>
   
       </div><!-- /.row -->
       

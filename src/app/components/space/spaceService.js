@@ -65,6 +65,28 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
     return $http.get('/request.php', config);
   };
 
+  var _retrieveRolesOfAllUsersForTheSpace = function(id) {
+    
+    // params
+    var params = {
+      'url': API_ENDPOINT + '/v2/spaces/' + id +  '/user_roles',
+    };
+
+    // http headers
+    headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      params: params,
+      headers: headers
+    };
+
+    return $http.get('/request.php', config);
+  };
+  
+
   var _editSpace = function(space) {
     // data
     var data = {
@@ -134,6 +156,7 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
   spaceServiceFactory.editSpace = _editSpace;
   spaceServiceFactory.addSpace = _addSpace;
   spaceServiceFactory.deleteSpace = _deleteSpace;
+  spaceServiceFactory.retrieveRolesOfAllUsersForTheSpace = _retrieveRolesOfAllUsersForTheSpace;
 
   return spaceServiceFactory;
 }]);

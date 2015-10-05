@@ -21,7 +21,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
   // users
   $scope.users = [];
   $scope.nrOfOrganizationUsers = 0;
-  $scope.allUsersForOrganization = [];
+  //$scope.allUsersForOrganization = [];
 
   // get particular organization
   organizationService.getOrganization($scope.id).then(function(response) {
@@ -120,9 +120,56 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
   }, function(err) {
     $log.error(err);
   });
+
+  organizationService.retrieveRolesOfAllUsersForTheOrganization($scope.id).then(function(response){
+
+    var data = response.data;
+    $scope.nrOfOrganizationUsers = data.total_results;
+    var userRoles = [];
+
+    angular.forEach(data.resources, function(user, key) {
+
+        var orgManager = false;
+        var orgAuditor = false;
+        var billingManager = false;
+
+        angular.forEach(user.entity.organization_roles, function(userRole, key) {        
+
+          if (userRole === 'org_manager'){
+            orgManager = true;
+          }
+          if (userRole === 'org_auditor'){
+            orgAuditor = true;
+          }
+          if (userRole === 'billing_manager'){
+            billingManager = true;
+          }
+
+          var objectRole = {
+            role: userRole
+          };
+
+          userRoles.push(objectRole);
+
+        });
+
+        var objectUser = {
+          //id: user.metadata.guid,
+          name: user.entity.username,
+          userRoles: userRoles,
+          orgManager: orgManager,
+          orgAuditor: orgAuditor,
+          billingManager: billingManager
+        };
+        $scope.users.push(objectUser);
+
+    });
+  }, function(err) {
+    $log.error(err);
+  });
   
   // get all users for the organization
-  organizationService.getAllUsersForTheOrganization($scope.id).then(function(response) {
+  /*organizationService.getAllUsersForTheOrganization($scope.id).then(function(response) {
      
     var data = response.data;
     $scope.nrOfOrganizationUsers = data.total_results;
@@ -137,13 +184,15 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
           name: user.entity.username,
         };
 
+
+
         $scope.users.push(objectUser);
 
     });
     
   }, function(err) {
     $log.error(err);
-  });
+  });*/
   
   $scope.setOrganizationQuota = function() {
     if ($scope.organizationTotalQuota > 0) {

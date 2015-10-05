@@ -130,7 +130,26 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       'url': API_ENDPOINT + '/v2/organizations/' + id +  '/users',
     };
 
-    console.log('aqui');
+    // http headers
+    headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      params: params,
+      headers: headers
+    };
+
+    return $http.get('/request.php', config);
+  };
+
+  var _retrieveRolesOfAllUsersForTheOrganization = function(id) {
+    
+    // params
+    var params = {
+      'url': API_ENDPOINT + '/v2/organizations/' + id +  '/user_roles',
+    };
 
     // http headers
     headers = {
@@ -219,6 +238,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
   organizationServiceFactory.getSharedDomainsForTheOrganization = _getSharedDomainsForTheOrganization;
   organizationServiceFactory.getPrivateDomainsForTheOrganization = _getPrivateDomainsForTheOrganization;
   organizationServiceFactory.getAllUsersForTheOrganization = _getAllUsersForTheOrganization;
+  organizationServiceFactory.retrieveRolesOfAllUsersForTheOrganization = _retrieveRolesOfAllUsersForTheOrganization;
   organizationServiceFactory.addOrganization = _addOrganization;
   organizationServiceFactory.editOrganization = _editOrganization;
   organizationServiceFactory.deleteOrganization = _deleteOrganization;
