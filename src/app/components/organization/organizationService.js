@@ -231,6 +231,31 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
     return $http.delete('/request.php', config);
   };
 
+  var _associateUserWithOrganization = function(user) {
+    console.log(user);
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/users',
+      'username': user.name,
+      //'organization_guid': user.organizationId
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers
+    };
+
+    console.log(data.url);
+    console.log(data.username);
+
+    return $http.put('/request.php', data, config);
+  };
+
   organizationServiceFactory.getOrganizations = _getOrganizations;
   organizationServiceFactory.getOrganization = _getOrganization;
   organizationServiceFactory.getQuotaForTheOrganization = _getQuotaForTheOrganization;
@@ -242,6 +267,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
   organizationServiceFactory.addOrganization = _addOrganization;
   organizationServiceFactory.editOrganization = _editOrganization;
   organizationServiceFactory.deleteOrganization = _deleteOrganization;
+  organizationServiceFactory.associateUserWithOrganization = _associateUserWithOrganization;
 
   return organizationServiceFactory;
 }]);

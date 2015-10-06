@@ -154,7 +154,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
         });
 
         var objectUser = {
-          //id: user.metadata.guid,
+          id: user.metadata.guid,
           name: user.entity.username,
           userRoles: userRoles,
           orgManager: orgManager,
@@ -360,6 +360,34 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
       $scope.nrOfSpaces -=1;
     });
     
+  };
+
+  $scope.addUser = function() {
+
+    var user = {
+      'organizationId': $scope.id
+    };
+
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/organization/organizationAssociateUser.tpl.html',
+      controller: 'OrganizationAssociateUserCtrl',
+      resolve: {
+        user: function() {
+          return user;
+        }
+      }
+    });
+
+
+    modalInstance.result.then(function() {
+      // reload the spaces table
+      //$route.reload();
+
+      $scope.getSpacesForTheOrganization();
+      //$scope.organizations.spaces=$scope.spaces;
+      
+    });
+
   };
   
   // delete user
