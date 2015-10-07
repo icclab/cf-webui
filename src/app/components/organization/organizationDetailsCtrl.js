@@ -23,6 +23,8 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
   $scope.nrOfOrganizationUsers = 0;
   //$scope.allUsersForOrganization = [];
 
+  $scope.userName = sessionStorage.getItem('userName');
+
   // get particular organization
   organizationService.getOrganization($scope.id).then(function(response) {
     var data = response.data;
@@ -121,52 +123,59 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
     $log.error(err);
   });
 
-  organizationService.retrieveRolesOfAllUsersForTheOrganization($scope.id).then(function(response){
+  $scope.retrieveRolesOfAllUsersForTheOrganization = function() {
+    organizationService.retrieveRolesOfAllUsersForTheOrganization($scope.id).then(function(response){
 
-    var data = response.data;
-    $scope.nrOfOrganizationUsers = data.total_results;
-    var userRoles = [];
+      var data = response.data;
+      $scope.nrOfOrganizationUsers = data.total_results;
+      var userRoles = [];
 
-    angular.forEach(data.resources, function(user, key) {
+      angular.forEach(data.resources, function(user, key) {
 
-        var orgManager = false;
-        var orgAuditor = false;
-        var billingManager = false;
+          var orgManager = false;
+          var orgAuditor = false;
+          var billingManager = false;
 
-        angular.forEach(user.entity.organization_roles, function(userRole, key) {        
+          angular.forEach(user.entity.organization_roles, function(userRole, key) {        
 
-          if (userRole === 'org_manager'){
-            orgManager = true;
-          }
-          if (userRole === 'org_auditor'){
-            orgAuditor = true;
-          }
-          if (userRole === 'billing_manager'){
-            billingManager = true;
-          }
+            if (userRole === 'org_manager'){
+              orgManager = true;
+            }
+            if (userRole === 'org_auditor'){
+              orgAuditor = true;
+            }
+            if (userRole === 'billing_manager'){
+              billingManager = true;
+            }
 
-          var objectRole = {
-            role: userRole
+            var objectRole = {
+              role: userRole
+            };
+
+            userRoles.push(objectRole);
+
+          });
+
+          var objectUser = {
+            id: user.metadata.guid,
+            name: user.entity.username,
+            userRoles: userRoles,
+            orgManager: orgManager,
+            orgAuditor: orgAuditor,
+            billingManager: billingManager,
+            currentUser: $scope.userName === user.entity.username
           };
+          $scope.users.push(objectUser);
 
-          userRoles.push(objectRole);
-
-        });
-
-        var objectUser = {
-          id: user.metadata.guid,
-          name: user.entity.username,
-          userRoles: userRoles,
-          orgManager: orgManager,
-          orgAuditor: orgAuditor,
-          billingManager: billingManager
-        };
-        $scope.users.push(objectUser);
-
-    });
-  }, function(err) {
+      });
+    }, function(err) {
     $log.error(err);
-  });
+    });
+
+  };
+  $scope.retrieveRolesOfAllUsersForTheOrganization();
+
+  
   
   // get all users for the organization
   /*organizationService.getAllUsersForTheOrganization($scope.id).then(function(response) {
@@ -377,15 +386,162 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
         }
       }
     });
-
-
     modalInstance.result.then(function() {
-      // reload the spaces table
-      //$route.reload();
+      $scope.retrieveRolesOfAllUsersForTheOrganization();
+    });
 
-      $scope.getSpacesForTheOrganization();
-      //$scope.organizations.spaces=$scope.spaces;
-      
+  };
+
+  $scope.disassociateUser = function(userId) {
+
+    var user = {
+      'organizationId': $scope.id,
+      'userId': userId
+    };
+
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/organization/organizationDeleteUser.tpl.html',
+      controller: 'OrganizationDeleteUserCtrl',
+      resolve: {
+        user: function() {
+          return user;
+        }
+      }
+    });
+    modalInstance.result.then(function() {
+      $scope.retrieveRolesOfAllUsersForTheOrganization();
+    });
+
+  };
+
+  $scope.addManager = function(username) {
+
+    var user = {
+      'organizationId': $scope.id,
+      'name': username
+    };
+
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/organization/organizationAddManager.tpl.html',
+      controller: 'OrganizationAddManagerCtrl',
+      resolve: {
+        user: function() {
+          return user;
+        }
+      }
+    });
+    modalInstance.result.then(function() {
+      $scope.retrieveRolesOfAllUsersForTheOrganization();
+    });
+
+  };
+
+  $scope.deleteManager = function(userId) {
+
+    var user = {
+      'organizationId': $scope.id,
+      'userId': userId
+    };
+
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/organization/organizationDeleteManager.tpl.html',
+      controller: 'OrganizationDeleteManagerCtrl',
+      resolve: {
+        user: function() {
+          return user;
+        }
+      }
+    });
+    modalInstance.result.then(function() {
+      $scope.retrieveRolesOfAllUsersForTheOrganization();
+    });
+
+  };
+
+  $scope.addBillingManager = function(username) {
+
+    var user = {
+      'organizationId': $scope.id,
+      'name': username
+    };
+
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/organization/organizationAddBillingManager.tpl.html',
+      controller: 'OrganizationAddBillingManagerCtrl',
+      resolve: {
+        user: function() {
+          return user;
+        }
+      }
+    });
+    modalInstance.result.then(function() {
+      $scope.retrieveRolesOfAllUsersForTheOrganization();
+    });
+
+  };
+
+  $scope.deleteBillingManager = function(userId) {
+
+    var user = {
+      'organizationId': $scope.id,
+      'userId': userId
+    };
+
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/organization/organizationDeleteBillingManager.tpl.html',
+      controller: 'OrganizationDeleteBillingManagerCtrl',
+      resolve: {
+        user: function() {
+          return user;
+        }
+      }
+    });
+    modalInstance.result.then(function() {
+      $scope.retrieveRolesOfAllUsersForTheOrganization();
+    });
+
+  };
+
+  $scope.addAuditor = function(username) {
+
+    var user = {
+      'organizationId': $scope.id,
+      'name': username
+    };
+
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/organization/organizationAddAuditor.tpl.html',
+      controller: 'OrganizationAddAuditorCtrl',
+      resolve: {
+        user: function() {
+          return user;
+        }
+      }
+    });
+    modalInstance.result.then(function() {
+      $scope.retrieveRolesOfAllUsersForTheOrganization();
+    });
+
+  };
+
+  $scope.deleteAuditor = function(userId) {
+
+    var user = {
+      'organizationId': $scope.id,
+      'userId': userId
+    };
+
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/organization/organizationDeleteAuditor.tpl.html',
+      controller: 'OrganizationDeleteAuditorCtrl',
+      resolve: {
+        user: function() {
+          return user;
+        }
+      }
+    });
+    modalInstance.result.then(function() {
+      $scope.retrieveRolesOfAllUsersForTheOrganization();
     });
 
   };

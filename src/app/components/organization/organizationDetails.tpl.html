@@ -112,25 +112,29 @@
                   <th>Org Manager</th>
                   <th>Org Auditor</th>
                   <th>Billing Manager</th>
-                  <th>&nbsp;</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 <tr ng-repeat="user in users | orderBy:name:false">
                   <td>{{user.name}}</td>
                   <td>
-                    <i class="fa fa-lg fa-check" ng-show="user.orgManager"></i>
-                    <i class="fa fa-lg fa-close" ng-hide="user.orgManager"></i>
+                    <a class="action action-add" ng-click="deleteManager(user.id)"><i class="fa fa-lg fa-check-square-o" ng-show="user.orgManager && !user.currentUser"></i></a>
+                    <a class="action action-delete" ng-click="addManager(user.name)"><i class="fa fa-lg fa-square-o" ng-show="!user.orgManager && 
+                    !user.currentUser"></i></a>
+                    &nbsp;<i class="fa fa-lg fa-check" ng-show="user.currentUser"></i>
                   </td>
                   <td>
-                    <i class="fa fa-lg fa-check" ng-show="user.orgAuditor"></i>
-                    <i class="fa fa-lg fa-close" ng-hide="user.orgAuditor"></i>
+                    <a class="action action-add" ng-click="deleteBillingManager(user.id)"><i class="fa fa-lg fa-check-square-o" ng-show="user.billingManager"></i></a>
+                    <a class="action action-delete" ng-click="addBillingManager(user.name)"><i class="fa fa-lg fa-square-o" ng-hide="user.billingManager"></i></a>
                   </td>
                   <td>
-                    <i class="fa fa-lg fa-check" ng-show="user.billingManager"></i>
-                    <i class="fa fa-lg fa-close" ng-hide="user.billingManager"></i>
+                    <a class="action action-add" ng-click="deleteAuditor(user.id)"><i class="fa fa-lg fa-check-square-o" ng-show="user.orgAuditor"></i></a>
+                    <a class="action action-delete" ng-click="addAuditor(user.name)"><i class="fa fa-lg fa-square-o" ng-hide="user.orgAuditor"></i></a>
                   </td>
-                  <td>&nbsp;</td>
+                  <td>
+                    <a class="action action-delete" ng-click="disassociateUser(user.id)"><i class="fa fa-lg fa-trash" ng-hide="user.orgManager || user.billingManager ||  user.orgAuditor"></i></a>&nbsp;&nbsp;
+                  </td>
                 </tr>
               </tbody>
             </table>

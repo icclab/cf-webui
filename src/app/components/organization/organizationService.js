@@ -256,6 +256,181 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
     return $http.put('/request.php', data, config);
   };
 
+  var _disassociateUserWithOrganization = function(user) {
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/users/' + user.userId,
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers,
+      data: data
+    };
+
+    console.log(data.url);
+    console.log(data.username);
+
+    return $http.delete('/request.php', config);
+  };
+
+  var _associateManagerWithOrganization = function(user) {
+
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/managers',
+      'username': user.name,
+      //'organization_guid': user.organizationId
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers
+    };
+
+    console.log(data.url);
+    console.log(data.username);
+
+    return $http.put('/request.php', data, config);
+  };
+
+  var _disassociateManagerWithOrganization = function(user) {
+    console.log(user);
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/managers/' + user.userId,
+      //'username': user.username,
+      //'organization_guid': user.organizationId
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers,
+      data: data
+    };
+
+    console.log(data.url);
+    console.log(data.username);
+
+    return $http.delete('/request.php', config);
+  };
+
+  var _associateBillingManagerWithOrganization = function(user) {
+    console.log(user);
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/billing_managers',
+      'username': user.name,
+      //'organization_guid': user.organizationId
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers
+    };
+
+    console.log(data.url);
+    console.log(data.username);
+
+    return $http.put('/request.php', data, config);
+  };
+
+  var _disassociateBillingManagerWithOrganization = function(user) {
+    console.log(user);
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/billing_managers/' + user.userId,
+      //'username': user.username,
+      //'organization_guid': user.organizationId
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers,
+      data: data
+    };
+
+    console.log(data.url);
+    console.log(data.username);
+
+    return $http.delete('/request.php', config);
+  };
+
+    var _associateAuditorWithOrganization = function(user) {
+    console.log(user);
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/auditors',
+      'username': user.name,
+      //'organization_guid': user.organizationId
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers
+    };
+
+    console.log(data.url);
+    console.log(data.username);
+
+    return $http.put('/request.php', data, config);
+  };
+
+  var _disassociateAuditorWithOrganization = function(user) {
+    console.log(user);
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/auditors/' + user.userId,
+      //'username': user.username,
+      //'organization_guid': user.organizationId
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers,
+      data: data
+    };
+
+    console.log(data.url);
+
+    return $http.delete('/request.php', config);
+  };
+
   organizationServiceFactory.getOrganizations = _getOrganizations;
   organizationServiceFactory.getOrganization = _getOrganization;
   organizationServiceFactory.getQuotaForTheOrganization = _getQuotaForTheOrganization;
@@ -268,6 +443,13 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
   organizationServiceFactory.editOrganization = _editOrganization;
   organizationServiceFactory.deleteOrganization = _deleteOrganization;
   organizationServiceFactory.associateUserWithOrganization = _associateUserWithOrganization;
+  organizationServiceFactory.disassociateUserWithOrganization = _disassociateUserWithOrganization;
+  organizationServiceFactory.associateManagerWithOrganization = _associateManagerWithOrganization;
+  organizationServiceFactory.disassociateManagerWithOrganization = _disassociateManagerWithOrganization;
+  organizationServiceFactory.associateBillingManagerWithOrganization = _associateBillingManagerWithOrganization;
+  organizationServiceFactory.disassociateBillingManagerWithOrganization = _disassociateBillingManagerWithOrganization;
+  organizationServiceFactory.associateAuditorWithOrganization = _associateAuditorWithOrganization;
+  organizationServiceFactory.disassociateAuditorWithOrganization = _disassociateAuditorWithOrganization;
 
   return organizationServiceFactory;
 }]);
