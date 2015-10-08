@@ -5,20 +5,17 @@ angular.module('app.organization').controller('OrganizationAssociateUserCtrl', [
   };
 
   $scope.ok = function () {
-    organizationService.associateUserWithOrganization($scope.user).then(function(response) {
-      $route.reload();
-      // close the modal
-      $modalInstance.close();
+    organizationService.associateUserWithOrganization($scope.user, $route.reload()).then(function(response) {
       // set message
-      messageService.addMessage('success', 'The user has been successfully added.', true);
+      messageService.addMessage('success', 'The user has been successfully added.');
     }, function(err) {
       // set message
       messageService.addMessage('danger', 'The user has not been added.');
       $log.error(err);
 
-      // close the modal
-      $modalInstance.close();
     });
+    // close the modal
+      $modalInstance.close();
   };
   
   $scope.cancel = function () {

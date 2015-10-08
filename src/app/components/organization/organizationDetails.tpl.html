@@ -54,7 +54,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="space in spaces | orderBy:space.name:false">
+                <tr ng-repeat="space in spaces">
                   <td><a href="#/organizations/{{id}}/spaces/{{space.id}}">{{space.name}}</a></td>
                   <td>
                     <span class="label label-success">{{space.nrOfStartedApps}} running</span>
@@ -125,12 +125,12 @@
                     &nbsp;<i class="fa fa-lg fa-check" ng-show="user.currentUser"></i>
                   </td>
                   <td>
-                    <a class="action action-add" ng-click="deleteBillingManager(user.id)"><i class="fa fa-lg fa-check-square-o" ng-show="user.billingManager"></i></a>
-                    <a class="action action-delete" ng-click="addBillingManager(user.name)"><i class="fa fa-lg fa-square-o" ng-hide="user.billingManager"></i></a>
-                  </td>
-                  <td>
                     <a class="action action-add" ng-click="deleteAuditor(user.id)"><i class="fa fa-lg fa-check-square-o" ng-show="user.orgAuditor"></i></a>
                     <a class="action action-delete" ng-click="addAuditor(user.name)"><i class="fa fa-lg fa-square-o" ng-hide="user.orgAuditor"></i></a>
+                  </td>
+                  <td>
+                    <a class="action action-add" ng-click="deleteBillingManager(user.id)"><i class="fa fa-lg fa-check-square-o" ng-show="user.billingManager"></i></a>
+                    <a class="action action-delete" ng-click="addBillingManager(user.name)"><i class="fa fa-lg fa-square-o" ng-hide="user.billingManager"></i></a>
                   </td>
                   <td>
                     <a class="action action-delete" ng-click="disassociateUser(user.id)"><i class="fa fa-lg fa-trash" ng-hide="user.orgManager || user.billingManager ||  user.orgAuditor"></i></a>&nbsp;&nbsp;

@@ -9,7 +9,7 @@ angular.module('app.organization').controller('OrganizationAddAuditorCtrl', ['$r
       $log.error(err);
     });
 
-    $modalInstance.close($scope.organization);
+    $modalInstance.close();
   };
   
   $scope.cancel = function () {

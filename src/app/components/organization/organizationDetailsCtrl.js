@@ -124,8 +124,13 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
   });
 
   $scope.retrieveRolesOfAllUsersForTheOrganization = function() {
-    organizationService.retrieveRolesOfAllUsersForTheOrganization($scope.id).then(function(response){
+    // clear spaces array on reload
+    if ($scope.users.length > 0) {
+      $scope.users.length = 0;
+    }
 
+    organizationService.retrieveRolesOfAllUsersForTheOrganization($scope.id).then(function(response){
+      console.log('Retrieving...');
       var data = response.data;
       $scope.nrOfOrganizationUsers = data.total_results;
       var userRoles = [];
