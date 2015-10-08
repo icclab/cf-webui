@@ -1,3 +1,7 @@
+# Grunt/NPM generated
+build/
+node_modules/
+
 # OS dependent files
 .DS_Store
 .Spotlight-V100
