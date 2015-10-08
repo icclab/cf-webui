@@ -1,8 +1,8 @@
 # CF WebUI
 
-CF WebUI is a modern single-page web-frontend for Cloud Foundry based on AngularJS and Bootstrap.
+[CF WebUI](https://icclab.github.io/cf-webui) is a modern single-page web-frontend for Cloud Foundry based on AngularJS and Bootstrap.
 
-Cloud Foundry is the OpenSource Platform as a Service (PaaS) Framework on which many PaaS offerings are based (e.g. Pivotal Web Services, HP Helion, IBM BlueMix, Swisscom Application Cloud, etc.). It allows the developers to provide, manage and scale their application in the cloud very easily and quickly. For end-users Cloud Foundry provides a REST based API and a command line interface (CLI) client. No official free and open source web front-end is currently available.
+[Cloud Foundry](http://cloudfoundry.org) is the OpenSource Platform as a Service (PaaS) Framework on which many PaaS offerings are based (e.g. Pivotal Web Services, HP Helion, IBM BlueMix, Swisscom Application Cloud, etc.). It allows the developers to provide, manage and scale their application in the cloud very easily and quickly. For end-users Cloud Foundry provides a REST based API and a command line interface (CLI) client. No official free and open source web front-end is currently available.
 
 ## Getting started
 
