@@ -38,7 +38,16 @@
                      </code> </li>
                   <li>Change to the cf-webui directory: <code>cd cf-webui</code></li>
                   <li>Change the endpoints to your desired Cloud Foundry instance in <code>app/app.constant.js</code>.</li>
-                  <li>Update the <code>manifest.yml</code> with your desired deployment options. e.g. (change host and domain-name)</li>
+                  <li>Update the <code>manifest.yml</code> with your desired deployment options. E.g.
+                     <p><br>----applications:  
+                           <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- &nbsp;  name: cf-webui  
+                           <br>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;   memory: 128M  
+                           <br>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;   host: console-cf-webui-${random-word}  
+                           <br>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;   path: ./build
+                     </p>
+                  </li>
+                  <li>Install npm packages: <code>npm install</code></li>
+                  <li>Build the application using Grunt: <code>grunt build</code></li>
                   <li>Push this application to Cloud Foundry with cf Command Line Interface (CLI): <code>cf push</code>.</li>
                   <li>Enjoy using CF WebUI!</li>
                </ol>
@@ -62,10 +71,13 @@
                            <li>Edit application</li>
                            <li>Delete application</li>
                            <li>Scale application</li>
-                           <li>Bind a service</li>
                            <li>Map a route</li>
+                           <li>Unmap a route</li>
                            <li>Monitoring health status</li>
-                           <li>Monitoring indicators</li>
+                           <li>Monitoring events</li>
+                           <li>Bind a service</li>
+                           <li>Unbind a service</li>
+                           <li>Marketplace</li>
                         </ul>
                      </td>
                      <td>
@@ -75,6 +87,8 @@
                            <li>Edit space</li>
                            <li>Delete space</li>
                            <li>Add a service</li>
+                           <li>Delete a service</li>
+                           <li>Marketplace</li>
                         </ul>
                      </td>
                      <td>
@@ -83,7 +97,9 @@
                            <li>Add organization</li>
                            <li>Edit organization</li>
                            <li>Delete organization</li>
+                           <li>Manage organization users</li>
                            <li>Add a domain</li>
+                           <li>Delete a domain</li>
                         </ul>
                      </td>
                   </tr>
@@ -109,9 +125,9 @@
                         </ul>
                      </td>
                      <td>
-                        Organization
+                        &nbsp;
                         <ul>
-                           <li>Manage organization users</li>
+                           
                         </ul>
                      </td>
                   </tr>
