@@ -1,5 +1,0 @@
----
-applications:
-- name: cf-webui
-  memory: 128M
-  host: console-cf-webui-${random-word}
