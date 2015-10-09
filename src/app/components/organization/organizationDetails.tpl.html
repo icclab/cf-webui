@@ -103,9 +103,9 @@
           <div class="panel panel-default">
             <div class="panel-heading clearfix">
               <h3 class="panel-title pull-left">Users <span class="label label-default">{{nrOfOrganizationUsers}}</span></h3>
-               <a ng-click="addUser()" class="btn btn-success pull-right"><i class="fa fa-plus"></i>&nbsp; Add a user</a>
+               <a ng-click="addUser()" class="btn btn-success pull-right" ng-show="currentUser.currentManager"><i class="fa fa-plus"></i>&nbsp; Add a user</a>
             </div>
-            <table class="table table-striped table-hover has-actions">
+            <table class="table table-striped table-hover has-actions" ng-show="currentUser.currentManager">
               <thead>
                 <tr>
                   <th>Name</th>
@@ -135,6 +135,38 @@
                   <td>
                     <a class="action action-delete" ng-click="disassociateUser(user.id)"><i class="fa fa-lg fa-trash" ng-hide="user.orgManager || user.billingManager ||  user.orgAuditor"></i></a>&nbsp;&nbsp;
                   </td>
+                </tr>
+              </tbody>
+              </table>
+              <table class="table table-striped table-hover has-actions" ng-show="!currentUser.currentManager">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Org Manager</th>
+                  <th>Org Auditor</th>
+                  <th>Billing Manager</th>
+                  <th>&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="user in users | orderBy:name:false">
+                  <td>{{user.name}}</td>
+                  <td>
+                    <i class="fa fa-lg fa-check" ng-show="user.orgManager"></i>
+                    <i class="fa fa-lg fa-close" ng-show="!user.orgManager"></i>
+                  </td>
+                  <td>
+                    <i class="fa fa-lg fa-check" ng-show="user.orgAuditor"></i>
+                    <i class="fa fa-lg fa-close" ng-hide="user.orgAuditor"></i>
+                  </td>
+                  <td>
+                    <i class="fa fa-lg fa-check" ng-show="user.billingManager"></i>
+                    <i class="fa fa-lg fa-close" ng-hide="user.billingManager"></i>
+                  </td>
+                  <td>
+                    &nbsp;
+                  </td>
+                  </div>
                 </tr>
               </tbody>
             </table>

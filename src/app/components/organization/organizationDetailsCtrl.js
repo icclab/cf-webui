@@ -23,7 +23,10 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
   $scope.nrOfOrganizationUsers = 0;
   //$scope.allUsersForOrganization = [];
 
-  $scope.userName = sessionStorage.getItem('userName');
+  $scope.currentUser = {
+    name: sessionStorage.getItem('userName'),
+    currentManager: false
+  };
 
   // get particular organization
   organizationService.getOrganization($scope.id).then(function(response) {
@@ -168,9 +171,15 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
             orgManager: orgManager,
             orgAuditor: orgAuditor,
             billingManager: billingManager,
-            currentUser: $scope.userName === user.entity.username
+            currentUser: $scope.currentUser.name === user.entity.username
           };
           $scope.users.push(objectUser);
+
+          if ($scope.currentUser.name === user.entity.username){
+            console.log('Enabled');
+            $scope.currentUser.currentManager = orgManager;
+          }
+          console.log($scope.currentUser.currentManager);
 
       });
     }, function(err) {
