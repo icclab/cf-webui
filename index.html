@@ -39,13 +39,12 @@
                   <li>Change to the cf-webui directory: <code>cd cf-webui</code></li>
                   <li>Change the endpoints to your desired Cloud Foundry instance in <code>app/app.constant.js</code>.</li>
                   <li>Update the <code>manifest.yml</code> with your desired deployment options. E.g.
-                     <p><br>----applications:  
-                           <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- &nbsp;  name: cf-webui  
-                           <br>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;   memory: 128M  
-                           <br>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;   host: console-cf-webui-${random-word}  
-                           <br>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;   path: ./build
-                     </p>
-                  </li>
+<pre><code>----
+applications:
+- name: cf-webui
+  memory: 128M
+  host: console-cf-webui-${random-word}
+  path: ./build</code></pre></li>
                   <li>Install npm packages: <code>npm install</code></li>
                   <li>Build the application using Grunt: <code>grunt build</code></li>
                   <li>Push this application to Cloud Foundry with cf Command Line Interface (CLI): <code>cf push</code>.</li>
@@ -114,8 +113,8 @@
                      <td>
                         Application
                         <ul>
-                           <li>Deploy application</li>
                            <li>Show application logs</li>
+                           <li>Deploy application</li>
                         </ul>
                      </td>
                      <td>
