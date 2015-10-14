@@ -1,8 +1,8 @@
-angular.module('app.organization').controller('OrganizationAddManagerCtrl', ['$route', '$scope', '$modalInstance', '$log', 'user', 'organizationService', 'messageService', function($route, $scope, $modalInstance, $log, user, organizationService, messageService) {
+angular.module('app.space').controller('SpaceAddManagerCtrl', ['$route', '$scope', '$modalInstance', '$log', 'user', 'spaceService', 'messageService', function($route, $scope, $modalInstance, $log, user, spaceService, messageService) {
 
   $scope.ok = function () {
 
-    organizationService.associateManagerWithOrganization(user).then(function(response) {
+    spaceService.associateManagerWithSpace(user).then(function(response) {
       messageService.addMessage('success', 'The manager has been successfully added.', true);
       $modalInstance.close();
     }, function(err) {
@@ -10,6 +10,7 @@ angular.module('app.organization').controller('OrganizationAddManagerCtrl', ['$r
       $modalInstance.close();
       $log.error(err);
     });
+
   };
   
   $scope.cancel = function () {

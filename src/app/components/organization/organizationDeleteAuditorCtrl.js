@@ -2,7 +2,7 @@ angular.module('app.organization').controller('OrganizationDeleteAuditorCtrl', [
 
   $scope.ok = function () {
 
-    organizationService.disassociateAuditorWithOrganization(user, $route.reload()).then(function(response) {
+    organizationService.disassociateAuditorWithOrganization(user).then(function(response) {
       messageService.addMessage('success', 'The auditor has been successfully deleted.');
     }, function(err) {
       messageService.addMessage('danger', 'The auditor has not been deleted.');

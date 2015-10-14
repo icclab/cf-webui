@@ -2,14 +2,14 @@ angular.module('app.organization').controller('OrganizationAddBillingManagerCtrl
 
   $scope.ok = function () {
 
-    organizationService.associateBillingManagerWithOrganization(user, $route.reload()).then(function(response) {
-      messageService.addMessage('success', 'The billing manager has been successfully added.');
+    organizationService.associateBillingManagerWithOrganization(user).then(function(response) {
+      messageService.addMessage('success', 'The billing manager has been successfully added.', true);
+      $modalInstance.close();
     }, function(err) {
-      messageService.addMessage('danger', 'The billing manager has not been added.');
+      messageService.addMessage('danger', 'The billing manager has not been added.', true);
+      $modalInstance.close();
       $log.error(err);
     });
-
-    $modalInstance.close();
   };
   
   $scope.cancel = function () {

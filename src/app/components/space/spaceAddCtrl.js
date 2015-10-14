@@ -5,12 +5,11 @@ angular.module('app.space').controller('SpaceAddCtrl', ['$route', '$scope', '$mo
   };
 
   $scope.ok = function () {
-    spaceService.addSpace($scope.space).then(function(response) {
+    spaceService.addSpace($scope.space, $route.reload()).then(function(response) {
       // close the modal
-      $route.reload();
       $modalInstance.close();
       // set message
-      messageService.addMessage('success', 'The space has been successfully added.', 'true');
+      messageService.addMessage('success', 'The space has been successfully added.');
     }, function(err) {
       // set message
       messageService.addMessage('danger', 'The space has not been added.');

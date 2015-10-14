@@ -26,7 +26,7 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
   var _responseError = function(rejection) {
 
     var timeOut = Date.now() - sessionStorage.getItem('lastTime');
-    if ($rootScope.nrOfUnauthorizedRequests === 0 && rejection.status === 401) {
+    if ($rootScope.nrOfUnauthorizedRequests === 0 && rejection.status === 401 && (sessionStorage.getItem('accessToken')!== null)) {
       var authService = $injector.get('authService');
       var $route = $injector.get('$route');
       var $location = $injector.get('$location');

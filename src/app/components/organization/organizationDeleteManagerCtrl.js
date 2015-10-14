@@ -2,7 +2,7 @@ angular.module('app.organization').controller('OrganizationDeleteManagerCtrl', [
 
   $scope.ok = function () {
 
-    organizationService.disassociateManagerWithOrganization(user, $route.reload()).then(function(response) {
+    organizationService.disassociateManagerWithOrganization(user).then(function(response) {
       messageService.addMessage('success', 'The manager has been successfully deleted.');
     }, function(err) {
       messageService.addMessage('danger', 'The manager has not been deleted.');

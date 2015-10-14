@@ -4,7 +4,7 @@ angular.module('app.message').factory('messageService', ['$rootScope', function(
   var _messages = [];
 
   var _addMessage = function(type, msg, forceDelete) {
-    if (forceDelete === true) $rootScope.rootFields.waitDelete=true;
+    if (forceDelete === true) _removeAllMessages();
     var message = {
       type: type,
       msg: msg
@@ -14,10 +14,9 @@ angular.module('app.message').factory('messageService', ['$rootScope', function(
   };
 
   var _removeAllMessages = function(messageObject) {
-    if ($rootScope.rootFields.waitDelete===false && _messages.length > 0){
+    if (_messages.length > 0){
       _messages.length = 0;
     }
-    $rootScope.rootFields.waitDelete=false;
   };
 
   var _removeMessage = function(messageObject) {

@@ -1,15 +1,16 @@
 angular.module('app.organization').controller('OrganizationAddAuditorCtrl', ['$route', '$scope', '$modalInstance', '$log', 'user', 'organizationService', 'messageService', function($route, $scope, $modalInstance, $log, user, organizationService, messageService) {
 
   $scope.ok = function () {
+    console.log(user);
 
-    organizationService.associateAuditorWithOrganization(user, $route.reload()).then(function(response) {
-      messageService.addMessage('success', 'The auditor has been successfully added.');
+    organizationService.associateAuditorWithOrganization(user).then(function(response) {
+      messageService.addMessage('success', 'The auditor has been successfully added.', true);
+      $modalInstance.close();
     }, function(err) {
-      messageService.addMessage('danger', 'The auditor has not been added.');
+      messageService.addMessage('danger', 'The auditor has not been added.', true);
+      $modalInstance.close();
       $log.error(err);
-    });
-
-    $modalInstance.close();
+    });    
   };
   
   $scope.cancel = function () {

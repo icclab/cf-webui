@@ -2,7 +2,7 @@ angular.module('app.organization').controller('OrganizationDeleteBillingManagerC
 
   $scope.ok = function () {
 
-    organizationService.disassociateBillingManagerWithOrganization(user, $route.reload()).then(function(response) {
+    organizationService.disassociateBillingManagerWithOrganization(user).then(function(response) {
       messageService.addMessage('success', 'The billing manager has been successfully deleted.');
     }, function(err) {
       messageService.addMessage('danger', 'The billing manager has not been deleted.');

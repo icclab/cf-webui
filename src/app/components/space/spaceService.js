@@ -150,6 +150,158 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
     return $http.delete('/request.php', config);
   };
 
+  var _associateManagerWithSpace = function(user) {
+
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/managers',
+      'username': user.name,
+      //'organization_guid': user.organizationId
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers
+    };
+
+    console.log(data.url);
+    console.log(data.username);
+
+    return $http.put('/request.php', data, config);
+  };
+
+  var _disassociateManagerWithSpace = function(user) {
+    console.log(user);
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/managers/' + user.userId,
+      //'username': user.username,
+      //'organization_guid': user.organizationId
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers,
+      data: data
+    };
+
+    console.log(data.url);
+    console.log(data.username);
+
+    return $http.delete('/request.php', config);
+  };
+
+  var _associateDeveloperWithSpace = function(user) {
+    console.log(user);
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/developers',
+      'username': user.name,
+      //'organization_guid': user.organizationId
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers
+    };
+
+    console.log(data.url);
+    console.log(data.username);
+
+    return $http.put('/request.php', data, config);
+  };
+
+  var _disassociateDeveloperWithSpace = function(user) {
+    console.log(user);
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/developers/' + user.userId,
+      //'username': user.username,
+      //'organization_guid': user.organizationId
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers,
+      data: data
+    };
+
+    console.log(data.url);
+    console.log(data.username);
+
+    return $http.delete('/request.php', config);
+  };
+
+    var _associateAuditorWithSpace = function(user) {
+    console.log(user);
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/auditors',
+      'username': user.name,
+      //'organization_guid': user.organizationId
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers
+    };
+
+    console.log(data.url);
+    console.log(data.username);
+
+    return $http.put('/request.php', data, config);
+  };
+
+  var _disassociateAuditorWithSpace = function(user) {
+    console.log(user);
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/auditors/' + user.userId,
+      //'username': user.username,
+      //'organization_guid': user.organizationId
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers,
+      data: data
+    };
+
+    console.log(data.url);
+
+    return $http.delete('/request.php', config);
+  };
+
   spaceServiceFactory.getSpaces = _getSpaces;
   spaceServiceFactory.getSpaceSummary = _getSpaceSummary;
   spaceServiceFactory.getServicesForTheSpace = _getServicesForTheSpace;
@@ -157,6 +309,12 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
   spaceServiceFactory.addSpace = _addSpace;
   spaceServiceFactory.deleteSpace = _deleteSpace;
   spaceServiceFactory.retrieveRolesOfAllUsersForTheSpace = _retrieveRolesOfAllUsersForTheSpace;
+  spaceServiceFactory.associateManagerWithSpace = _associateManagerWithSpace;
+  spaceServiceFactory.disassociateManagerWithSpace = _disassociateManagerWithSpace;
+  spaceServiceFactory.associateDeveloperWithSpace = _associateDeveloperWithSpace;
+  spaceServiceFactory.disassociateDeveloperWithSpace = _disassociateDeveloperWithSpace;
+  spaceServiceFactory.associateAuditorWithSpace = _associateAuditorWithSpace;
+  spaceServiceFactory.disassociateAuditorWithSpace = _disassociateAuditorWithSpace;
 
   return spaceServiceFactory;
 }]);
