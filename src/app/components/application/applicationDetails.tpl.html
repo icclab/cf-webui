@@ -238,9 +238,9 @@
             <div class="panel-heading clearfix">
               <h3 class="panel-title pull-left">System Environment variables</h3>
             </div>
-            <div class="panel-body">
-              <p class="word-break">{{systemEnvironmentVariables}}</p>
-            </div>
+            
+            <pre class="panel-body">{{systemEnvironmentVariables | json}}</pre>
+            
           </div><!-- /.panel -->
         </div>
       </div><!-- /.row -->

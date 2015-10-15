@@ -27,7 +27,7 @@
             <div class="panel-body">
               <div class="progress">
                 <div class="progress-bar" role="progressbar" aria-valuenow="{{usedQuotaPercent}}" aria-valuemin="0" aria-valuemax="100" style="width: {{usedQuotaPercent}}%;">
-                  {{usedQuotaPercent}}%
+                  {{usedQuotaPercent | limitTo:4}}%
                 </div>
               </div>
               <p ng-show="spacesTotalQuota !== 0 && organizationTotalQuota !== 0">{{spacesTotalQuota}} MB of {{organizationTotalQuota}} MB limit</p>
