@@ -3,13 +3,13 @@ angular.module('app.organization').controller('OrganizationDeleteAuditorCtrl', [
   $scope.ok = function () {
 
     organizationService.disassociateAuditorWithOrganization(user).then(function(response) {
-      messageService.addMessage('success', 'The auditor has been successfully deleted.');
+      messageService.addMessage('success', 'The auditor has been successfully deleted.', true);
+      $modalInstance.close();
     }, function(err) {
-      messageService.addMessage('danger', 'The auditor has not been deleted.');
+      messageService.addMessage('danger', 'The auditor has not been deleted.', true);
+      $modalInstance.close();
       $log.error(err);
     });
-
-    $modalInstance.close();
   };
   
   $scope.cancel = function () {

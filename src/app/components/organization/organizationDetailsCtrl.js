@@ -387,16 +387,18 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 
   $scope.addUser = function() {
 
-    var user = {
+    /*var user = {
       'organizationId': $scope.id
-    };
+    };*/
+
+    var spaces = $scope.spaces;
 
     var modalInstance = $modal.open({
       templateUrl: 'app/components/organization/organizationAssociateUser.tpl.html',
       controller: 'OrganizationAssociateUserCtrl',
       resolve: {
-        user: function() {
-          return user;
+        spaces: function() {
+          return spaces;
         }
       }
     });

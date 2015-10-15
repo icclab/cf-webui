@@ -4,12 +4,12 @@ angular.module('app.organization').controller('OrganizationDeleteUserCtrl', ['$r
 
     organizationService.disassociateUserWithOrganization(user, $route.reload()).then(function(response) {
       messageService.addMessage('success', 'The user has been successfully removed from organization.');
+      $modalInstance.close($scope.organization);
     }, function(err) {
       messageService.addMessage('danger', 'The user has not been removed from organization.');
+      $modalInstance.close($scope.organization);
       $log.error(err);
     });
-
-    $modalInstance.close($scope.organization);
   };
   
   $scope.cancel = function () {

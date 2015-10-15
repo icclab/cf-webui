@@ -5,10 +5,94 @@
 <div class="modal-body">
   <form class="form-horizontal" role="form">
     <div class="form-group">
-      <label for="inputName" class="col-sm-3 control-label">Name</label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control" id="inputName" ng-model="user.name" required>
-      </div>
+      <table class="table table-striped table-hover has-actions"  ng-show="spacesLength">
+        <thead>
+          <tr>
+            <th>New User</th>
+            <th>Org Manager</th>
+            <th>Org Auditor</th>
+            <th>Billing Manager</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input type="text" class="form-control" id="inputName" ng-model="user.name" required>
+            </td>
+            <td>
+              <a class="action action-add" ng-click="user.orgManager=true" ng-show="!user.orgManager"><i class="fa fa-lg fa-square-o"></i></a>
+              <a class="action action-add" ng-click="user.orgManager=false" ng-show="user.orgManager"><i class="fa fa-lg fa-check-square-o"></i></a>
+            </td>
+            <td>
+              <a class="action action-add" ng-click="user.orgAuditor=true" ng-show="!user.orgAuditor"><i class="fa fa-lg fa-square-o"></i></a>
+              <a class="action action-add" ng-click="user.orgAuditor=false" ng-show="user.orgAuditor"><i class="fa fa-lg fa-check-square-o"></i></a>
+            </td>
+            <td>
+              <a class="action action-add" ng-click="user.billingManager=true" ng-show="!user.billingManager"><i class="fa fa-lg fa-square-o"></i></a>
+              <a class="action action-add" ng-click="user.billingManager=false" ng-show="user.billingManager"><i class="fa fa-lg fa-check-square-o"></i></a>
+            </td>
+            <td>&nbsp;</td>
+          </tr>
+        </tbody>
+        <thead>
+          <tr>
+            <th>Associate to Space</th>
+            <th>Space Manager</th>
+            <th>Space Auditor</th>
+            <th>Space Developer</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="space in spacesRoles">
+            <td>{{space.spaceName}}</td>
+            <td>
+              <a class="action action-add" ng-click="space.spaceManager=true" ng-show="!space.spaceManager"><i class="fa fa-lg fa-square-o"></i></a>
+              <a class="action action-add" ng-click="space.spaceManager=false" ng-show="space.spaceManager"><i class="fa fa-lg fa-check-square-o"></i></a>
+            <td>
+              <a class="action action-add" ng-click="space.spaceAuditor=true" ng-show="!space.spaceAuditor"><i class="fa fa-lg fa-square-o"></i></a>
+              <a class="action action-add" ng-click="space.spaceAuditor=false" ng-show="space.spaceAuditor"><i class="fa fa-lg fa-check-square-o"></i></a>
+            </td>
+            <td>
+              <a class="action action-add" ng-click="space.spaceDeveloper=true" ng-show="!space.spaceDeveloper"><i class="fa fa-lg fa-square-o"></i></a>
+              <a class="action action-add" ng-click="space.spaceDeveloper=false" ng-show="space.spaceDeveloper"><i class="fa fa-lg fa-check-square-o"></i></a>
+            </td>
+            <td>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table table-striped table-hover has-actions"  ng-hide="spacesLength">
+        <thead>
+          <tr>
+            <th>New User</th>
+            <th>Org Manager</th>
+            <th>Org Auditor</th>
+            <th>Billing Manager</th>
+            <th>&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <input type="text" class="form-control" id="inputName" ng-model="user.name" required>
+            </td>
+            <td>
+              <a class="action action-add" ng-click="user.orgManager=true" ng-show="!user.orgManager"><i class="fa fa-lg fa-square-o"></i></a>
+              <a class="action action-add" ng-click="user.orgManager=false" ng-show="user.orgManager"><i class="fa fa-lg fa-check-square-o"></i></a>
+            </td>
+            <td>
+              <a class="action action-add" ng-click="user.orgAuditor=true" ng-show="!user.orgAuditor"><i class="fa fa-lg fa-square-o"></i></a>
+              <a class="action action-add" ng-click="user.orgAuditor=false" ng-show="user.orgAuditor"><i class="fa fa-lg fa-check-square-o"></i></a>
+            </td>
+            <td>
+              <a class="action action-add" ng-click="user.billingManager=true" ng-show="!user.billingManager"><i class="fa fa-lg fa-square-o"></i></a>
+              <a class="action action-add" ng-click="user.billingManager=false" ng-show="user.billingManager"><i class="fa fa-lg fa-check-square-o"></i></a>
+            </td>
+            <td>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </form>
 </div>
