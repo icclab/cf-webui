@@ -1,4 +1,4 @@
-angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$route', '$rootScope', '$scope', '$routeParams', '$modal', '$log', 'organizationService', 'spaceService', 'userService', 'domainService', function($route, $rootScope, $scope, $routeParams, $modal, $log, organizationService, spaceService, userService, domainService) {
+angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$route', '$rootScope', '$scope', '$routeParams', '$modal', '$log', 'organizationService', 'spaceService', function($route, $rootScope, $scope, $routeParams, $modal, $log, organizationService, spaceService) {
   $rootScope.rootFields.showContent = false;
   $scope.name = '';
   $scope.id = $routeParams.organizationId;
@@ -133,7 +133,6 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
     }
 
     organizationService.retrieveRolesOfAllUsersForTheOrganization($scope.id).then(function(response){
-      console.log('Retrieving...');
       var data = response.data;
       $scope.nrOfOrganizationUsers = data.total_results;
       var userRoles = [];
@@ -176,10 +175,8 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
           $scope.users.push(objectUser);
 
           if ($scope.currentUser.name === user.entity.username){
-            console.log('Enabled');
             $scope.currentUser.currentManager = orgManager;
           }
-          console.log($scope.currentUser.currentManager);
 
       });
     }, function(err) {

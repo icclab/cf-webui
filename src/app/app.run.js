@@ -3,6 +3,9 @@ angular.module('app').run(['$rootScope', '$location', '$route', 'authService', f
   $rootScope.rootFields = {};
 
   authService.fillAuthData();
+  $rootScope.rootFields.marginSidebar = 220;
+
+
 
   // redirect the user to the login page if he is not logged in
   $rootScope.$on('$routeChangeStart', function(event) {
@@ -16,6 +19,7 @@ angular.module('app').run(['$rootScope', '$location', '$route', 'authService', f
   });
   
   $rootScope.$on('cfpLoadingBar:started', function (event) {
+
     $rootScope.rootFields.showContent = false;
   });
 
@@ -25,5 +29,8 @@ angular.module('app').run(['$rootScope', '$location', '$route', 'authService', f
   
   $rootScope.$on('cfpLoadingBar:completed', function (event) {
     $rootScope.rootFields.showContent = true;
+
   });
+  
+
 }]);

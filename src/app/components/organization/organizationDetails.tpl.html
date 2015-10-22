@@ -1,7 +1,7 @@
-<sidebar></sidebar>
+<sidebar ng-show="rootFields.showContent"></sidebar>
 
-<div id="page-content">
-  <topbar></topbar>
+<div id="page-content" ng-style="{ 'marginLeft': rootFields.marginSidebar}">
+  <topbar ng-show="true"></topbar>
   
   <breadcrumb></breadcrumb>
 
