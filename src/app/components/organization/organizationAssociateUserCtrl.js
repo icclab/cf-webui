@@ -17,7 +17,6 @@ angular.module('app.organization').controller('OrganizationAssociateUserCtrl', [
   $scope.spacesRoles = [];
 
   angular.forEach($scope.spaces, function(space, key) {    
-    console.log(space);
     var objectSpaceRoles = {
       spaceName: space.name,
       spaceId: space.id,
@@ -25,11 +24,8 @@ angular.module('app.organization').controller('OrganizationAssociateUserCtrl', [
       spaceAuditor: false,
       spaceDeveloper: false,
     };
-
     $scope.spacesRoles.push(objectSpaceRoles);
-
   });
-  console.log($scope.spacesRoles);
 
   $scope.ok = function () {
     messageService.removeAllMessages();

@@ -19,7 +19,6 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
 
     if (timeOut < 600000){
       sessionStorage.setItem('lastTime', Date.now());
-      console.log('Tiempo');
     }
 
     return config;

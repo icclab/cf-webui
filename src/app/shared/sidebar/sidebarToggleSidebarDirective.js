@@ -26,8 +26,6 @@ angular.module('app.sidebar').directive('toggleSidebar', ['$rootScope', function
             $rootScope.rootFields.marginSidebar = "220px";
             $rootScope.rootFields.hidedSidebar = false;
           }
-          console.log('Nuevo valor:');
-          console.log($rootScope.rootFields.hidedSidebar);
         });
       }
   };

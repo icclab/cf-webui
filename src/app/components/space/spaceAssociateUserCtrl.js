@@ -17,8 +17,6 @@ angular.module('app.space').controller('SpaceAssociateUserCtrl', ['$route', '$ro
     angular.forEach($scope.users, function(user, key) {       
 
       if (user.spaceManager){
-        console.log('Space Manager:');
-        console.log(user.name);
         spaceService.associateManagerWithSpace(user).then(function(response) {
           // set message
           messageService.addMessage('success', 'The space manager has been successfully added.');
@@ -33,8 +31,6 @@ angular.module('app.space').controller('SpaceAssociateUserCtrl', ['$route', '$ro
       }
 
       if (user.spaceAuditor){
-        console.log('Space Auditor:');
-        console.log(user.name);
         spaceService.associateAuditorWithSpace(user).then(function(response) {
           // set message
           messageService.addMessage('success', 'The space auditor has been successfully added.');
@@ -48,9 +44,6 @@ angular.module('app.space').controller('SpaceAssociateUserCtrl', ['$route', '$ro
       }
 
       if (user.spaceDeveloper){
-        console.log('Space Developer:');
-        console.log(user.name);
-
         spaceService.associateDeveloperWithSpace(user).then(function(response) {
           // set message
           messageService.addMessage('success', 'The space developer has been successfully added.');

@@ -169,14 +169,10 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
       headers: headers
     };
 
-    console.log(data.url);
-    console.log(data.username);
-
     return $http.put('/request.php', data, config);
   };
 
   var _disassociateManagerWithSpace = function(user) {
-    console.log(user);
     // data
     var data = {
       'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/managers/' + user.userId,
@@ -195,14 +191,10 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
       data: data
     };
 
-    console.log(data.url);
-    console.log(data.username);
-
     return $http.delete('/request.php', config);
   };
 
   var _associateDeveloperWithSpace = function(user) {
-    console.log(user);
     // data
     var data = {
       'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/developers',
@@ -220,14 +212,10 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
       headers: headers
     };
 
-    console.log(data.url);
-    console.log(data.username);
-
     return $http.put('/request.php', data, config);
   };
 
   var _disassociateDeveloperWithSpace = function(user) {
-    console.log(user);
     // data
     var data = {
       'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/developers/' + user.userId,
@@ -246,14 +234,10 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
       data: data
     };
 
-    console.log(data.url);
-    console.log(data.username);
-
     return $http.delete('/request.php', config);
   };
 
     var _associateAuditorWithSpace = function(user) {
-    console.log(user);
     // data
     var data = {
       'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/auditors',
@@ -271,14 +255,10 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
       headers: headers
     };
 
-    console.log(data.url);
-    console.log(data.username);
-
     return $http.put('/request.php', data, config);
   };
 
   var _disassociateAuditorWithSpace = function(user) {
-    console.log(user);
     // data
     var data = {
       'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/auditors/' + user.userId,
@@ -296,8 +276,6 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
       headers: headers,
       data: data
     };
-
-    console.log(data.url);
 
     return $http.delete('/request.php', config);
   };

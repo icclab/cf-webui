@@ -232,7 +232,6 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
   };
 
   var _associateUserWithOrganization = function(user) {
-    console.log(user);
     // data
     var data = {
       'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/users',
@@ -249,9 +248,6 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
     var config = {
       headers: headers
     };
-
-    console.log(data.url);
-    console.log(data.username);
 
     return $http.put('/request.php', data, config);
   };
@@ -272,9 +268,6 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       headers: headers,
       data: data
     };
-
-    console.log(data.url);
-    console.log(data.username);
 
     return $http.delete('/request.php', config);
   };
@@ -298,14 +291,10 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       headers: headers
     };
 
-    console.log(data.url);
-    console.log(data.username);
-
     return $http.put('/request.php', data, config);
   };
 
   var _disassociateManagerWithOrganization = function(user) {
-    console.log(user);
     // data
     var data = {
       'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/managers/' + user.userId,
@@ -324,14 +313,10 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       data: data
     };
 
-    console.log(data.url);
-    console.log(data.username);
-
     return $http.delete('/request.php', config);
   };
 
   var _associateBillingManagerWithOrganization = function(user) {
-    console.log(user);
     // data
     var data = {
       'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/billing_managers',
@@ -349,14 +334,10 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       headers: headers
     };
 
-    console.log(data.url);
-    console.log(data.username);
-
     return $http.put('/request.php', data, config);
   };
 
   var _disassociateBillingManagerWithOrganization = function(user) {
-    console.log(user);
     // data
     var data = {
       'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/billing_managers/' + user.userId,
@@ -375,14 +356,10 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       data: data
     };
 
-    console.log(data.url);
-    console.log(data.username);
-
     return $http.delete('/request.php', config);
   };
 
     var _associateAuditorWithOrganization = function(user) {
-    console.log(user);
     // data
     var data = {
       'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/auditors',
@@ -400,14 +377,10 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       headers: headers
     };
 
-    console.log(data.url);
-    console.log(data.username);
-
     return $http.put('/request.php', data, config);
   };
 
   var _disassociateAuditorWithOrganization = function(user) {
-    console.log(user);
     // data
     var data = {
       'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/auditors/' + user.userId,
@@ -425,8 +398,6 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       headers: headers,
       data: data
     };
-
-    console.log(data.url);
 
     return $http.delete('/request.php', config);
   };

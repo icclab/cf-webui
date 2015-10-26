@@ -113,6 +113,8 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
         messageService.addMessage('danger', 'The service bindings have not been loaded.');
         $log.error(err);
       });
+      
+      if($scope.state === 'STARTED') $scope.getInstances();
 
     }, function(err) {
       messageService.addMessage('danger', 'The application summary has not been loaded.');
@@ -141,7 +143,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
       $log.error(err);
     });
   };
-  $scope.getInstances();
+
   
   // get application events
   applicationService.getAppEvents($scope.applicationId).then(function(appEventsResponse) {
