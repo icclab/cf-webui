@@ -1,9 +1,9 @@
-angular.module('app.space').controller('SpaceEditCtrl', ['$scope', '$modalInstance', '$log', 'space', 'spaceService', 'messageService', function($scope, $modalInstance, $log, space, spaceService, messageService) {
+angular.module('app.space').controller('SpaceEditCtrl', ['$scope', '$route', '$modalInstance', '$log', 'space', 'spaceService', 'messageService', function($scope, $route, $modalInstance, $log, space, spaceService, messageService) {
 
   $scope.space = space;
 
   $scope.ok = function () {
-    spaceService.editSpace($scope.space).then(function(response) {
+    spaceService.editSpace($scope.space, $route.reload()).then(function(response) {
       messageService.addMessage('success', 'The space has been successfully changed.');
     }, function(err) {
       messageService.addMessage('danger', 'The space has not been changed.');

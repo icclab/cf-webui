@@ -64,8 +64,11 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 
       // get summary for each space
       angular.forEach(data.resources, function(space, key) {
+        $scope.spaces.push(space.metadata.guid);
+
         spaceService.getSpaceSummary(space.metadata.guid).then(function(responseSpace) {
           var dataSpace = responseSpace.data;
+          console.log(dataSpace.name);
 
           // calculate space memory and stopped or started apps
           var memory = 0;
@@ -94,7 +97,14 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
             nrOfServices: dataSpace.services.length
           };
 
-          $scope.spaces.push(objectSpace);
+          //$scope.spaces.push(objectSpace);
+
+          for (var j = 0; j < $scope.spaces.length; j++) {
+            if ($scope.spaces[j] === objectSpace.id) {
+              $scope.spaces[j]=objectSpace;
+              break;
+            }
+          }
           
           $scope.spacesTotalQuota += memory;
           $scope.setOrganizationQuota();
@@ -306,7 +316,6 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
     modalInstance.result.then(function() {
       // reload the spaces table
       //$route.reload();
-
       $scope.getSpacesForTheOrganization();
       //$scope.organizations.spaces=$scope.spaces;
       
