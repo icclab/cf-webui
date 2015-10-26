@@ -68,7 +68,6 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 
         spaceService.getSpaceSummary(space.metadata.guid).then(function(responseSpace) {
           var dataSpace = responseSpace.data;
-          console.log(dataSpace.name);
 
           // calculate space memory and stopped or started apps
           var memory = 0;

@@ -1,7 +1,6 @@
 angular.module('app.organization').controller('OrganizationAddAuditorCtrl', ['$route', '$scope', '$modalInstance', '$log', 'user', 'organizationService', 'messageService', function($route, $scope, $modalInstance, $log, user, organizationService, messageService) {
 
   $scope.ok = function () {
-    console.log(user);
 
     organizationService.associateAuditorWithOrganization(user).then(function(response) {
       messageService.addMessage('success', 'The auditor has been successfully added.', true);
