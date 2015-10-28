@@ -1,4 +1,4 @@
-angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scope', '$routeParams', '$modal', '$log', 'spaceService', 'organizationService', 'messageService', function($rootScope, $scope, $routeParams, $modal, $log, spaceService, organizationService, messageService) {
+angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scope', '$routeParams', '$modal', '$log', 'applicationService', 'spaceService', 'organizationService', 'messageService', function($rootScope, $scope, $routeParams, $modal, $log, applicationService, spaceService, organizationService, messageService) {
   $rootScope.rootFields.showContent = false;
   
   $scope.name = '';
@@ -29,7 +29,6 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
       $scope.applications.length = 0;
     }
 
-
     var getSpaceSummaryPromise = spaceService.getSpaceSummary($scope.spaceId);
     
     getSpaceSummaryPromise.then(function(response) {
@@ -40,16 +39,40 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
         $scope.nrOfApplications = response.data.apps.length;
 
         angular.forEach(response.data.apps, function(app, i) {
-          var objectApp = {
-            id: app.guid,
-            status: (app.state === 'STARTED') ? 'running' : 'stopped',
-            name: app.name,
-            instances: app.instances,
-            memory: app.memory,
-            url: app.urls[0] // only the first url
-          };
 
-          $scope.applications.push(objectApp);
+         
+
+          applicationService.getInstances(app.guid).then(function(instancesResponse) {
+            
+            //$scope.instances = instancesResponse.data;
+
+            var objectApp = {
+              id: app.guid,
+              status: (app.state === 'STARTED') ? 'running' : 'stopped',
+              name: app.name,
+              instances: app.instances,
+              memory: app.memory,
+              url: app.urls[0] // only the first url
+            };
+
+            angular.forEach(instancesResponse.data, function(instance, i) {
+              console.log(instance.state);
+              if (instance.state === 'CRASHED'){
+                objectApp.status = 'crashed';
+                console.log(instance.state);
+              }
+            });
+
+            console.log(instancesResponse.data);
+
+            $scope.applications.push(objectApp);
+
+          }, function(err) {
+            messageService.addMessage('danger', 'Could not load app instances.');
+            $log.error(err);
+          });
+
+          
         });
       }
 
@@ -330,6 +353,23 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
   };
 
+  $scope.deleteUser = function(user) {
+
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/space/spaceDisassociateUser.tpl.html',
+      controller: 'SpaceDisassociateUserCtrl',
+      resolve: {
+        user: function() {
+          return user;
+        }
+      }
+    });
+    modalInstance.result.then(function() {
+      $scope.retrieveRolesOfAllUsersForTheSpace();
+    });
+
+  };
+
   $scope.addManager = function(username) {
 
     var user = {
@@ -356,7 +396,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
     var user = {
       'spaceId': $scope.id,
-      'userId': userId
+      'id': userId
     };
 
     var modalInstance = $modal.open({
@@ -400,7 +440,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
     var user = {
       'spaceId': $scope.id,
-      'userId': userId
+      'id': userId
     };
 
     var modalInstance = $modal.open({
@@ -444,7 +484,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
     var user = {
       'spaceId': $scope.id,
-      'userId': userId
+      'id': userId
     };
 
     var modalInstance = $modal.open({

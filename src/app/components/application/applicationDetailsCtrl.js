@@ -51,6 +51,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
       $scope.scale.memory = response.data.memory;
       $scope.lastPush = response.data.package_updated_at;
       $scope.state = response.data.state;
+      console.log($scope.state);
       
       $scope.buildPack = response.data.detected_buildpack;
       $scope.startCommand = response.data.detected_start_command;
@@ -113,7 +114,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
         messageService.addMessage('danger', 'The service bindings have not been loaded.');
         $log.error(err);
       });
-      
+
       if($scope.state === 'STARTED') $scope.getInstances();
 
     }, function(err) {

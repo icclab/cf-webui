@@ -175,7 +175,7 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
   var _disassociateManagerWithSpace = function(user) {
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/managers/' + user.userId,
+      'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/managers/' + user.id,
       //'username': user.username,
       //'organization_guid': user.organizationId
     };
@@ -218,7 +218,7 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
   var _disassociateDeveloperWithSpace = function(user) {
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/developers/' + user.userId,
+      'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/developers/' + user.id,
       //'username': user.username,
       //'organization_guid': user.organizationId
     };
@@ -261,7 +261,7 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
   var _disassociateAuditorWithSpace = function(user) {
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/auditors/' + user.userId,
+      'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/auditors/' + user.id,
       //'username': user.username,
       //'organization_guid': user.organizationId
     };

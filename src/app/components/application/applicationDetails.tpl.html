@@ -116,7 +116,7 @@
             <tbody>
               <tr ng-repeat="instance in instances">
                 <td>{{$index}}</td>
-                <td><span class="label label-success">{{instance.state}}</span></td>
+                <td><span class="label" ng-class="instance.state == 'RUNNING' ? 'label-success' : instance.state == 'CRASHED' ? 'label-danger' : 'label-default'">{{instance.state}}</span></td>
                 <td>{{instance.stats.usage.cpu | number : 2}} %</td>
                 <td>{{instance.stats.usage.mem / (1024*1024) | number : 0}} MB</td>
                 <td>{{instance.stats.usage.disk / (1024*1024) | number : 0}} MB</td>

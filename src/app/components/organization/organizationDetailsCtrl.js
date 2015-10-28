@@ -383,9 +383,11 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
     
     modalInstance.result.then(function() {
       // adjust space table information
+      $scope.getSpacesForTheOrganization();
       var indexOfSpaceToRemove = $scope.spaces.indexOf(space);
       $scope.spaces.splice(indexOfSpaceToRemove, 1);
       $scope.nrOfSpaces -=1;
+
     });
     
   };
