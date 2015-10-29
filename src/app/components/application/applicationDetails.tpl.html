@@ -173,8 +173,10 @@
                     <pre collapse="service.isCollapsed" class="service-credentials word-break">{{service.credentials}}</pre>
                   </td>
                   <td>
-                    <a class="action" href="{{service.dashboard_url}}" target="_blank"><i class="fa fa-lg fa-cog"></i></a>
-                    <a class="action action-delete" ng-click="deleteServiceBinding(service)"><i class="fa fa-lg fa-chain-broken"></i></a>
+                    <a class="action" href="{{service.supportURL}}" target="_blank" title="Support"><i class="fa fa-lg fa fa-question"></i></a>
+                    <a class="action" href="{{service.docsURL}}" target="_blank" title="Docs"><i class="fa fa-lg fa fa-file"></i></a>
+                    <a class="action" href="{{service.dashboard_url}}" target="_blank" title="Manage"><i class="fa fa-lg fa-cog"></i></a>
+                    <a class="action action-delete" ng-click="deleteServiceBinding(service)" title="Unbind"><i class="fa fa-lg fa-chain-broken"></i></a>
                   </td>
                 </tr>
               </tbody>

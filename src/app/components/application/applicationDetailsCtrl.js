@@ -28,6 +28,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
   
   $scope.services = [];
   $scope.serviceBindings = [];
+  $scope.serviceLabel = '';
   $scope.routes = [];
   $scope.domains = [];
 
@@ -50,9 +51,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
       $scope.memory = response.data.memory;
       $scope.scale.memory = response.data.memory;
       $scope.lastPush = response.data.package_updated_at;
-      $scope.state = response.data.state;
-      console.log($scope.state);
-      
+
       $scope.buildPack = response.data.detected_buildpack;
       $scope.startCommand = response.data.detected_start_command;
       $scope.packageState = response.data.package_state;
@@ -60,6 +59,8 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
       $scope.services = response.data.services;
       angular.forEach($scope.services, function(service, i) {
         service.isCollapsed = true;
+        service.docsURL='http://docs.run.pivotal.io/marketplace/services/'+service.service_plan.service.label+'.html';
+        service.supportURL='https://support.'+service.service_plan.service.label+'.com/';
       });
       $scope.nrOfServices = $scope.services.length;
       

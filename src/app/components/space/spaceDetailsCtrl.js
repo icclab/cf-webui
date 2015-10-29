@@ -56,14 +56,10 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
             };
 
             angular.forEach(instancesResponse.data, function(instance, i) {
-              console.log(instance.state);
               if (instance.state === 'CRASHED'){
                 objectApp.status = 'crashed';
-                console.log(instance.state);
               }
             });
-
-            console.log(instancesResponse.data);
 
             $scope.applications.push(objectApp);
 
@@ -86,7 +82,9 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
             name: service.name,
             servicePlan: service.service_plan.service.label + ', ' + service.service_plan.name,
             nrOfBoundApps: service.bound_app_count,
-            dashboardUrl: service.dashboard_url
+            dashboardUrl: service.dashboard_url,
+            supportURL:'https://support.'+service.service_plan.service.label+'.com/',
+            docsURL: 'http://docs.run.pivotal.io/marketplace/services/'+service.service_plan.service.label+'.html'
           };
 
           $scope.services.push(objectService);
