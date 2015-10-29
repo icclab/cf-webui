@@ -11,8 +11,8 @@
     <div id="page-title" class="clearfix">
       <h1 class="pull-left">Space: {{name}}</h1>
       <div class="pull-right">
-        <a class="action action-edit" ng-click="editSpace(id)"><i class="fa fa-lg fa-pencil"></i></a>
-        <a class="action action-delete" ng-click="deleteSpace(id)"><i class="fa fa-lg fa-trash"></i></a>
+        <a class="action action-edit" ng-click="editSpace(id)" title="Edit"><i class="fa fa-lg fa-pencil"></i></a>
+        <a class="action action-delete" ng-click="deleteSpace(id)" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
       </div>
     </div><!-- /#page-title -->
     
@@ -46,9 +46,9 @@
                   <td>{{application.instances}}</td>
                   <td>{{application.memory}} MB</td>
                   <td>
-                    <a class="action" href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/applications/{{application.id}}"><i class="fa fa-lg fa-eye"></i></a>
-                    <a class="action action-edit" ng-click="editApplication(application)"><i class="fa fa-lg fa-pencil"></i></a>
-                    <a class="action action-delete" ng-click="deleteApplication(application)"><i class="fa fa-lg fa-trash"></i></a>
+                    <a class="action" href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/applications/{{application.id}}" title="Details"><i class="fa fa-lg fa-eye"></i></a>
+                    <a class="action action-edit" ng-click="editApplication(application)" title="Edit"><i class="fa fa-lg fa-pencil"></i></a>
+                    <a class="action action-delete" ng-click="deleteApplication(application)" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
                   </td>
                 </tr>
               </tbody>

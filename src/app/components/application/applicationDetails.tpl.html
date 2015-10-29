@@ -11,11 +11,11 @@
     <div id="page-title" class="clearfix">
       <h1 class="pull-left">Application: {{name}}</h1>
       <div class="pull-right">
-        <a class="action action-stop" ng-click="stopApplication()" ng-show="state == 'STARTED'"><i class="fa fa-lg fa-stop"></i></a>
-        <a class="action action-play" ng-click="startApplication()" ng-show="state == 'STOPPED'"><i class="fa fa-lg fa-play"></i></a>
-        <a class="action action-refresh" ng-click="restartApplication()" ng-show="state == 'STARTED'"><i class="fa fa-lg fa-refresh"></i></a>
-        <a class="action action-edit" ng-click="editApplication()"><i class="fa fa-lg fa-pencil"></i></a>
-        <a class="action action-delete" ng-click="deleteApplication()"><i class="fa fa-lg fa-trash"></i></a>
+        <a class="action action-stop" ng-click="stopApplication()" ng-show="state == 'STARTED'" title="Stop"><i class="fa fa-lg fa-stop"></i></a>
+        <a class="action action-play" ng-click="startApplication()" ng-show="state == 'STOPPED'" title="Start"><i class="fa fa-lg fa-play"></i></a>
+        <a class="action action-refresh" ng-click="restartApplication()" ng-show="state == 'STARTED'" title="Restart"><i class="fa fa-lg fa-refresh"></i></a>
+        <a class="action action-edit" ng-click="editApplication()"><i class="fa fa-lg fa-pencil" title="Edit"></i></a>
+        <a class="action action-delete" ng-click="deleteApplication()"><i class="fa fa-lg fa-trash" title="Delete"></i></a>
       </div>
     </div><!-- /#page-title -->
     
@@ -173,7 +173,7 @@
                     <pre collapse="service.isCollapsed" class="service-credentials word-break">{{service.credentials}}</pre>
                   </td>
                   <td>
-                    <a class="action" href="{{service.supportURL}}" target="_blank" title="Support"><i class="fa fa-lg fa fa-question"></i></a>
+                    <a class="action" href="{{service.supportURL}}" target="_blank" title="Support"><i class="fa fa-lg fa fa-question" title="Support"></i></a>
                     <a class="action" href="{{service.docsURL}}" target="_blank" title="Docs"><i class="fa fa-lg fa fa-file"></i></a>
                     <a class="action" href="{{service.dashboard_url}}" target="_blank" title="Manage"><i class="fa fa-lg fa-cog"></i></a>
                     <a class="action action-delete" ng-click="deleteServiceBinding(service)" title="Unbind"><i class="fa fa-lg fa-chain-broken"></i></a>
@@ -199,7 +199,7 @@
               <tbody>
                 <tr ng-repeat="route in routes">
                   <td><a href="http://{{route.host}}.{{route.domain.name}}" target="_blank">{{route.host}}.{{route.domain.name}}</a></td>
-                  <td><a class="action action-delete" ng-click="unmapRoute(route)"><i class="fa fa-lg fa-trash"></i></a></td>
+                  <td><a class="action action-delete" ng-click="unmapRoute(route)" title="Delete"><i class="fa fa-lg fa-trash"></i></a></td>
                 </tr>
               </tbody>
             </table>
@@ -228,7 +228,7 @@
                   <td>{{usrEnVarValue}}</td>
                   <td>
                     <a class="action action-edit" ng-click="editUserEnv(usrEnVarKey, usrEnVarValue)"><i class="fa fa-lg fa-pencil"></i></a>
-                    <a class="action action-delete" ng-click="deleteUserEnv(usrEnVarKey)"><i class="fa fa-lg fa-trash"></i></a>
+                    <a class="action action-delete" ng-click="deleteUserEnv(usrEnVarKey)" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
                   </td>
                 </tr>
               </tbody>

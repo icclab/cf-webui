@@ -45,6 +45,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
       
       $scope.stackId = response.data.stack_guid;
       $scope.name = response.data.name;
+      $scope.state = response.data.state;
       $scope.nrOfInstances = response.data.instances;
       $scope.scale.instances = response.data.instances;
       $scope.diskQuota = response.data.disk_quota;

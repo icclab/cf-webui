@@ -35,8 +35,8 @@
                     <span class="label" ng-class="organization.status == 'active' ? 'label-success' : 'label-danger'">{{organization.status}}</span>
                   </td>
                   <td>
-                    <a class="action action-edit" ng-click="editOrganization(organization)"><i class="fa fa-lg fa-pencil"></i></a>
-                    <a class="action action-delete" ng-show="rootFields.showOrgCreation" ng-click="deleteOrganization(organization)"><i class="fa fa-lg fa-trash"></i></a>
+                    <a class="action action-edit" ng-click="editOrganization(organization)" title="Edit"><i class="fa fa-lg fa-pencil"></i></a>
+                    <a class="action action-delete" ng-show="rootFields.showOrgCreation" ng-click="deleteOrganization(organization)" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
                   </td>
                 </tr>
               </tbody>
