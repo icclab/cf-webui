@@ -229,6 +229,10 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
     }
   };
 
+  $scope.showSpace = function(spaceId) {
+    window.location = '#/organizations/' + $scope.organizationId + '/spaces/' + spaceId;
+  };
+
   $scope.open = function(space) {
     var modalInstance = $modal.open({
       templateUrl: 'app/components/space/spaceEdit.tpl.html',
