@@ -35,7 +35,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="application in applications">
+                <tr ng-repeat="application in applications" ng-click="showApp(application.id)" style="cursor: pointer">
                   <td>
                     <span class="label" ng-class="application.status == 'running' ? 'label-success' : application.status == 'crashed' ? 'label-warning' : 'label-default'">{{application.status}}</span>
                   </td>

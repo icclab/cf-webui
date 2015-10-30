@@ -249,6 +249,10 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
   };
   //$scope.retrieveRolesOfAllUsers();
 
+  $scope.showApp = function(appId) {
+    window.location = '#/organizations/' + $scope.organizationId + '/spaces/' + $scope.spaceId + '/applications/' + appId;
+  };
+
   $scope.editSpace = function(id) {
     var space = {
       id: $scope.id,
