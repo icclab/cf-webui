@@ -1,4 +1,4 @@
-angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scope', '$routeParams', '$modal', '$log', 'applicationService', 'spaceService', 'organizationService', 'messageService', function($rootScope, $scope, $routeParams, $modal, $log, applicationService, spaceService, organizationService, messageService) {
+angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scope', '$routeParams', '$modal', '$log', 'applicationService', 'spaceService', 'organizationService', 'routeService', 'messageService', function($rootScope, $scope, $routeParams, $modal, $log, applicationService, spaceService, organizationService, routeService, messageService) {
   $rootScope.rootFields.showContent = false;
   
   $scope.name = '';
@@ -10,6 +10,8 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
   $scope.nrOfApplications = 0;
   $scope.services = [];
   $scope.nrOfServices = 0;
+  $scope.routes = [];
+  $scope.nrOfRoutes = 0;
 
   $scope.users = [];
   $scope.usersOrganization = [];
@@ -90,12 +92,41 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
           $scope.services.push(objectService);
         });
       }
+      
     }, function(err) {
       messageService.addMessage('danger', 'The space summary has not been loaded.');
       $log.error(err);
     });
   };
   $scope.getApplicationsForTheSpace();
+
+  $scope.getRoutesForTheSpace = function(){
+    routeService.getRoutes($scope.id).then(function(response){
+      var data = response.data;
+      $scope.nrOfRoutes = data.total_results;
+      angular.forEach(data.resources, function(route, key){
+        var objectRoute = {
+          id: route.metadata.guid,
+          name: route.entity.host,
+          apps: []
+        };
+        routeService.getAppsForRoute(route.metadata.guid).then(function(responseApp){
+          angular.forEach(responseApp.data.resources, function(app, key){
+            var objectApp = {
+              id: app.metadata.guid,
+              name: app.entity.name
+            };
+            objectRoute.apps.push(objectApp);
+          });
+        });
+        $scope.routes.push(objectRoute);
+      });
+    }, function(err) {
+       messageService.addMessage('danger', 'The routes have not been loaded.');
+    });
+
+  };
+  $scope.getRoutesForTheSpace();
 
   $scope.retrieveRolesOfAllUsersForTheSpace = function() {
     if ($scope.users.length > 0) {
