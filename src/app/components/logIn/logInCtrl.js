@@ -18,12 +18,8 @@ angular.module('app.logIn').controller('LogInCtrl', ['$scope', '$location', '$ro
   };
 
   $scope.logOut = function() {
-    messageService.removeAllMessages();
-    authService.logOut();
-    messageService.addMessage('danger', 'Logged out successfully');
     $location.path('/login');
-
-    
-
+    authService.logOut();
+    messageService.addMessage('danger', 'Logged out successfully', true);
   };
 }]);

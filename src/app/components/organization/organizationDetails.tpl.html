@@ -63,8 +63,8 @@
                   <td>{{space.nrOfServices}}</td>
                   <td>{{space.memory}} MB</td>
                   <td>
-                    <a class="action action-edit" ng-click="open(space)" title="Edit"><i class="fa fa-lg fa-pencil"></i></a>
-                    <a class="action action-delete" ng-click="deleteSpace(space)" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
+                    <a class="action action-edit" ng-click="open(space); $event.stopPropagation();" title="Edit"><i class="fa fa-lg fa-pencil"></i></a>
+                    <a class="action action-delete" ng-click="deleteSpace(space); $event.stopPropagation();" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
                   </td>
                 </tr>
               </tbody>

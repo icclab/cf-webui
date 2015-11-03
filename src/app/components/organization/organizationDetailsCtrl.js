@@ -1,5 +1,6 @@
 angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$route', '$rootScope', '$scope', '$routeParams', '$modal', '$log', 'organizationService', 'spaceService', function($route, $rootScope, $scope, $routeParams, $modal, $log, organizationService, spaceService) {
   $rootScope.rootFields.showContent = false;
+  $scope.disableShow=true;
   $scope.name = '';
   $scope.id = $routeParams.organizationId;
   
@@ -230,7 +231,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
   };
 
   $scope.showSpace = function(spaceId) {
-    window.location = '#/organizations/' + $scope.organizationId + '/spaces/' + spaceId;
+    window.location = '#/organizations/' + $scope.id + '/spaces/' + spaceId;
   };
 
   $scope.open = function(space) {
@@ -388,9 +389,6 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
     modalInstance.result.then(function() {
       // adjust space table information
       $scope.getSpacesForTheOrganization();
-      var indexOfSpaceToRemove = $scope.spaces.indexOf(space);
-      $scope.spaces.splice(indexOfSpaceToRemove, 1);
-      $scope.nrOfSpaces -=1;
 
     });
     

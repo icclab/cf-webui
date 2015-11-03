@@ -47,8 +47,8 @@
                   <td>{{application.memory}} MB</td>
                   <td>
                     <a class="action" href="#/organizations/{{organizationId}}/spaces/{{spaceId}}/applications/{{application.id}}" title="Details"><i class="fa fa-lg fa-eye"></i></a>
-                    <a class="action action-edit" ng-click="editApplication(application)" title="Edit"><i class="fa fa-lg fa-pencil"></i></a>
-                    <a class="action action-delete" ng-click="deleteApplication(application)" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
+                    <a class="action action-edit" ng-click="editApplication(application); $event.stopPropagation();" title="Edit"><i class="fa fa-lg fa-pencil"></i></a>
+                    <a class="action action-delete" ng-click="deleteApplication(application.id); $event.stopPropagation();" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
                   </td>
                 </tr>
               </tbody>
@@ -151,6 +151,8 @@
                     <a class="action action-add" ng-click="deleteDeveloper(user.id)"><i class="fa fa-lg fa-check-square-o"ng-show="user.spaceDeveloper && !user.currentUser"></i></a>
                     <a class="action action-delete" ng-click="addDeveloper(user.name)"><i class="fa fa-lg fa-square-o" ng-show="!user.spaceDeveloper && 
                     !user.currentUser"></i></a>
+                    <a class="action action-delete"><i class="fa fa-lg fa-close" ng-show="!user.spaceDeveloper && 
+                    user.currentUser"></i></a>
                     &nbsp;<i class="fa fa-lg fa-check" ng-show="user.spaceDeveloper && user.currentUser"></i>
                   </td>
                   <td>

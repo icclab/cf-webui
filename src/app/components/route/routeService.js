@@ -24,6 +24,27 @@ angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', fu
 
     return $http.get('/request.php', config);
   };
+
+  var _getRoutesForTheSpace = function(spaceId) {
+
+    // params
+    var params = {
+      'url': API_ENDPOINT + '/v2/spaces/' + spaceId +'/routes',
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers,
+      params: params,
+    };
+
+    return $http.get('/request.php', config);
+  };
   
   var _getRoutesForApp = function(id, ignoreLoadingBar) {
     if (typeof(ignoreLoadingBar) === 'undefined') ignoreLoadingBar = false;
@@ -99,7 +120,8 @@ angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', fu
     
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/routes/' + routeId + '?recursive=true'
+      'url': API_ENDPOINT + '/v2/routes/' + routeId + '?recursive=true',
+      'guid': routeId
     };
 
     // http headers
@@ -112,6 +134,8 @@ angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', fu
       headers: headers,
       data: data
     };
+
+    return $http.delete('/request.php', config);
   };
   
   var _mapRoute = function(config) {
@@ -167,6 +191,7 @@ angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', fu
   };
   
   routeServiceFactory.getRoutes = _getRoutes;
+  routeServiceFactory.getRoutesForTheSpace = _getRoutesForTheSpace;
   routeServiceFactory.getRoutesForApp = _getRoutesForApp;
   routeServiceFactory.getAppsForRoute = _getAppsForRoute;
   routeServiceFactory.createRoute = _createRoute;

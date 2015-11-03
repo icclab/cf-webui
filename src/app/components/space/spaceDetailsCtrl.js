@@ -66,7 +66,6 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
             $scope.applications.push(objectApp);
 
           }, function(err) {
-            messageService.addMessage('danger', 'Could not load app instances.');
             $log.error(err);
           });
 
@@ -101,7 +100,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
   $scope.getApplicationsForTheSpace();
 
   $scope.getRoutesForTheSpace = function(){
-    routeService.getRoutes($scope.id).then(function(response){
+    routeService.getRoutesForTheSpace($scope.id).then(function(response){
       var data = response.data;
       $scope.nrOfRoutes = data.total_results;
       angular.forEach(data.resources, function(route, key){
@@ -323,19 +322,14 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     });
   };
   
-  $scope.deleteApplication = function(application) {
-    
-    application = {
-      'id' : application.id,
-      'name' : application.name
-    };
-    
+  $scope.deleteApplication = function(applicationId) {
+
     var modalInstance = $modal.open({
       templateUrl: 'app/components/application/applicationDelete.tpl.html',
       controller: 'ApplicationDeleteCtrl',
       resolve: {
-        application: function() {
-          return application;
+        applicationId: function() {
+          return applicationId;
         }
       }
     });

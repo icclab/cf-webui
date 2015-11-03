@@ -1,4 +1,4 @@
-angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootScope', '$scope', '$routeParams', '$modal', '$log', 'applicationService', 'routeService', 'messageService', function($rootScope, $scope, $routeParams, $modal, $log, applicationService, routeService, messageService) {
+angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootScope', '$scope', '$routeParams', '$modal', '$log', 'applicationService', 'messageService', function($rootScope, $scope, $routeParams, $modal, $log, applicationService, messageService) {
   $rootScope.rootFields.showContent = false;
   
   $scope.summary = {};
@@ -182,17 +182,14 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
   
   $scope.deleteApplication = function() {
     
-    var application = {
-      'id' : $scope.applicationId,
-      'name' : $scope.name
-    };
+    var applicationId = $scope.applicationId;
     
     var modalInstance = $modal.open({
       templateUrl: 'app/components/application/applicationDelete.tpl.html',
       controller: 'ApplicationDeleteCtrl',
       resolve: {
-        application: function() {
-          return application;
+        applicationId: function() {
+          return applicationId;
         }
       }
     });

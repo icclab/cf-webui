@@ -169,12 +169,12 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
     return $http.put('/request.php', data, config);
   };
   
-  var _deleteApplication = function(application) {
+  var _deleteApplication = function(applicationId) {
     
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/apps/' + application.id,
-      'guid' : application.id
+      'url': API_ENDPOINT + '/v2/apps/' + applicationId,
+      'guid' : applicationId
     };
 
     // http headers
