@@ -21,6 +21,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
   $scope.currentUser = {
     name: sessionStorage.getItem('userName'),
+    spaceId: $routeParams.spaceId,
     currentManager: false
   };
 

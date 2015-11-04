@@ -7,7 +7,8 @@ angular.module('app.space').controller('SpaceAddCtrl', ['$route', '$scope', '$mo
   $scope.ok = function () {
     spaceService.addSpace($scope.space, $route.reload()).then(function(response) {
       // close the modal
-      $modalInstance.close();
+      console.log(response.data);
+      $scope.addUser(response.data.metadata.guid);
       // set message
       messageService.addMessage('success', 'The space has been successfully added.');
     }, function(err) {
@@ -18,6 +19,33 @@ angular.module('app.space').controller('SpaceAddCtrl', ['$route', '$scope', '$mo
       // close the modal
       $modalInstance.close();
     });
+  };
+
+  $scope.addUser = function (spaceId) {
+    var currentUser = {
+      name: sessionStorage.getItem('userName'),
+      spaceId: spaceId
+    };
+    spaceService.associateManagerWithSpace(currentUser).then(function(response) {
+      spaceService.associateAuditorWithSpace(currentUser).then(function(response) {
+        spaceService.associateDeveloperWithSpace(currentUser).then(function(response) {
+          $modalInstance.close();
+        }, function(err) {
+          messageService.addMessage('danger', 'The space developer has not been added.', true);
+          $modalInstance.close();
+          $log.error(err);
+        });
+      }, function(err) {
+        messageService.addMessage('danger', 'The space auditor has not been added.', true);
+        $modalInstance.close();
+        $log.error(err);
+      });
+    }, function(err) {
+      messageService.addMessage('danger', 'The space manager has not been added.', true);
+      $modalInstance.close();
+      $log.error(err);
+    });
+
   };
   
   $scope.cancel = function () {
