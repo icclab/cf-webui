@@ -3,9 +3,14 @@ angular.module('app').run(['$rootScope', '$location', '$route', 'authService', f
   $rootScope.rootFields = {};
 
   authService.fillAuthData();
-  $rootScope.rootFields.marginSidebar = 220;
 
-
+  var marginSidebar= sessionStorage.getItem('marginSidebar');
+  if (marginSidebar){
+    $rootScope.rootFields.marginSidebar = marginSidebar;
+  }else{
+    sessionStorage.setItem('marginSidebar', "220px");
+    $rootScope.rootFields.marginSidebar = "220px";
+  }
 
   // redirect the user to the login page if he is not logged in
   $rootScope.$on('$routeChangeStart', function(event) {

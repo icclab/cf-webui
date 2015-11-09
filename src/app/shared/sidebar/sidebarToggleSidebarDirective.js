@@ -15,6 +15,7 @@ angular.module('app.sidebar').directive('toggleSidebar', ['$rootScope', function
             $('#page-content').animate({'marginLeft': 0}, 400);
             $rootScope.rootFields.hidedSidebar = true;
             $rootScope.rootFields.marginSidebar = "0px";
+            sessionStorage.setItem('marginSidebar', "0px");
 
           // show sidebar
           } else {
@@ -24,6 +25,7 @@ angular.module('app.sidebar').directive('toggleSidebar', ['$rootScope', function
             $('#page-sidebar').animate({'width': '220px'}, 400);
             $('#page-content').animate({'marginLeft': '220px'}, 400);
             $rootScope.rootFields.marginSidebar = "220px";
+            sessionStorage.setItem('marginSidebar', "220px");
             $rootScope.rootFields.hidedSidebar = false;
           }
         });
