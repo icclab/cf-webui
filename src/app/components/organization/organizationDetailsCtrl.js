@@ -175,6 +175,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 
           var objectUser = {
             id: user.metadata.guid,
+            organizationId: $scope.id,
             name: user.entity.username,
             userRoles: userRoles,
             orgManager: orgManager,
@@ -417,12 +418,8 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 
   };
 
-  $scope.disassociateUser = function(userId) {
-
-    var user = {
-      'organizationId': $scope.id,
-      'userId': userId
-    };
+  $scope.disassociateUser = function(user) {
+    var spaces = $scope.spaces;
 
     var modalInstance = $modal.open({
       templateUrl: 'app/components/organization/organizationDeleteUser.tpl.html',
@@ -430,6 +427,9 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
       resolve: {
         user: function() {
           return user;
+        },
+        spaces: function() {
+          return spaces;
         }
       }
     });
@@ -465,7 +465,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 
     var user = {
       'organizationId': $scope.id,
-      'userId': userId
+      'id': userId
     };
 
     var modalInstance = $modal.open({
@@ -509,7 +509,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 
     var user = {
       'organizationId': $scope.id,
-      'userId': userId
+      'id': userId
     };
 
     var modalInstance = $modal.open({
@@ -553,7 +553,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 
     var user = {
       'organizationId': $scope.id,
-      'userId': userId
+      'id': userId
     };
 
     var modalInstance = $modal.open({

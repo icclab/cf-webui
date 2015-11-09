@@ -255,7 +255,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
   var _disassociateUserWithOrganization = function(user) {
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/users/' + user.userId,
+      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/users/' + user.id,
     };
 
     // http headers
@@ -297,7 +297,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
   var _disassociateManagerWithOrganization = function(user) {
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/managers/' + user.userId,
+      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/managers/' + user.id,
       //'username': user.username,
       //'organization_guid': user.organizationId
     };
@@ -340,7 +340,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
   var _disassociateBillingManagerWithOrganization = function(user) {
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/billing_managers/' + user.userId,
+      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/billing_managers/' + user.id,
       //'username': user.username,
       //'organization_guid': user.organizationId
     };
@@ -383,7 +383,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
   var _disassociateAuditorWithOrganization = function(user) {
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/auditors/' + user.userId,
+      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/auditors/' + user.id,
       //'username': user.username,
       //'organization_guid': user.organizationId
     };

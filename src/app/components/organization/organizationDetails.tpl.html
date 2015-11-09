@@ -133,7 +133,7 @@
                     <a class="action action-delete" ng-click="addBillingManager(user.name)"><i class="fa fa-lg fa-square-o" ng-hide="user.billingManager"></i></a>
                   </td>
                   <td>
-                    <a class="action action-delete" ng-click="disassociateUser(user.id)"><i class="fa fa-lg fa-trash" ng-hide="user.orgManager || user.billingManager ||  user.orgAuditor"></i></a>&nbsp;&nbsp;
+                    <a class="action action-delete" ng-click="disassociateUser(user)"><i class="fa fa-lg fa-trash" ng-hide="user.currentUser"></i></a>&nbsp;&nbsp;
                   </td>
                 </tr>
               </tbody>
