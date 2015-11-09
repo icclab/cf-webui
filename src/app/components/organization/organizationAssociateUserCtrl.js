@@ -118,7 +118,8 @@ angular.module('app.organization').controller('OrganizationAssociateUserCtrl', [
 
     }, function(err) {
       // set message
-      messageService.addMessage('danger', 'The user has not been added.');
+      messageService.addMessage('danger', 'The user has not been added. ' + err.data.description);
+      $modalInstance.close();
       $log.error(err);
     });
   };
