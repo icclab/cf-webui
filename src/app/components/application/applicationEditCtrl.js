@@ -5,12 +5,12 @@ angular.module('app.application').controller('ApplicationEditCtrl', ['$scope', '
   $scope.ok = function () {
     applicationService.editApplication($scope.application).then(function(response) {
       messageService.addMessage('success', 'The application name has been successfully changed.');
+      $modalInstance.close($scope.application);
     }, function(err) {
       messageService.addMessage('danger', 'The application name has not been changed.');
+      $modalInstance.dismiss('cancel');
       $log.error(err);
     });
-
-    $modalInstance.close($scope.application);
   };
   
   $scope.cancel = function () {

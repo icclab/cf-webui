@@ -1,7 +1,8 @@
-angular.module('app.sidebar').controller('SidebarCtrl', ['$rootScope', '$scope', '$location', '$log', 'organizationService', 'spaceService', function ($rootScope, $scope, $location, $log, organizationService, spaceService) {
+angular.module('app.sidebar').controller('SidebarCtrl', ['$rootScope', '$routeParams', '$scope', '$location', '$log', 'organizationService', 'spaceService', function ($rootScope, $routeParams, $scope, $location, $log, organizationService, spaceService) {
   $rootScope.rootFields.showContent = false;
   
-  $scope.organizations = [];
+  $rootScope.organizations = [];
+  $rootScope.orgIdx = -1;
 
   // get all spaces
   var getSpacesPromise = spaceService.getSpaces();
@@ -18,7 +19,7 @@ angular.module('app.sidebar').controller('SidebarCtrl', ['$rootScope', '$scope',
         spaces: []
       };
 
-      $scope.organizations.push(objectOrganization);
+      $rootScope.organizations.push(objectOrganization);
     });
 
     // push the space objects to the organizations
@@ -33,9 +34,9 @@ angular.module('app.sidebar').controller('SidebarCtrl', ['$rootScope', '$scope',
           name: space.entity.name
         };
 
-        for (var j = 0; j < $scope.organizations.length; j++) {
-          if ($scope.organizations[j].id === objectSpace.organizationId) {
-            $scope.organizations[j].spaces.push(objectSpace);
+        for (var j = 0; j < $rootScope.organizations.length; j++) {
+          if ($rootScope.organizations[j].id === objectSpace.organizationId) {
+            $rootScope.organizations[j].spaces.push(objectSpace);
             break;
           }
         }
@@ -48,6 +49,12 @@ angular.module('app.sidebar').controller('SidebarCtrl', ['$rootScope', '$scope',
   });
   
   $scope.isActive = function(path) {
+    for (var j = 0; j < $rootScope.organizations.length; j++) {
+      if ($rootScope.organizations[j].id === $routeParams.organizationId) {
+        $rootScope.orgIdx = j;
+        break;
+      }
+    }
     return ($location.path().indexOf(path) > -1);
   };
   

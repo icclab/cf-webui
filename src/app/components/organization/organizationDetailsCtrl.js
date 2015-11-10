@@ -28,6 +28,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
     name: sessionStorage.getItem('userName'),
     currentManager: false
   };
+  
 
   // get particular organization
   organizationService.getOrganization($scope.id).then(function(response) {
@@ -46,10 +47,10 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
       });
       
     }, function(err) {
-      $log.error(err);
+      $log.error(err.data.description);
     });
   }, function (err) {
-    $log.error(err);
+    $log.error(err.data.description);
   });
 
   // get spaces for the organization
@@ -109,11 +110,11 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
           $scope.spacesTotalQuota += memory;
           $scope.setOrganizationQuota();
         }, function(err) {
-          $log.error(err);
+          $log.error(err.data.description);
         });
       });
     }, function(err) {
-      $log.error(err);
+      $log.error(err.data.description);
     });
   };
   $scope.getSpacesForTheOrganization();
@@ -124,7 +125,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
     $scope.nrOfDomains += 1;
     $scope.sharedDomains = (data.resources);
   }, function(err) {
-    $log.error(err);
+    $log.error(err.data.description);
   });
   
   // get organization privateDomains
@@ -191,40 +192,12 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 
       });
     }, function(err) {
-    $log.error(err);
+    $log.error(err.data.description);
     });
 
   };
   $scope.retrieveRolesOfAllUsersForTheOrganization();
 
-  
-  
-  // get all users for the organization
-  /*organizationService.getAllUsersForTheOrganization($scope.id).then(function(response) {
-     
-    var data = response.data;
-    $scope.nrOfOrganizationUsers = data.total_results;
-    $scope.allUsersForOrganization = data.resources;
-    
-    
-    // get summary for each user
-    angular.forEach(data.resources, function(user, key) {
-      
-        var objectUser = {
-          id: user.metadata.guid,
-          name: user.entity.username,
-        };
-
-
-
-        $scope.users.push(objectUser);
-
-    });
-    
-  }, function(err) {
-    $log.error(err);
-  });*/
-  
   $scope.setOrganizationQuota = function() {
     if ($scope.organizationTotalQuota > 0) {
       $scope.usedQuotaPercent = (($scope.spacesTotalQuota / $scope.organizationTotalQuota)*100);
@@ -235,7 +208,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
     window.location = '#/organizations/' + $scope.id + '/spaces/' + spaceId;
   };
 
-  $scope.open = function(space) {
+  $scope.editSpace = function(space) {
     var modalInstance = $modal.open({
       templateUrl: 'app/components/space/spaceEdit.tpl.html',
       controller: 'SpaceEditCtrl',
@@ -247,6 +220,8 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
     });
 
     modalInstance.result.then(function(editedSpace) {
+      var indexOfSpaceToRemove = $scope.spaces.indexOf(space);
+      $rootScope.organizations[$rootScope.orgIdx].spaces[indexOfSpaceToRemove].name = editedSpace.name;
       $scope.editedSpace = editedSpace;
     });
   };
@@ -271,6 +246,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 
     modalInstance.result.then(function(editedOrganization) {
       $scope.name = editedOrganization.name;
+      $rootScope.organizations[$rootScope.orgIdx].name = editedOrganization.name;
     });
 
   };
@@ -312,6 +288,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
       controller: 'SpaceAddCtrl',
       resolve: {
         space: function() {
+          console.log(space);
           return space;
         }
       }
@@ -321,6 +298,9 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
     modalInstance.result.then(function() {
       // reload the spaces table
       //$route.reload();
+      console.log(space);
+      //$scope.spaces.push(space);
+      $rootScope.organizations[$rootScope.orgIdx].spaces.push(space);
       $scope.getSpacesForTheOrganization();
       //$scope.organizations.spaces=$scope.spaces;
       
@@ -389,7 +369,12 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
     
     modalInstance.result.then(function() {
       // adjust space table information
-      $scope.getSpacesForTheOrganization();
+      //$scope.getSpacesForTheOrganization();
+      var indexOfSpaceToRemove = $scope.spaces.indexOf(space);
+      $scope.spaces.splice(indexOfSpaceToRemove, 1);
+      $rootScope.organizations[$rootScope.orgIdx].spaces.splice(indexOfSpaceToRemove, 1);
+      $scope.nrOfSpaces -=1;
+      console.log($scope.spaces);
 
     });
     

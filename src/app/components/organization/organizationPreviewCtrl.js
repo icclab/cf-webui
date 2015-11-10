@@ -59,7 +59,9 @@ angular.module('app.organization').controller('OrganizationPreviewCtrl', ['$root
         };
         
         $scope.organizations.push(createdOrganization);
+        $rootScope.organizations.push(createdOrganization);
       }
+      $scope.nrOfOrganizations += 1;
       
     });
   };
@@ -89,6 +91,7 @@ angular.module('app.organization').controller('OrganizationPreviewCtrl', ['$root
     modalInstance.result.then(function(editedOrganization) {
       var orgIdx = $scope.organizations.indexOf(org);
       $scope.organizations[orgIdx].name = editedOrganization.name;
+      $rootScope.organizations[orgIdx].name = editedOrganization.name;
     });
   };
   

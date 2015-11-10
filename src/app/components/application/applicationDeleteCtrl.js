@@ -5,7 +5,7 @@ angular.module('app.application').controller('ApplicationDeleteCtrl', ['$route',
   $scope.ok = function () {
     applicationService.getServiceBindings(applicationId).then(function(responseServiceBinding){
       if (responseServiceBinding.data.total_results ===0){
-        applicationService.deleteApplication($scope.applicationId, $route.reload()).then(function(response) {
+        applicationService.deleteApplication($scope.applicationId).then(function(response) {
           messageService.addMessage('success', 'The application has been successfully deleted.');
           $modalInstance.close();
         }, function(err) {

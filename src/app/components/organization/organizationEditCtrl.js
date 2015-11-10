@@ -4,11 +4,11 @@ angular.module('app.organization').controller('OrganizationEditCtrl', ['$scope',
 
   $scope.ok = function () {
 
-    organizationService.editOrganization($scope.organization, $route.reload()).then(function(response) {
+    organizationService.editOrganization($scope.organization).then(function(response) {
       messageService.addMessage('success', 'The organization name has been successfully changed.');
     }, function(err) {
       messageService.addMessage('danger', 'The organization name has not been changed.');
-      $log.error(err);
+      $log.error(err.data.description);
     });
 
     $modalInstance.close($scope.organization);

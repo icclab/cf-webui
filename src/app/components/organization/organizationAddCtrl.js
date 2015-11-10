@@ -2,7 +2,7 @@ angular.module('app.organization').controller('OrganizationAddCtrl', ['$route', 
 
   $scope.ok = function () {
     
-    organizationService.addOrganization($scope.organization, $route.reload()).then(function(response) {
+    organizationService.addOrganization($scope.organization).then(function(response) {
 
       $route.reload();
       

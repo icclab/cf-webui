@@ -5,12 +5,12 @@ angular.module('app.space').controller('SpaceDeleteCtrl', ['$q', '$route', '$sco
 
   $scope.ok = function () {
     $scope.emptySpace().then(function(response){
-      spaceService.deleteSpace($scope.space, $route.reload()).then(function(response) {
+      spaceService.deleteSpace($scope.space).then(function(response) {
         messageService.addMessage('success', 'The space has been successfully deleted.', true);
         $modalInstance.close($scope.space);
       }, function(err) {
         messageService.addMessage('danger', 'The space has not been deleted.', true);
-        $log.error(err.data);
+        $log.error(err.data.description);
         $modalInstance.close($scope.space);
       });
     });
@@ -77,8 +77,17 @@ angular.module('app.space').controller('SpaceDeleteCtrl', ['$q', '$route', '$sco
       $scope.deleteServiceInstances().then(function(responseServiceInstance){
         $scope.deleteRoutes().then(function(responseRoute){
           deferred.resolve(responseRoute);
+        }, function(err){
+          $log.error(err.data.description);
+          deferred.reject(err);
         });
+      }, function(err){
+        $log.error(err.data.description);
+        deferred.reject(err);
       });
+    }, function(err){
+      $log.error(err.data.description);
+      deferred.reject(err);
     });
     return deferred.promise;
   };

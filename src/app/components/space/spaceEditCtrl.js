@@ -3,7 +3,7 @@ angular.module('app.space').controller('SpaceEditCtrl', ['$scope', '$route', '$m
   $scope.space = space;
 
   $scope.ok = function () {
-    spaceService.editSpace($scope.space, $route.reload()).then(function(response) {
+    spaceService.editSpace($scope.space).then(function(response) {
       messageService.addMessage('success', 'The space has been successfully changed.');
     }, function(err) {
       messageService.addMessage('danger', 'The space has not been changed.');

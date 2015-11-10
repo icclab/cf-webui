@@ -11,7 +11,7 @@
     <div id="page-title" class="clearfix">
       <h1 class="pull-left">Organization: {{name}}</h1>
       <div class="pull-right">
-        <a class="action action-edit" ng-click="editOrganization()" ng-show="rootFields.showOrgCreation" title="Edit"><i class="fa fa-lg fa-pencil"></i></a>
+        <a class="action action-edit" ng-click="editOrganization()" title="Edit"><i class="fa fa-lg fa-pencil"></i></a>
         <a class="action action-delete" ng-show="rootFields.showOrgCreation" ng-click="deleteOrganization()" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
       </div>
     </div><!-- /#page-title -->
@@ -63,7 +63,7 @@
                   <td>{{space.nrOfServices}}</td>
                   <td>{{space.memory}} MB</td>
                   <td>
-                    <a class="action action-edit" ng-click="open(space); $event.stopPropagation();" title="Edit"><i class="fa fa-lg fa-pencil"></i></a>
+                    <a class="action action-edit" ng-click="editSpace(space); $event.stopPropagation();" title="Edit"><i class="fa fa-lg fa-pencil"></i></a>
                     <a class="action action-delete" ng-click="deleteSpace(space); $event.stopPropagation();" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
                   </td>
                 </tr>
