@@ -17,7 +17,7 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
 
     var timeOut = Date.now() - lastTime;
 
-    if (timeOut < 600000){
+    if (timeOut < 1800000){
       sessionStorage.setItem('lastTime', Date.now());
     }
 
@@ -33,7 +33,7 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
       var $location = $injector.get('$location');
       var messageService = $injector.get('messageService');
       $log.error(timeOut);
-      if(timeOut > 600000){
+      if(timeOut > 1800000){
         authService.logOut();
         sessionStorage.setItem('lastTime', 0);
       }
