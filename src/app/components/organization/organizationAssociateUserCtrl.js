@@ -1,4 +1,4 @@
-angular.module('app.organization').controller('OrganizationAssociateUserCtrl', ['$route', '$routeParams', '$scope', '$modalInstance', '$log', 'spaces', 'organizationService', 'spaceService', 'messageService', function($route, $routeParams, $scope, $modalInstance, $log, spaces, organizationService, spaceService, messageService) {
+angular.module('app.organization').controller('OrganizationAssociateUserCtrl', ['$q', '$route', '$routeParams', '$scope', '$modalInstance', '$log', 'spaces', 'organizationService', 'spaceService', 'messageService', function($q, $route, $routeParams, $scope, $modalInstance, $log, spaces, organizationService, spaceService, messageService) {
 
   $scope.spaces = spaces;
   $scope.spacesLength = spaces.length > 0;
@@ -29,102 +29,47 @@ angular.module('app.organization').controller('OrganizationAssociateUserCtrl', [
 
   $scope.ok = function () {
     messageService.removeAllMessages();
-    organizationService.associateUserWithOrganization($scope.user).then(function(response) {
-      // set message
-      messageService.addMessage('success', 'The user has been successfully added.');
-      if ($scope.user.orgManager){
-        organizationService.associateManagerWithOrganization($scope.user).then(function(response) {
-          // set message
-          messageService.addMessage('success', 'The organization manager has been successfully added.');
-          // close the modal
+      organizationService.associateUserWithOrganization($scope.user).then(function(response) {
+        var promises = [];
+        promises.push($scope.addOrganizationUser($scope.user));
+        promises.push($scope.addSpacesUser($scope.spacesRoles));
+        $q.all(promises).then(function(){
+          messageService.addMessage('success', 'The user been succesfully added. ');
           $modalInstance.close();
-        }, function(err) {
-          // set message
-          messageService.addMessage('danger', 'The organization manager has not been added.');
+        }, function(err){
+          messageService.addMessage('danger', 'The user has not been added. ' + err.data.description);
+          $modalInstance.dismiss();
           $log.error(err);
-          $modalInstance.close();
         });
-      }
 
-      if ($scope.user.orgAuditor){
-        organizationService.associateAuditorWithOrganization($scope.user).then(function(response) {
-          // set message
-          messageService.addMessage('success', 'The organization auditor has been successfully added.');
-          $modalInstance.close();
-        }, function(err) {
-          // set message
-          messageService.addMessage('danger', 'The organization auditor has not been added.');
-          $log.error(err);
-          $modalInstance.close();
-        });
-      }
+      }, function(err) {
 
-      if ($scope.user.billingManager){
-        organizationService.associateBillingManagerWithOrganization($scope.user).then(function(response) {
-          // set message
-          messageService.addMessage('success', 'The organization billing manager has been successfully added.');
-          $modalInstance.close();
-        }, function(err) {
-          // set message
-          messageService.addMessage('danger', 'The organization billing manager has not been added.');
-          $log.error(err);
-          $modalInstance.close();
-        });      
-      }
-
-      angular.forEach($scope.spacesRoles, function(spaceRoles, key) {  
-        spaceRoles.name = $scope.user.name;  
-
-        if (spaceRoles.spaceManager){
-          spaceService.associateManagerWithSpace(spaceRoles).then(function(response) {
-            // set message
-            messageService.addMessage('success', 'The space manager has been successfully added.');
-            // close the modal
-            $modalInstance.close();
-          }, function(err) {
-            // set message
-            messageService.addMessage('danger', 'The space manager has not been added.');
-            $log.error(err);
-            $modalInstance.close();
-          });
-        }
-
-        if (spaceRoles.spaceAuditor){
-          spaceService.associateAuditorWithSpace(spaceRoles).then(function(response) {
-            // set message
-            messageService.addMessage('success', 'The space auditor has been successfully added.');
-            $modalInstance.close();
-          }, function(err) {
-            // set message
-            messageService.addMessage('danger', 'The space auditor has not been added.');
-            $log.error(err);
-            $modalInstance.close();
-          });
-        }
-
-        if (spaceRoles.spaceDeveloper){
-          spaceService.associateDeveloperWithSpace(spaceRoles).then(function(response) {
-            // set message
-            messageService.addMessage('success', 'The space developer has been successfully added.');
-            $modalInstance.close();
-          }, function(err) {
-            // set message
-            messageService.addMessage('danger', 'The space developer has not been added.');
-            $log.error(err);
-            $modalInstance.close();
-          });      
-        }
+        messageService.addMessage('danger', 'The user has not been added. ' + err.data.description);
+        $modalInstance.close();
+        $log.error(err);
       });
-
-    }, function(err) {
-      // set message
-      messageService.addMessage('danger', 'The user has not been added. ' + err.data.description);
-      $modalInstance.close();
-      $log.error(err);
-    });
   };
   
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
   };
+
+  $scope.addSpacesUser = function (spacesUser){
+    var promises = [];
+    angular.forEach(spacesUser, function(spaceUser, key){
+      spaceUser.name = $scope.user.name;
+      if (spaceUser.spaceManager) promises.push(spaceService.associateManagerWithSpace(spaceUser));
+      if (spaceUser.spaceAuditor) promises.push(spaceService.associateAuditorWithSpace(spaceUser));
+      if (spaceUser.spaceDeveloper) promises.push(spaceService.associateDeveloperWithSpace(spaceUser));
+    });
+    return $q.all(promises);
+  };
+  $scope.addOrganizationUser = function (organizationUser){
+    var promises = [];
+    if (organizationUser.orgManager) promises.push(organizationService.associateManagerWithOrganization(organizationUser));
+    if (organizationUser.orgAuditor) promises.push(organizationService.associateAuditorWithOrganization(organizationUser));
+    if (organizationUser.billingManager) promises.push(organizationService.associateBillingManagerWithOrganization(organizationUser));
+    return $q.all(promises);
+  };
+
 }]);
