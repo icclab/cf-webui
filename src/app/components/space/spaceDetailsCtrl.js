@@ -40,7 +40,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
       // populate applications
       if (response.data.apps && response.data.apps.length > 0) {
         $scope.nrOfApplications = response.data.apps.length;
-
+        $scope.applications = response.data.apps;
         angular.forEach(response.data.apps, function(app, i) {
 
           var objectApp = {
@@ -51,33 +51,16 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
             memory: app.memory,
             url: app.urls[0] // only the first url
           };
-          console.log(objectApp.name);
-          console.log(objectApp.instances);
-          console.log(objectApp.status);
-          console.log(app.state);
-          if (objectApp.instances>0){
-            applicationService.getInstances(app.guid).then(function(instancesResponse) {
-            
-              //$scope.instances = instancesResponse.data;
 
-              angular.forEach(instancesResponse.data, function(instance, i) {
-                if (instance.state === 'CRASHED'){
-                  objectApp.status = 'crashed';
-                }
-              });
-
-              //$scope.applications.push(objectApp);
-
-            }, function(err) {
-              $log.error(err.data.description);
-              //$scope.applications.push(objectApp);
-            });
-
-          }else{
-            //$scope.applications.push(objectApp);
-          }
-          $scope.applications.push(objectApp);
+          if (app.state === 'STARTED' && (app.instances!==app.running_instances)) objectApp.status = 'crashed';
           
+          for (var j = 0; j < response.data.apps.length; j++) {
+            if (response.data.apps[j].guid === objectApp.id) {
+              $scope.applications[j]=objectApp;
+              break;
+            }
+          }
+
         });
       }
 
