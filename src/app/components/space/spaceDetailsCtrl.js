@@ -43,33 +43,40 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
         angular.forEach(response.data.apps, function(app, i) {
 
-         
-
-          applicationService.getInstances(app.guid).then(function(instancesResponse) {
+          var objectApp = {
+            id: app.guid,
+            status: (app.state === 'STARTED') ? 'running' : 'stopped',
+            name: app.name,
+            instances: app.instances,
+            memory: app.memory,
+            url: app.urls[0] // only the first url
+          };
+          console.log(objectApp.name);
+          console.log(objectApp.instances);
+          console.log(objectApp.status);
+          console.log(app.state);
+          if (objectApp.instances>0){
+            applicationService.getInstances(app.guid).then(function(instancesResponse) {
             
-            //$scope.instances = instancesResponse.data;
+              //$scope.instances = instancesResponse.data;
 
-            var objectApp = {
-              id: app.guid,
-              status: (app.state === 'STARTED') ? 'running' : 'stopped',
-              name: app.name,
-              instances: app.instances,
-              memory: app.memory,
-              url: app.urls[0] // only the first url
-            };
+              angular.forEach(instancesResponse.data, function(instance, i) {
+                if (instance.state === 'CRASHED'){
+                  objectApp.status = 'crashed';
+                }
+              });
 
-            angular.forEach(instancesResponse.data, function(instance, i) {
-              if (instance.state === 'CRASHED'){
-                objectApp.status = 'crashed';
-              }
+              //$scope.applications.push(objectApp);
+
+            }, function(err) {
+              $log.error(err.data.description);
+              //$scope.applications.push(objectApp);
             });
 
-            $scope.applications.push(objectApp);
-
-          }, function(err) {
-            $log.error(err);
-          });
-
+          }else{
+            //$scope.applications.push(objectApp);
+          }
+          $scope.applications.push(objectApp);
           
         });
       }
@@ -95,7 +102,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
       
     }, function(err) {
       messageService.addMessage('danger', 'The space summary has not been loaded.');
-      $log.error(err);
+      $log.error(err.data.description);
     });
   };
   $scope.getApplicationsForTheSpace();
@@ -173,7 +180,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     });
       $scope.retrieveRolesOfAllUsers();
     }, function(err) {
-      $log.error(err);
+      $log.error(err.data.description);
     });
     
   };
@@ -243,7 +250,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
     });
   }, function(err) {
-  $log.error(err);
+  $log.error(err.data.description);
   });
 
   };
