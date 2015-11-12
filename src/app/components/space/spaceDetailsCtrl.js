@@ -27,6 +27,9 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
   // service summary from api
   $scope.getRoutesForTheSpace = function(){
+    if ($scope.routes.length > 0) {
+      $scope.routes.length = 0;
+    }
     routeService.getRoutesForTheSpace($scope.id).then(function(response){
       var data = response.data;
       $scope.nrOfRoutes = data.total_results;
