@@ -34,11 +34,11 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
     $http.post('/request.php', data, { headers: headers }).success(function(response) {
       if (response.access_token !== null) {
         // save access token and username in session storage
-        sessionStorage.setItem('accessToken', response.access_token);
-        sessionStorage.setItem('refreshToken', response.refresh_token);
-        sessionStorage.setItem('expiresIn', response.expires_in);
-        sessionStorage.setItem('userName', logInData.userName);
-        sessionStorage.setItem('lastTime', Date.now());
+        localStorage.setItem('accessToken', response.access_token);
+        localStorage.setItem('refreshToken', response.refresh_token);
+        localStorage.setItem('expiresIn', response.expires_in);
+        localStorage.setItem('userName', logInData.userName);
+        localStorage.setItem('lastTime', Date.now());
 
         // set data of authentication object
         _authentication.isAuth = true;
@@ -59,8 +59,8 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
   };
 
   var _refresh = function() {
-    var refreshToken = sessionStorage.getItem('refreshToken');
-    var accessToken = sessionStorage.getItem('accessToken');
+    var refreshToken = localStorage.getItem('refreshToken');
+    var accessToken = localStorage.getItem('accessToken');
 
     // data to post
     var data = {
@@ -86,8 +86,8 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
     $http.post('/request.php', data, { headers: headers }).success(function(response) {
       if (response.access_token !== null) {
         // save access token and username in session storage
-        sessionStorage.setItem('accessToken', response.access_token);
-        sessionStorage.setItem('refreshToken', response.refresh_token);
+        localStorage.setItem('accessToken', response.access_token);
+        localStorage.setItem('refreshToken', response.refresh_token);
 
         // set data of authentication object
         _authentication.isAuth = true;
@@ -107,9 +107,9 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
 
   var _logOut = function() {
     // remove access token and username in session storage
-    sessionStorage.removeItem('accessToken');
-    sessionStorage.removeItem('refreshToken');
-    sessionStorage.removeItem('userName');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('userName');
 
     // reset authentication object
     _authentication.isAuth = false;
@@ -117,9 +117,9 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
   };
 
   var _fillAuthData = function() {
-    var accessToken = sessionStorage.getItem('accessToken');
-    var refreshToken = sessionStorage.getItem('refreshToken');
-    var userName = sessionStorage.getItem('userName');
+    var accessToken = localStorage.getItem('accessToken');
+    var refreshToken = localStorage.getItem('refreshToken');
+    var userName = localStorage.getItem('userName');
 
     if (accessToken !== null && userName !== null) {
       _authentication.isAuth = true;

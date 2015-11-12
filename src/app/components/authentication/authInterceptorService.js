@@ -5,20 +5,20 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
 
     config.headers = config.headers || {};
 
-    var accessToken = sessionStorage.getItem('accessToken');
-    var userName = sessionStorage.getItem('userName');
+    var accessToken = localStorage.getItem('accessToken');
+    var userName = localStorage.getItem('userName');
 
     if (config.headers.Authorization === undefined && accessToken !== null && userName !== null) {
       config.headers.Authorization = 'Bearer ' + accessToken;
       config.headers['X-Webui-Authorization'] = 'Bearer ' + accessToken;
     }
 
-    var lastTime = sessionStorage.getItem('lastTime');
+    var lastTime = localStorage.getItem('lastTime');
 
     var timeOut = Date.now() - lastTime;
 
     if (timeOut < 1800000){
-      sessionStorage.setItem('lastTime', Date.now());
+      localStorage.setItem('lastTime', Date.now());
     }
 
     return config;
@@ -26,8 +26,8 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
 
   var _responseError = function(rejection) {
 
-    var timeOut = Date.now() - sessionStorage.getItem('lastTime');
-    if ($rootScope.nrOfUnauthorizedRequests === 0 && rejection.status === 401 && (sessionStorage.getItem('accessToken')!== null)) {
+    var timeOut = Date.now() - localStorage.getItem('lastTime');
+    if ($rootScope.nrOfUnauthorizedRequests === 0 && rejection.status === 401 && (localStorage.getItem('accessToken')!== null)) {
       var authService = $injector.get('authService');
       var $route = $injector.get('$route');
       var $location = $injector.get('$location');
@@ -35,7 +35,7 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
       $log.error(timeOut);
       if(timeOut > 1800000){
         authService.logOut();
-        sessionStorage.setItem('lastTime', 0);
+        localStorage.setItem('lastTime', 0);
       }
 
       authService.refresh().then(function(response) {

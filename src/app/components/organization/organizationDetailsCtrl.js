@@ -25,7 +25,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
   //$scope.allUsersForOrganization = [];
 
   $scope.currentUser = {
-    name: sessionStorage.getItem('userName'),
+    name: localStorage.getItem('userName'),
     currentManager: false
   };
   

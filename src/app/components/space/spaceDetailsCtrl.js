@@ -17,10 +17,10 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
   $scope.usersOrganization = [];
   $scope.nrOfSpaceUsers = 0;
 
-  $scope.userName = sessionStorage.getItem('userName');
+  $scope.userName = localStorage.getItem('userName');
 
   $scope.currentUser = {
-    name: sessionStorage.getItem('userName'),
+    name: localStorage.getItem('userName'),
     spaceId: $routeParams.spaceId,
     currentManager: false
   };

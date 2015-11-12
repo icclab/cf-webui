@@ -23,7 +23,7 @@ angular.module('app.space').controller('SpaceAddCtrl', ['$route', '$scope', '$mo
 
   $scope.addUser = function (spaceId) {
     var currentUser = {
-      name: sessionStorage.getItem('userName'),
+      name: localStorage.getItem('userName'),
       spaceId: spaceId
     };
     spaceService.associateManagerWithSpace(currentUser).then(function(response) {

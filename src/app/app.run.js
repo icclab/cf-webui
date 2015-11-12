@@ -4,11 +4,11 @@ angular.module('app').run(['$rootScope', '$location', '$route', 'authService', f
 
   authService.fillAuthData();
 
-  var marginSidebar= sessionStorage.getItem('marginSidebar');
+  var marginSidebar= localStorage.getItem('marginSidebar');
   if (marginSidebar){
     $rootScope.rootFields.marginSidebar = marginSidebar;
   }else{
-    sessionStorage.setItem('marginSidebar', "220px");
+    localStorage.setItem('marginSidebar', "220px");
     $rootScope.rootFields.marginSidebar = "220px";
   }
 
