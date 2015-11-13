@@ -1,14 +1,16 @@
 <div class="modal-header">
 <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-  <h3 class="modal-title">Map a route</h3>
+  <h3 class="modal-title">Add route</h3>
 </div>
 <div class="modal-body">
   <form class="form-horizontal" role="form">
     <div class="form-group">
-      <label for="inputName" class="col-sm-3 control-label">Route</label>
+      <label for="inputName" class="col-sm-3 control-label">Host</label>
       <div class="col-sm-9">
-        <input type="text" class="form-control routeHost" id="inputName" ng-model="enteredHost" placeholder="Host" ng-required="true">
-        <select type="text" class="form-control routeDomain" id="inputService" ng-options="domain.metadata.guid as domain.entity.name for domain in domains" ng-model="selectedDomainId" ng-required="true"></select>
+        <input type="text" class="form-control routeHost" id="inputName" ng-model="route.host" placeholder="Host" ng-required="true">
+        <select type="text" class="form-control routeDomain" id="inputService" placeholder="Domain" ng-options="domain.id as domain.name for domain in domains" ng-model="domainId" ng-required="true"></select>
+      </div>
+    
       </div>
     </div>
   </form>

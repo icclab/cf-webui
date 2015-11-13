@@ -1,4 +1,4 @@
-angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
+angular.module('app.routes').factory('routeService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
   var routeServiceFactory = {};
   
   var globalRouteConfig;
@@ -93,14 +93,14 @@ angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', fu
     return $http.get('/request.php', config);
   };
   
-  var _createRoute = function(config) {
+  var _createRoute = function(route) {
     
     // data
     var data = {
       'url': API_ENDPOINT + '/v2/routes',
-      'domain_guid': config.domainID,
-      'space_guid': config.spaceID,
-      'host' : config.host
+      'domain_guid': route.domainId,
+      'space_guid': route.spaceId,
+      'host' : route.host
     };
 
     // http headers
@@ -144,13 +144,13 @@ angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', fu
     
     // First: create route
     return this.createRoute(config).then(function(response) {
-      globalRouteConfig.routeID = response.data.metadata.guid;
+      globalRouteConfig.routeId = response.data.metadata.guid;
       
       // Second: map route
       // data
       var data = {
-        'url': API_ENDPOINT + '/v2/routes/' + globalRouteConfig.routeID + '/apps/' + globalRouteConfig.applicationID,
-        'guid': globalRouteConfig.routeID
+        'url': API_ENDPOINT + '/v2/routes/' + globalRouteConfig.routeId + '/apps/' + globalRouteConfig.applicationId,
+        'guid': globalRouteConfig.routeId
       };
 
       // http headers
@@ -172,8 +172,8 @@ angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', fu
     
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/apps/' + route.applicationID + '/routes/' + route.guid,
-      'guid' : route.applicationID
+      'url': API_ENDPOINT + '/v2/apps/' + route.applicationId + '/routes/' + route.id,
+      'guid' : route.applicationId
     };
 
     // http headers
@@ -189,6 +189,27 @@ angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', fu
     
     return $http.delete('/request.php', config);
   };
+
+  var _associateRouteWithApp = function(routeId, appId) {
+    
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/routes/' + routeId + '/apps/' + appId,
+      'guid': routeId
+    };
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers
+    };
+    
+    return $http.put('/request.php', data, config);
+  };
+
   
   routeServiceFactory.getRoutes = _getRoutes;
   routeServiceFactory.getRoutesForTheSpace = _getRoutesForTheSpace;
@@ -197,6 +218,7 @@ angular.module('app.route').factory('routeService', ['$http', 'API_ENDPOINT', fu
   routeServiceFactory.createRoute = _createRoute;
   routeServiceFactory.deleteRoute = _deleteRoute;
   routeServiceFactory.mapRoute = _mapRoute;
+  routeServiceFactory.associateRouteWithApp = _associateRouteWithApp;
   routeServiceFactory.unmapRoute = _unmapRoute;
   
   return routeServiceFactory;

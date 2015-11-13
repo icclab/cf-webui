@@ -22,7 +22,7 @@ angular.module('app', [
   'app.serviceInstance',
   'app.user',
   'app.domain',
-  'app.route',
+  'app.routes',
   'app.serviceBinding',
   'app.marketplace',
   'app.featureFlag'

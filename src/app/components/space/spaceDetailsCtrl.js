@@ -10,6 +10,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
   $scope.nrOfApplications = 0;
   $scope.services = [];
   $scope.nrOfServices = 0;
+
   $scope.routes = [];
   $scope.nrOfRoutes = 0;
 
@@ -44,7 +45,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
             if ($scope.applications[j].routes[i].guid === objectRoute.id) {
               var objectRouteApp = {
                 name: $scope.applications[j].name,
-                guid: '',
+                id: $scope.applications[j].id,
               };
               objectRoute.apps.push(objectRouteApp);
             }
@@ -65,8 +66,8 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
     var getSpaceSummaryPromise = spaceService.getSpaceSummary($scope.spaceId);
     
-    getSpaceSummaryPromise.then(function(response) {
-      $scope.getRoutesForTheSpace();
+    q = getSpaceSummaryPromise.then(function(response) {
+      //$scope.getRoutesForTheSpace();
       $scope.name = response.data.name;
 
       // populate applications
@@ -99,6 +100,9 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
       // populate services
       if (response.data.services && response.data.services.length > 0) {
+        if ($scope.services.length > 0) {
+          $scope.services.length = 0;
+        }
         $scope.nrOfServices = response.data.services.length;
 
         angular.forEach(response.data.services, function(service, i) {
@@ -117,12 +121,18 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
       }
       
     }, function(err) {
-      $scope.getRoutesForTheSpace();
+      //$scope.getRoutesForTheSpace();
       messageService.addMessage('danger', 'The space summary has not been loaded.');
       $log.error(err.data.description);
     });
+
+    return q;
   };
-  $scope.getApplicationsForTheSpace();
+  $scope.getApplicationsForTheSpace().then(function(){
+    console.log('boom');
+    $scope.getRoutesForTheSpace();
+
+  });
 
   $scope.retrieveRolesOfAllUsersForTheSpace = function() {
     if ($scope.users.length > 0) {
@@ -354,6 +364,107 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
       var indexOfServiceInstanceToRemove = $scope.services.indexOf(serviceInstance);
       $scope.services.splice(indexOfServiceInstanceToRemove, 1);
       $scope.nrOfServices -= 1;
+    });
+  };
+
+    // new route
+  $scope.addRoute = function(routeName) {
+    var route = {
+      domainId: '',
+      spaceId: $scope.id,
+      host: ''
+    };
+    
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/route/routeAdd.tpl.html',
+      controller: 'RouteAddCtrl',
+      resolve: {
+        route: function() {
+          return route;
+        }
+      }
+    });
+    
+    modalInstance.result.then(function() {
+      // adjust routes table information
+      $scope.getRoutesForTheSpace();
+    });
+
+  };
+
+  $scope.deleteRoute = function(route) {
+
+    var routeId = route.id;
+    
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/route/routeDelete.tpl.html',
+      controller: 'RouteDeleteCtrl',
+      resolve: {
+        routeId: function() {
+          return routeId;
+        }
+      }
+    });
+    
+    modalInstance.result.then(function(response) {
+      var routeIdx = $scope.routes.indexOf($scope.route);
+      $scope.routes.splice(routeIdx, 1);
+      $scope.getApplicationsForTheSpace();
+    });
+
+  };
+
+  $scope.associateRouteWithApp = function(routeId, applications) {
+    
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/route/routeAssociateWithApp.tpl.html',
+      controller: 'RouteAssociateWithAppCtrl',
+      resolve: {
+        routeId: function() {
+          return routeId;
+        },
+        applications: function() {
+          return applications;
+        }
+      }
+    });
+    
+    modalInstance.result.then(function(application) {
+      // adjust routes table information
+      console.log(application);
+      for (var j = 0; j < $scope.routes.length; j++) {
+        if ($scope.routes[j].id === routeId) {
+          var objectRouteApp = {
+            name: application.name,
+            id: application.id,
+          };
+          $scope.routes[j].apps.push(objectRouteApp);
+          break;
+        }
+      }
+
+      $scope.getApplicationsForTheSpace();
+    });
+  };
+
+  $scope.disassociateRouteWithApp = function(route) {
+    
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/route/routeDisassociateFromApp.tpl.html',
+      controller: 'RouteUnmapCtrl',
+      resolve: {
+        route: function() {
+          return route;
+        }
+      }
+    });
+    
+    modalInstance.result.then(function(route, app) {
+      // adjust routes table information
+      var routeIdx = $scope.routes.indexOf(route);
+      var appIdx = $scope.routes[routeIdx].apps.indexOf(app);
+      $scope.routes[routeIdx].apps.splice(appIdx, 1);
+      $scope.nrOfDomains -=1;
     });
   };
 

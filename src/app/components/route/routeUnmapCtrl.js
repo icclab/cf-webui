@@ -1,10 +1,23 @@
-angular.module('app.route').controller('RouteUnmapCtrl', ['$scope', '$modalInstance', '$log', 'route', 'routeService', 'messageService', function($scope, $modalInstance, $log, route, routeService, messageService) {
+angular.module('app.routes').controller('RouteUnmapCtrl', ['$scope', '$modalInstance', '$log', 'route', 'routeService', 'messageService', function($scope, $modalInstance, $log, route, routeService, messageService) {
 
   $scope.route = route;
+  $scope.application = {
+    'id': $scope.route.applicationId
+  };
+  $scope.applications = route.apps;
+  console.log($scope.application.id);
+  console.log($scope.applications);
+  angular.forEach($scope.applications, function(app, key){
+    console.log(app);
+  });
 
   $scope.ok = function () {
+    console.log($scope.application.id);
+    console.log($scope.applications);
+    console.log($scope.route);
+    $scope.route.applicationId = $scope.application.id;
     routeService.unmapRoute($scope.route).then(function(response) {
-      $modalInstance.close(route);
+      $modalInstance.close(route, $scope.application);
       messageService.addMessage('success', 'The route has been successfully unmapped.');
     }, function(err) {
       messageService.addMessage('danger', 'The route has not been unmapped.');

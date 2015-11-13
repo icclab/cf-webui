@@ -67,6 +67,9 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
       
       $scope.routes = response.data.routes;
       $scope.nrOfRoutes = $scope.routes.length;
+      angular.forEach($scope.routes, function(route, key){
+        console.log(route);
+      });
       
       $scope.domains = response.data.available_domains;
 
@@ -202,11 +205,11 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
   
   $scope.mapRoute = function() {
     
-    // applicationID injection
+    // applicationId injection
     var route = {
-      'organizationID': $scope.organizationId,
-      'applicationID': $scope.applicationId,
-      'spaceID': $scope.spaceId
+      'organizationId': $scope.organizationId,
+      'applicationId': $scope.applicationId,
+      'spaceId': $scope.spaceId
     };
     
     var modalInstance = $modal.open({
@@ -236,8 +239,9 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
   
   $scope.unmapRoute = function(route) {
     
-    // applicationID injection
-    route.applicationID = $scope.applicationId;
+    // applicationId injection
+    route.applicationId = $scope.applicationId;
+    route.id = route.guid;
     
     var modalInstance = $modal.open({
       templateUrl: 'app/components/route/routeUnmap.tpl.html',
