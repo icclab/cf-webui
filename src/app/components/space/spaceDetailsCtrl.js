@@ -378,7 +378,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     var route = {
       domainId: '',
       spaceId: $scope.id,
-      host: ''
+      host: '',
     };
     
     var modalInstance = $modal.open({
@@ -420,7 +420,18 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
   };
 
-  $scope.associateRouteWithApp = function(routeId, applications) {
+  $scope.associateRouteWithApp = function(route, applications) {
+
+    for (var j = 0; j < route.apps.length; j++) {
+      for (var i = 0; i < applications.length; i++) {
+        if (route.apps[j].id === applications[i].id) {
+          applications.splice(i, 1);
+          break;
+        }
+      }
+    }
+
+    var routeId = route.id;
     
     var modalInstance = $modal.open({
       templateUrl: 'app/components/route/routeAssociateWithApp.tpl.html',

@@ -109,7 +109,7 @@
                     <div ng-repeat="app in route.apps">{{app.name}}<br></div>
                   </td>
                   <td>
-                    <a class="action action-map" ng-click="associateRouteWithApp(route.id, applications)" title="Map"><i class="fa fa-lg fa-link"></i></a>
+                    <a class="action action-map" ng-click="associateRouteWithApp(route, applications)" title="Map"><i class="fa fa-lg fa-link"></i></a>
                     <a class="action action-map" ng-click="disassociateRouteWithApp(route)" title="Unmap"><i class="fa fa-lg fa-unlink"></i></a>
                     <a class="action action-delete" ng-click="deleteRoute(route)" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
                   </td>
