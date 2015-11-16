@@ -1,7 +1,8 @@
-angular.module('app.sidebar').controller('SidebarCtrl', ['$rootScope', '$routeParams', '$scope', '$location', '$log', 'organizationService', 'spaceService', function ($rootScope, $routeParams, $scope, $location, $log, organizationService, spaceService) {
+angular.module('app.sidebar').controller('SidebarCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$log', 'organizationService', 'spaceService', function ($rootScope, $scope, $routeParams, $location, $log, organizationService, spaceService) {
   $rootScope.rootFields.showContent = false;
   
-  $rootScope.organizations = [];
+  $rootScope.organizationsSidebar = [];
+  
   $rootScope.orgIdx = -1;
 
   // get all spaces
@@ -19,11 +20,11 @@ angular.module('app.sidebar').controller('SidebarCtrl', ['$rootScope', '$routePa
         spaces: []
       };
 
-      $rootScope.organizations.push(objectOrganization);
+      $rootScope.organizationsSidebar.push(objectOrganization);
     });
 
     // push the space objects to the organizations
-    getSpacesPromise.then(function(response) {
+    spaceService.getSpaces().then(function(response) {
       var data = response.data;
 
       // create space objects
@@ -34,9 +35,9 @@ angular.module('app.sidebar').controller('SidebarCtrl', ['$rootScope', '$routePa
           name: space.entity.name
         };
 
-        for (var j = 0; j < $rootScope.organizations.length; j++) {
-          if ($rootScope.organizations[j].id === objectSpace.organizationId) {
-            $rootScope.organizations[j].spaces.push(objectSpace);
+        for (var j = 0; j < $rootScope.organizationsSidebar.length; j++) {
+          if ($rootScope.organizationsSidebar[j].id === objectSpace.organizationId) {
+            $rootScope.organizationsSidebar[j].spaces.push(objectSpace);
             break;
           }
         }
@@ -49,9 +50,15 @@ angular.module('app.sidebar').controller('SidebarCtrl', ['$rootScope', '$routePa
   });
   
   $scope.isActive = function(path) {
-    for (var j = 0; j < $rootScope.organizations.length; j++) {
-      if ($rootScope.organizations[j].id === $routeParams.organizationId) {
+    for (var j = 0; j < $rootScope.organizationsSidebar.length; j++) {
+      if ($rootScope.organizationsSidebar[j].id === $routeParams.organizationId) {
         $rootScope.orgIdx = j;
+        for (var i = 0; i < $rootScope.organizationsSidebar[j].spaces.length; i++) {
+          if ($rootScope.organizationsSidebar[j].spaces[i].id === $routeParams.spaceId) {
+            $rootScope.spaceIdx = i;
+            break;
+          }
+        }
         break;
       }
     }

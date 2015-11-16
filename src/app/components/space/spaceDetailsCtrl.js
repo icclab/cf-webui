@@ -281,6 +281,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
     modalInstance.result.then(function(editedSpace) {
       $scope.name = editedSpace.name;
+      $rootScope.organizationsSidebar[$rootScope.orgIdx].spaces[$rootScope.spaceIdx].name = editedSpace.name;
     });
   };
   

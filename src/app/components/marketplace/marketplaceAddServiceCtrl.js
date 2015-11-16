@@ -43,8 +43,9 @@ angular.module('app.marketplace').controller('marketplaceAddServiceCtrl', ['$q',
     });
   };
 
-
+  console.log($scope.organizationId);
   if ($scope.organizationId!==undefined){
+    $scope.getOrganizations();
     getServicesPromise = spaceService.getServicesForTheSpace($scope.spaceId);
     //$scope.hideSelectOrganization = true;
   } else{

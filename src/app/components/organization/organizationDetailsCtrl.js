@@ -226,7 +226,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 
     modalInstance.result.then(function(editedSpace) {
       var indexOfSpaceToRemove = $scope.spaces.indexOf(space);
-      $rootScope.organizations[$rootScope.orgIdx].spaces[indexOfSpaceToRemove].name = editedSpace.name;
+      $rootScope.organizationsSidebar[$rootScope.orgIdx].spaces[indexOfSpaceToRemove].name = editedSpace.name;
       $scope.editedSpace = editedSpace;
     });
   };
@@ -251,7 +251,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 
     modalInstance.result.then(function(editedOrganization) {
       $scope.name = editedOrganization.name;
-      $rootScope.organizations[$rootScope.orgIdx].name = editedOrganization.name;
+      $rootScope.organizationsSidebar[$rootScope.orgIdx].name = editedOrganization.name;
     });
 
   };
@@ -305,7 +305,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
       //$route.reload();
       console.log(space);
       //$scope.spaces.push(space);
-      $rootScope.organizations[$rootScope.orgIdx].spaces.push(space);
+      $rootScope.organizationsSidebar[$rootScope.orgIdx].spaces.push(space);
       $scope.getSpacesForTheOrganization();
       //$scope.organizations.spaces=$scope.spaces;
       
@@ -377,7 +377,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
       //$scope.getSpacesForTheOrganization();
       var indexOfSpaceToRemove = $scope.spaces.indexOf(space);
       $scope.spaces.splice(indexOfSpaceToRemove, 1);
-      $rootScope.organizations[$rootScope.orgIdx].spaces.splice(indexOfSpaceToRemove, 1);
+      $rootScope.organizationsSidebar[$rootScope.orgIdx].spaces.splice(indexOfSpaceToRemove, 1);
       $scope.nrOfSpaces -=1;
       console.log($scope.spaces);
 
