@@ -5,8 +5,8 @@
       <a href="#" ng-class="{active: isActive('/organizations/' + organizationSidebar.id)}" toggle-subnavi>{{organizationSidebar.name}}</a>
       <ul>
         <li><a href="#/organizations/{{organizationSidebar.id}}">Overview</a></li>
-        <li ng-repeat="space in organizationSidebar.spaces">
-          <a href="#/organizations/{{organizationSidebar.id}}/spaces/{{space.id}}" ng-class="{active: isActive('/organizations/' + organizationSidebar.id + '/spaces/' + space.id)}">{{space.name}}</a>
+        <li ng-repeat="spaceSidebar in organizationSidebar.spaces">
+          <a href="#/organizations/{{organizationSidebar.id}}/spaces/{{spaceSidebar.id}}" ng-class="{active: isActive('/organizations/' + organizationSidebar.id + '/spaces/' + spaceSidebar.id)}">{{spaceSidebar.name}}</a>
         </li>
       </ul>
     </li>
