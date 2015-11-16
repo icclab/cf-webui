@@ -255,8 +255,13 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
   };
   //$scope.retrieveRolesOfAllUsers();
 
-  $scope.showApp = function(appId) {
-    window.location = '#/organizations/' + $scope.organizationId + '/spaces/' + $scope.spaceId + '/applications/' + appId;
+  $scope.showApp = function(appId, event) {
+    if (event.ctrlKey==1){
+      window.open('#/organizations/' + $scope.organizationId + '/spaces/' + $scope.spaceId + '/applications/' + appId);
+    }else{
+      window.location = '#/organizations/' + $scope.organizationId + '/spaces/' + $scope.spaceId + '/applications/' + appId;
+    }
+    
   };
 
   $scope.editSpace = function(id) {

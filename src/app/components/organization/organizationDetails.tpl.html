@@ -54,7 +54,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="space in spaces" ng-click="showSpace(space.id)" style="cursor: pointer">
+                <tr ng-repeat="space in spaces" ng-click="showSpace(space.id, $event)" style="cursor: pointer">
                   <td><a href="#/organizations/{{id}}/spaces/{{space.id}}">{{space.name}}</a></td>
                   <td>
                     <span class="label label-success">{{space.nrOfStartedApps}} running</span>

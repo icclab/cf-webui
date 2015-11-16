@@ -35,13 +35,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="application in applications" ng-click="showApp(application.id)" style="cursor: pointer">
+                <tr ng-repeat="application in applications" ng-click="showApp(application.id, $event)" style="cursor: pointer">
                   <td>
                     <span class="label" ng-class="application.status == 'running' ? 'label-success' : application.status == 'crashed' ? 'label-warning' : 'label-default'">{{application.status}}</span>
                   </td>
                   <td>
                     {{application.name}}<br>
-                    <a href="http://{{application.url}}" target="_blank">{{application.url}}</a>
+                    <a ng-href="http://{{application.url}}" target="_blank">{{application.url}}</a>
                   </td>
                   <td>{{application.instances}}</td>
                   <td>{{application.memory}} MB</td>

@@ -29,7 +29,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="organization in organizations" ng-click="showOrg(organization.id)" style="cursor: pointer">
+                <tr ng-repeat="organization in organizations" ng-click="showOrg(organization.id, $event)" style="cursor: pointer">
                   <td><a href="#/organizations/{{organization.id}}">{{organization.name}}</a></td>
                   <td>
                     <span class="label" ng-class="organization.status == 'active' ? 'label-success' : 'label-danger'">{{organization.status}}</span>

@@ -66,8 +66,12 @@ angular.module('app.organization').controller('OrganizationPreviewCtrl', ['$root
     });
   };
 
-  $scope.showOrg = function(orgId) {
-    window.location = '#/organizations/' + orgId;
+  $scope.showOrg = function(orgId, event) {
+    if (event.ctrlKey==1){
+      window.open('#/organizations/' + orgId);
+    }else{
+      window.location = '#/organizations/' + orgId;
+    }
   };
   
   $scope.editOrganization = function(org) {

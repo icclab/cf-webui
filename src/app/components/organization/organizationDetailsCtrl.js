@@ -76,6 +76,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
           var nrOfStartedApps = 0;
           var nrOfStoppedApps = 0;
           angular.forEach(dataSpace.apps, function(application, i) {
+            console.log(application);
             memory += application.memory * application.instances;
 
             // started apps
@@ -204,8 +205,12 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
     }
   };
 
-  $scope.showSpace = function(spaceId) {
-    window.location = '#/organizations/' + $scope.id + '/spaces/' + spaceId;
+  $scope.showSpace = function(spaceId, event) {
+    if (event.ctrlKey==1){
+      window.open('#/organizations/' + $scope.id + '/spaces/' + spaceId);
+    }else{
+      window.location = '#/organizations/' + $scope.id + '/spaces/' + spaceId;
+    }
   };
 
   $scope.editSpace = function(space) {
