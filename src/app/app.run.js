@@ -7,9 +7,15 @@ angular.module('app').run(['$rootScope', '$location', '$route', 'authService', f
   var marginSidebar= localStorage.getItem('marginSidebar');
   if (marginSidebar){
     $rootScope.rootFields.marginSidebar = marginSidebar;
+    if (marginSidebar === "220px"){
+      $rootScope.rootFields.hidedSidebar = false;
+    }else{
+      $rootScope.rootFields.hidedSidebar = true;
+    }
   }else{
     localStorage.setItem('marginSidebar', "220px");
     $rootScope.rootFields.marginSidebar = "220px";
+    $rootScope.rootFields.hidedSidebar = false;
   }
 
   // redirect the user to the login page if he is not logged in
