@@ -8,7 +8,7 @@ angular.module('app.routes').controller('RouteAddCtrl', ['$scope', '$modalInstan
   $scope.domainId = null;
 
   // get organization sharedDomains
-  organizationService.getSharedDomainsForTheOrganization($scope.id).then(function(response) {
+  organizationService.getSharedDomainsForTheOrganization(route.orgId).then(function(response) {
     var data = response.data;
     $scope.nrOfDomains += 1;
     //$scope.sharedDomains = (data.resources);
@@ -18,14 +18,13 @@ angular.module('app.routes').controller('RouteAddCtrl', ['$scope', '$modalInstan
         name: sharedDomain.entity.name
       };
       $scope.domains.push(sharedDomainObject);
-      console.log(sharedDomainObject.id);
     });
   }, function(err) {
     $log.error(err.data.description);
   });
   
   // get organization privateDomains
-  organizationService.getPrivateDomainsForTheOrganization($scope.id).then(function(response) {
+  organizationService.getPrivateDomainsForTheOrganization(route.orgId).then(function(response) {
     var data = response.data;
     $scope.nrOfDomains += data.total_results;
     //$scope.privateDomains = data.resources;
@@ -35,16 +34,13 @@ angular.module('app.routes').controller('RouteAddCtrl', ['$scope', '$modalInstan
         name: privateDomain.entity.name
       };
       $scope.domains.push(privateDomainObject);
-      console.log(privateDomainObject.id);
     });
   }, function(err) {
-    $log.error(err);
+    $log.error(err.data.description);
   });
 
   $scope.ok = function () {
-    console.log($scope.domainId);
     $scope.route.domainId = $scope.domainId;
-    console.log($scope.route);
     routeService.createRoute($scope.route).then(function(response) {
       messageService.addMessage('success', 'The route has been successfully added.', true);
      $modalInstance.close();

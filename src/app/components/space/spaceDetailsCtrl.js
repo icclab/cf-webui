@@ -129,7 +129,6 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     return q;
   };
   $scope.getApplicationsForTheSpace().then(function(){
-    console.log('boom');
     $scope.getRoutesForTheSpace();
 
   });
@@ -378,6 +377,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     var route = {
       domainId: '',
       spaceId: $scope.id,
+      orgId: $scope.organizationId,
       host: '',
     };
     
@@ -448,7 +448,6 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     
     modalInstance.result.then(function(application) {
       // adjust routes table information
-      console.log(application);
       for (var j = 0; j < $scope.routes.length; j++) {
         if ($scope.routes[j].id === routeId) {
           var objectRouteApp = {
