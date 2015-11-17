@@ -75,19 +75,24 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
           var memory = 0;
           var nrOfStartedApps = 0;
           var nrOfStoppedApps = 0;
+          var nrOfCrashedApps = 0;
           angular.forEach(dataSpace.apps, function(application, i) {
-            console.log(application);
             memory += application.memory * application.instances;
 
             // started apps
             if (application.state === 'STARTED') {
-              nrOfStartedApps++;
+              if ((application.instances - application.running_instances) > 0){
+                nrOfCrashedApps++;
+              }else{
+                nrOfStartedApps++;
+              }
             }
 
             // stopped apps
             if (application.state === 'STOPPED') {
               nrOfStoppedApps++;
             }
+
           });
 
           var objectSpace = {
@@ -96,6 +101,7 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
             memory: memory,
             nrOfStartedApps: nrOfStartedApps,
             nrOfStoppedApps: nrOfStoppedApps,
+            nrOfCrashedApps: nrOfCrashedApps,
             nrOfServices: dataSpace.services.length
           };
 
@@ -293,7 +299,6 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
       controller: 'SpaceAddCtrl',
       resolve: {
         space: function() {
-          console.log(space);
           return space;
         }
       }
@@ -303,7 +308,6 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
     modalInstance.result.then(function() {
       // reload the spaces table
       //$route.reload();
-      console.log(space);
       //$scope.spaces.push(space);
       $rootScope.organizationsSidebar[$rootScope.orgIdx].spaces.push(space);
       $scope.getSpacesForTheOrganization();
@@ -379,7 +383,6 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
       $scope.spaces.splice(indexOfSpaceToRemove, 1);
       $rootScope.organizationsSidebar[$rootScope.orgIdx].spaces.splice(indexOfSpaceToRemove, 1);
       $scope.nrOfSpaces -=1;
-      console.log($scope.spaces);
 
     });
     
