@@ -71,6 +71,14 @@ module.exports = function(grunt) {
         }
     },
 
+    less: {
+      development: {
+        files: {
+          "src/assets/css/style.css": "src/assets/less/style.less"
+        }
+      }
+    },
+
     cssmin: {
       options: {
         shorthandCompacting: false,
@@ -105,6 +113,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
 
+  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
 
   // define the tasks
@@ -112,7 +121,7 @@ module.exports = function(grunt) {
   grunt.registerTask(
     'build', 
     'Compiles all of the assets, validate js files, annotate angular and minify files to the build directory.', 
-    ['clean:prev', 'copy', 'jshint', 'htmlmin', 'ngAnnotate', 'uglify', 'cssmin', 'concat', 'clean:post']
+    ['clean:prev', 'copy', 'jshint', 'htmlmin', 'ngAnnotate', 'uglify', 'less', 'cssmin', 'concat', 'clean:post']
   );
 
 

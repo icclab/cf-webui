@@ -21,6 +21,7 @@
     "grunt-contrib-uglify": "0.2.x",
     "grunt-ng-annotate": "~1.0.1",
     "grunt-contrib-htmlmin": "~0.4.0",
-    "grunt-contrib-concat": "~0.5.1"
+    "grunt-contrib-concat": "~0.5.1",
+    "grunt-contrib-less": "~1.1.0"
   }
 }

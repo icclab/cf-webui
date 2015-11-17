@@ -57,9 +57,9 @@
                 <tr ng-repeat="space in spaces" ng-click="showSpace(space.id, $event)" style="cursor: pointer">
                   <td><a href="#/organizations/{{id}}/spaces/{{space.id}}">{{space.name}}</a></td>
                   <td>
-                    <span class="label label-success">{{space.nrOfStartedApps}} running</span>
-                    <span class="label label-danger">{{space.nrOfCrashedApps}} crashed</span>
-                    <span class="label label-default">{{space.nrOfStoppedApps}} stopped</span>
+                    <span class="label label-success label-responsive">{{space.nrOfStartedApps}} <span class="toggle-text">running</span></span>
+                    <span class="label label-danger label-responsive">{{space.nrOfCrashedApps}} <span class="toggle-text">crashed</span></span>
+                    <span class="label label-default label-responsive">{{space.nrOfStoppedApps}} <span class="toggle-text">stopped</span></span>
                   </td>
                   <td>{{space.nrOfServices}}</td>
                   <td>{{space.memory}} MB</td>
