@@ -441,6 +441,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
       //var routeIdx = $scope.routes.indexOf(responseRouteId);
       //$scope.routes.splice(routeIdx, 1);
       $scope.getRoutesForTheSpace();
+      $scope.getApplicationsForTheSpace();
     });
 
   };

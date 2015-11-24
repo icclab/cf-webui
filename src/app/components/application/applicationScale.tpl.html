@@ -3,7 +3,8 @@
   <h3 class="modal-title">Scale application</h3>
 </div>
 <div class="modal-body">
-  <p>This will cause the app to restart. Are you sure you want to scale this application?</p>
+  <p ng-hide='scale.memory===scale.initialMemoryValue'>This will cause the app to restart. Are you sure you want to scale this application?</p>
+  <p ng-show='scale.memory===scale.initialMemoryValue'>Are you sure you want to scale this application?</p>
 </div>
 <div class="modal-footer">
   <button class="btn btn-primary" ng-click="ok()">Scale</button>

@@ -51,9 +51,15 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
       $scope.diskQuota = response.data.disk_quota;
       $scope.memory = response.data.memory;
       $scope.scale.memory = response.data.memory;
+      $scope.scale.initialMemoryValue = $scope.scale.memory;
       $scope.lastPush = response.data.package_updated_at;
 
       $scope.buildPack = response.data.detected_buildpack;
+      console.log(response.data);
+      console.log(response.data.detected_buildpack);
+      console.log(response.data.buildpack);
+      console.log($scope.buildPack);
+      if ($scope.buildPack==="") $scope.buildPack = response.data.buildpack;
       $scope.startCommand = response.data.detected_start_command;
       $scope.packageState = response.data.package_state;
       
@@ -67,9 +73,6 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
       
       $scope.routes = response.data.routes;
       $scope.nrOfRoutes = $scope.routes.length;
-      angular.forEach($scope.routes, function(route, key){
-        console.log(route);
-      });
       
       $scope.domains = response.data.available_domains;
 
