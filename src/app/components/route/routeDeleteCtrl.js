@@ -2,7 +2,7 @@ angular.module('app.routes').controller('RouteDeleteCtrl', ['$scope', '$modalIns
   $scope.ok = function () {
     routeService.deleteRoute(routeId).then(function(response) {
       messageService.addMessage('success', 'The route has been successfully deleted.', true);
-      $modalInstance.close();
+      $modalInstance.close(routeId);
     }, function(err) {
       messageService.addMessage('danger', 'The route has not been deleted.', true);
       $log.error(err);

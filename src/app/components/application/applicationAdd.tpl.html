@@ -1,0 +1,21 @@
+<div class="modal-header">
+<button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <h3 class="modal-title">Add application</h3>
+</div>
+<div class="modal-body">
+  <form class="form-horizontal" role="form">
+    <div class="form-group">
+      <label for="inputName" class="col-sm-3 control-label">Name</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control appName" id="inputName" ng-model="application.name" placeholder="Name" ng-required="true">
+        <input type="file" name="file" multiple required onchange="angular.element(this).scope().uploadedFile(this)">
+        <input type="text" class="form-control routeHost" id="inputName" ng-model="route.host" placeholder="Host" ng-required="true">
+        <select type="text" class="form-control routeDomain" id="inputService" placeholder="Domain" ng-options="domain.id as domain.name for domain in domains" ng-model="domainId" ng-required="true"></select>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="ok()">Save</button>
+  <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+</div>

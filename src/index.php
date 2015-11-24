@@ -31,10 +31,10 @@
     <script src="assets/libs/libs.min.js"></script>
 
     <!-- AngularJS app -->
-    <script src="app.min.js" defer></script>
+    <script src="app.min.js"></script>
 
     <!-- App components -->
-    <script src="application.min.js" defer></script>
+    <script src="application.min.js"></script>
 
   </body>
 </html>

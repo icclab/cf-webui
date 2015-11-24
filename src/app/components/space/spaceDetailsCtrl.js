@@ -260,7 +260,32 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     }else{
       window.location = '#/organizations/' + $scope.organizationId + '/spaces/' + $scope.spaceId + '/applications/' + appId;
     }
+  };
+
+  $scope.addApplication = function(appName) {
+
+    var application = {
+      'name': appName,
+      'orgId': $scope.organizationId,
+      'spaceId': $scope.id,
+      'application': null
+    };
     
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/application/applicationAdd.tpl.html',
+      controller: 'AppAddCtrl',
+      resolve: {
+        application: function() {
+          return application;
+        }
+      }
+    });
+    
+    modalInstance.result.then(function() {
+      // adjust routes table information
+      //$scope.getRoutesForTheSpace();
+    });
+
   };
 
   $scope.editSpace = function(id) {
@@ -412,10 +437,10 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
       }
     });
     
-    modalInstance.result.then(function(response) {
-      var routeIdx = $scope.routes.indexOf($scope.route);
-      $scope.routes.splice(routeIdx, 1);
-      $scope.getApplicationsForTheSpace();
+    modalInstance.result.then(function(responseRouteId) {
+      //var routeIdx = $scope.routes.indexOf(responseRouteId);
+      //$scope.routes.splice(routeIdx, 1);
+      $scope.getRoutesForTheSpace();
     });
 
   };

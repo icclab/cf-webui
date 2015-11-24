@@ -13,6 +13,7 @@ angular.module('app', [
   'app.message',
 
   // components
+  'app.info',
   'app.application',
   'app.auth',
   'app.logIn',

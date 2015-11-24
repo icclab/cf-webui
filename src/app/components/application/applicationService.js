@@ -1,4 +1,4 @@
-angular.module('app.application').factory('applicationService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
+angular.module('app.application').factory('applicationService', ['$q', '$http', 'API_ENDPOINT', function($q, $http, API_ENDPOINT) {
   var applicationServiceFactory = {};
   
   var _getApplications = function() {
@@ -148,6 +148,68 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
 
     return $http.get('/request.php', config);
   };
+
+  var _createApplication = function(application) {
+    // data
+    var data = {
+      'url': API_ENDPOINT + '/v2/apps',
+      'name': application.name,
+      'space_guid': application.spaceId,
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      headers: headers
+    };
+
+    return $http.post('/request.php', data, config);
+  };
+
+  var _addApplication = function(app) {
+    var promises = [];
+    console.log(app);
+    var resources = [];
+
+    for ( var i = 0; i < app.bits.length; i++) {
+      var fd = new FormData();
+      var url = API_ENDPOINT + '/v2/apps/' + app.id +'/bits';
+
+      // data
+      /*var data = {
+        'url': API_ENDPOINT + '/v2/apps/' + application.id +'/bits',
+        'resources': resources,
+        'application': fd
+      };*/
+      console.log(app.bits[i]);
+      var application = app.bits[i];
+      console.log(application);
+
+
+      fd.append("url", url);
+      fd.append("application", application);
+      fd.append("resources", resources);
+
+      // http headers
+      var headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data; boundary=AaB03x'
+      };
+
+      var config = {
+        headers: headers,
+      };
+
+      promises.push($http.put('/request.php', fd, config));
+    }
+
+    return $q.all(promises);
+    
+  };
   
   var _editApplication = function(application) {
     // data
@@ -280,6 +342,8 @@ angular.module('app.application').factory('applicationService', ['$http', 'API_E
   applicationServiceFactory.getAppEvents = _getAppEvents;
   applicationServiceFactory.getEnvironmentVariables = _getEnvironmentVariables;
   applicationServiceFactory.getServiceBindings = _getServiceBindings;
+  applicationServiceFactory.createApplication = _createApplication;
+  applicationServiceFactory.addApplication = _addApplication;
   applicationServiceFactory.editApplication = _editApplication;
   applicationServiceFactory.editApplicationEnv = _editApplicationEnv;
   applicationServiceFactory.deleteApplication = _deleteApplication;
