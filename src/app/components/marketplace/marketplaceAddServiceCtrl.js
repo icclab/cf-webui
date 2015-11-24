@@ -214,13 +214,7 @@ angular.module('app.marketplace').controller('marketplaceAddServiceCtrl', ['$q',
       applicationId: $scope.applicationId
     };
 
-
-    serviceBindingService.addServiceBinding(serviceBinding).then(function(response) {
-      messageService.addMessage('success', 'The service has been successfully bound.');
-    }, function(err) {
-      messageService.addMessage('danger', 'The service has not been bound.');
-      $log.error(err);
-    });
+    return serviceBindingService.addServiceBinding(serviceBinding);
   };
 
 
@@ -234,8 +228,6 @@ angular.module('app.marketplace').controller('marketplaceAddServiceCtrl', ['$q',
       servicePlanId: $scope.selectedServicePlan.id
     };
 
-
-
     serviceInstanceService.addServiceInstance(serviceInstance).then(function(response) {
       //defer.resolve('data received!');
       $location.path('/organizations/' + $scope.organizationId + '/spaces/' + $scope.spaceId);
@@ -246,7 +238,12 @@ angular.module('app.marketplace').controller('marketplaceAddServiceCtrl', ['$q',
         //messageService.addMessage('success', 'The service instance has been successfully added.');
 
         if ($scope.applicationId !== null){
-          $scope.addServiceBinding(response.data.metadata.guid);
+          $scope.addServiceBinding(response.data.metadata.guid).then(function(response) {
+            messageService.addMessage('success', 'The service has been successfully bound.', true);
+          }, function(err) {
+            messageService.addMessage('danger', 'The service has not been bound.', true);
+            $log.error(err);
+          });
         }  
         
         messageService.addMessage('success', 'The service instance has been successfully added.', true);

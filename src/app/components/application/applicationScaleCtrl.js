@@ -7,17 +7,24 @@ angular.module('app.application').controller('ApplicationScaleCtrl', ['$scope', 
 
   $scope.ok = function () {
     applicationService.scaleApplication($scope.applicationId, $scope.scale).then(function(response) {
-      applicationService.stopApplication($scope.applicationId).then(function(responseStop) {
-        applicationService.startApplication($scope.applicationId).then(function(responseStart) {
-          $modalInstance.close();
+      if ($scope.scale.memory===$scope.scale.initialMemoryValue){
+        applicationService.stopApplication($scope.applicationId).then(function(responseStop) {
+          applicationService.startApplication($scope.applicationId).then(function(responseStart) {
+            $modalInstance.close();
+          }, function(err) {
+            $log.error('The application has not been started: ' + err.data.description + ' (' + err.data.error_code + ')');
+            $modalInstance.dismiss('cancel');
+          });
         }, function(err) {
-          $log.error('The application has not been started: ' + err.data.description + ' (' + err.data.error_code + ')');
+          $log.error('The application has not been stopped: ' + err.data.description + ' (' + err.data.error_code + ')');
+          $modalInstance.dismiss('cancel');
         });
-      }, function(err) {
-        $log.error('The application has not been stopped: ' + err.data.description + ' (' + err.data.error_code + ')');
-      });
+      }else{
+        $modalInstance.close();
+      }
     }, function(err) {
       $log.error('The application has not been scaled: ' + err.data.description + ' (' + err.data.error_code + ')');
+      $modalInstance.dismiss('cancel');
     });
   };
   

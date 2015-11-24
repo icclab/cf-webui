@@ -44,8 +44,29 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
     return $http.delete('/request.php', config);
   };
 
+  var _getServiceBindingsForServiceInstance= function(serviceInstanceId) {
+    // params
+    var params = {
+      'url': API_ENDPOINT + '/v2/service_instances/' + serviceInstanceId + '/service_bindings',
+    };
+
+    // http headers
+    var headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    };
+
+    var config = {
+      params: params,
+      headers: headers
+    };
+
+    return $http.get('/request.php', config);
+  };
+
   serviceInstanceServiceFactory.addServiceInstance = _addServiceInstance;
   serviceInstanceServiceFactory.deleteServiceInstance = _deleteServiceInstance;
+  serviceInstanceServiceFactory.getServiceBindingsForServiceInstance = _getServiceBindingsForServiceInstance;
 
   return serviceInstanceServiceFactory;
 }]);

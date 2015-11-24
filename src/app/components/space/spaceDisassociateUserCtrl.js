@@ -6,12 +6,12 @@ angular.module('app.space').controller('SpaceDisassociateUserCtrl', ['$route', '
       if (user.spaceManager){
         spaceService.disassociateManagerWithSpace(user).then(function(response) {
           // set message
-          messageService.addMessage('success', 'The space manager has been successfully deleted.');
+          messageService.addMessage('success', 'The space manager has been successfully deleted.', true);
           // close the modal
           $modalInstance.close();
         }, function(err) {
           // set message
-          messageService.addMessage('danger', 'The space manager has not been deleted.');
+          messageService.addMessage('danger', 'The space manager has not been deleted.', true);
           $log.error(err);
           $modalInstance.close();
         });
@@ -20,11 +20,11 @@ angular.module('app.space').controller('SpaceDisassociateUserCtrl', ['$route', '
       if (user.spaceAuditor){
         spaceService.disassociateAuditorWithSpace(user).then(function(response) {
           // set message
-          messageService.addMessage('success', 'The space auditor has been successfully deleted.');
+          messageService.addMessage('success', 'The space auditor has been successfully deleted.', true);
           $modalInstance.close();
         }, function(err) {
           // set message
-          messageService.addMessage('danger', 'The space auditor has not been deleted.');
+          messageService.addMessage('danger', 'The space auditor has not been deleted.', true);
           $log.error(err);
           $modalInstance.close();
         });
@@ -33,11 +33,11 @@ angular.module('app.space').controller('SpaceDisassociateUserCtrl', ['$route', '
       if (user.spaceDeveloper){
         spaceService.disassociateDeveloperWithSpace(user).then(function(response) {
           // set message
-          messageService.addMessage('success', 'The space developer has been successfully deleted.');
+          messageService.addMessage('success', 'The space developer has been successfully deleted.', true);
           $modalInstance.close();
         }, function(err) {
           // set message
-          messageService.addMessage('danger', 'The space developer has not been deleted.');
+          messageService.addMessage('danger', 'The space developer has not been deleted.', true);
           $log.error(err);
           $modalInstance.close();
         });      

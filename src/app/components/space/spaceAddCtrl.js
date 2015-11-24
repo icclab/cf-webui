@@ -5,6 +5,7 @@ angular.module('app.space').controller('SpaceAddCtrl', ['$route', '$scope', '$mo
   };
 
   $scope.ok = function () {
+    messageService.removeAllMessages();
     spaceService.addSpace($scope.space).then(function(response) {
       // close the modal
       space.name = $scope.space.name;

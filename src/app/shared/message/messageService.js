@@ -3,8 +3,11 @@ angular.module('app.message').factory('messageService', ['$rootScope', function(
 
   var _messages = [];
 
-  var _addMessage = function(type, msg, forceDelete) {
-    if (forceDelete === true) _removeAllMessages();
+  var _addMessage = function(type, msg, avoidDelete) {
+    console.log(msg);
+    console.log('Avoid delete: '+avoidDelete);
+    console.log('Borramos: ' + (avoidDelete !== true));
+    if (avoidDelete !== true) _removeAllMessages();
     var message = {
       type: type,
       msg: msg

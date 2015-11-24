@@ -1,24 +1,25 @@
 angular.module('app.organization').controller('OrganizationDeleteUserCtrl', ['$q', '$route', '$scope', '$modalInstance', '$log', 'user', 'spaces', 'organizationService', 'spaceService', 'messageService', function($q, $route, $scope, $modalInstance, $log, user, spaces, organizationService, spaceService, messageService) {
 
   $scope.ok = function () {
+    messageService.removeAllMessages();
     $scope.disassociateSpacesUser(user, spaces).then(function(responseUser){
       $scope.deleteOrganizationUserRoles(user).then(function(response){
         organizationService.disassociateUserWithOrganization(user, $route.reload()).then(function(response) {
-          messageService.addMessage('success', 'The user has been successfully removed from organization.');
+          messageService.addMessage('success', 'The user has been successfully removed from organization.', true);
           $modalInstance.close($scope.organization);
         }, function(err) {
-          messageService.addMessage('danger', 'An error ocurred while removing the user from the organization.');
+          messageService.addMessage('danger', 'An error ocurred while removing the user from the organization.', true);
           $modalInstance.close($scope.organization);
           $log.error(err.data.description);
         });
       }, function(err) {
         $log.error(err);
-        messageService.addMessage('danger', 'An error ocurred while removing the user from the organization .');
+        messageService.addMessage('danger', 'An error ocurred while removing the user from the organization .', true);
         $modalInstance.close($scope.organization);
       });
     }, function(err) {
       $log.error(err);
-      messageService.addMessage('danger', 'An error ocurred while removing the user from the spaces.');
+      messageService.addMessage('danger', 'An error ocurred while removing the user from the spaces.', true);
       $modalInstance.close($scope.organization);
     });
   };
@@ -62,7 +63,7 @@ angular.module('app.organization').controller('OrganizationDeleteUserCtrl', ['$q
 
       }, function(err) {
         $log.error(err);
-        messageService.addMessage('danger', 'The user has not been removed from organization.');
+        messageService.addMessage('danger', 'The user has not been removed from organization.', true);
       });
       promises.push(deferred.promise);
     });
@@ -84,7 +85,7 @@ angular.module('app.organization').controller('OrganizationDeleteUserCtrl', ['$q
     if (spaceUser.spaceDeveloper){
       promises.push(spaceService.disassociateDeveloperWithSpace(spaceUser));
     }
-
+    
     return $q.all(promises);
   };
 
