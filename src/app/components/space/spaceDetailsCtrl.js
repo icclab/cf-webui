@@ -20,6 +20,8 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
   $scope.userName = localStorage.getItem('userName');
 
+  $scope.showOrphanRoute = false;
+
   $scope.currentUser = {
     name: localStorage.getItem('userName'),
     spaceId: $routeParams.spaceId,
@@ -134,8 +136,13 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     return q;
   };
   $scope.getApplicationsForTheSpace().then(function(){
-    $scope.getRoutesForTheSpace();
-
+    $scope.getRoutesForTheSpace().then(function(){
+      for (var j = 0; j < $scope.routes.length; j++) {
+        if($scope.routes[j].apps.length===0) $scope.showOrphanRoute = true;
+        console.log('Existe orphaned route: ');
+        console.log($scope.showOrphanRoute);
+      }
+    });
   });
 
   $scope.retrieveRolesOfAllUsersForTheSpace = function() {
@@ -423,7 +430,13 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     
     modalInstance.result.then(function() {
       // adjust routes table information
-      $scope.getRoutesForTheSpace();
+      $scope.getRoutesForTheSpace().then(function(){
+        for (var j = 0; j < $scope.routes.length; j++) {
+          if($scope.routes[j].apps.length===0) $scope.showOrphanRoute = true;
+          console.log('Existe orphaned route: ');
+          console.log($scope.showOrphanRoute);
+        }
+    });
     });
 
   };
@@ -467,6 +480,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     modalInstance.result.then(function(responseRouteId) {
       //var routeIdx = $scope.routes.indexOf(responseRouteId);
       //$scope.routes.splice(routeIdx, 1);
+      $scope.showOrphanRoute=false;
       $scope.getRoutesForTheSpace();
     });
 

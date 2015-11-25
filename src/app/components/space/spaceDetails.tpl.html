@@ -94,7 +94,7 @@
             <div class="panel-heading clearfix">
               <h3 class="panel-title pull-left">Routes <span class="label label-default">{{nrOfRoutes}}</span></h3>
               <div class="pull-right">
-              <a class="btn btn-success" ng-click="deleteOrphanedRoutes(routes)"><i class="fa fa-plus"></i>&nbsp; Delete orphaned routes</a>&nbsp;
+              <a class="btn btn-success" ng-click="deleteOrphanedRoutes(routes)" ng-show="showOrphanRoute"><i class="fa fa-plus"></i>&nbsp; Delete orphaned routes</a>&nbsp;
               <a class="btn btn-success" ng-click="addRoute()"><i class="fa fa-plus"></i>&nbsp; Add a route</a>
               </div>
             </div>
@@ -113,8 +113,8 @@
                     <div ng-repeat="app in route.apps">{{app.name}}<br></div>
                   </td>
                   <td>
-                    <a class="action action-map" ng-click="associateRouteWithApp(route, applications)" title="Map"><i class="fa fa-lg fa-link"></i></a>
-                    <a class="action action-map" ng-click="disassociateRouteWithApp(route)" title="Unmap"><i class="fa fa-lg fa-unlink"></i></a>
+                    <a class="action action-map" ng-click="associateRouteWithApp(route, applications)" title="Map" ng-show="nrOfApplications>0"><i class="fa fa-lg fa-link"></i></a>
+                    <a class="action action-map" ng-click="disassociateRouteWithApp(route)" title="Unmap" ng-show="route.apps.length>0"><i class="fa fa-lg fa-unlink"></i></a><i class="fa fa-fw" ng-hide="route.apps.length>0"></i>
                     <a class="action action-delete" ng-click="deleteRoute(route)" title="Delete"><i class="fa fa-lg fa-trash"></i></a>
                   </td>
                 </tr>
