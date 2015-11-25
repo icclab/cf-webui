@@ -31,7 +31,10 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     if ($scope.routes.length > 0) {
       $scope.routes.length = 0;
     }
-    routeService.getRoutesForTheSpace($scope.id).then(function(response){
+
+    var applications = $scope.applications;
+
+    q = routeService.getRoutesForTheSpace($scope.id).then(function(response){
       var data = response.data;
       $scope.nrOfRoutes = data.total_results;
       angular.forEach(data.resources, function(route, key){
@@ -40,12 +43,12 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
           name: route.entity.host,
           apps: []
         };
-        for (var j = 0; j < $scope.applications.length; j++) {
-          for (var i = 0; i < $scope.applications[j].routes.length; i++) {
-            if ($scope.applications[j].routes[i].guid === objectRoute.id) {
+        for (var j = 0; j < applications.length; j++) {
+          for (var i = 0; i < applications[j].routes.length; i++) {
+            if (applications[j].routes[i].guid === objectRoute.id) {
               var objectRouteApp = {
-                name: $scope.applications[j].name,
-                id: $scope.applications[j].id,
+                name: applications[j].name,
+                id: applications[j].id,
               };
               objectRoute.apps.push(objectRouteApp);
             }
@@ -57,6 +60,8 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
        messageService.addMessage('danger', 'The routes have not been loaded.');
     });
 
+    return q;
+
   };
 
   $scope.getApplicationsForTheSpace = function() {
@@ -65,7 +70,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     }
 
     var getSpaceSummaryPromise = spaceService.getSpaceSummary($scope.spaceId);
-    
+    var promises = [];
     q = getSpaceSummaryPromise.then(function(response) {
       //$scope.getRoutesForTheSpace();
       $scope.name = response.data.name;
@@ -440,11 +445,33 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     modalInstance.result.then(function(responseRouteId) {
       //var routeIdx = $scope.routes.indexOf(responseRouteId);
       //$scope.routes.splice(routeIdx, 1);
-      $scope.getRoutesForTheSpace();
-      $scope.getApplicationsForTheSpace();
+      $scope.getRoutesForTheSpace().then(function(response){
+        $scope.getApplicationsForTheSpace();
+      });
     });
 
   };
+
+  $scope.deleteOrphanedRoutes = function(routes) {
+    
+    var modalInstance = $modal.open({
+      templateUrl: 'app/components/route/routeDeleteOrphanedRoutes.tpl.html',
+      controller: 'RouteDeleteOrphanedRoutesCtrl',
+      resolve: {
+        routes: function() {
+          return routes;
+        }
+      }
+    });
+    
+    modalInstance.result.then(function(responseRouteId) {
+      //var routeIdx = $scope.routes.indexOf(responseRouteId);
+      //$scope.routes.splice(routeIdx, 1);
+      $scope.getRoutesForTheSpace();
+    });
+
+  };
+
 
   $scope.associateRouteWithApp = function(route, applications) {
 

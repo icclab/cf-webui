@@ -42,10 +42,10 @@ angular.module('app.routes').controller('RouteAddCtrl', ['$scope', '$modalInstan
   $scope.ok = function () {
     $scope.route.domainId = $scope.domainId;
     routeService.createRoute($scope.route).then(function(response) {
-      messageService.addMessage('success', 'The route has been successfully added.', true);
+      messageService.addMessage('success', 'The route has been successfully added.');
      $modalInstance.close();
     }, function(err) {
-      messageService.addMessage('danger', 'The route has not been added.', true);
+      messageService.addMessage('danger', 'The route has not been added.');
       $log.error(err);
       $modalInstance.dismiss('error');
     });
