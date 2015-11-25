@@ -416,6 +416,7 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
 
     modalInstance.result.then(function() {
       messageService.addMessage('success', 'The application has been successfully scaled.');
+      $scope.getApplicationSummary();
     });
   };
   
