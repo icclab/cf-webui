@@ -38,7 +38,7 @@
               <tbody>
                 <tr ng-repeat="application in applications" ng-click="showApp(application.id, $event)" style="cursor: pointer">
                   <td>
-                    <span class="label" ng-class="application.status == 'running' ? 'label-success' : application.status == 'crashed' ? 'label-warning' : 'label-default'">{{application.status}}</span>
+                    <span class="label" ng-class="application.status == 'running' ? 'label-success' : application.status == 'crashed' ? 'label-danger' : 'label-default'">{{application.status}}</span>
                   </td>
                   <td>
                     {{application.name}}<br>
