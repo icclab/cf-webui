@@ -386,6 +386,13 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
       // go to spaces overview
       //window.location = '#/organizations/' + $scope.organizationId + '/spaces/' + $scope.id;
       $scope.getApplicationsForTheSpace();
+
+      for (var j = 0; j < $scope.routes.length; j++) {
+        if($scope.routes[j].apps.length===0) $scope.showOrphanRoute = true;
+        console.log('Existe orphaned route: ');
+        console.log($scope.showOrphanRoute);
+      }
+
     });
   };
 
@@ -436,7 +443,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
           console.log('Existe orphaned route: ');
           console.log($scope.showOrphanRoute);
         }
-    });
+      });
     });
 
   };
@@ -458,8 +465,14 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     modalInstance.result.then(function(responseRouteId) {
       //var routeIdx = $scope.routes.indexOf(responseRouteId);
       //$scope.routes.splice(routeIdx, 1);
-      $scope.getRoutesForTheSpace().then(function(response){
-        $scope.getApplicationsForTheSpace();
+      $scope.getApplicationsForTheSpace().then(function(){
+        $scope.getRoutesForTheSpace().then(function(){
+          for (var j = 0; j < $scope.routes.length; j++) {
+            if($scope.routes[j].apps.length===0) $scope.showOrphanRoute = true;
+            console.log('Existe orphaned route: ');
+            console.log($scope.showOrphanRoute);
+          }
+        });
       });
     });
 
@@ -488,8 +501,9 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
 
 
   $scope.associateRouteWithApp = function(route, applications) {
-
+    $scope.showOrphanRoute = false;
     for (var j = 0; j < route.apps.length; j++) {
+      if (route.apps.length===0) $scope.showOrphanRoute = true;
       for (var i = 0; i < applications.length; i++) {
         if (route.apps[j].id === applications[i].id) {
           applications.splice(i, 1);
@@ -515,18 +529,15 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     
     modalInstance.result.then(function(application) {
       // adjust routes table information
-      for (var j = 0; j < $scope.routes.length; j++) {
-        if ($scope.routes[j].id === routeId) {
-          var objectRouteApp = {
-            name: application.name,
-            id: application.id,
-          };
-          $scope.routes[j].apps.push(objectRouteApp);
-          break;
-        }
-      }
-
-      $scope.getApplicationsForTheSpace();
+      $scope.getApplicationsForTheSpace().then(function(){
+        $scope.getRoutesForTheSpace().then(function(){
+          for (var j = 0; j < $scope.routes.length; j++) {
+            if($scope.routes[j].apps.length===0) $scope.showOrphanRoute = true;
+            console.log('Existe orphaned route: ');
+            console.log($scope.showOrphanRoute);
+          }
+        });
+      });
     });
   };
 
@@ -543,11 +554,15 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     });
     
     modalInstance.result.then(function(route, app) {
-      // adjust routes table information
-      var routeIdx = $scope.routes.indexOf(route);
-      var appIdx = $scope.routes[routeIdx].apps.indexOf(app);
-      $scope.routes[routeIdx].apps.splice(appIdx, 1);
-      $scope.nrOfDomains -=1;
+      $scope.getApplicationsForTheSpace().then(function(){
+        $scope.getRoutesForTheSpace().then(function(){
+          for (var j = 0; j < $scope.routes.length; j++) {
+            if($scope.routes[j].apps.length===0) $scope.showOrphanRoute = true;
+            console.log('Existe orphaned route: ');
+            console.log($scope.showOrphanRoute);
+          }
+        });
+      });
     });
   };
 
