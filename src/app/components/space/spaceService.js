@@ -172,7 +172,7 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
     
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/spaces/' + space.id,
+      'url': API_ENDPOINT + '/v2/spaces/' + space.id + '?recursive=true',
       'guid' : space.id
     };
 
