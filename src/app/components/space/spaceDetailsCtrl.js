@@ -385,14 +385,16 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     modalInstance.result.then(function() {
       // go to spaces overview
       //window.location = '#/organizations/' + $scope.organizationId + '/spaces/' + $scope.id;
-      $scope.getApplicationsForTheSpace();
 
-      for (var j = 0; j < $scope.routes.length; j++) {
-        if($scope.routes[j].apps.length===0) $scope.showOrphanRoute = true;
-        console.log('Existe orphaned route: ');
-        console.log($scope.showOrphanRoute);
-      }
-
+      $scope.getApplicationsForTheSpace().then(function(){
+        $scope.getRoutesForTheSpace().then(function(){
+          for (var j = 0; j < $scope.routes.length; j++) {
+            if($scope.routes[j].apps.length===0) $scope.showOrphanRoute = true;
+            console.log('Existe orphaned route: ');
+            console.log($scope.showOrphanRoute);
+          }
+        });
+      });
     });
   };
 
