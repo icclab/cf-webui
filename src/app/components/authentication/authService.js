@@ -13,6 +13,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
       'grant_type': 'password',
       'password': logInData.password,
       'username': logInData.userName,
+      "redirect_uri": "http://console-cf-webui-94.cfapps.io/",
       'scope': ''
 
     };
@@ -23,15 +24,15 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
 
     // http headers
     var headers = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic Y2Y6',
-      'X-Webui-Authorization': 'Basic Y2Y6',
+      //'Accept': 'application/json',
+      //'Content-Type': 'application/x-www-form-urlencoded',
+      //'Authorization': 'Basic Y2Y6',
+      //'X-Webui-Authorization': 'Basic Y2Y6'
     };
 
     var deferred = $q.defer();
 
-    $http.post('/request.php', data, { headers: headers }).success(function(response) {
+    $http.post('/auth', data, { headers: headers }).success(function(response) {
       if (response.access_token !== null) {
         // save access token and username in session storage
         localStorage.setItem('accessToken', response.access_token);
