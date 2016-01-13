@@ -9,6 +9,12 @@ module.exports = function(grunt) {
         dest: 'build',
         expand: true
       },
+      late: {
+        cwd: 'build',
+        src: [ '**', '!server.js', '!app.js', '!temp/', '!package.json' ],
+        dest: 'build/public',
+        expand: true
+      },
     },
 
     clean: {
@@ -30,7 +36,7 @@ module.exports = function(grunt) {
           files: [{
            expand: true,
            cwd: 'build',
-           src: ['app/**/*.tpl.html', 'index.php'],
+           src: ['app/**/*.tpl.html', 'index.html'],
            dest: 'build/'
         }]
         
@@ -121,7 +127,7 @@ module.exports = function(grunt) {
   grunt.registerTask(
     'build', 
     'Compiles all of the assets, validate js files, annotate angular and minify files to the build directory.', 
-    ['clean:prev', 'copy', 'jshint', 'htmlmin', 'ngAnnotate', 'uglify', 'less', 'cssmin', 'concat', 'clean:post']
+    ['clean:prev', 'copy:build', 'jshint', 'htmlmin', 'ngAnnotate', 'uglify', 'less', 'cssmin', 'concat', 'clean:post', 'copy:late']
   );
 
 

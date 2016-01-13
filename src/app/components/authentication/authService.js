@@ -9,12 +9,11 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
   var _logIn = function(logInData) {
     // data to post
     var data = {
-      'url': UAA_ENDPOINT + '/oauth/token',
-      'grant_type': 'password',
-      'password': logInData.password,
-      'username': logInData.userName,
-      'scope': ''
-
+      "grant_type": "password",
+      "password": logInData.password,
+      "username": logInData.userName,
+      "redirect_uri": "http://console-cf-webui-94.cfapps.io/",
+      "scope": ""
     };
     //'response_type': 'token'
  
@@ -30,8 +29,9 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
     };
 
     var deferred = $q.defer();
+    //data = JSON.stringify(data);
 
-    $http.post('/request.php', data, { headers: headers }).success(function(response) {
+    $http.post('/api', data, { headers: headers }).success(function(response) {
       if (response.access_token !== null) {
         // save access token and username in session storage
         localStorage.setItem('accessToken', response.access_token);
@@ -51,6 +51,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
       }
     }).error(function(err, status) {
       $log.error(err);
+      console.log(status);
       //_logOut();
       deferred.reject(err);
     });

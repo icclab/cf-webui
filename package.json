@@ -2,7 +2,7 @@
   "name": "cf-webui",
   "version": "0.0.1",
   "description": "grunt for cf-webui",
-  "main": "index.php",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -23,5 +23,10 @@
     "grunt-contrib-htmlmin": "~0.4.0",
     "grunt-contrib-concat": "~0.5.1",
     "grunt-contrib-less": "~1.1.0"
+  },
+  "dependencies": {
+    "express": "~4.13.3",
+    "http-proxy": "~1.12.0",
+    "request": "~2.67.0"
   }
 }

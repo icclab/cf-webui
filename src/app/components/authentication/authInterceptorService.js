@@ -59,6 +59,7 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
     $rootScope.nrOfUnauthorizedRequests++;
 
     $log.error(rejection);
+    console.log(rejection.config.data);
     return $q.reject(rejection);
   };
 
