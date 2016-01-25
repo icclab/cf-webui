@@ -2,9 +2,11 @@ angular.module('app.serviceBinding').factory('serviceBindingService', ['$http', 
   var serviceBindingServiceFactory = {};
   
   var _addServiceBinding = function(serviceBinding) {
+    
+    var url = '/v2/service_bindings';
+
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/service_bindings',
       'service_instance_guid': serviceBinding.serviceInstanceId,
       'app_guid': serviceBinding.applicationId
     };
@@ -19,14 +21,12 @@ angular.module('app.serviceBinding').factory('serviceBindingService', ['$http', 
       headers: headers
     };
 
-    return $http.post('/request.php', data, config);
+    return $http.post(url, data, config);
   };
 
   var _deleteServiceBinding = function(serviceBindingId) {
-    // data
-    var data = {
-      'url': API_ENDPOINT + '/v2/service_bindings/' + serviceBindingId
-    };
+    
+    var url = '/v2/service_bindings/' + serviceBindingId;
 
     // http headers
     var headers = {
@@ -35,11 +35,10 @@ angular.module('app.serviceBinding').factory('serviceBindingService', ['$http', 
     };
 
     var config = {
-      headers: headers,
-      data: data
+      headers: headers
     };
 
-    return $http.delete('/request.php', config);
+    return $http.delete(url, config);
   };
   
   serviceBindingServiceFactory.addServiceBinding = _addServiceBinding;

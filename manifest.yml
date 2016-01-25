@@ -4,3 +4,6 @@ applications:
   memory: 128M
   host: console-cf-webui-${random-word}
   path: ./build
+  env: 
+    UAA_ENDPOINT: https://uaa.run.pivotal.io
+    API_ENDPOINT: https://api.run.pivotal.io

@@ -2,10 +2,8 @@ angular.module('app.application').factory('applicationService', ['$q', '$http', 
   var applicationServiceFactory = {};
   
   var _getApplications = function() {
-    // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/apps'
-    };
+    
+    var url = '/v2/apps';
 
     // http headers
     var headers = {
@@ -14,18 +12,15 @@ angular.module('app.application').factory('applicationService', ['$q', '$http', 
     };
 
     var config = {
-      params: params,
       headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
   
   var _getApplicationSummary = function(id) {
-    // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/apps/' + id + '/summary'
-    };
+    
+    var url = '/v2/apps/' + id + '/summary';
 
     // http headers
     var headers = {
@@ -34,20 +29,15 @@ angular.module('app.application').factory('applicationService', ['$q', '$http', 
     };
 
     var config = {
-      params: params,
       headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
   
   var _getStack = function(id) {
     
-    // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/stacks/' + id,
-      'guid' : id
-    };
+    var url = '/v2/stacks/' + id;
 
     // http headers
     var headers = {
@@ -56,18 +46,18 @@ angular.module('app.application').factory('applicationService', ['$q', '$http', 
     };
 
     var config = {
-      headers: headers,
-      params: params
+      headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
   
   var _getInstances = function(id) {
     
+    var url = '/v2/apps/' + id + '/stats';
+
     // params
     var params = {
-      'url': API_ENDPOINT + '/v2/apps/' + id + '/stats',
       'guid' : id
     };
 
@@ -79,18 +69,14 @@ angular.module('app.application').factory('applicationService', ['$q', '$http', 
 
     var config = {
       headers: headers,
-      params: params
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
   
   var _getAppEvents = function(id) {
     
-    // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/events?order-direction=desc&q=actee:' + id + '&results-per-page=5'
-    };
+    var url = '/v2/events?order-direction=desc&q=actee:' + id + '&results-per-page=5';
 
     // http headers
     var headers = {
@@ -99,19 +85,15 @@ angular.module('app.application').factory('applicationService', ['$q', '$http', 
     };
 
     var config = {
-      headers: headers,
-      params: params
+      headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
   
   var _getEnvironmentVariables = function(id) {
     
-    // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/apps/' + id + '/env'
-    };
+    var url = '/v2/apps/' + id + '/env';
 
     // http headers
     var headers = {
@@ -120,18 +102,17 @@ angular.module('app.application').factory('applicationService', ['$q', '$http', 
     };
 
     var config = {
-      headers: headers,
-      params: params
+      headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
   
   var _getServiceBindings = function(id) {
     
     // params
+    var url = '/v2/apps/' + id + '/service_bindings';
     var params = {
-      'url': API_ENDPOINT + '/v2/apps/' + id + '/service_bindings',
       'inline-relations-depth': 1
     };
 
@@ -146,13 +127,15 @@ angular.module('app.application').factory('applicationService', ['$q', '$http', 
       params: params
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
 
   var _createApplication = function(application) {
+    
+    var url = '/v2/apps';
+
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/apps',
       'name': application.name,
       'space_guid': application.spaceId,
     };
@@ -167,7 +150,7 @@ angular.module('app.application').factory('applicationService', ['$q', '$http', 
       headers: headers
     };
 
-    return $http.post('/request.php', data, config);
+    return $http.post(url, data, config);
   };
 
   var _addApplication = function(app) {
@@ -177,11 +160,11 @@ angular.module('app.application').factory('applicationService', ['$q', '$http', 
 
     for ( var i = 0; i < app.bits.length; i++) {
       var fd = new FormData();
-      var url = API_ENDPOINT + '/v2/apps/' + app.id +'/bits';
+      var url = '/v2/apps/' + app.id +'/bits';
 
       // data
       /*var data = {
-        'url': API_ENDPOINT + '/v2/apps/' + application.id +'/bits',
+        'url': '/v2/apps/' + application.id +'/bits',
         'resources': resources,
         'application': fd
       };*/
@@ -212,9 +195,11 @@ angular.module('app.application').factory('applicationService', ['$q', '$http', 
   };
   
   var _editApplication = function(application) {
+    
+    var url = '/v2/apps/' + application.id;
+
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/apps/' + application.id,
       'name': application.name
     };
 
@@ -228,14 +213,15 @@ angular.module('app.application').factory('applicationService', ['$q', '$http', 
       headers: headers
     };
 
-    return $http.put('/request.php', data, config);
+    return $http.put(url, data, config);
   };
   
   var _deleteApplication = function(applicationId) {
     
+    var url = '/v2/apps/' + applicationId;
+
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/apps/' + applicationId,
       'guid' : applicationId
     };
 
@@ -250,14 +236,16 @@ angular.module('app.application').factory('applicationService', ['$q', '$http', 
       data: data
     };
     
-    return $http.delete('/request.php', config);
+    return $http.delete(url, config);
   };
   
   // environment variables
   var _editApplicationEnv = function(applicationId, userEnvs) {
+    
+    var url = '/v2/apps/' + applicationId;
+
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/apps/' + applicationId,
       'environment_json': userEnvs
     };
 
@@ -271,13 +259,15 @@ angular.module('app.application').factory('applicationService', ['$q', '$http', 
       headers: headers
     };
 
-    return $http.put('/request.php', data, config);
+    return $http.put(url, data, config);
   };
   
   var _stopApplication = function(applicationId) {
+    
+    var url = '/v2/apps/' + applicationId;
+
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/apps/' + applicationId,
       'state': 'STOPPED'
     };
 
@@ -291,13 +281,15 @@ angular.module('app.application').factory('applicationService', ['$q', '$http', 
       headers: headers
     };
 
-    return $http.put('/request.php', data, config);
+    return $http.put(url, data, config);
   };
   
   var _startApplication = function(applicationId) {
+    
+    var url = '/v2/apps/' + applicationId;
+
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/apps/' + applicationId,
       'state': 'STARTED'
     };
 
@@ -311,13 +303,15 @@ angular.module('app.application').factory('applicationService', ['$q', '$http', 
       headers: headers
     };
 
-    return $http.put('/request.php', data, config);
+    return $http.put(url, data, config);
   };
   
   var _scaleApplication = function(applicationId, scale) {
+    
+    var url = '/v2/apps/' + applicationId;
+
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/apps/' + applicationId,
       'instances': scale.instances,
       'memory': scale.memory
     };
@@ -332,7 +326,7 @@ angular.module('app.application').factory('applicationService', ['$q', '$http', 
       headers: headers
     };
 
-    return $http.put('/request.php', data, config);
+    return $http.put(url, data, config);
   };
   
   applicationServiceFactory.getApplications = _getApplications;

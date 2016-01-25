@@ -2,9 +2,11 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
   var serviceInstanceServiceFactory = {};
 
   var _addServiceInstance = function(serviceInstance) {
+    
+    var url = '/v2/service_instances';
+
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/service_instances',
       'name': serviceInstance.name,
       'service_plan_guid': serviceInstance.servicePlanId,
       'space_guid': serviceInstance.spaceId
@@ -20,15 +22,12 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
       headers: headers
     };
 
-    return $http.post('/request.php', data, config);
+    return $http.post(url, data, config);
   };
 
   var _deleteServiceInstance = function(serviceInstanceId) {
     
-    // data
-    var data = {
-      'url': API_ENDPOINT + '/v2/service_instances/' + serviceInstanceId
-    };
+    var url = '/v2/service_instances/' + serviceInstanceId;
 
     // http headers
     var headers = {
@@ -37,18 +36,15 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
     };
 
     var config = {
-      headers: headers,
-      data: data
+      headers: headers
     };
     
-    return $http.delete('/request.php', config);
+    return $http.delete(url, config);
   };
 
   var _getServiceBindingsForServiceInstance= function(serviceInstanceId) {
     // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/service_instances/' + serviceInstanceId + '/service_bindings',
-    };
+    var url = '/v2/service_instances/' + serviceInstanceId + '/service_bindings';
 
     // http headers
     var headers = {
@@ -57,11 +53,10 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
     };
 
     var config = {
-      params: params,
       headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
 
   serviceInstanceServiceFactory.addServiceInstance = _addServiceInstance;

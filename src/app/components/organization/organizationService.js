@@ -2,30 +2,29 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
   var organizationServiceFactory = {};
 
   var _getOrganizations = function() {
-    // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/organizations'
-    };
+    
+    var accessToken = localStorage.getItem('accessToken');
+
+    var url = '/v2/organizations';
 
     // http headers
     var headers = {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Authorization': 'Bearer ' + accessToken,
+      'X-Webui-Authorization': 'Bearer ' + accessToken,
+      'Content-Type': 'application/json; charset=utf-8'
     };
 
     var config = {
-      params: params,
       headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get('/v2/organizations', config);
   };
 
   var _getOrganization = function(id) {
-    // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/organizations/' + id
-    };
+    
+    var url = '/v2/organizations/' + id;
 
     // http headers
     headers = {
@@ -34,19 +33,16 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
     };
 
     var config = {
-      params: params,
       headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
 
   var _getSpacesForTheOrganization = function(id, ignoreLoadingBar) {
     if (typeof(ignoreLoadingBar) === 'undefined') ignoreLoadingBar = false;
     // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/organizations/' + id +  '/spaces'
-    };
+    var url = '/v2/organizations/' + id +  '/spaces';
 
     // http headers
     headers = {
@@ -55,19 +51,16 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
     };
 
     var config = {
-      params: params,
       headers: headers,
       ignoreLoadingBar: ignoreLoadingBar
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
   
   var _getQuotaForTheOrganization = function(id) {
     // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/quota_definitions'
-    };
+    var url = '/v2/quota_definitions';
 
     // http headers
     headers = {
@@ -76,18 +69,15 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
     };
 
     var config = {
-      params: params,
       headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
   
   var _getSharedDomainsForTheOrganization = function() {
-    // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/shared_domains'
-    };
+    
+    var url = '/v2/shared_domains';
 
     // http headers
     headers = {
@@ -96,18 +86,15 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
     };
 
     var config = {
-      params: params,
       headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
   
   var _getPrivateDomainsForTheOrganization = function(id) {
-    // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/organizations/' + id +  '/private_domains'
-    };
+    
+    var url = '/v2/organizations/' + id +  '/private_domains';
 
     // http headers
     headers = {
@@ -116,19 +103,16 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
     };
 
     var config = {
-      params: params,
       headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
   
   var _getAllUsersForTheOrganization = function(id) {
     
     // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/organizations/' + id +  '/users',
-    };
+    var url = '/v2/organizations/' + id +  '/users';
 
     // http headers
     headers = {
@@ -137,19 +121,15 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
     };
 
     var config = {
-      params: params,
       headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
 
   var _retrieveRolesOfAllUsersForTheOrganization = function(id) {
     
-    // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/organizations/' + id +  '/user_roles',
-    };
+    var url = '/v2/organizations/' + id +  '/user_roles';
 
     // http headers
     headers = {
@@ -158,18 +138,17 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
     };
 
     var config = {
-      params: params,
       headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
   
   var _addOrganization = function(organization) {
     
     // data
+    var url = '/v2/organizations';
     var data = {
-      'url': API_ENDPOINT + '/v2/organizations',
       'name': organization.name
     };
 
@@ -183,35 +162,35 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       headers: headers
     };
 
-    return $http.post('/request.php', data, config);
+    return $http.post(url, data, config);
   };
   
   var _editOrganization = function(organization) {
     
     // data
+    var url = '/v2/organizations/' + organization.id;
     var data = {
-      'url': API_ENDPOINT + '/v2/organizations/' + organization.id,
       'name': organization.name
     };
 
     // http headers
     var headers = {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json; charset=utf-8'
     };
 
     var config = {
       headers: headers
     };
 
-    return $http.put('/request.php', data, config);
+    return $http.put(url, data, config);
   };
   
   var _deleteOrganization = function(organization) {
     
     // data
+    var url = '/v2/organizations/' + organization.id;
     var data = {
-      'url': API_ENDPOINT + '/v2/organizations/' + organization.id,
       'guid' : organization.id,
       'async' : true,
       'recursive' : true
@@ -228,13 +207,13 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       data: data
     };
     
-    return $http.delete('/request.php', config);
+    return $http.delete(url, config);
   };
 
   var _associateUserWithOrganization = function(user) {
     // data
+    var url = '/v2/organizations/' + user.organizationId + '/users';
     var data = {
-      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/users',
       'username': user.name,
       //'organization_guid': user.organizationId
     };
@@ -249,14 +228,13 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       headers: headers
     };
 
-    return $http.put('/request.php', data, config);
+    return $http.put(url, data, config);
   };
 
   var _disassociateUserWithOrganization = function(user) {
     // data
-    var data = {
-      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/users/' + user.id,
-    };
+    var url = '/v2/organizations/' + user.organizationId + '/users/' + user.id;
+    
 
     // http headers
     var headers = {
@@ -266,17 +244,17 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
 
     var config = {
       headers: headers,
-      data: data
     };
 
-    return $http.delete('/request.php', config);
+    return $http.delete(url, config);
   };
 
   var _associateManagerWithOrganization = function(user) {
 
+    var url = '/v2/organizations/' + user.organizationId + '/managers';
+    
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/managers',
       'username': user.name,
       //'organization_guid': user.organizationId
     };
@@ -291,16 +269,15 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       headers: headers
     };
 
-    return $http.put('/request.php', data, config);
+    return $http.put(url, data, config);
   };
 
   var _disassociateManagerWithOrganization = function(user) {
-    // data
-    var data = {
-      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/managers/' + user.id,
+    
+    var url = '/v2/organizations/' + user.organizationId + '/managers/' + user.id;
       //'username': user.username,
       //'organization_guid': user.organizationId
-    };
+    //};
 
     // http headers
     var headers = {
@@ -310,16 +287,17 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
 
     var config = {
       headers: headers,
-      data: data
     };
 
-    return $http.delete('/request.php', config);
+    return $http.delete(url, config);
   };
 
   var _associateBillingManagerWithOrganization = function(user) {
+
+    var url = '/v2/organizations/' + user.organizationId + '/billing_managers';
+    
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/billing_managers',
       'username': user.name,
       //'organization_guid': user.organizationId
     };
@@ -334,16 +312,14 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       headers: headers
     };
 
-    return $http.put('/request.php', data, config);
+    return $http.put(url, data, config);
   };
 
   var _disassociateBillingManagerWithOrganization = function(user) {
-    // data
-    var data = {
-      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/billing_managers/' + user.id,
+    
+    var url = '/v2/organizations/' + user.organizationId + '/billing_managers/' + user.id;
       //'username': user.username,
       //'organization_guid': user.organizationId
-    };
 
     // http headers
     var headers = {
@@ -353,16 +329,17 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
 
     var config = {
       headers: headers,
-      data: data
     };
 
-    return $http.delete('/request.php', config);
+    return $http.delete(url, config);
   };
 
     var _associateAuditorWithOrganization = function(user) {
+
+    var url = '/v2/organizations/' + user.organizationId + '/auditors';
+    
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/auditors',
       'username': user.name,
       //'organization_guid': user.organizationId
     };
@@ -377,16 +354,14 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
       headers: headers
     };
 
-    return $http.put('/request.php', data, config);
+    return $http.put(url, data, config);
   };
 
   var _disassociateAuditorWithOrganization = function(user) {
-    // data
-    var data = {
-      'url': API_ENDPOINT + '/v2/organizations/' + user.organizationId + '/auditors/' + user.id,
+
+    var url = '/v2/organizations/' + user.organizationId + '/auditors/' + user.id;
       //'username': user.username,
       //'organization_guid': user.organizationId
-    };
 
     // http headers
     var headers = {
@@ -396,10 +371,9 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
 
     var config = {
       headers: headers,
-      data: data
     };
 
-    return $http.delete('/request.php', config);
+    return $http.delete(url, config);
   };
 
   organizationServiceFactory.getOrganizations = _getOrganizations;

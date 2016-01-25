@@ -5,9 +5,7 @@ angular.module('app.domain').factory('domainService', ['$http', 'API_ENDPOINT', 
     if (typeof(ignoreLoadingBar) === 'undefined') ignoreLoadingBar = false;
     
     // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/shared_domains'
-    };
+    var url = '/v2/shared_domains';
 
     // http headers
     headers = {
@@ -16,21 +14,18 @@ angular.module('app.domain').factory('domainService', ['$http', 'API_ENDPOINT', 
     };
 
     var config = {
-      params: params,
       headers: headers,
       ignoreLoadingBar: ignoreLoadingBar
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
   
   var _getPrivateDomainsForTheOrganization = function(id, ignoreLoadingBar) {
     if (typeof(ignoreLoadingBar) === 'undefined') ignoreLoadingBar = false;
     
     // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/organizations/' + id +  '/private_domains'
-    };
+    var url = '/v2/organizations/' + id +  '/private_domains';
 
     // http headers
     headers = {
@@ -39,19 +34,18 @@ angular.module('app.domain').factory('domainService', ['$http', 'API_ENDPOINT', 
     };
 
     var config = {
-      params: params,
       headers: headers,
       ignoreLoadingBar: ignoreLoadingBar
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
   
   var _addDomain = function(domain) {
     
     // data
+    var url = '/v2/private_domains';
     var data = {
-      'url': API_ENDPOINT + '/v2/private_domains',
       'name': domain.name,
       'owning_organization_guid': domain.organizationID
     };
@@ -66,14 +60,15 @@ angular.module('app.domain').factory('domainService', ['$http', 'API_ENDPOINT', 
       headers: headers
     };
 
-    return $http.post('/request.php', data, config);
+    return $http.post(url, data, config);
   };
   
   var _deleteDomain = function(domain) {
     
+    var url = '/v2/private_domains/' + domain.metadata.guid;
+
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/private_domains/' + domain.metadata.guid,
       'guid' : domain.metadata.guid,
       'name' : domain.entity.name
     };
@@ -89,7 +84,7 @@ angular.module('app.domain').factory('domainService', ['$http', 'API_ENDPOINT', 
       data: data
     };
     
-    return $http.delete('/request.php', config);
+    return $http.delete(url, config);
   };
   
   domainServiceFactory.getPrivateDomainsForTheOrganization =_getPrivateDomainsForTheOrganization;

@@ -3,8 +3,8 @@ angular.module('app.service').factory('serviceService', ['$http', 'API_ENDPOINT'
 
   var _getServicePlansForTheService = function(serviceId) {
     // params
+    var url = '/v2/services/' + serviceId + '/service_plans';
     var params = {
-      'url': API_ENDPOINT + '/v2/services/' + serviceId + '/service_plans',
       'inline-relations-depth': 1
     };
 
@@ -19,13 +19,13 @@ angular.module('app.service').factory('serviceService', ['$http', 'API_ENDPOINT'
       headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
 
   var _getServices= function(id) {
     // params
+    var url = '/v2/services';
     var params = {
-      'url': API_ENDPOINT + '/v2/services',
       'inline-relations-depth': 1
     };
 
@@ -40,7 +40,7 @@ angular.module('app.service').factory('serviceService', ['$http', 'API_ENDPOINT'
       headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
 
   serviceServiceFactory.getServicePlansForTheService = _getServicePlansForTheService;
