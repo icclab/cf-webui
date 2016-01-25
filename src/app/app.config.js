@@ -42,5 +42,4 @@ angular.module('app').config(['$routeProvider', function($routeProvider) {
 
 angular.module('app').config(['$httpProvider', function($httpProvider) {
   $httpProvider.interceptors.push('authInterceptorService');
-  $httpProvider.defaults.withCredentials = true;
 }]);

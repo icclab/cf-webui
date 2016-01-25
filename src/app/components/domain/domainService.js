@@ -1,4 +1,4 @@
-angular.module('app.domain').factory('domainService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
+angular.module('app.domain').factory('domainService', ['$http', function($http) {
   var domainServiceFactory = {};
   
   var _getSharedDomainsForTheOrganization = function(ignoreLoadingBar) {
@@ -43,8 +43,9 @@ angular.module('app.domain').factory('domainService', ['$http', 'API_ENDPOINT', 
   
   var _addDomain = function(domain) {
     
-    // data
     var url = '/v2/private_domains';
+
+    // data
     var data = {
       'name': domain.name,
       'owning_organization_guid': domain.organizationID

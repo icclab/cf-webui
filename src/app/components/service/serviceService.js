@@ -1,4 +1,4 @@
-angular.module('app.service').factory('serviceService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
+angular.module('app.service').factory('serviceService', ['$http', function($http) {
   var serviceServiceFactory = {};
 
   var _getServicePlansForTheService = function(serviceId) {

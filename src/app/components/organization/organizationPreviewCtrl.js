@@ -6,10 +6,9 @@ angular.module('app.organization').controller('OrganizationPreviewCtrl', ['$root
   $scope.showOrgCreation = false;
   $scope.organizations = [];
   $scope.nrOfOrganizations = 0;
-  console.log('asking for orgs');
+
   organizationService.getOrganizations().then(function(response) {
     var data = response.data;
-    console.log('No error getting organizations');
     $scope.nrOfOrganizations = data.total_results;
 
     // create organization objects
@@ -25,10 +24,7 @@ angular.module('app.organization').controller('OrganizationPreviewCtrl', ['$root
       $scope.organizations.push(objectOrganization);
     });
   }, function (err, status) {
-    console.log('Error getting organizations');
-    console.log(err);
-    //$log.error(err.config.headers);
-    //$log.error(err);
+    $log.error(err);
   });
 
   featureFlagService.getUserOrgCreationFeatureFlag().then(function(response) {

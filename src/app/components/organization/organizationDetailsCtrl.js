@@ -62,14 +62,10 @@ angular.module('app.organization').controller('OrganizationDetailsCtrl', ['$rout
 
     organizationService.getSpacesForTheOrganization($scope.id).then(function(response) {
       var data = response.data;
-      console.log(data);
       $scope.nrOfSpaces = data.total_results;
 
       // get summary for each space
       angular.forEach(data.resources, function(space, key) {
-        console.log('Inside:');
-        console.log(space.metadada);
-        console.log(space.entity);
         $scope.spaces.push(space.metadata.guid);
 
         spaceService.getSpaceSummary(space.metadata.guid).then(function(responseSpace) {

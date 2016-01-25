@@ -1,4 +1,4 @@
-angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
+angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http', function($http) {
   var serviceInstanceServiceFactory = {};
 
   var _addServiceInstance = function(serviceInstance) {

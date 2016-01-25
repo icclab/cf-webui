@@ -3,8 +3,6 @@ angular.module('app.application').controller('ApplicationScaleCtrl', ['$scope', 
   $scope.applicationId = config.applicationId;
   $scope.scale = config.scale;
 
-  console.log($scope.scale.memory===$scope.scale.initialMemoryValue);
-
   $scope.ok = function () {
     applicationService.scaleApplication($scope.applicationId, $scope.scale).then(function(response) {
       if ($scope.scale.memory===$scope.scale.initialMemoryValue){

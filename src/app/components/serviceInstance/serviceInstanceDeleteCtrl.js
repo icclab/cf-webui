@@ -14,7 +14,6 @@ angular.module('app.serviceInstance').controller('ServiceInstanceDeleteCtrl', ['
 
   $scope.ok = function () {
     angular.forEach($scope.serviceBindings, function(serviceBinding, key){
-      console.log(serviceBinding.id);
     });
 
     $scope.deleteServiceBindings($scope.serviceBindingId).then(function(response) {

@@ -6,9 +6,7 @@ angular.module('app.routes').controller('RouteAssociateWithAppCtrl', ['$scope', 
   $scope.applicationId = null;
 
   $scope.ok = function () {
-    console.log($scope.applicationId);  
     routeService.associateRouteWithApp($scope.routeId, $scope.application.id).then(function(mapRouteResponse) {
-      console.log(mapRouteResponse.data.entity);
       messageService.addMessage('success', 'The route has been successfully mapped.', true);
       $modalInstance.close($scope.application);
     }, function(err) {

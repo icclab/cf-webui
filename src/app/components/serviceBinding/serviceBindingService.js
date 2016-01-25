@@ -1,4 +1,4 @@
-angular.module('app.serviceBinding').factory('serviceBindingService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
+angular.module('app.serviceBinding').factory('serviceBindingService', ['$http', function($http) {
   var serviceBindingServiceFactory = {};
   
   var _addServiceBinding = function(serviceBinding) {

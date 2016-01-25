@@ -1,4 +1,4 @@
-angular.module('app.organization').factory('organizationService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
+angular.module('app.organization').factory('organizationService', ['$http', function($http) {
   var organizationServiceFactory = {};
 
   var _getOrganizations = function() {
@@ -146,8 +146,9 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
   
   var _addOrganization = function(organization) {
     
-    // data
     var url = '/v2/organizations';
+
+    // data
     var data = {
       'name': organization.name
     };
@@ -167,8 +168,9 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
   
   var _editOrganization = function(organization) {
     
-    // data
     var url = '/v2/organizations/' + organization.id;
+
+    // data
     var data = {
       'name': organization.name
     };
@@ -188,8 +190,9 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
   
   var _deleteOrganization = function(organization) {
     
-    // data
     var url = '/v2/organizations/' + organization.id;
+
+    // data
     var data = {
       'guid' : organization.id,
       'async' : true,
@@ -211,8 +214,10 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
   };
 
   var _associateUserWithOrganization = function(user) {
-    // data
+
     var url = '/v2/organizations/' + user.organizationId + '/users';
+    
+    // data
     var data = {
       'username': user.name,
       //'organization_guid': user.organizationId
@@ -232,7 +237,7 @@ angular.module('app.organization').factory('organizationService', ['$http', 'API
   };
 
   var _disassociateUserWithOrganization = function(user) {
-    // data
+    
     var url = '/v2/organizations/' + user.organizationId + '/users/' + user.id;
     
 

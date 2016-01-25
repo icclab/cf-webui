@@ -1,4 +1,4 @@
-angular.module('app.application').factory('applicationService', ['$q', '$http', 'API_ENDPOINT', function($q, $http, API_ENDPOINT) {
+angular.module('app.application').factory('applicationService', ['$q', '$http', function($q, $http) {
   var applicationServiceFactory = {};
   
   var _getApplications = function() {
@@ -155,7 +155,6 @@ angular.module('app.application').factory('applicationService', ['$q', '$http', 
 
   var _addApplication = function(app) {
     var promises = [];
-    console.log(app);
     var resources = [];
 
     for ( var i = 0; i < app.bits.length; i++) {
@@ -168,10 +167,7 @@ angular.module('app.application').factory('applicationService', ['$q', '$http', 
         'resources': resources,
         'application': fd
       };*/
-      console.log(app.bits[i]);
       var application = app.bits[i];
-      console.log(application);
-
 
       fd.append("url", url);
       fd.append("application", application);

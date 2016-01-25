@@ -1,4 +1,4 @@
-angular.module('app.routes').factory('routeService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
+angular.module('app.routes').factory('routeService', ['$http', function($http) {
   var routeServiceFactory = {};
   
   var globalRouteConfig;
@@ -88,8 +88,9 @@ angular.module('app.routes').factory('routeService', ['$http', 'API_ENDPOINT', f
   
   var _createRoute = function(route) {
     
-    // data
     var url = '/v2/routes';
+
+    // data
     var data = {
       'domain_guid': route.domainId,
       'space_guid': route.spaceId,
@@ -111,8 +112,9 @@ angular.module('app.routes').factory('routeService', ['$http', 'API_ENDPOINT', f
 
   var _deleteRoute = function(routeId) {
     
-    // data
     var url = '/v2/routes/' + routeId + '?recursive=true';
+    
+    // data
     var data = {
       'guid': routeId
     };
@@ -140,8 +142,9 @@ angular.module('app.routes').factory('routeService', ['$http', 'API_ENDPOINT', f
       globalRouteConfig.routeId = response.data.metadata.guid;
       
       // Second: map route
-      // data
       var url = '/v2/routes/' + globalRouteConfig.routeId + '/apps/' + globalRouteConfig.applicationId;
+
+      // data
       var data = {
         'guid': globalRouteConfig.routeId
       };
@@ -163,8 +166,9 @@ angular.module('app.routes').factory('routeService', ['$http', 'API_ENDPOINT', f
   
   var _unmapRoute = function(route) {
     
-    // data
     var url = '/v2/apps/' + route.applicationId + '/routes/' + route.id;
+
+    // data
     var data = {
       'guid' : route.applicationId
     };
@@ -185,8 +189,9 @@ angular.module('app.routes').factory('routeService', ['$http', 'API_ENDPOINT', f
 
   var _associateRouteWithApp = function(routeId, appId) {
     
-    // data
     var url = '/v2/routes/' + routeId + '/apps/' + appId;
+
+    // data
     var data = {
       'guid': routeId
     };

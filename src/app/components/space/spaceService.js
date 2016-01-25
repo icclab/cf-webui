@@ -1,4 +1,4 @@
-angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
+angular.module('app.space').factory('spaceService', ['$http', function($http) {
   var spaceServiceFactory = {};
 
   var _getSpaces = function() {
@@ -113,8 +113,10 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
   
 
   var _editSpace = function(space) {
-    // data
+    
     var url = '/v2/spaces/' + space.id;
+
+    // data
     var data = {
       'name': space.name
     };
@@ -133,8 +135,10 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
   };
 
   var _addSpace = function(space) {
-    // data
+    
     var url = '/v2/spaces';
+
+    // data
     var data = {
       'name': space.name,
       'organization_guid': space.organizationId
@@ -155,8 +159,9 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
   
   var _deleteSpace = function(space) {
     
-    // data
     var url = '/v2/spaces/' + space.id + '?recursive=true';
+
+    // data
     var data = {
       'guid' : space.id
     };
@@ -177,8 +182,9 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
 
   var _associateManagerWithSpace = function(user) {
 
-    // data
     var url = '/v2/spaces/' + user.spaceId + '/managers';
+
+    // data
     var data = {
       'username': user.name,
       //'organization_guid': user.organizationId
@@ -198,7 +204,7 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
   };
 
   var _disassociateManagerWithSpace = function(user) {
-    // data
+    
     var url = '/v2/spaces/' + user.spaceId + '/managers/' + user.id;
       //'username': user.username,
       //'organization_guid': user.organizationId
@@ -217,8 +223,10 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
   };
 
   var _associateDeveloperWithSpace = function(user) {
-    // data
+    
     var url = '/v2/spaces/' + user.spaceId + '/developers';
+
+    // data
     var data = {
       'username': user.name,
       //'organization_guid': user.organizationId
@@ -238,7 +246,7 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
   };
 
   var _disassociateDeveloperWithSpace = function(user) {
-    // data
+    
     var url = '/v2/spaces/' + user.spaceId + '/developers/' + user.id;
       //'username': user.username,
       //'organization_guid': user.organizationId

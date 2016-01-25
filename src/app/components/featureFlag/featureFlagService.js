@@ -1,4 +1,4 @@
-angular.module('app.featureFlag').factory('featureFlagService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
+angular.module('app.featureFlag').factory('featureFlagService', ['$http', function($http) {
   var featureFlagServiceFactory = {};
 
   var _getAllFeatureFlags = function(organization) {

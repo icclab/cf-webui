@@ -1,4 +1,4 @@
-angular.module('app.user').factory('userService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
+angular.module('app.user').factory('userService', ['$http', function($http) {
   var userServiceFactory = {};
 
   var _getUserSummary = function(id) {

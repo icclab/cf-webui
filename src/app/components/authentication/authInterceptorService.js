@@ -9,8 +9,8 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
     var userName = localStorage.getItem('userName');
 
     if (config.headers.Authorization === undefined && accessToken !== null && userName !== null) {
-      //config.headers.Authorization = 'Bearer ' + accessToken;
-      config.headers['X-Webui-Authorization'] = 'Bearer ' + accessToken;
+      config.headers.Authorization = 'Bearer ' + accessToken;
+      //config.headers['X-Webui-Authorization'] = 'Bearer ' + accessToken;
     }
 
     var lastTime = localStorage.getItem('lastTime');
@@ -50,7 +50,6 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
         }else{
           messageService.addMessage('danger', err.error_description, true);
         }
-        $log.error('¿Cual es el error?');
         $log.error(err);
       });
     }
@@ -58,8 +57,6 @@ angular.module('app.auth').factory('authInterceptorService', ['$q', '$location',
 
     $rootScope.nrOfUnauthorizedRequests++;
 
-    //$log.error(rejection);
-    //$log.error(rejection.config.headers);
     return $q.reject(rejection);
   };
 

@@ -139,8 +139,6 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     $scope.getRoutesForTheSpace().then(function(){
       for (var j = 0; j < $scope.routes.length; j++) {
         if($scope.routes[j].apps.length===0) $scope.showOrphanRoute = true;
-        console.log('Existe orphaned route: ');
-        console.log($scope.showOrphanRoute);
       }
     });
   });
@@ -390,8 +388,6 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
         $scope.getRoutesForTheSpace().then(function(){
           for (var j = 0; j < $scope.routes.length; j++) {
             if($scope.routes[j].apps.length===0) $scope.showOrphanRoute = true;
-            console.log('Existe orphaned route: ');
-            console.log($scope.showOrphanRoute);
           }
         });
       });
@@ -442,8 +438,6 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
       $scope.getRoutesForTheSpace().then(function(){
         for (var j = 0; j < $scope.routes.length; j++) {
           if($scope.routes[j].apps.length===0) $scope.showOrphanRoute = true;
-          console.log('Existe orphaned route: ');
-          console.log($scope.showOrphanRoute);
         }
       });
     });
@@ -471,8 +465,6 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
         $scope.getRoutesForTheSpace().then(function(){
           for (var j = 0; j < $scope.routes.length; j++) {
             if($scope.routes[j].apps.length===0) $scope.showOrphanRoute = true;
-            console.log('Existe orphaned route: ');
-            console.log($scope.showOrphanRoute);
           }
         });
       });
@@ -535,8 +527,6 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
         $scope.getRoutesForTheSpace().then(function(){
           for (var j = 0; j < $scope.routes.length; j++) {
             if($scope.routes[j].apps.length===0) $scope.showOrphanRoute = true;
-            console.log('Existe orphaned route: ');
-            console.log($scope.showOrphanRoute);
           }
         });
       });
@@ -560,8 +550,6 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
         $scope.getRoutesForTheSpace().then(function(){
           for (var j = 0; j < $scope.routes.length; j++) {
             if($scope.routes[j].apps.length===0) $scope.showOrphanRoute = true;
-            console.log('Existe orphaned route: ');
-            console.log($scope.showOrphanRoute);
           }
         });
       });

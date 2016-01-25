@@ -1,4 +1,4 @@
-angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$injector', '$rootScope', 'UAA_ENDPOINT', function($http, $log, $q, $injector, $rootScope, UAA_ENDPOINT) {
+angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$injector', '$rootScope', function($http, $log, $q, $injector, $rootScope) {
   var authServiceFactory = {};
 
   var _authentication = {
@@ -33,11 +33,9 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
     data = $.param(data);
 
     $http.post('/oauth/token', data, { headers: headers }).success(function(response) {
-      $log.error(response.access_token);
-      console.log('Authorization: ' + response.access_token);
+
       if (response.access_token !== null) {
         // save access token and username in session storage
-        console.log(response);
         localStorage.setItem('accessToken', response.access_token);
         localStorage.setItem('refreshToken', response.refresh_token);
         localStorage.setItem('expiresIn', response.expires_in);
@@ -90,7 +88,6 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
     data = $.param(data);
 
     $http.post('/oauth/token', data, { headers: headers }).success(function(response) {
-      console.log('refresh');
       if (response.access_token !== null) {
         // save access token and username in session storage
         localStorage.setItem('accessToken', response.access_token);
@@ -105,7 +102,6 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
         deferred.reject(response);
       }
     }).error(function(err, status) {
-      console.log('nein refresh');
       _logOut();
       deferred.reject(err);
     });
