@@ -8,7 +8,7 @@
 
 1. Clone the project: `git clone https://github.com/icclab/cf-webui`
 2. Change directory to cf-webUI: `cd cf-webUI`
-3. Change the `manifest.yml` to your desired endpoints and options. E.g.:  
+3. Change the `manifest.yml` to your options and the endpoint to your desired Cloud Foundry instance. E.g.:  
 
         ---
         applications:  
@@ -17,7 +17,6 @@
           host: console-cf-webui-${random-word}  
           path: ./build
           env: 
-            UAA_ENDPOINT: https://uaa.run.pivotal.io
             API_ENDPOINT: https://api.run.pivotal.io
   
 4. Install npm packages: `npm install`

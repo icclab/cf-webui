@@ -7,57 +7,62 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
   };
 
   var _logIn = function(logInData) {
-    // data to post
-    var data = {
-      'grant_type': 'password',
-      'password': logInData.password,
-      'username': logInData.userName,
-      'scope': ''
 
-    };
-    //'response_type': 'token'
- 
-    //'client_id': 'cf'
-    //'redirect_uri': 'https://cf-webui.cfapps.io/#organizations'
+  var deferred = $q.defer();
 
-    // http headers
-    var headers = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic Y2Y6',
-      //'X-Webui-Authorization': 'Basic Y2Y6'
-    };
+    $http.get('/info').success(function(response) {
+      console.log('La respuesta:');
+      console.log(response.authorization_endpoint);
+      // data to post
+      var data = {
+        'grant_type': 'password',
+        'password': logInData.password,
+        'username': logInData.userName,
+        'scope': ''
+      };
+      //'response_type': 'token'
+   
+      //'client_id': 'cf'
+      //'redirect_uri': 'https://cf-webui.cfapps.io/#organizations'
 
-    var deferred = $q.defer();
+      // http headers
+      var headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Basic Y2Y6',
+        'X-UAA-Endpoint': response.authorization_endpoint
+      };
 
-    data = $.param(data);
+      data = $.param(data);
 
-    $http.post('/oauth', data, { headers: headers }).success(function(response) {
+      $http.post('/oauth', data, { headers: headers }).success(function(response) {
 
-      if (response.access_token !== null) {
-        // save access token and username in session storage
-        localStorage.setItem('accessToken', response.access_token);
-        localStorage.setItem('refreshToken', response.refresh_token);
-        localStorage.setItem('expiresIn', response.expires_in);
-        localStorage.setItem('userName', logInData.userName);
-        localStorage.setItem('lastTime', Date.now());
+        if (response.access_token !== null) {
+          // save access token and username in session storage
+          localStorage.setItem('accessToken', response.access_token);
+          localStorage.setItem('refreshToken', response.refresh_token);
+          localStorage.setItem('expiresIn', response.expires_in);
+          localStorage.setItem('userName', logInData.userName);
+          localStorage.setItem('lastTime', Date.now());
 
-        console.log(response.access_token);
+          console.log(response.access_token);
 
-        // set data of authentication object
-        _authentication.isAuth = true;
-        _authentication.userName = logInData.userName;
+          // set data of authentication object
+          _authentication.isAuth = true;
+          _authentication.userName = logInData.userName;
 
-        deferred.resolve(response);
-      } else {
-        // log in failed
-        deferred.reject(response);
-      }
-    }).error(function(err, status) {
-      $log.error('Definicion del error');
-      $log.error(err);
-      //_logOut();
-      deferred.reject(err);
+          deferred.resolve(response);
+        } else {
+          // log in failed
+          deferred.reject(response);
+        }
+      }).error(function(err, status) {
+        $log.error('Definicion del error');
+        $log.error(err);
+        //_logOut();
+        deferred.reject(err);
+      });
+
     });
 
     return deferred.promise;
