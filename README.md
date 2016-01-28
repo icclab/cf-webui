@@ -6,9 +6,9 @@
 
 ## Getting started
 
-1. Clone the project: `git clone https://github.com/icclab/cf-webui`
-2. Change directory to cf-webUI: `cd cf-webUI`
-3. Change the `manifest.yml` to your options and the endpoint to your desired Cloud Foundry instance. E.g.:  
+1\. Clone the project: `git clone https://github.com/icclab/cf-webui` <br\>  
+2\. Change directory to cf-webUI: `cd cf-webUI`<br\>  
+3\. Change the `manifest.yml` to your options and the endpoint to your desired Cloud Foundry instance. E.g.:  <br\>
 
         ---
         applications:  
@@ -19,10 +19,10 @@
           env: 
             API_ENDPOINT: https://api.run.pivotal.io
   
-4. Install npm packages: `npm install`
-5. Build the application using Grunt: `grunt build`
-6. Push this application to Cloud Foundry using the cf Command Line Interface (CLI): `cf push`.
-7. Enjoy the CF WebUI!
+4\. Install npm packages: `npm install`<br\>  
+5\. Build the application using Grunt: `grunt build`<br\>  
+6\. Push this application to Cloud Foundry using the cf Command Line Interface (CLI): `cf push`.<br\>  
+7\. Enjoy the CF WebUI!<br\>  
 
 ## Disclaimer
 
