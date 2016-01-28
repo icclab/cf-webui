@@ -32,7 +32,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
 
     data = $.param(data);
 
-    $http.post('/oauth/token', data, { headers: headers }).success(function(response) {
+    $http.post('/oauth', data, { headers: headers }).success(function(response) {
 
       if (response.access_token !== null) {
         // save access token and username in session storage
@@ -41,6 +41,8 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
         localStorage.setItem('expiresIn', response.expires_in);
         localStorage.setItem('userName', logInData.userName);
         localStorage.setItem('lastTime', Date.now());
+
+        console.log(response.access_token);
 
         // set data of authentication object
         _authentication.isAuth = true;
