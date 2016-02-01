@@ -1,18 +1,20 @@
 angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$injector', '$rootScope', function($http, $log, $q, $injector, $rootScope) {
   var authServiceFactory = {};
+  var UAA_Endpoint = "";
 
   var _authentication = {
     isAuth: false,
     userName: ''
   };
 
+  $http.get('/info').success(function(response) {
+    UAA_Endpoint = response.authorization_endpoint;
+  });
+
   var _logIn = function(logInData) {
 
   var deferred = $q.defer();
 
-    $http.get('/info').success(function(response) {
-      console.log('La respuesta:');
-      console.log(response.authorization_endpoint);
       // data to post
       var data = {
         'grant_type': 'password',
@@ -30,7 +32,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
         'Accept': 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': 'Basic Y2Y6',
-        'X-UAA-Endpoint': response.authorization_endpoint
+        'X-UAA-Endpoint': UAA_Endpoint
       };
 
       data = $.param(data);
@@ -44,8 +46,6 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
           localStorage.setItem('expiresIn', response.expires_in);
           localStorage.setItem('userName', logInData.userName);
           localStorage.setItem('lastTime', Date.now());
-
-          console.log(response.access_token);
 
           // set data of authentication object
           _authentication.isAuth = true;
@@ -63,7 +63,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
         deferred.reject(err);
       });
 
-    });
+    //});
 
     return deferred.promise;
   };
@@ -72,46 +72,52 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
     var refreshToken = localStorage.getItem('refreshToken');
     var accessToken = localStorage.getItem('accessToken');
 
-    // data to post
-    var data = {
-      //'url': UAA_ENDPOINT + '/oauth/token',
-      //'client_id': 'cf',
-      'grant_type': 'refresh_token',
-      'refresh_token': refreshToken,
-      'scope': ''
-    };
-
-    // http headers
-    var headers = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic Y2Y6',
-      //'X-Webui-Authorization': 'Basic Y2Y6',
-      'WWW-Authorization': 'Basic Y2Y6',
-
-    };
-
     var deferred = $q.defer();
-    data = $.param(data);
 
-    $http.post('/oauth/token', data, { headers: headers }).success(function(response) {
-      if (response.access_token !== null) {
-        // save access token and username in session storage
-        localStorage.setItem('accessToken', response.access_token);
-        localStorage.setItem('refreshToken', response.refresh_token);
+    //$http.get('/info').success(function(response) {
+      // data to post
+      var data = {
+        //'url': UAA_ENDPOINT + '/oauth/token',
+        //'client_id': 'cf',
+        'grant_type': 'refresh_token',
+        'refresh_token': refreshToken,
+        'scope': ''
+      };
 
-        // set data of authentication object
-        _authentication.isAuth = true;
+      // http headers
+      var headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Basic Y2Y6',
+        //'X-Webui-Authorization': 'Basic Y2Y6',
+        'WWW-Authorization': 'Basic Y2Y6',
+        'X-UAA-Endpoint': UAA_Endpoint
 
-        deferred.resolve(response);
-      } else {
-        // log in failed
-        deferred.reject(response);
-      }
-    }).error(function(err, status) {
-      _logOut();
-      deferred.reject(err);
-    });
+      };
+
+      
+      data = $.param(data);
+
+  
+      $http.post('/oauth/token', data, { headers: headers }).success(function(response) {
+        if (response.access_token !== null) {
+          // save access token and username in session storage
+          localStorage.setItem('accessToken', response.access_token);
+          localStorage.setItem('refreshToken', response.refresh_token);
+
+          // set data of authentication object
+          _authentication.isAuth = true;
+
+          deferred.resolve(response);
+        } else {
+          // log in failed
+          deferred.reject(response);
+        }
+      }).error(function(err, status) {
+        _logOut();
+        deferred.reject(err);
+      });
+    //});
 
     return deferred.promise;
   };

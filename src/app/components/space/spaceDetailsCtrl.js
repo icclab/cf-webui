@@ -34,6 +34,8 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
       $scope.routes.length = 0;
     }
 
+    $scope.showOrphanRoute = false;
+
     var applications = $scope.applications;
 
     q = routeService.getRoutesForTheSpace($scope.id).then(function(response){
@@ -56,6 +58,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
             }
           }
         }
+        if (!objectRoute.apps.length) $scope.showOrphanRoute = true;
         $scope.routes.push(objectRoute);
       });
     }, function(err) {
@@ -136,11 +139,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     return q;
   };
   $scope.getApplicationsForTheSpace().then(function(){
-    $scope.getRoutesForTheSpace().then(function(){
-      for (var j = 0; j < $scope.routes.length; j++) {
-        if($scope.routes[j].apps.length===0) $scope.showOrphanRoute = true;
-      }
-    });
+    $scope.getRoutesForTheSpace();
   });
 
   $scope.retrieveRolesOfAllUsersForTheSpace = function() {
@@ -385,11 +384,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
       //window.location = '#/organizations/' + $scope.organizationId + '/spaces/' + $scope.id;
 
       $scope.getApplicationsForTheSpace().then(function(){
-        $scope.getRoutesForTheSpace().then(function(){
-          for (var j = 0; j < $scope.routes.length; j++) {
-            if($scope.routes[j].apps.length===0) $scope.showOrphanRoute = true;
-          }
-        });
+        $scope.getRoutesForTheSpace();
       });
     });
   };
@@ -435,11 +430,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     
     modalInstance.result.then(function() {
       // adjust routes table information
-      $scope.getRoutesForTheSpace().then(function(){
-        for (var j = 0; j < $scope.routes.length; j++) {
-          if($scope.routes[j].apps.length===0) $scope.showOrphanRoute = true;
-        }
-      });
+      $scope.getRoutesForTheSpace();
     });
 
   };
@@ -462,12 +453,10 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
       //var routeIdx = $scope.routes.indexOf(responseRouteId);
       //$scope.routes.splice(routeIdx, 1);
       $scope.getApplicationsForTheSpace().then(function(){
-        $scope.getRoutesForTheSpace().then(function(){
-          for (var j = 0; j < $scope.routes.length; j++) {
-            if($scope.routes[j].apps.length===0) $scope.showOrphanRoute = true;
-          }
-        });
+        $scope.getRoutesForTheSpace();
       });
+
+
     });
 
   };
@@ -487,7 +476,6 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     modalInstance.result.then(function(responseRouteId) {
       //var routeIdx = $scope.routes.indexOf(responseRouteId);
       //$scope.routes.splice(routeIdx, 1);
-      $scope.showOrphanRoute=false;
       $scope.getRoutesForTheSpace();
     });
 
@@ -524,11 +512,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     modalInstance.result.then(function(application) {
       // adjust routes table information
       $scope.getApplicationsForTheSpace().then(function(){
-        $scope.getRoutesForTheSpace().then(function(){
-          for (var j = 0; j < $scope.routes.length; j++) {
-            if($scope.routes[j].apps.length===0) $scope.showOrphanRoute = true;
-          }
-        });
+        $scope.getRoutesForTheSpace();
       });
     });
   };
@@ -547,11 +531,7 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
     
     modalInstance.result.then(function(route, app) {
       $scope.getApplicationsForTheSpace().then(function(){
-        $scope.getRoutesForTheSpace().then(function(){
-          for (var j = 0; j < $scope.routes.length; j++) {
-            if($scope.routes[j].apps.length===0) $scope.showOrphanRoute = true;
-          }
-        });
+        $scope.getRoutesForTheSpace();
       });
     });
   };
