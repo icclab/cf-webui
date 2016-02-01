@@ -32,12 +32,12 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
         'Accept': 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': 'Basic Y2Y6',
-        'X-UAA-Endpoint': UAA_Endpoint
+        //'X-UAA-Endpoint': UAA_Endpoint
       };
 
       data = $.param(data);
 
-      $http.post('/oauth', data, { headers: headers }).success(function(response) {
+      $http.post(UAA_Endpoint + '/oauth/token', data, { headers: headers }).success(function(response) {
 
         if (response.access_token !== null) {
           // save access token and username in session storage
@@ -46,7 +46,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
           localStorage.setItem('expiresIn', response.expires_in);
           localStorage.setItem('userName', logInData.userName);
           localStorage.setItem('lastTime', Date.now());
-
+          console.log(response.access_token);
           // set data of authentication object
           _authentication.isAuth = true;
           _authentication.userName = logInData.userName;
@@ -99,7 +99,7 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
       data = $.param(data);
 
   
-      $http.post('/oauth/token', data, { headers: headers }).success(function(response) {
+      $http.post(UAA_Endpoint + '/oauth/token', data, { headers: headers }).success(function(response) {
         if (response.access_token !== null) {
           // save access token and username in session storage
           localStorage.setItem('accessToken', response.access_token);
