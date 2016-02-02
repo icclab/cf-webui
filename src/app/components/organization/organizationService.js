@@ -10,9 +10,7 @@ angular.module('app.organization').factory('organizationService', ['$http', func
     // http headers
     var headers = {
       'Accept': 'application/json',
-      'Authorization': 'Bearer ' + accessToken,
-      'X-Webui-Authorization': 'Bearer ' + accessToken,
-      'Content-Type': 'application/json; charset=utf-8'
+      'Content-Type': 'application/json'
     };
 
     var config = {
