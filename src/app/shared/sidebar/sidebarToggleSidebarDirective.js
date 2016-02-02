@@ -28,7 +28,6 @@ angular.module('app.sidebar').directive('toggleSidebar', ['$rootScope', function
             localStorage.setItem('marginSidebar', "220px");
             $rootScope.rootFields.hidedSidebar = false;
           }
-          console.log('El estado ahora es: ' + $rootScope.rootFields.hidedSidebar);
         });
       }
   };

@@ -5,16 +5,8 @@ angular.module('app.routes').controller('RouteUnmapCtrl', ['$scope', '$modalInst
     'id': $scope.route.applicationId
   };
   $scope.applications = route.apps;
-  console.log($scope.application.id);
-  console.log($scope.applications);
-  angular.forEach($scope.applications, function(app, key){
-    console.log(app);
-  });
 
   $scope.ok = function () {
-    console.log($scope.application.id);
-    console.log($scope.applications);
-    console.log($scope.route);
     $scope.route.applicationId = $scope.application.id;
     routeService.unmapRoute($scope.route).then(function(response) {
       $modalInstance.close(route, $scope.application);

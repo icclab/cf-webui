@@ -68,8 +68,6 @@ angular.module('app.application').controller('AppAddCtrl', ['$route', '$scope', 
 
       $scope.application.id = response.data.metadata.guid;
       applicationService.addApplication($scope.application).then(function(responseApp) {
-
-        console.log('dentro');
         
         // set message
         messageService.addMessage('success', 'The application has been successfully added.', 'true');
@@ -81,7 +79,6 @@ angular.module('app.application').controller('AppAddCtrl', ['$route', '$scope', 
         messageService.addMessage('danger', 'The application has not been added.');
         $log.error(err.data.description);
         $log.error(err.config);
-        console.log('fuera');
 
         // close the modal
         $modalInstance.close();
@@ -92,7 +89,6 @@ angular.module('app.application').controller('AppAddCtrl', ['$route', '$scope', 
       // set message
       messageService.addMessage('danger', 'The application has not been added.');
       $log.error(err.data);
-      console.log('error aqui');
 
       // close the modal
       $modalInstance.close();

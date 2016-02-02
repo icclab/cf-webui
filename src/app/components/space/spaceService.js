@@ -1,11 +1,9 @@
-angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', function($http, API_ENDPOINT) {
+angular.module('app.space').factory('spaceService', ['$http', function($http) {
   var spaceServiceFactory = {};
 
   var _getSpaces = function() {
     // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/spaces'
-    };
+    var url = '/v2/spaces';
 
     // http headers
     var headers = {
@@ -14,20 +12,17 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
     };
 
     var config = {
-      params: params,
       headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
 
   var _getSpaceSummary = function(id, ignoreLoadingBar) {
     if (typeof(ignoreLoadingBar) === 'undefined') ignoreLoadingBar = false;
     
     // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/spaces/' + id + '/summary'
-    };
+    var url = '/v2/spaces/' + id + '/summary';
 
     // http headers
     var headers = {
@@ -36,18 +31,17 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
     };
 
     var config = {
-      params: params,
       headers: headers,
       ignoreLoadingBar: ignoreLoadingBar
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
 
   var _getServicesForTheSpace = function(id) {
     // params
+    var url = '/v2/spaces/' + id + '/services';
     var params = {
-      'url': API_ENDPOINT + '/v2/spaces/' + id + '/services',
       'inline-relations-depth': 1
     };
 
@@ -62,14 +56,12 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
       headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
 
     var _getServicesInstancesForTheSpace = function(id) {
     // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/spaces/' + id + '/service_instances'
-    };
+    var url = '/v2/spaces/' + id + '/service_instances';
 
     // http headers
     var headers = {
@@ -78,18 +70,15 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
     };
 
     var config = {
-      params: params,
       headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
 
   var _getApplicationsForTheSpace = function(id) {
     // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/spaces/' + id + '/apps',
-    };
+    var url = '/v2/spaces/' + id + '/apps';
 
     // http headers
     var headers = {
@@ -98,19 +87,16 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
     };
 
     var config = {
-      params: params,
       headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
 
   var _retrieveRolesOfAllUsersForTheSpace = function(id) {
     
     // params
-    var params = {
-      'url': API_ENDPOINT + '/v2/spaces/' + id +  '/user_roles',
-    };
+    var url = '/v2/spaces/' + id +  '/user_roles';
 
     // http headers
     headers = {
@@ -119,18 +105,19 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
     };
 
     var config = {
-      params: params,
       headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
   
 
   var _editSpace = function(space) {
+    
+    var url = '/v2/spaces/' + space.id;
+
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/spaces/' + space.id,
       'name': space.name
     };
 
@@ -144,13 +131,15 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
       headers: headers
     };
 
-    return $http.put('/request.php', data, config);
+    return $http.put(url, data, config);
   };
 
   var _addSpace = function(space) {
+    
+    var url = '/v2/spaces';
+
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/spaces',
       'name': space.name,
       'organization_guid': space.organizationId
     };
@@ -165,14 +154,15 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
       headers: headers
     };
 
-    return $http.post('/request.php', data, config);
+    return $http.post(url, data, config);
   };
   
   var _deleteSpace = function(space) {
     
+    var url = '/v2/spaces/' + space.id + '?recursive=true';
+
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/spaces/' + space.id + '?recursive=true',
       'guid' : space.id
     };
 
@@ -187,14 +177,15 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
       data: data
     };
     
-    return $http.delete('/request.php', config);
+    return $http.delete(url, config);
   };
 
   var _associateManagerWithSpace = function(user) {
 
+    var url = '/v2/spaces/' + user.spaceId + '/managers';
+
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/managers',
       'username': user.name,
       //'organization_guid': user.organizationId
     };
@@ -209,16 +200,14 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
       headers: headers
     };
 
-    return $http.put('/request.php', data, config);
+    return $http.put(url, data, config);
   };
 
   var _disassociateManagerWithSpace = function(user) {
-    // data
-    var data = {
-      'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/managers/' + user.id,
+    
+    var url = '/v2/spaces/' + user.spaceId + '/managers/' + user.id;
       //'username': user.username,
       //'organization_guid': user.organizationId
-    };
 
     // http headers
     var headers = {
@@ -228,16 +217,17 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
 
     var config = {
       headers: headers,
-      data: data
     };
 
-    return $http.delete('/request.php', config);
+    return $http.delete(url, config);
   };
 
   var _associateDeveloperWithSpace = function(user) {
+    
+    var url = '/v2/spaces/' + user.spaceId + '/developers';
+
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/developers',
       'username': user.name,
       //'organization_guid': user.organizationId
     };
@@ -252,16 +242,14 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
       headers: headers
     };
 
-    return $http.put('/request.php', data, config);
+    return $http.put(url, data, config);
   };
 
   var _disassociateDeveloperWithSpace = function(user) {
-    // data
-    var data = {
-      'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/developers/' + user.id,
+    
+    var url = '/v2/spaces/' + user.spaceId + '/developers/' + user.id;
       //'username': user.username,
       //'organization_guid': user.organizationId
-    };
 
     // http headers
     var headers = {
@@ -271,16 +259,17 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
 
     var config = {
       headers: headers,
-      data: data
     };
 
-    return $http.delete('/request.php', config);
+    return $http.delete(url, config);
   };
 
     var _associateAuditorWithSpace = function(user) {
+    
+    var url = '/v2/spaces/' + user.spaceId + '/auditors';
+    
     // data
     var data = {
-      'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/auditors',
       'username': user.name,
       //'organization_guid': user.organizationId
     };
@@ -295,16 +284,14 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
       headers: headers
     };
 
-    return $http.put('/request.php', data, config);
+    return $http.put(url, data, config);
   };
 
   var _disassociateAuditorWithSpace = function(user) {
-    // data
-    var data = {
-      'url': API_ENDPOINT + '/v2/spaces/' + user.spaceId + '/auditors/' + user.id,
+    
+    var url = '/v2/spaces/' + user.spaceId + '/auditors/' + user.id;
       //'username': user.username,
       //'organization_guid': user.organizationId
-    };
 
     // http headers
     var headers = {
@@ -314,10 +301,9 @@ angular.module('app.space').factory('spaceService', ['$http', 'API_ENDPOINT', fu
 
     var config = {
       headers: headers,
-      data: data
     };
 
-    return $http.delete('/request.php', config);
+    return $http.delete(url, config);
   };
 
   spaceServiceFactory.getSpaces = _getSpaces;

@@ -4,9 +4,7 @@ angular.module('app.info').factory('infoService', ['$http', 'API_ENDPOINT', func
   var _getInfo = function() {
     
     // data
-    var params = {
-      'url': API_ENDPOINT + '/v2/info'
-    };
+    var url = '/v2/info';
 
     // http headers
     var headers = {
@@ -15,11 +13,10 @@ angular.module('app.info').factory('infoService', ['$http', 'API_ENDPOINT', func
     };
 
     var config = {
-      headers: headers,
-      params: params
+      headers: headers
     };
 
-    return $http.get('/request.php', config);
+    return $http.get(url, config);
   };
 
   infoServiceFactory.getInfo = _getInfo;

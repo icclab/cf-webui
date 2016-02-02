@@ -23,7 +23,7 @@ angular.module('app.organization').controller('OrganizationPreviewCtrl', ['$root
 
       $scope.organizations.push(objectOrganization);
     });
-  }, function (err) {
+  }, function (err, status) {
     $log.error(err);
   });
 
