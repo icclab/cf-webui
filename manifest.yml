@@ -5,4 +5,4 @@ applications:
   host: console-cf-webui-${random-word}
   path: ./build
   env: 
-    API_ENDPOINT: https://api.eu-gb.bluemix.net
+    API_ENDPOINT: https://api.run.pivotal.io
