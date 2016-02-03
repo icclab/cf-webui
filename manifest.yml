@@ -6,3 +6,5 @@ applications:
   path: ./build
   env: 
     API_ENDPOINT: https://api.run.pivotal.io
+    # Use Google DNS by default
+    NGINX_RESOLVER: 8.8.8.8
