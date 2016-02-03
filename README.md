@@ -18,6 +18,9 @@
           path: ./build
           env: 
             API_ENDPOINT: https://api.run.pivotal.io
+            #Enforce https is used (using x_forwarded_proto check) .Default: enabled
+            FORCE_HTTPS: 1
+
   
 4\. Install npm packages: `npm install`<br\>  
 5\. Build the application using Grunt: `grunt build`<br\>  
