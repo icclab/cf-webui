@@ -20,7 +20,11 @@
             API_ENDPOINT: https://api.run.pivotal.io
             # Use Google DNS by default
             NGINX_RESOLVER: 8.8.8.8
+            #Enforce https is used (using x_forwarded_proto check) .Default: enabled
+            FORCE_HTTPS: 1
 
+  
+>>>>>>> 781de563e91b38f21f2a4fef57cb45a1e7163733
 4\. Install npm packages: `npm install`<br\>  
 5\. Build the application using Grunt: `grunt build`<br\>  
 6\. Push this application to Cloud Foundry using the cf Command Line Interface (CLI): `cf push`.<br\>  
