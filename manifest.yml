@@ -6,3 +6,7 @@ applications:
   path: ./build
   env: 
     API_ENDPOINT: https://api.run.pivotal.io
+    # Use Google DNS by default
+    NGINX_RESOLVER: 8.8.8.8
+    #Enforce https is used (using x_forwarded_proto check) .Default: enabled
+    FORCE_HTTPS: 1
