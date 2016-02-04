@@ -60,13 +60,14 @@ angular.module('app.marketplace').controller('marketplaceAddServiceCtrl', ['$q',
 
       var objectService = {
         id: service.metadata.guid,
-        name: (extraData.displayName) ? extraData.displayName : service.entity.label,
+	//cope with cases where extraData is Null and avoid premature exit
+        name: (extraData && extraData.displayName) ? extraData.displayName : service.entity.label,
         description: service.entity.description,
-        longDescription: (extraData.longDescription) ? extraData.longDescription : service.entity.long_description,
-        provider: (extraData.providerDisplayName) ? extraData.providerDisplayName : service.entity.provider,
-        imageUrl: (extraData.imageUrl) ? extraData.imageUrl : null,
-        documentationUrl: (extraData.documentationUrl) ? extraData.documentationUrl : service.entity.documentation_url,
-        supportUrl: (extraData.supportUrl) ? extraData.supportUrl : null
+        longDescription: (extraData && extraData.longDescription) ? extraData.longDescription : service.entity.long_description,
+        provider: (extraData && extraData.providerDisplayName) ? extraData.providerDisplayName : service.entity.provider,
+        imageUrl: (extraData && extraData.imageUrl) ? extraData.imageUrl : null,
+        documentationUrl: (extraData && extraData.documentationUrl) ? extraData.documentationUrl : service.entity.documentation_url,
+        supportUrl: (extraData && extraData.supportUrl) ? extraData.supportUrl : null
       };
 
       $scope.services.push(objectService);
@@ -161,7 +162,7 @@ angular.module('app.marketplace').controller('marketplaceAddServiceCtrl', ['$q',
 
         // get costs
         var costs = null;
-        if (extraData.costs) {
+        if (extraData && extraData.costs) {
           var unit = extraData.costs[0].unit.replace('LY', '');
 
           var currency = null;
@@ -179,9 +180,9 @@ angular.module('app.marketplace').controller('marketplaceAddServiceCtrl', ['$q',
 
         var objectServicePlan = {
           id: servicePlan.metadata.guid,
-          name: (extraData.displayName) ? extraData.displayName : servicePlan.entity.name,
+          name: (extraData && extraData.displayName) ? extraData.displayName : servicePlan.entity.name,
           description: servicePlan.entity.description,
-          bullets: (extraData.bullets) ? extraData.bullets : null,
+          bullets: (extraData && extraData.bullets) ? extraData.bullets : null,
           costs: (servicePlan.entity.free) ? 'free' : costs
         };
 
