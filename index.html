@@ -37,14 +37,20 @@
                         git clone https://github.com/icclab/cf-webui.git
                      </code> </li>
                   <li>Change to the cf-webui directory: <code>cd cf-webui</code></li>
-                  <li>Change the endpoints to your desired Cloud Foundry instance in <code>app/app.constant.js</code>.</li>
-                  <li>Update the <code>manifest.yml</code> with your desired deployment options. E.g.
+                  <li>Change the <code>manifest.yml</code> to your options and the endpoint to your desired Cloud Foundry instance. E.g.:
 <pre><code>----
 applications:
 - name: cf-webui
   memory: 128M
   host: console-cf-webui-${random-word}
-  path: ./build</code></pre></li>
+  path: ./build
+  buildpack: staticfile_buildpack
+      API_ENDPOINT: https://api.run.pivotal.io
+        # Use Google DNS by default
+        NGINX_RESOLVER: 8.8.8.8
+        #Enforce https is used (using x_forwarded_proto check) .Default: enabled
+        FORCE_HTTPS: 1
+   </code></pre></li>
                   <li>Install npm packages: <code>npm install</code></li>
                   <li>Build the application using Grunt: <code>grunt build</code></li>
                   <li>Push this application to Cloud Foundry with cf Command Line Interface (CLI): <code>cf push</code>.</li>
