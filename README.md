@@ -31,7 +31,7 @@
 
 ## Disclaimer
 
-The current version is an early release (alpha). It is not yet production-ready. Use it at your own risk. Some features are still to come and it may contain major bugs.
+The current version is an early release (alpha). It is not yet production-ready. Some features are still to come and it may contain major bugs.
 
 ## Community & Support
 
