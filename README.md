@@ -16,6 +16,7 @@
           memory: 128M  
           host: console-cf-webui-${random-word}  
           path: ./build
+          buildpack: staticfile_buildpack
           env: 
             API_ENDPOINT: https://api.run.pivotal.io
             # Use Google DNS by default
