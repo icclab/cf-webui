@@ -35,6 +35,8 @@ angular.module('app.application').controller('ApplicationDetailsCtrl', ['$rootSc
   $scope.scale = {};
   $scope.instances = [];
 
+  console.log('#/organizations/' + $scope.organizationId +'/' + $scope.spaceId + '/' + $scope.applicationId + '/logs');
+
   $scope.test = '{"glossary": {"title": "example glossary","GlossDiv": {"title": "S","GlossList": {"GlossEntry": {"ID": "SGML","SortAs": "SGML","GlossTerm": "Standard Generalized Markup Language","Acronym": "SGML","Abbrev": "ISO 8879:1986","GlossDef": {"para": "A meta-markup language, used to create markup languages such as DocBook.","GlossSeeAlso": ["GML", "XML"]},"GlossSee": "markup"}}}}}';
   
   // app summary

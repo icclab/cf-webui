@@ -2,6 +2,7 @@ angular.module('app', [
   'ngRoute',
   'ngResource',
   'ngAnimate',
+  'ngWebSocket',
 
   'ui.bootstrap',
   'angular-loading-bar',
@@ -26,5 +27,6 @@ angular.module('app', [
   'app.routes',
   'app.serviceBinding',
   'app.marketplace',
-  'app.featureFlag'
+  'app.featureFlag',
+  'app.log'
 ]);

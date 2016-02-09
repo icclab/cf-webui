@@ -29,6 +29,11 @@ angular.module('app').config(['$routeProvider', function($routeProvider) {
       templateUrl: 'app/components/application/applicationDetails.tpl.html',
       controller: 'ApplicationDetailsCtrl'
     })
+
+    .when('/organizations/:organizationId/spaces/:spaceId/applications/:applicationId/logs', {
+      templateUrl: 'app/components/log/applicationLogs.tpl.html',
+      controller: 'LogsCtrl'
+    })
     
     .when('/marketplace', {
       templateUrl: 'app/components/marketplace/marketplaceAddService.tpl.html',

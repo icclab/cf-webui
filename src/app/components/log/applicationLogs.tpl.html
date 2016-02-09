@@ -1,0 +1,35 @@
+<sidebar></sidebar>
+
+<div id="page-content" ng-style="{ 'marginLeft': rootFields.marginSidebar}">
+  <topbar></topbar>
+  
+  <breadcrumb></breadcrumb>
+
+  <messages></messages>
+  
+  <div class="fadein" ng-show="rootFields.showContent">
+    <div id="page-title" class="clearfix">
+      <h1 class="pull-left">Application Logs</h1>
+    </div><!-- /#page-title -->
+    
+    <div id="page-content-wrap" class="clearfix">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title pull-left"> Logs <span class="label label-default">{{nrOfApplications}}</span></h3>
+            </div>
+            <div class="panel-body clearfix">
+              <div ng-repeat="log in collection">
+                <b>{{ log.date }}&nbsp&nbsp{{ log.type }}</b> {{ log.message }}
+                <br>
+              </div>
+            </div>
+          </div><!-- /.panel -->
+        </div>
+      </div><!-- /.row -->
+      
+    </div><!-- /#page-content-wrap -->
+  </div>
+  
+</div><!-- /#page-content -->
