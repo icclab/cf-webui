@@ -1,0 +1,63 @@
+<sidebar></sidebar>
+
+<div id="page-content" ng-style="{'marginLeft': rootFields.marginSidebar}">
+  <topbar></topbar>
+  
+  <breadcrumb></breadcrumb>
+
+  <messages></messages>
+  
+  <div class="fadein" ng-show="rootFields.showContent">
+    <div id="page-title">
+      <h1>Services Marketplace</h1>
+    </div><!-- /#page-title -->
+    
+    <div id="page-content-wrap" class="clearfix">
+      <div class="row" ng-hide="hideSelectServicePlan">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Select a service plan</h3>
+            </div>
+            <div class="panel-body">
+              <div class="selected-service row">
+                <div class="col-md-4">
+                  <img src="{{selectedService.imageUrl}}" alt="{{selectedService.name}}" width="60">
+                  <h4>{{selectedService.name}}</h4>
+                  <p>{{selectedService.description}}</p>
+                </div>
+  
+                <div class="col-md-4">
+                  <h4>About this service</h4>
+                  <p>{{selectedService.longDescription}}</p>
+                  <p><a href="{{selectedService.documentationUrl}}" target="_blank">Documentation</a> | <a href="{{selectedService.supportUrl}}" target="_blank">Support</a></p>
+                </div>
+  
+                <div class="col-md-4">
+                  <h4>Provider</h4>
+                  <p>{{selectedService.provider}}</p>
+                </div>
+              </div>
+  
+              <hr>
+  
+              <div class="select-serviceplan row">
+                <div class="col-md-12">
+                  <tabset vertical="false" type="tabs">
+                    <tab ng-repeat="servicePlan in servicePlans track by servicePlan.id" heading="{{servicePlan.name}} ({{servicePlan.costs}})">
+                      <p>{{servicePlan.description}}</p>
+                      <ul>
+                        <li ng-repeat="bullet in servicePlan.bullets">{{bullet}}</li>
+                      </ul>
+                      <button class="btn btn-primary" ng-click="selectServicePlan(servicePlan.id)">Select {{servicePlan.name}}</button>
+                    </tab>
+                  </tabset>
+                </div>
+              </div>
+            </div>
+          </div><!-- /.panel -->
+        </div>
+      </div><!-- /.row -->
+    </div><!-- /#page-content-wrap -->
+  </div>
+</div><!-- /#page-content -->

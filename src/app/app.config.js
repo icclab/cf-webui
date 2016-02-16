@@ -24,6 +24,16 @@ angular.module('app').config(['$routeProvider', function($routeProvider) {
       templateUrl: 'app/components/marketplace/marketplaceAddService.tpl.html',
       controller: 'marketplaceAddServiceCtrl'
     })
+
+    .when('/organizations/:organizationId/spaces/:spaceId/marketplace/:serviceId', {
+      templateUrl: 'app/components/marketplace/marketplaceSelectServicePlan.tpl.html',
+      controller: 'marketplaceSelectServicePlanCtrl'
+    })
+
+    .when('/organizations/:organizationId/spaces/:spaceId/marketplace/:serviceId/plan/:servicePlanId', {
+      templateUrl: 'app/components/marketplace/marketplaceAddServiceInstance.tpl.html',
+      controller: 'marketplaceAddServiceInstanceCtrl'
+    })
   
     .when('/organizations/:organizationId/spaces/:spaceId/applications/:applicationId', {
       templateUrl: 'app/components/application/applicationDetails.tpl.html',
@@ -33,6 +43,16 @@ angular.module('app').config(['$routeProvider', function($routeProvider) {
     .when('/marketplace', {
       templateUrl: 'app/components/marketplace/marketplaceAddService.tpl.html',
       controller: 'marketplaceAddServiceCtrl'
+    })
+
+    .when('/marketplace/:serviceId', {
+      templateUrl: 'app/components/marketplace/marketplaceSelectServicePlan.tpl.html',
+      controller: 'marketplaceSelectServicePlanCtrl'
+    })
+
+    .when('/marketplace/:serviceId/plan/:servicePlanId', {
+      templateUrl: 'app/components/marketplace/marketplaceAddServiceInstance.tpl.html',
+      controller: 'marketplaceAddServiceInstanceCtrl'
     })
 
     .otherwise({
