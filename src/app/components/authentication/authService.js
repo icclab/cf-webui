@@ -40,7 +40,6 @@ angular.module('app.auth').factory('authService', ['$http', '$log', '$q', '$inje
       $http.post('/oauth', data, { headers: headers }).success(function(response) {
 
         if (response.access_token !== null) {
-          console.log(response.access_token);
           // save access token and username in session storage
           localStorage.setItem('accessToken', response.access_token);
           localStorage.setItem('refreshToken', response.refresh_token);

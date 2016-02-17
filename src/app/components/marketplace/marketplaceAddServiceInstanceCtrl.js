@@ -55,7 +55,7 @@ angular.module('app.marketplace').controller('marketplaceAddServiceInstanceCtrl'
         $scope.organizations.push(objectOrganization);
       });
     }, function (err) {
-      messageService.addMessage('danger', 'The organizations have not been loaded.');
+      messageService.addMessage('danger', 'The organizations have not been loaded.', true);
       $log.error(err);
     });
   };
@@ -99,7 +99,7 @@ angular.module('app.marketplace').controller('marketplaceAddServiceInstanceCtrl'
       $scope.showSelectSpace = true;
 
     }, function(err) {
-      messageService.addMessage('danger', 'The spaces have not been loaded.');
+      messageService.addMessage('danger', 'The spaces have not been loaded.', true);
       $log.error(err);
     });
 
@@ -134,7 +134,7 @@ angular.module('app.marketplace').controller('marketplaceAddServiceInstanceCtrl'
       }
 
     }, function(err) {
-      messageService.addMessage('danger', 'The applications have not been loaded.');
+      messageService.addMessage('danger', 'The applications have not been loaded.', true);
       $log.error(err);
     });
 
@@ -155,6 +155,8 @@ angular.module('app.marketplace').controller('marketplaceAddServiceInstanceCtrl'
 
     var defer = $q.defer();
 
+    $location.path('/organizations/' + $scope.organizationId + '/spaces/' + $scope.spaceId);
+
     var serviceInstance = {
       name: $scope.instanceName,
       spaceId: $scope.spaceId,
@@ -162,8 +164,6 @@ angular.module('app.marketplace').controller('marketplaceAddServiceInstanceCtrl'
     };
 
     serviceInstanceService.addServiceInstance(serviceInstance).then(function(response) {
-      //defer.resolve('data received!');
-      $location.path('/organizations/' + $scope.organizationId + '/spaces/' + $scope.spaceId);
       
       if (response.data.error_code) {
         messageService.addMessage('danger', response.data.description);
