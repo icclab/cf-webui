@@ -3,6 +3,7 @@ angular.module('app', [
   'ngResource',
   'ngAnimate',
   'ngWebSocket',
+  'ngCookies',
 
   'ui.bootstrap',
   'angular-loading-bar',

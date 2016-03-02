@@ -55,7 +55,7 @@ module.exports = function(grunt) {
 
       },
       dist: {
-        src: ['src/assets/libs/angular.min.js', 'src/assets/libs/angular-route.min.js', 'src/assets/libs/angular-resource.min.js', 'src/assets/libs/angular-animate.min.js', 'src/assets/libs/ui-bootstrap-tpls-0.11.2.min.js', 'src/assets/libs/loading-bar.min.js', 'src/assets/libs/angular-websocket.min.js'  ],
+        src: ['src/assets/libs/angular.min.js', 'src/assets/libs/angular-route.min.js', 'src/assets/libs/angular-resource.min.js', 'src/assets/libs/angular-animate.min.js', 'src/assets/libs/ui-bootstrap-tpls-0.11.2.min.js', 'src/assets/libs/loading-bar.min.js', 'src/assets/libs/angular-websocket.min.js', 'src/assets/libs/angular-cookies.min.js'  ],
         dest: 'build/assets/libs/libs.min.js',
       },
     },
