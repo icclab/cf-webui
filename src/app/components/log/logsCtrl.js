@@ -1,5 +1,9 @@
-angular.module('app.log').controller('LogsCtrl', ['$rootScope', '$scope', '$websocket', '$routeParams', '$modal', '$log', function($rootScope, $scope, $websocket, $routeParams, $modal, $log) {
+angular.module('app.log', ['ngCookies']).controller('LogsCtrl', ['$rootScope', '$scope', '$websocket', '$cookies', '$routeParams', '$modal', '$log', function($rootScope, $scope, $websocket, $cookies, $routeParams, $modal, $log) {
   $rootScope.rootFields.showContent = false;
+  
+  var accessToken = localStorage.getItem('accessToken');
+  console.log(accessToken);
+  $cookies.put('user_session', accessToken);
 
   var ws = $websocket('wss://loggregator.run.pivotal.io:443/tail/?app=' + $routeParams.applicationId);
 
@@ -12,7 +16,7 @@ angular.module('app.log').controller('LogsCtrl', ['$rootScope', '$scope', '$webs
     //collection.push(JSON.parse(message));
     //$rootScope.collection.push(message);
     var myReader = new FileReader();
-    //handler executed once reading(blob content referenced to a variable) from blob is finished. 
+
     myReader.addEventListener("loadend", function(e){
         //console.log(JSON.stringify(e.target.result));
         data = e.target.result.slice(-7).replace(/[^\w\.@\->{}()=,"]/g, " ");
