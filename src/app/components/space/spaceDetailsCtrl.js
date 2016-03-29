@@ -383,9 +383,19 @@ angular.module('app.space').controller('SpaceDetailsCtrl', ['$rootScope', '$scop
       // go to spaces overview
       //window.location = '#/organizations/' + $scope.organizationId + '/spaces/' + $scope.id;
 
+      
       $scope.getApplicationsForTheSpace().then(function(){
         $scope.getRoutesForTheSpace();
       });
+
+      angular.forEach($scope.applications, function(app, i) {
+        if(app.id === applicationId){
+          var indexOfApplicationToRemove = $scope.applications.indexOf(app);
+          console.log('Index es: ' + indexOfApplicationToRemove);
+          $scope.applications.splice(indexOfApplicationToRemove, 1);
+        }
+      });
+
     });
   };
 
