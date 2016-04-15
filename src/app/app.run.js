@@ -41,7 +41,6 @@ angular.module('app').run(['$rootScope', '$location', '$route', 'authService', f
   });
   
   $rootScope.$on('cfpLoadingBar:completed', function (event) {
-    console.log('se acaba');
     $rootScope.rootFields.showContent = true;
 
   });
