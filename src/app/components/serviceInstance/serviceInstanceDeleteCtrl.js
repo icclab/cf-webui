@@ -3,7 +3,7 @@ angular.module('app.serviceInstance').controller('ServiceInstanceDeleteCtrl', ['
   $scope.serviceInstance = serviceInstance;
   $scope.serviceBindings = [];
 
-  serviceInstanceService.getServiceBindingsForServiceInstance(serviceInstance.id).then(function(response){
+  serviceInstanceService.getServiceBindingsForServiceInstance(serviceInstance.id, true).then(function(response){
     angular.forEach(response.data.resources, function(serviceBinding, key){
       var objectServiceBinding = {
         id: serviceBinding.metadata.guid

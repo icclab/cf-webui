@@ -7,7 +7,7 @@ angular.module('app.logIn').controller('LogInCtrl', ['$scope', '$location', '$ro
 
   $scope.logIn = function() {
     authService.logOut();
-    messageService.removeAllMessages();
+    //messageService.removeAllMessages();
     authService.logIn($scope.logInData).then(function(response) {
       $location.path('/');
     },
@@ -19,6 +19,7 @@ angular.module('app.logIn').controller('LogInCtrl', ['$scope', '$location', '$ro
 
   $scope.logOut = function() {
     $location.path('/login');
+    $route.reload();
     authService.logOut();
     messageService.addMessage('danger', 'Logged out successfully', true);
   };

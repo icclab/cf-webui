@@ -20,6 +20,14 @@ module.exports = function(grunt) {
 	    all: ['Gruntfile.js', 'src/app/***/**/*.js']
 	  },
 
+    ngtemplates:  {
+      app:        {
+        cwd:      'build',
+        src:      'app/**/*.tpl.html',
+        dest:     'build/app.templates.js'
+      }
+    },
+
     htmlmin: {                                     // Task 
       dist: {                                      // Target 
         options: {                                 // Target options 
@@ -116,12 +124,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
 
+  grunt.loadNpmTasks('grunt-angular-templates');
+
   // define the tasks
    
   grunt.registerTask(
     'build', 
     'Compiles all of the assets, validate js files, annotate angular and minify files to the build directory.', 
-    ['clean:prev', 'copy', 'jshint', 'htmlmin', 'ngAnnotate', 'uglify', 'less', 'cssmin', 'concat', 'clean:post']
+    ['clean:prev', 'copy', 'jshint', 'ngtemplates', 'htmlmin', 'ngAnnotate', 'uglify', 'less', 'cssmin', 'concat', 'clean:post']
   );
 
 

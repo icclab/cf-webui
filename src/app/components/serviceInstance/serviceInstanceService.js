@@ -42,7 +42,9 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
     return $http.delete(url, config);
   };
 
-  var _getServiceBindingsForServiceInstance= function(serviceInstanceId) {
+  var _getServiceBindingsForServiceInstance= function(serviceInstanceId, ignoreLoadingBar) {
+    if (typeof(ignoreLoadingBar) === 'undefined') ignoreLoadingBar = false;
+
     // params
     var url = '/v2/service_instances/' + serviceInstanceId + '/service_bindings';
 
@@ -53,7 +55,8 @@ angular.module('app.serviceInstance').factory('serviceInstanceService', ['$http'
     };
 
     var config = {
-      headers: headers
+      headers: headers,
+      ignoreLoadingBar: ignoreLoadingBar
     };
 
     return $http.get(url, config);
