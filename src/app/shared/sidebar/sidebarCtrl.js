@@ -1,7 +1,7 @@
 angular.module('app.sidebar').controller('SidebarCtrl', ['$rootScope', '$scope', '$routeParams', '$location', '$log', 'organizationService', 'spaceService', function ($rootScope, $scope, $routeParams, $location, $log, organizationService, spaceService) {
   $rootScope.rootFields.showContent = false;
   
-  $scope.organizationsSidebar = [];
+  $rootScope.organizationsSidebar = [];
   
   $rootScope.orgIdx = -1;
 
@@ -20,7 +20,7 @@ angular.module('app.sidebar').controller('SidebarCtrl', ['$rootScope', '$scope',
         spaces: []
       };
 
-      $scope.organizationsSidebar.push(objectOrganization);
+      $rootScope.organizationsSidebar.push(objectOrganization);
     });
 
     // push the space objects to the organizations
@@ -35,9 +35,9 @@ angular.module('app.sidebar').controller('SidebarCtrl', ['$rootScope', '$scope',
           name: space.entity.name
         };
 
-        for (var j = 0; j < $scope.organizationsSidebar.length; j++) {
-          if ($scope.organizationsSidebar[j].id === objectSpace.organizationId) {
-            $scope.organizationsSidebar[j].spaces.push(objectSpace);
+        for (var j = 0; j < $rootScope.organizationsSidebar.length; j++) {
+          if ($rootScope.organizationsSidebar[j].id === objectSpace.organizationId) {
+            $rootScope.organizationsSidebar[j].spaces.push(objectSpace);
             break;
           }
         }
@@ -48,14 +48,13 @@ angular.module('app.sidebar').controller('SidebarCtrl', ['$rootScope', '$scope',
   }, function (err) {
     $log.error(err);
   });
-
+  
   $scope.isActive = function(path) {
-    //console.log($scope);
-    for (var j = 0; j < $scope.organizationsSidebar.length; j++) {
-      if ($scope.organizationsSidebar[j].id === $routeParams.organizationId) {
+    for (var j = 0; j < $rootScope.organizationsSidebar.length; j++) {
+      if ($rootScope.organizationsSidebar[j].id === $routeParams.organizationId) {
         $rootScope.orgIdx = j;
-        for (var i = 0; i < $scope.organizationsSidebar[j].spaces.length; i++) {
-          if ($scope.organizationsSidebar[j].spaces[i].id === $routeParams.spaceId) {
+        for (var i = 0; i < $rootScope.organizationsSidebar[j].spaces.length; i++) {
+          if ($rootScope.organizationsSidebar[j].spaces[i].id === $routeParams.spaceId) {
             $rootScope.spaceIdx = i;
             break;
           }
@@ -63,7 +62,6 @@ angular.module('app.sidebar').controller('SidebarCtrl', ['$rootScope', '$scope',
         break;
       }
     }
-    //console.log($location.path().indexOf(path) > -1);
     return ($location.path().indexOf(path) > -1);
   };
   

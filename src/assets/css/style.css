@@ -22,12 +22,10 @@ a:hover {
 }
 #page-sidebar {
   width: 220px;
-  position: fixed;
+  position: absolute;
   float: left;
   color: #fff;
   height: 100%;
-  width: 100%;
-  overflow: hidden;
 }
 #sidebar-navigation,
 #sidebar-navigation ul {
@@ -35,10 +33,6 @@ a:hover {
   list-style: outside none none;
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow-y: scroll;
-  padding-right: 17px;
 }
 #sidebar-navigation li {
   display: block;
@@ -95,7 +89,8 @@ a:hover {
 }
 #sidebar-navigation #logo a {
   display: block;
-  padding: 13px 53px;
+  padding: 13px 10px;
+  text-align: center;
   height: 50px;
   background-color: #f2ae72;
   color: #434a54;
@@ -173,7 +168,6 @@ a:hover {
   position: relative;
   margin-left: 220px;
   min-height: 100%;
-  overflow: hidden;
 }
 #page-content-wrap {
   padding: 0 10px;
